@@ -99,6 +99,7 @@ const S = {
     borderBottom: `1px solid ${C.border}`, padding: "1.25rem 2rem",
     display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap",
   },
+  homeLink: { fontSize: "0.6rem", color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", display: "inline-block", marginBottom: "0.4rem", transition: "color 0.15s" },
   headerTitle: { fontSize: "1rem", fontWeight: 600, letterSpacing: "0.1em", color: C.accent, textTransform: "uppercase", margin: 0 },
   headerSub: { fontSize: "0.65rem", color: C.muted, marginTop: "0.15rem", letterSpacing: "0.05em" },
   headerRight: { display: "flex", alignItems: "center", gap: "1.5rem", flexWrap: "wrap" },
@@ -655,6 +656,7 @@ export default function App() {
       {/* Header */}
       <div style={S.header}>
         <div>
+          <a href="../" style={S.homeLink}>← All Tools</a>
           <p style={S.headerTitle}>☘ Tangleroot Tracker</p>
           <p style={S.headerSub}>OSRS farming pet probability log</p>
         </div>

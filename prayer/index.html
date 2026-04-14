@@ -25,7 +25,9 @@ body::before{
   content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
   background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);
 }
-header{text-align:center;padding:2.2rem 1rem 1.2rem;}
+header{text-align:center;padding:2.2rem 1rem 1.2rem;position:relative;}
+.home-link{display:inline-block;position:absolute;top:1rem;left:1.2rem;font-family:'Source Code Pro',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .14s;}
+.home-link:hover{color:var(--gold);}
 .hr{height:2px;background:linear-gradient(90deg,transparent,var(--gold-dim),var(--gold),var(--gold-dim),transparent);max-width:600px;margin:.5rem auto;opacity:.6;}
 header h1{font-size:clamp(1.7rem,4.5vw,2.7rem);color:var(--gold-light);letter-spacing:.03em;text-shadow:0 0 28px rgba(201,162,39,.45),0 2px 4px rgba(0,0,0,.9);}
 header p{font-size:.9rem;color:var(--text-dim);font-style:italic;margin-top:.3rem;}
@@ -125,8 +127,9 @@ td.ctr{text-align:center;font-size:.72rem;color:var(--text-dim);}
 </head>
 <body>
 <header>
+  <a href="../" class="home-link">← All Tools</a>
   <div class="hr"></div>
-  <h1>🦴 Prayer Bone Optimizer 💀</h1>
+  <h1>🦴 Prayer Bone Optimizer 🦴</h1>
   <p>Find the optimal bone given your gold-per-hour income rate</p>
   <div class="hr"></div>
 </header>
