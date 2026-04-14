@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSRS Prayer Bone Optimizer</title>
 <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 <style>
 :root {
   --gold:#c9a227;--gold-light:#f0c94a;--gold-dim:#7a621a;
@@ -270,6 +271,20 @@ Superior dragon bones    21,048    350%    525    1,340,000    22.76    1,800,00
   </div>
 </div>
 
+<!-- CHART -->
+<div class="panel" id="chartPanel" style="display:none;">
+  <div class="tbl-hdr">
+    <div class="panel-title" style="margin-bottom:0;">📈 Training Time vs GP/Hour Rate</div>
+    <div class="tbl-sub">Options that are best (or within 5%) at some income rate — click a legend entry to toggle it</div>
+  </div>
+  <div style="position:relative;width:100%;margin-top:.85rem;">
+    <canvas id="trainingChart"></canvas>
+  </div>
+  <div style="margin-top:.65rem;font-family:'Source Code Pro',monospace;font-size:.65rem;color:var(--text-dim);">
+    Solid line = Gilded Altar &nbsp;·&nbsp; Dashed = Chaos Altar &nbsp;·&nbsp; Dotted = Libation Bowl (Shards)
+  </div>
+</div>
+
 </div>
 
 <script>
@@ -362,7 +377,7 @@ function parsePaste(){
       return isNaN(n)?null:n;
     });
     // gp/xp: 0.1 – 500, xphr: 5000 – 5000000
-    const gpxpV=nums.filter(n=>n!==null&&Math.abs(n)>=0.05&&Math.abs(n)<600);
+    const gpxpV=nums.filter(n=>n!==null&&Math.abs(n)>=0.1&&Math.abs(n)<600);
     const xphrV=nums.filter(n=>n!==null&&n>5000&&n<5000000);
     if(!gpxpV.length) continue;
     const mNames=['Gilded Altar','Chaos Altar','Libation Bowl'];
@@ -461,6 +476,7 @@ function recalc(){
   const range=worstH-best.totalH;
   renderTbl(rows,best,range,xpNeeded,gphr);
   renderCallout(best,xpNeeded);
+  renderChart(rows,xpNeeded);
 }
 
 function showEmpty(msg){
@@ -468,6 +484,7 @@ function showEmpty(msg){
   document.getElementById('emptyMsg').style.display='';
   document.getElementById('tbl').style.display='none';
   document.getElementById('callout').classList.remove('show');
+  document.getElementById('chartPanel').style.display='none';
 }
 
 function renderTbl(rows,best,range,xpNeeded,gphr){
@@ -518,11 +535,142 @@ function renderCallout(r){
   ].map(([l,v,g])=>`<div class="cstat"><div class="cslbl">${l}</div><div class="csval${g?' g':''}">${v}</div></div>`).join('');
 }
 
-function srt(col){if(sortCol===col)sortDir*=-1;else{sortCol=col;sortDir=1;}recalc();}
+function srt(col) {
+  if (sortCol === col) sortDir *=- 1;
+  else {
+    sortCol = col;
+    sortDir = 1;
+  }
+  recalc();
+}
 
-function fg(n){if(n>=1e9)return(n/1e9).toFixed(2)+'b';if(n>=1e6)return(n/1e6).toFixed(2)+'m';if(n>=1e3)return(n/1e3).toFixed(1)+'k';return Math.round(n).toLocaleString();}
+function fg(n) {
+  if (n>=1e9) return(n/1e9).toFixed(1) + 'b';
+  if (n>=1e6) return(n/1e6).toFixed(1) + 'm';
+  if (n>=1e3) return(n/1e3).toFixed(1) + 'k';
+  return Math.round(n).toLocaleString();
+}
 function fk(n){if(n>=1e6)return(n/1e6).toFixed(2)+'m';return(n/1e3).toFixed(0)+'k';}
 function fh(h){if(h<1/60)return Math.round(h*3600)+'s';if(h<1){const m=Math.round(h*60);return m+'m';}const hh=Math.floor(h),mm=Math.round((h-hh)*60);return mm>0?`${hh}h ${mm}m`:`${hh}h`;}
+
+// chart
+let chartInst=null;
+const CHART_PALETTE=['#c9a227','#4aad52','#4a9acc','#c44','#cc7a4a','#9a4acc','#4accb8','#cc4a9a','#a3cc4a','#cc9a3e','#4a6bcc','#cc5050','#3eccaa','#cc4a7a'];
+function fgpt(v){if(v>=1e6){const m=v/1e6;return(m===Math.floor(m)?m+'m':m.toFixed(2).replace(/\.?0+$/,'')+'m');}return(v/1e3)+'k';}
+
+function renderChart(rows,xpNeeded){
+  const panel=document.getElementById('chartPanel');
+  if(!rows||!rows.length){panel.style.display='none';return;}
+  panel.style.display='';
+
+  // build GP/hr sample points 500k → 5m
+  const pts=[];
+  for(let v=500000;v<=1000000;v+=100000) pts.push(v);
+  for(let v=1250000;v<=5000000;v+=250000) pts.push(v);
+  const xLabels=pts.map(fgpt);
+
+  // pre-compute total time for every row at every GP/hr point
+  const rowData=rows.map(r=>pts.map(g=>xpNeeded*r.gpxp/g+xpNeeded/r.xphr));
+
+  // keep only rows that are within 5% of the best at any point in the range
+  const filtered=rows.filter((_,ri)=>
+    pts.some((_,pi)=>{
+      const best=Math.min(...rowData.map(d=>d[pi]));
+      return rowData[ri][pi]<=best*1.05;
+    })
+  );
+  const filteredData=rowData.filter((_,ri)=>
+    pts.some((_,pi)=>{
+      const best=Math.min(...rowData.map(d=>d[pi]));
+      return rowData[ri][pi]<=best*1.05;
+    })
+  );
+
+  // optimal envelope: minimum across ALL rows at each point
+  const envelopeData=pts.map((_,pi)=>+Math.min(...rowData.map(d=>d[pi])).toFixed(4));
+  // label each point with the name of whichever row achieves the minimum
+  const envelopeRow=pts.map((_,pi)=>{
+    const minV=Math.min(...rowData.map(d=>d[pi]));
+    const ri=rowData.findIndex(d=>d[pi]===minV);
+    const r=rows[ri];
+    const shortM=r.method.replace(' Altar','').replace('Libation Bowl','Shards');
+    return`${r.name} (${shortM})`;
+  });
+
+  // one color per bone name, line-dash per method
+  const bColor={};let ci=0;
+  const datasets=filtered.map((r,fi)=>{
+    if(!bColor[r.name]) bColor[r.name]=CHART_PALETTE[ci++%CHART_PALETTE.length];
+    const color=bColor[r.name];
+    const dash=r.method==='Chaos Altar'?[6,3]:r.method==='Libation Bowl'?[2,3]:[];
+    const shortM=r.method.replace(' Altar','').replace('Libation Bowl','Shards');
+    const data=filteredData[fi].map(v=>+v.toFixed(4));
+    return{label:`${r.name} (${shortM})`,data,borderColor:color,backgroundColor:'transparent',borderDash:dash,borderWidth:1.8,pointRadius:0,pointHoverRadius:4,tension:0.25};
+  });
+
+  // prepend the envelope as the first (top) dataset so it renders above everything
+  datasets.unshift({
+    label:'★ Optimal',
+    data:envelopeData,
+    borderColor:'#f0c94a',
+    backgroundColor:'rgba(255,255,255,0.06)',
+    borderWidth:3,
+    pointRadius:0,
+    pointHoverRadius:5,
+    tension:0.25,
+    fill:false,
+    order:0,
+    envelopeRow,  // stashed for tooltip use
+  });
+
+  const mono="'Source Code Pro',monospace";
+  const gridC='rgba(51,42,16,0.45)';
+  const tickC='#8a7850';
+
+  const opts={
+    responsive:true,
+    animation:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{position:'bottom',labels:{color:tickC,font:{family:mono,size:9},boxWidth:22,padding:9,usePointStyle:true}},
+      tooltip:{
+        backgroundColor:'#191408',borderColor:'#332a10',borderWidth:1,
+        titleColor:'#c9a227',titleFont:{family:mono,size:10},
+        bodyColor:'#d4c48a',bodyFont:{family:mono,size:10},
+        callbacks:{
+          title:items=>fgpt(pts[items[0].dataIndex])+'/hr',
+          label:ctx=>{
+            const pi=ctx.dataIndex;
+            const suffix=ctx.dataset.envelopeRow?` → ${ctx.dataset.envelopeRow[pi]}`:'';
+            return` ${ctx.dataset.label}${suffix}: ${fh(ctx.parsed.y)}`;
+          },
+        },
+      },
+    },
+    scales:{
+      x:{
+        grid:{color:gridC},
+        ticks:{color:tickC,font:{family:mono,size:9},maxTicksLimit:12,maxRotation:45},
+        title:{display:true,text:'GP / Hour',color:tickC,font:{family:mono,size:10}},
+      },
+      y:{
+        grid:{color:gridC},
+        ticks:{color:tickC,font:{family:mono,size:9},callback:v=>fh(v)},
+        title:{display:true,text:'Total Time  (gather + train)',color:tickC,font:{family:mono,size:10}},
+        min:0,
+      },
+    },
+  };
+
+  if(chartInst){
+    chartInst.data.labels=xLabels;
+    chartInst.data.datasets=datasets;
+    chartInst.options=opts;
+    chartInst.update('none');
+    return;
+  }
+  chartInst=new Chart(document.getElementById('trainingChart'),{type:'line',data:{labels:xLabels,datasets},options:opts});
+}
 </script>
 </body>
 </html>
