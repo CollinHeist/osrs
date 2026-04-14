@@ -275,6 +275,41 @@ function ImportModal({ onClose, onImport }) {
   );
 }
 
+// ─── Luck gauge ───────────────────────────────────────────────────────────────
+function LuckGauge({ cumProb }) {
+  const currentCum = cumProb * 100;
+  return (
+    <div style={{ ...S.chartCard, marginBottom: "1.1rem" }}>
+      <div style={S.chartTitle}>Where you sit among all players</div>
+      <div style={{ position: "relative", height: "58px" }}>
+        <div style={{ position:"absolute", left:0, right:0, top:"20px", height:"14px", background:C.surface, borderRadius:"7px", overflow:"hidden" }}>
+          <div style={{ position:"absolute", left:0, width:`${Math.min(currentCum, 100)}%`, height:"100%", background:`linear-gradient(90deg, ${C.accentBg}, ${C.accentDim})` }} />
+          <div style={{ position:"absolute", left:`${Math.min(currentCum, 98.5)}%`, top:0, width:"3px", height:"100%", background:C.accent }} />
+        </div>
+        <div style={{ position:"absolute", left:`${Math.min(currentCum, 95)}%`, top:4, transform:"translateX(-50%)", fontSize:"0.58rem", color:C.accent, whiteSpace:"nowrap" }}>
+          You ({currentCum.toFixed(1)}%) ↓
+        </div>
+        {[{x:50,label:"p50",col:C.muted},{x:90,label:"p90",col:C.gold}].map(({x,label,col})=>(
+          <div key={x} style={{ position:"absolute", left:`${x}%`, top:"18px" }}>
+            <div style={{ width:"1px", height:"16px", background:col }} />
+            <div style={{ fontSize:"0.55rem", color:col, transform:"translateX(-50%)", marginTop:"2px", whiteSpace:"nowrap" }}>{label}</div>
+          </div>
+        ))}
+        <div style={{ position:"absolute", left:0, top:"38px", fontSize:"0.55rem", color:C.muted }}>Luckiest</div>
+        <div style={{ position:"absolute", right:0, top:"38px", fontSize:"0.55rem", color:C.muted, textAlign:"right" }}>Unluckiest</div>
+      </div>
+      <div style={S.chartNote}>
+        {currentCum.toFixed(1)}% of players running your route would have received Tangleroot by now.
+        {currentCum < 50
+          ? ` You are in the lucky half — still well below the median.`
+          : currentCum < 90
+          ? ` You have passed the median (p50). You are ${(currentCum - 50).toFixed(1)} percentile points into the unlucky tail.`
+          : ` You are past the p90 mark. Only ~10% of players go this long. The pet is seriously overdue.`}
+      </div>
+    </div>
+  );
+}
+
 // ─── Charts tab ───────────────────────────────────────────────────────────────
 function ChartsTab({ days }) {
   const sortedDays = [...days].sort((a, b) => a.date.localeCompare(b.date));
@@ -343,40 +378,6 @@ function ChartsTab({ days }) {
 
   return (
     <div>
-      {/* ── Luck gauge ── */}
-      <div style={S.chartCard}>
-        <div style={S.chartTitle}>Where you sit among all players</div>
-        <div style={{ position: "relative", height: "58px" }}>
-          {/* Track */}
-          <div style={{ position:"absolute", left:0, right:0, top:"20px", height:"14px", background:C.surface, borderRadius:"7px", overflow:"hidden" }}>
-            <div style={{ position:"absolute", left:0, width:`${Math.min(currentCum, 100)}%`, height:"100%", background:`linear-gradient(90deg, ${C.accentBg}, ${C.accentDim})` }} />
-            <div style={{ position:"absolute", left:`${Math.min(currentCum, 98.5)}%`, top:0, width:"3px", height:"100%", background:C.accent }} />
-          </div>
-          {/* "You" label */}
-          <div style={{ position:"absolute", left:`${Math.min(currentCum, 95)}%`, top:4, transform:"translateX(-50%)", fontSize:"0.58rem", color:C.accent, whiteSpace:"nowrap" }}>
-            You ({currentCum.toFixed(1)}%) ↓
-          </div>
-          {/* p50 / p90 ticks */}
-          {[{x:50,label:"p50",col:C.muted},{x:90,label:"p90",col:C.gold}].map(({x,label,col})=>(
-            <div key={x} style={{ position:"absolute", left:`${x}%`, top:"18px" }}>
-              <div style={{ width:"1px", height:"16px", background:col }} />
-              <div style={{ fontSize:"0.55rem", color:col, transform:"translateX(-50%)", marginTop:"2px", whiteSpace:"nowrap" }}>{label}</div>
-            </div>
-          ))}
-          {/* axis labels */}
-          <div style={{ position:"absolute", left:0, top:"38px", fontSize:"0.55rem", color:C.muted }}>Luckiest</div>
-          <div style={{ position:"absolute", right:0, top:"38px", fontSize:"0.55rem", color:C.muted, textAlign:"right" }}>Unluckiest</div>
-        </div>
-        <div style={S.chartNote}>
-          {currentCum.toFixed(1)}% of players running your route would have received Tangleroot by now.
-          {currentCum < 50
-            ? ` You are in the lucky half — still well below the median.`
-            : currentCum < 90
-            ? ` You have passed the median (p50). You are ${(currentCum - 50).toFixed(1)} percentile points into the unlucky tail.`
-            : ` You are past the p90 mark. Only ~10% of players go this long. The pet is seriously overdue.`}
-        </div>
-      </div>
-
       {/* ── P-curve ── */}
       <div style={S.chartCard}>
         <div style={S.chartTitle}>Cumulative probability curve (P-curve)</div>
@@ -506,28 +507,9 @@ function summarizeDay(d) {
 }
 
 // ─── Log tab ──────────────────────────────────────────────────────────────────
-function LogTab({ days, removeDay, clearAll, cumProb }) {
+function LogTab({ days, removeDay, clearAll }) {
   return (
     <div>
-      {days.length > 0 && (
-        <div style={S.cumBar}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline" }}>
-            <span style={{ fontSize:"0.6rem", color:C.muted, letterSpacing:"0.08em", textTransform:"uppercase" }}>Cumulative probability</span>
-            <span style={{ fontSize:"1rem", fontWeight:600, color: cumProb>0.5?C.gold:C.accent }}>{fmtPct(cumProb, 2)}</span>
-          </div>
-          <div style={S.cumTrack}>
-            <div style={{ height:"100%", width:`${Math.min(cumProb*100,100)}%`, background: cumProb>0.75?C.gold:C.accent, borderRadius:"4px", transition:"width 0.4s ease" }} />
-          </div>
-          <div style={{ display:"flex", justifyContent:"space-between", fontSize:"0.58rem", color:C.muted }}>
-            <span>0%</span>
-            <span style={{ color: cumProb>0.5?C.gold:C.muted }}>
-              {cumProb>0.9?"Seriously overdue":cumProb>0.5?"You're overdue!":cumProb>0.25?"Getting there...":"Keep grinding"}
-            </span>
-            <span>100%</span>
-          </div>
-        </div>
-      )}
-
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"0.65rem" }}>
         <p style={{ ...S.secLabel, margin:0 }}>Harvest log</p>
         {days.length > 0 && <button style={S.btnSecondary} onClick={clearAll}>clear all</button>}
@@ -1020,6 +1002,9 @@ export default function App() {
             ))}
           </div>
 
+          {/* Luck gauge — shown whenever there are logged days */}
+          {days.length > 0 && <LuckGauge cumProb={cumProb} />}
+
           {/* Tabs */}
           <div style={S.tabBar}>
             {[{id:"log",label:"Log"},{id:"charts",label:"Charts"}].map(t => (
@@ -1029,7 +1014,7 @@ export default function App() {
             ))}
           </div>
 
-          {activeTab === "log"    && <LogTab days={days} removeDay={removeDay} clearAll={clearAll} cumProb={cumProb} avgChance={avgChance} />}
+          {activeTab === "log"    && <LogTab days={days} removeDay={removeDay} clearAll={clearAll} avgChance={avgChance} />}
           {activeTab === "charts" && <ChartsTab days={days} />}
         </div>
       </div>
