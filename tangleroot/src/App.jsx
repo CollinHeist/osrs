@@ -4,53 +4,19 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
   ResponsiveContainer, Label,
 } from "recharts";
+import {
+  HARVEST_BY_ID,
+  DEFAULT_HARVEST_ID,
+  TYPICAL_UNTRACKED_ENTRIES,
+  harvestOptionsByPatchType,
+  calcChanceFromEntries,
+  mergeEntryLists,
+  cloneEntries,
+  normalizeDayForLoad,
+  normalizeRunForLoad,
+} from "./wikiHarvests.js";
 
-// ─── Base chances from OSRS Wiki data module ────────────────────────────────
-const BASE = {
-  herb:     12150,
-  cactus:   14833,
-  maple:    20000,
-  papaya:    9000,
-  calquat:   6000,
-  celastrus: 6000,
-  ironwood: 15000,
-  redwood:   5000,
-  seaweed:   7500,
-  mushroom:  7500,
-};
-const HESPORI_BASE = 4950;
-
-const PATCH_META = [
-  { key: "herb",      label: "Herb patches",    defaultCount: 9, perRun: 1, note: "" },
-  { key: "cactus",    label: "Cactus patches",  defaultCount: 2, perRun: 1, note: "" },
-  { key: "maple",     label: "Maple trees",     defaultCount: 7, perRun: 1, note: "" },
-  { key: "papaya",    label: "Papaya trees",    defaultCount: 7, perRun: 1, note: "" },
-  { key: "calquat",   label: "Calquat trees",   defaultCount: 4, perRun: 1, note: "" },
-  { key: "celastrus", label: "Celastrus trees", defaultCount: 1, perRun: 1, note: "" },
-  { key: "ironwood",  label: "Ironwood trees",  defaultCount: 4, perRun: 1, note: "" },
-  { key: "redwood",   label: "Redwood tree",    defaultCount: 1, perRun: 1, note: "" },
-  { key: "hespori",   label: "Hespori",         defaultCount: 1, perRun: 1, note: "level-independent" },
-  { key: "seaweed",   label: "Giant seaweed",   defaultCount: 2, perRun: 1, note: "" },
-  { key: "mushroom",  label: "Mushroom patch",  defaultCount: 1, perRun: 1, note: "" },
-];
-
-// ─── Math ────────────────────────────────────────────────────────────────────
-function chancePerRoll(key, lvl) {
-  if (key === "hespori") return 1 / HESPORI_BASE;
-  const denom = BASE[key] - lvl * 25;
-  return denom <= 0 ? 1 : 1 / denom;
-}
-
-function calcDayChance(instance, lvl) {
-  let failProb = 1;
-  for (const { key, perRun } of PATCH_META) {
-    const count = instance[key] ?? 0;
-    if (count === 0) continue;
-    const rolls = key === "herb" ? count * perRun : count;
-    failProb *= Math.pow(1 - chancePerRoll(key, lvl), rolls);
-  }
-  return 1 - failProb;
-}
+const HARVEST_GROUPS = harvestOptionsByPatchType();
 
 function fmt1in(p) {
   if (p <= 0) return "—";
@@ -67,9 +33,47 @@ function todayStr() {
 }
 
 // ─── localStorage ─────────────────────────────────────────────────────────────
-const LS_KEY = "tangleroot_tracker_v1";
+const LS_KEY = "tangleroot_tracker_v3";
+const LS_KEY_LEGACY_V2 = "tangleroot_tracker_v2";
+const LS_KEY_LEGACY_V1 = "tangleroot_tracker_v1";
+
+function emptyEntries() {
+  return [];
+}
+
+function addDaysIso(iso, deltaDays) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const t = new Date(Date.UTC(y, m - 1, d + deltaDays));
+  return t.toISOString().slice(0, 10);
+}
+
 function lsLoad() {
-  try { const r = localStorage.getItem(LS_KEY); return r ? JSON.parse(r) : null; } catch { return null; }
+  try {
+    const r = localStorage.getItem(LS_KEY);
+    if (r) {
+      const o = JSON.parse(r);
+      return {
+        days: (o.days ?? []).map(normalizeDayForLoad),
+        level: typeof o.level === "number" ? o.level : 99,
+        runs: (o.runs ?? []).map(normalizeRunForLoad),
+      };
+    }
+    const v2 = localStorage.getItem(LS_KEY_LEGACY_V2);
+    if (v2) {
+      const o = JSON.parse(v2);
+      return {
+        days: (o.days ?? []).map(normalizeDayForLoad),
+        level: o.level ?? 99,
+        runs: (o.runs ?? []).map(normalizeRunForLoad),
+      };
+    }
+    const v1 = localStorage.getItem(LS_KEY_LEGACY_V1);
+    if (v1) {
+      const o = JSON.parse(v1);
+      return { days: (o.days ?? []).map(normalizeDayForLoad), level: o.level ?? 99, runs: [] };
+    }
+  } catch { /* ignore */ }
+  return null;
 }
 function lsSave(data) {
   try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch {}
@@ -105,7 +109,7 @@ const S = {
   lvlRow: { display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.7rem", color: C.muted, letterSpacing: "0.05em" },
   lvlInput: { width: "120px", accentColor: C.accent },
   lvlVal: { color: C.accent, fontWeight: 600, minWidth: "2.5ch", fontSize: "0.95rem" },
-  layout: { display: "grid", gridTemplateColumns: "320px 1fr", height: "calc(100vh - 69px)" },
+  layout: { display: "grid", gridTemplateColumns: "minmax(340px, 400px) 1fr", height: "calc(100vh - 69px)" },
   sidebar: { borderRight: `1px solid ${C.border}`, overflowY: "auto", padding: "1.25rem" },
   main: { overflowY: "auto", padding: "1.25rem 1.75rem" },
   secLabel: { fontSize: "0.6rem", letterSpacing: "0.12em", color: C.muted, textTransform: "uppercase", margin: "0 0 0.6rem" },
@@ -147,6 +151,32 @@ const S = {
     background: C.accentBg, border: `1px solid ${C.accentDim}`, color: C.accent,
     padding: "0.28rem 0.6rem", borderRadius: "3px", fontFamily: "'IBM Plex Mono', monospace",
     fontSize: "0.62rem", cursor: "pointer", letterSpacing: "0.04em",
+  },
+  patchTypeHeader: {
+    fontSize: "0.58rem", letterSpacing: "0.1em", color: C.gold, textTransform: "uppercase",
+    margin: "0.65rem 0 0.35rem", paddingTop: "0.35rem", borderTop: `1px solid ${C.border}`,
+  },
+  patchTypeHeaderFirst: {
+    fontSize: "0.58rem", letterSpacing: "0.1em", color: C.gold, textTransform: "uppercase",
+    margin: "0 0 0.35rem",
+  },
+  runSelect: {
+    width: "100%", background: C.surface, border: `1px solid ${C.border}`, borderRadius: "3px",
+    color: C.text, fontFamily: "'IBM Plex Mono', monospace", fontSize: "0.72rem", padding: "5px 7px",
+    marginBottom: "0.45rem", boxSizing: "border-box",
+  },
+  runNameInput: {
+    width: "100%", background: C.surface, border: `1px solid ${C.border}`, borderRadius: "3px",
+    color: C.text, fontFamily: "'IBM Plex Mono', monospace", fontSize: "0.72rem", padding: "5px 7px",
+    marginBottom: "0.45rem", boxSizing: "border-box",
+  },
+  entryRow: {
+    display: "grid", gridTemplateColumns: "1fr 52px 28px", gap: "0.35rem", alignItems: "center", marginBottom: "0.4rem",
+  },
+  harvestSelect: {
+    minWidth: 0, background: C.surface, border: `1px solid ${C.border}`, borderRadius: "3px",
+    color: C.text, fontFamily: "'IBM Plex Mono', monospace", fontSize: "0.62rem", padding: "4px 5px",
+    boxSizing: "border-box",
   },
   statsGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.65rem", marginBottom: "1.1rem" },
   statCard: { background: C.card, border: `1px solid ${C.border}`, borderRadius: "4px", padding: "0.75rem 0.9rem" },
@@ -211,7 +241,7 @@ function ImportModal({ onClose, onImport }) {
     reader.onload = ev => {
       try {
         const data = JSON.parse(ev.target.result);
-        if (!data.days || !Array.isArray(data.days)) throw new Error("Invalid format");
+        if (!data.days || !Array.isArray(data.days)) throw new Error("Invalid format: missing days[]");
         onImport(data, mode);
       } catch (err) { onImport(null, mode, err.message); }
     };
@@ -223,7 +253,7 @@ function ImportModal({ onClose, onImport }) {
       <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:"6px", padding:"1.5rem", width:"340px", fontFamily:"'IBM Plex Mono', monospace" }}>
         <p style={{ ...S.secLabel, margin:"0 0 1rem" }}>Import data</p>
         <p style={{ fontSize:"0.7rem", color:C.muted, marginBottom:"1rem", lineHeight:1.7 }}>
-          Select a <code style={{ color:C.accent }}>.json</code> file exported from this tracker.
+          Select a <code style={{ color:C.accent }}>.json</code> file exported from this tracker (includes days, level, and saved runs when present).
         </p>
         <div style={{ marginBottom:"1rem" }}>
           <p style={{ ...S.secLabel, margin:"0 0 0.5rem" }}>Import mode</p>
@@ -246,20 +276,21 @@ function ImportModal({ onClose, onImport }) {
 
 // ─── Charts tab ───────────────────────────────────────────────────────────────
 function ChartsTab({ days }) {
-  const n = days.length;
-  const avgP = n ? days.reduce((a, d) => a + d.chance, 0) / n : 0;
+  const sortedDays = [...days].sort((a, b) => a.date.localeCompare(b.date));
+  const n = sortedDays.length;
+  const avgP = n ? sortedDays.reduce((a, d) => a + d.chance, 0) / n : 0;
 
-  // ── P-curve data: actual + expected, extrapolated to 99.9% or 150% of current days ──
+  // ── P-curve data: actual + expected, extrapolated to 95% or 150% of current days ──
   const extendTo = n === 0 ? 30 : Math.max(
     n + Math.ceil(n * 0.5),
-    avgP > 0 ? Math.ceil(Math.log(0.001) / Math.log(1 - avgP)) : 30,
+    avgP > 0 ? Math.ceil(Math.log(0.05) / Math.log(1 - avgP)) : 30,
     10
   );
 
   const pCurveData = [];
   let cumFail = 1;
   for (let i = 1; i <= extendTo; i++) {
-    if (i <= n) cumFail *= (1 - days[i - 1].chance);
+    if (i <= n) cumFail *= (1 - sortedDays[i - 1].chance);
     pCurveData.push({
       day:      i,
       actual:   i <= n ? parseFloat(((1 - cumFail) * 100).toFixed(3)) : null,
@@ -272,10 +303,10 @@ function ChartsTab({ days }) {
   const p50day = pDay(0.50);
   const p90day = pDay(0.90);
 
-  const currentCum = n > 0 ? (1 - days.reduce((f, d) => f * (1 - d.chance), 1)) * 100 : 0;
+  const currentCum = n > 0 ? (1 - sortedDays.reduce((f, d) => f * (1 - d.chance), 1)) * 100 : 0;
 
   // ── Daily bar data ──
-  const dailyData = days.map((d, i) => ({
+  const dailyData = sortedDays.map((d, i) => ({
     idx:    i + 1,
     date:   d.date,
     pct:    parseFloat((d.chance * 100).toFixed(4)),
@@ -285,7 +316,7 @@ function ChartsTab({ days }) {
   // ── Histogram of daily % values ──
   const BUCKETS = 12;
   let hMin = Infinity, hMax = -Infinity;
-  days.forEach(d => { hMin = Math.min(hMin, d.chance * 100); hMax = Math.max(hMax, d.chance * 100); });
+  sortedDays.forEach(d => { hMin = Math.min(hMin, d.chance * 100); hMax = Math.max(hMax, d.chance * 100); });
   if (!isFinite(hMin)) { hMin = 0; hMax = 1; }
   const hRange = hMax - hMin || 0.001;
   const bSize  = hRange / BUCKETS;
@@ -293,7 +324,7 @@ function ChartsTab({ days }) {
     const lo = hMin + i * bSize;
     return { label: lo.toFixed(3) + "%", lo, count: 0 };
   });
-  days.forEach(d => {
+  sortedDays.forEach(d => {
     const bi = Math.min(BUCKETS - 1, Math.floor((d.chance * 100 - hMin) / bSize));
     histData[bi].count++;
   });
@@ -366,12 +397,12 @@ function ChartsTab({ days }) {
             {/* p50 day */}
             {p50day && p50day <= extendTo && (
               <ReferenceLine x={p50day} stroke={C.muted} strokeDasharray="4 3"
-                label={{ value:"p50", position:"top", fill:C.muted, fontSize:9, fontFamily:"'IBM Plex Mono', monospace" }} />
+                label={{ value:"p50", position:"top", offset:-75, fill:C.muted, fontSize:11, fontFamily:"'IBM Plex Mono', monospace" }} />
             )}
             {/* p90 day */}
             {p90day && p90day <= extendTo && (
               <ReferenceLine x={p90day} stroke={C.gold} strokeDasharray="4 3"
-                label={{ value:"p90", position:"top", fill:C.gold, fontSize:9, fontFamily:"'IBM Plex Mono', monospace" }} />
+                label={{ value:"p90", position:"top", offset:-75, fill:C.gold, fontSize:11, fontFamily:"'IBM Plex Mono', monospace" }} />
             )}
             {/* Expected (dashed) */}
             <Line type="monotone" dataKey="expected" name="expected" stroke={C.accentDim} strokeWidth={1.5} dot={false} strokeDasharray="5 3" />
@@ -460,6 +491,19 @@ function ChartsTab({ days }) {
   );
 }
 
+function summarizeDay(d) {
+  if (d.approximate && (!d.entries || !d.entries.length)) return "approx. rate";
+  const list = d.entries ?? [];
+  if (!list.length) return "—";
+  const parts = list.slice(0, 4).map(e => {
+    const h = HARVEST_BY_ID[e.harvestId];
+    const name = h ? h.produce : e.harvestId;
+    return `${name}×${e.qty}`;
+  });
+  const more = list.length > 4 ? ` +${list.length - 4}` : "";
+  return parts.join(", ") + more;
+}
+
 // ─── Log tab ──────────────────────────────────────────────────────────────────
 function LogTab({ days, removeDay, clearAll, cumProb }) {
   return (
@@ -492,7 +536,7 @@ function LogTab({ days, removeDay, clearAll, cumProb }) {
         <div style={S.empty}>
           <div style={{ fontSize:"2rem", marginBottom:"0.65rem" }}>☘</div>
           No days logged yet.<br />
-          Fill in a harvest instance and click "Log this day".<br />
+          Add harvest lines and click &quot;Log this day&quot;, or add approximate filler days.<br />
           <span style={{ fontSize:"0.62rem" }}>Your data is saved automatically in your browser.</span>
         </div>
       ) : (
@@ -501,9 +545,8 @@ function LogTab({ days, removeDay, clearAll, cumProb }) {
             <tr>
               <th style={S.th}>Date</th>
               <th style={S.th}>Lvl</th>
-              <th style={S.th}>Herb runs</th>
-              <th style={S.th}>Trees</th>
-              <th style={S.th}>Other</th>
+              <th style={S.th}>Kind</th>
+              <th style={S.th}>Harvests</th>
               <th style={S.th}>Daily %</th>
               <th style={S.th}>Cumulative</th>
               <th style={S.th}></th>
@@ -519,17 +562,15 @@ function LogTab({ days, removeDay, clearAll, cumProb }) {
                 cumById.set(x.id, 1 - cumFail);
               }
               return [...days].sort((a, b) => b.date.localeCompare(a.date)).map(d => {
-                const cum   = cumById.get(d.id);
-                const herbs = d.instance.herb ?? 0;
-                const trees = ["maple","papaya","calquat","ironwood","redwood"].reduce((s,k) => s+(d.instance[k]??0), 0);
-                const other = ["cactus","hespori","seaweed","mushroom"].reduce((s,k) => s+(d.instance[k]??0), 0);
+                const cum = cumById.get(d.id);
                 return (
                   <tr key={d.id}>
                     <td style={S.td}>{d.date}</td>
                     <td style={{ ...S.td, color:C.muted }}>{d.level}</td>
-                    <td style={{ ...S.td, color:C.muted }}>{herbs>0?`×${herbs}`:"—"}</td>
-                    <td style={{ ...S.td, color:C.muted }}>{trees>0?`×${trees}`:"—"}</td>
-                    <td style={{ ...S.td, color:C.muted }}>{other>0?`×${other}`:"—"}</td>
+                    <td style={{ ...S.td, color:d.approximate ? C.gold : C.muted, fontSize:"0.65rem" }}>
+                      {d.approximate ? "≈ approx" : "tracked"}
+                    </td>
+                    <td style={{ ...S.td, color:C.muted, fontSize:"0.62rem", maxWidth:"220px", wordBreak:"break-word" }}>{summarizeDay(d)}</td>
                     <td style={S.td}><span style={{ color:C.accent, fontWeight:600 }}>{fmtPct(d.chance,3)}</span></td>
                     <td style={S.td}>
                       <div style={{ display:"flex", alignItems:"center", gap:"7px" }}>
@@ -552,11 +593,39 @@ function LogTab({ days, removeDay, clearAll, cumProb }) {
 }
 
 // ─── Root App ─────────────────────────────────────────────────────────────────
+function normalizeRunList(list) {
+  if (!Array.isArray(list)) return [];
+  const used = new Set();
+  let n = Date.now();
+  return list.map((r, i) => {
+    let id = typeof r.id === "number" && Number.isFinite(r.id) ? r.id : Date.now() + i;
+    if (used.has(id)) {
+      do { n += 1; } while (used.has(n));
+      id = n;
+    }
+    used.add(id);
+    const normalized = normalizeRunForLoad(r);
+    const entries = Array.isArray(normalized.entries) ? mergeEntryLists(normalized.entries, []) : [];
+    return {
+      id,
+      name: typeof r.name === "string" && r.name.trim() ? r.name.trim() : `Run ${i + 1}`,
+      entries,
+    };
+  });
+}
+
 export default function App() {
   const [level,      setLevel]      = useState(99);
-  const [instance,   setInstance]   = useState(Object.fromEntries(PATCH_META.map(p => [p.key, p.defaultCount])));
+  const [entries,    setEntries]    = useState(emptyEntries);
   const [date,       setDate]       = useState(todayStr());
   const [days,       setDays]       = useState([]);
+  const [runs,       setRuns]       = useState([]);
+  const [runNameDraft, setRunNameDraft] = useState("");
+  const [selectedRunId, setSelectedRunId] = useState(null);
+  const [approxCount, setApproxCount] = useState(1);
+  const [approxStart, setApproxStart] = useState(todayStr());
+  const [approxMode,  setApproxMode]  = useState("typical"); // "typical" | "manual"
+  const [approxManualPct, setApproxManualPct] = useState("0.1");
   const [loaded,     setLoaded]     = useState(false);
   const [showImport, setShowImport] = useState(false);
   const [toast,      setToast]      = useState(null);
@@ -572,47 +641,129 @@ export default function App() {
     if (d) {
       if (Array.isArray(d.days))       setDays(d.days);
       if (typeof d.level === "number") setLevel(d.level);
+      if (Array.isArray(d.runs))      setRuns(d.runs);
     }
     setLoaded(true);
   }, []);
 
   useEffect(() => {
     if (!loaded) return;
-    lsSave({ days, level });
-  }, [days, level, loaded]);
+    lsSave({ version: 3, days, level, runs });
+  }, [days, level, runs, loaded]);
 
-  const preview   = calcDayChance(instance, level);
-  const cumProb   = days.reduce((acc, d) => 1 - (1-acc)*(1-d.chance), 0);
+  const editorMerged = mergeEntryLists(entries, []);
+  const preview   = calcChanceFromEntries(editorMerged, level);
+  const typicalApproxP = calcChanceFromEntries(TYPICAL_UNTRACKED_ENTRIES, level);
+  const daysChrono = [...days].sort((a, b) => a.date.localeCompare(b.date));
+  const cumProb   = daysChrono.reduce((acc, d) => 1 - (1-acc)*(1-d.chance), 0);
   const avgChance = days.length ? days.reduce((a,d) => a+d.chance, 0) / days.length : 0;
 
-  function addDay() {
+  function addOrMergeTrackedDay(deltaEntries, toastPrefix) {
+    const delta = mergeEntryLists(deltaEntries, []);
+    if (!delta.length) {
+      showToast("Add at least one harvest line with quantity > 0", true);
+      return;
+    }
     let toastMsg;
     setDays(prev => {
       const idx = prev.findIndex(d => d.date === date);
       if (idx === -1) {
-        const chance = calcDayChance(instance, level);
-        toastMsg = `Logged ${date} — ${fmtPct(chance, 3)} daily chance`;
-        return [...prev, { id: Date.now(), date, level, instance: { ...instance }, chance }]
+        const merged = cloneEntries(delta);
+        const chance = calcChanceFromEntries(merged, level);
+        toastMsg = `${toastPrefix}Logged ${date} — ${fmtPct(chance, 3)} daily chance`;
+        return [...prev, { id: Date.now(), date, level, entries: merged, chance, approximate: false }]
           .sort((a, b) => a.date.localeCompare(b.date));
       }
       const existing = prev[idx];
-      const mergedInstance = Object.fromEntries(
-        PATCH_META.map(({ key }) => [
-          key,
-          (existing.instance[key] ?? 0) + (instance[key] ?? 0),
-        ])
-      );
-      const mergedChance = calcDayChance(mergedInstance, level);
-      toastMsg = `Updated ${date} — merged with existing log — ${fmtPct(mergedChance, 3)} daily chance`;
+      const mergedEntries = mergeEntryLists(existing.entries ?? [], delta);
+      const mergedChance = calcChanceFromEntries(mergedEntries, level);
+      toastMsg = `${toastPrefix}Updated ${date} — merged — ${fmtPct(mergedChance, 3)} daily chance`;
       return prev
         .map((d, i) =>
           i === idx
-            ? { ...existing, level, instance: mergedInstance, chance: mergedChance }
+            ? {
+                ...existing,
+                level,
+                entries: mergedEntries,
+                chance: mergedChance,
+                approximate: false,
+              }
             : d
         )
         .sort((a, b) => a.date.localeCompare(b.date));
     });
     showToast(toastMsg);
+  }
+
+  function addDay() {
+    addOrMergeTrackedDay(editorMerged, "");
+  }
+
+  function logSelectedRun() {
+    const run = runs.find(r => r.id === selectedRunId);
+    if (!run) { showToast("Select a saved run first", true); return; }
+    addOrMergeTrackedDay(mergeEntryLists(run.entries ?? [], []), "");
+  }
+
+  function saveRunFromForm() {
+    const name = runNameDraft.trim();
+    if (!name) { showToast("Enter a run name", true); return; }
+    const snapshot = mergeEntryLists(editorMerged, []);
+    if (!snapshot.length) { showToast("Add harvest lines before saving a run", true); return; }
+    setRuns(prev => [...prev, { id: Date.now(), name, entries: cloneEntries(snapshot) }]);
+    setRunNameDraft("");
+    showToast(`Saved run "${name}"`);
+  }
+
+  function deleteRun(id) {
+    setRuns(prev => prev.filter(r => r.id !== id));
+    if (selectedRunId === id) setSelectedRunId(null);
+    showToast("Run removed");
+  }
+
+  function loadRunIntoForm(id) {
+    const run = runs.find(r => r.id === id);
+    if (!run) return;
+    setEntries(cloneEntries(run.entries ?? []));
+    setSelectedRunId(id);
+    showToast(`Loaded "${run.name}" into editor`);
+  }
+
+  function addApproximateDays() {
+    const n = Math.max(1, Math.min(5000, Math.floor(Number(approxCount) || 0)));
+    let p =
+      approxMode === "typical"
+        ? typicalApproxP
+        : Math.max(0, Math.min(1, (parseFloat(approxManualPct) || 0) / 100));
+    if (approxMode === "manual" && !(p > 0)) {
+      showToast("Enter a manual daily % greater than 0", true);
+      return;
+    }
+    const taken = new Set(days.map(d => d.date));
+    let dayCursor = 0;
+    const newRows = [];
+    let nid = Date.now();
+    while (newRows.length < n) {
+      const iso = addDaysIso(approxStart, dayCursor);
+      dayCursor += 1;
+      if (taken.has(iso)) continue;
+      taken.add(iso);
+      newRows.push({
+        id: nid++,
+        date: iso,
+        level,
+        entries: [],
+        chance: p,
+        approximate: true,
+      });
+      if (dayCursor > n + 40000) break;
+    }
+    if (newRows.length < n) {
+      showToast(`Only placed ${newRows.length} of ${n} days (ran out of free dates forward from start)`, true);
+    } else {
+      showToast(`Added ${newRows.length} approximate day${newRows.length !== 1 ? "s" : ""} at ${fmtPct(p, 4)} / day`);
+    }
+    if (newRows.length) setDays(prev => [...prev, ...newRows].sort((a, b) => a.date.localeCompare(b.date)));
   }
 
   function removeDay(id) { setDays(prev => prev.filter(d => d.id !== id)); }
@@ -624,18 +775,25 @@ export default function App() {
   }
 
   function exportJSON() {
-    const blob = new Blob([JSON.stringify({ version:1, exportedAt:new Date().toISOString(), level, days }, null, 2)], { type:"application/json" });
+    const blob = new Blob([JSON.stringify({
+      version: 3,
+      exportedAt: new Date().toISOString(),
+      level,
+      days,
+      runs,
+    }, null, 2)], { type:"application/json" });
     const a = Object.assign(document.createElement("a"), { href:URL.createObjectURL(blob), download:`tangleroot-${todayStr()}.json` });
     a.click(); URL.revokeObjectURL(a.href);
     showToast(`Exported ${days.length} day${days.length!==1?"s":""}`);
   }
 
   function exportCSV() {
-    const header = ["date","level",...PATCH_META.map(p=>p.key),"daily_chance_pct","cumulative_chance_pct"];
+    const header = ["date","level","approximate","entries_json","daily_chance_pct","cumulative_chance_pct"];
     let cumFail = 1;
     const rows = days.map(d => {
       cumFail *= (1-d.chance);
-      return [d.date, d.level, ...PATCH_META.map(p=>d.instance[p.key]??0), (d.chance*100).toFixed(6), ((1-cumFail)*100).toFixed(6)].join(",");
+      const ej = JSON.stringify(d.entries ?? []);
+      return [d.date, d.level, d.approximate ? 1 : 0, `"${ej.replace(/"/g, '""')}"`, (d.chance*100).toFixed(6), ((1-cumFail)*100).toFixed(6)].join(",");
     });
     const blob = new Blob([[header.join(","), ...rows].join("\n")], { type:"text/csv" });
     const a = Object.assign(document.createElement("a"), { href:URL.createObjectURL(blob), download:`tangleroot-${todayStr()}.csv` });
@@ -646,16 +804,35 @@ export default function App() {
   function handleImport(data, mode, errMsg) {
     setShowImport(false);
     if (!data) { showToast(`Import failed: ${errMsg}`, true); return; }
+    const importedRunsRaw = Array.isArray(data.runs) ? data.runs : [];
+    const normRuns = normalizeRunList(importedRunsRaw);
     if (mode === "replace") {
-      setDays(data.days.sort((a,b) => a.date.localeCompare(b.date)));
-      if (data.level) setLevel(data.level);
-      showToast(`Replaced with ${data.days.length} imported days`);
+      setDays((data.days ?? []).map(normalizeDayForLoad).sort((a,b) => a.date.localeCompare(b.date)));
+      if (typeof data.level === "number") setLevel(data.level);
+      setRuns(normRuns);
+      showToast(`Replaced with ${data.days.length} day${data.days.length !== 1 ? "s" : ""}${normRuns.length ? `, ${normRuns.length} run${normRuns.length !== 1 ? "s" : ""}` : ""}`);
     } else {
       setDays(prev => {
         const ids = new Set(prev.map(d => d.id));
-        return [...prev, ...data.days.filter(d => !ids.has(d.id))].sort((a,b) => a.date.localeCompare(b.date));
+        return [...prev, ...(data.days ?? []).map(normalizeDayForLoad).filter(d => !ids.has(d.id))]
+          .sort((a,b) => a.date.localeCompare(b.date));
       });
-      showToast(`Merged ${data.days.length} days`);
+      setRuns(prev => {
+        const ids = new Set(prev.map(r => r.id));
+        let n = Date.now();
+        const extra = [];
+        for (const r of normRuns) {
+          let id = r.id;
+          if (ids.has(id)) {
+            do { n += 1; } while (ids.has(n));
+            id = n;
+          }
+          ids.add(id);
+          extra.push({ ...r, id });
+        }
+        return [...prev, ...extra];
+      });
+      showToast(`Merged ${data.days.length} day${data.days.length !== 1 ? "s" : ""}${normRuns.length ? `, ${normRuns.length} run template${normRuns.length !== 1 ? "s" : ""}` : ""}`);
     }
   }
 
@@ -677,12 +854,6 @@ export default function App() {
             <button style={S.btnExport} onClick={exportCSV}>↓ CSV</button>
             <button style={S.btnImport} onClick={() => setShowImport(true)}>↑ Import</button>
           </div>
-          <div style={S.lvlRow}>
-            <span>FARMING LVL</span>
-            <input type="range" min={1} max={99} value={level} step={1} style={S.lvlInput}
-              onChange={e => setLevel(Number(e.target.value))} />
-            <span style={S.lvlVal}>{level}</span>
-          </div>
         </div>
       </div>
 
@@ -693,13 +864,89 @@ export default function App() {
           <div style={S.card}>
             <label style={{ ...S.secLabel, display:"block", marginBottom:"0.35rem" }}>Date</label>
             <input type="date" value={date} onChange={e => setDate(e.target.value)} style={S.dateInput} />
-            {PATCH_META.map(({ key, label, note }) => (
-              <div key={key} style={S.patchRow}>
-                <span style={S.patchLabel}>{label}{note && <span style={S.patchNote}> {note}</span>}</span>
-                <input type="number" min={0} max={99} value={instance[key]} style={S.patchInput}
-                  onChange={e => setInstance(prev => ({ ...prev, [key]: Math.max(0, parseInt(e.target.value)||0) }))} />
+            <div style={{ ...S.lvlRow, marginBottom:"0.65rem", flexWrap:"wrap" }}>
+              <span>FARMING LVL</span>
+              <input type="range" min={1} max={99} value={level} step={1} style={{ ...S.lvlInput, flex: 1, minWidth: "100px" }}
+                onChange={e => setLevel(Number(e.target.value))} />
+              <span style={S.lvlVal}>{level}</span>
+            </div>
+            <p style={{ ...S.secLabel, margin:"0 0 0.4rem" }}>Harvests (wiki produce)</p>
+            <p style={{ fontSize:"0.58rem", color:C.muted, margin:"0 0 0.5rem", lineHeight:1.6 }}>
+              Each line is one roll source from the wiki Tangleroot table (e.g. Oak ×4, Flax ×10). Quantities are pet-roll counts for that crop.
+            </p>
+            {entries.map((row, i) => (
+              <div key={`${row.harvestId}-${i}`} style={S.entryRow}>
+                <select
+                  style={S.harvestSelect}
+                  value={row.harvestId}
+                  onChange={e => {
+                    const v = e.target.value;
+                    setEntries(prev => prev.map((r, j) => (j === i ? { ...r, harvestId: v } : r)));
+                  }}
+                >
+                  {HARVEST_GROUPS.map(g => (
+                    <optgroup key={g.patchType} label={g.patchType}>
+                      {g.harvests.map(h => (
+                        <option key={h.id} value={h.id}>{h.produce} (Lv.{h.minLevel})</option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
+                <input
+                  type="number" min={0} max={9999} value={row.qty}
+                  style={S.patchInput}
+                  onChange={e => setEntries(prev => prev.map((r, j) =>
+                    j === i ? { ...r, qty: Math.max(0, parseInt(e.target.value, 10) || 0) } : r))}
+                />
+                <button type="button" style={S.btnSecondary} title="Remove line"
+                  onClick={() => setEntries(prev => prev.filter((_, j) => j !== i))}>✕</button>
               </div>
             ))}
+            <button type="button" style={{ ...S.btnSecondary, width:"100%", marginBottom:"0.5rem" }}
+              onClick={() => setEntries(prev => [...prev, { harvestId: DEFAULT_HARVEST_ID, qty: 1 }])}>
+              + Add harvest
+            </button>
+          </div>
+          <div style={{ ...S.card, marginTop: "0.65rem" }}>
+            <p style={{ ...S.secLabel, margin: "0 0 0.5rem" }}>Saved runs</p>
+            <p style={{ fontSize: "0.62rem", color: C.muted, margin: "0 0 0.55rem", lineHeight: 1.65 }}>
+              A run is a named list of harvest lines (see wiki <a href="https://oldschool.runescape.wiki/w/Tangleroot" target="_blank" rel="noreferrer" style={{ color: C.accent }}>Tangleroot rates</a>). Log it for the date above without re-entering each crop.
+            </p>
+            <select
+              value={selectedRunId ?? ""}
+              onChange={e => {
+                const v = e.target.value;
+                setSelectedRunId(v ? Number(v) : null);
+              }}
+              style={S.runSelect}
+            >
+              <option value="">— select run —</option>
+              {runs.map(r => (
+                <option key={r.id} value={r.id}>{r.name}</option>
+              ))}
+            </select>
+            <div style={{ display: "flex", gap: "0.35rem", marginBottom: "0.45rem", flexWrap: "wrap" }}>
+              <button type="button" style={{ ...S.btnSecondary, flex: 1, minWidth: "100px" }} disabled={!selectedRunId}
+                onClick={() => selectedRunId && loadRunIntoForm(selectedRunId)}>Load into editor</button>
+              <button type="button" style={{ ...S.btnExport, flex: 1, minWidth: "100px", padding: "0.35rem 0.5rem" }} disabled={!selectedRunId}
+                onClick={logSelectedRun}>Log this run</button>
+            </div>
+            <input
+              type="text"
+              placeholder="New run name…"
+              value={runNameDraft}
+              onChange={e => setRunNameDraft(e.target.value)}
+              style={S.runNameInput}
+            />
+            <button type="button" style={{ ...S.btnSecondary, width: "100%", marginBottom: "0.35rem" }} onClick={saveRunFromForm}>
+              Save editor as new run
+            </button>
+            {runs.length > 0 && (
+              <button type="button" style={{ ...S.btnSecondary, width: "100%", color: C.red, borderColor: C.redDim }} disabled={!selectedRunId}
+                onClick={() => selectedRunId && window.confirm("Delete this run?") && deleteRun(selectedRunId)}>
+                Delete selected run
+              </button>
+            )}
           </div>
           <div style={S.preview}>
             <div>
@@ -712,11 +959,43 @@ export default function App() {
             </div>
           </div>
           <button style={S.btnPrimary} onClick={addDay}>+ Log this day</button>
+          <div style={{ ...S.card, marginTop: "0.65rem" }}>
+            <p style={{ ...S.secLabel, margin: "0 0 0.45rem" }}>Approximate untracked days</p>
+            <p style={{ fontSize: "0.58rem", color: C.muted, margin: "0 0 0.55rem", lineHeight: 1.65 }}>
+              Insert many calendar days you did not log in detail. Skips dates that already have an entry and walks forward from the start date until the requested count is placed.
+            </p>
+            <label style={{ ...S.secLabel, display: "block", marginBottom: "0.25rem" }}>Start date</label>
+            <input type="date" value={approxStart} onChange={e => setApproxStart(e.target.value)} style={S.dateInput} />
+            <label style={{ ...S.secLabel, display: "block", marginBottom: "0.25rem" }}>Days to add</label>
+            <input type="number" min={1} max={5000} value={approxCount} style={{ ...S.dateInput, marginBottom: "0.5rem" }}
+              onChange={e => setApproxCount(Math.max(1, Math.min(5000, parseInt(e.target.value, 10) || 1)))} />
+            <p style={{ ...S.secLabel, margin: "0 0 0.35rem" }}>Daily chance</p>
+            <label style={{ display: "flex", alignItems: "center", gap: "0.45rem", fontSize: "0.65rem", color: approxMode === "typical" ? C.text : C.muted, marginBottom: "0.35rem", cursor: "pointer" }}>
+              <input type="radio" name="apx" checked={approxMode === "typical"} onChange={() => setApproxMode("typical")} style={{ accentColor: C.accent }} />
+              Typical ({fmtPct(typicalApproxP, 4)} at Lv.{level} — built-in herb/tree/cactus run)
+            </label>
+            <label style={{ display: "flex", alignItems: "center", gap: "0.45rem", fontSize: "0.65rem", color: approxMode === "manual" ? C.text : C.muted, marginBottom: "0.35rem", cursor: "pointer" }}>
+              <input type="radio" name="apx" checked={approxMode === "manual"} onChange={() => setApproxMode("manual")} style={{ accentColor: C.accent }} />
+              Manual daily %
+            </label>
+            {approxMode === "manual" && (
+              <input
+                type="text"
+                placeholder="e.g. 0.15 for 0.15%"
+                value={approxManualPct}
+                onChange={e => setApproxManualPct(e.target.value)}
+                style={S.runNameInput}
+              />
+            )}
+            <button type="button" style={{ ...S.btnExport, width: "100%", padding: "0.45rem" }} onClick={addApproximateDays}>
+              Add approximate days
+            </button>
+          </div>
           <div style={{ borderTop:`1px solid ${C.border}`, paddingTop:"0.75rem", marginTop:"0.25rem" }}>
-            <p style={{ ...S.secLabel, margin:"0 0 0.4rem" }}>Patch defaults</p>
+            <p style={{ ...S.secLabel, margin:"0 0 0.4rem" }}>Editor</p>
             <button style={{ ...S.btnSecondary, fontSize:"0.6rem", width:"100%" }}
-              onClick={() => setInstance(Object.fromEntries(PATCH_META.map(p=>[p.key,p.defaultCount])))}>
-              Reset to defaults
+              onClick={() => setEntries(emptyEntries())}>
+              Clear harvest list
             </button>
           </div>
         </div>
