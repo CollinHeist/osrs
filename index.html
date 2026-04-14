@@ -4,178 +4,184 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSRS Tools</title>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@400;500&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --gold:#c9a227;--gold-light:#f0c94a;--gold-dim:#7a621a;
-  --dark:#0d0b06;--panel:#191408;--panel-border:#332a10;
-  --text:#d4c48a;--text-dim:#8a7850;
-  --green:#4aad52;--glow:rgba(201,162,39,0.13);
+  --accent:#5b9ec9;--accent-light:#8fc6e8;--accent-dim:#2d5f7a;
+  --dark:#07090d;--panel:#0e1420;--panel-border:#1a2840;
+  --text:#c4d4e0;--text-dim:#4e6a7a;
+  --green:#3aaa6a;--glow:rgba(91,158,201,0.12);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{
   background:var(--dark);color:var(--text);
-  font-family:'IM Fell English',Georgia,serif;
+  font-family:'Inter',system-ui,sans-serif;
   min-height:100vh;
   background-image:
-    radial-gradient(ellipse at 15% 10%, rgba(201,162,39,.07) 0%,transparent 50%),
-    radial-gradient(ellipse at 85% 90%, rgba(80,40,5,.1) 0%,transparent 50%);
+    radial-gradient(ellipse at 20% 0%, rgba(40,80,140,.1) 0%,transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(10,30,60,.12) 0%,transparent 50%);
 }
 body::before{
   content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.022) 2px,rgba(0,0,0,.022) 4px);
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.015) 3px,rgba(0,0,0,.015) 6px);
 }
 
 /* ── HERO ── */
 .hero{
   text-align:center;
-  padding:5rem 1.5rem 3.5rem;
+  padding:5.5rem 1.5rem 3.5rem;
   position:relative;z-index:1;
 }
 .hero-eyebrow{
   font-family:'Source Code Pro',monospace;
-  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold-dim);margin-bottom:1.1rem;
+  font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent-dim);margin-bottom:1.2rem;
 }
 .hero h1{
-  font-size:clamp(2.2rem,6vw,3.8rem);
-  color:var(--gold-light);
-  letter-spacing:.02em;
-  line-height:1.12;
-  text-shadow:0 0 40px rgba(201,162,39,.4),0 2px 6px rgba(0,0,0,.9);
-  margin-bottom:.9rem;
+  font-family:'Cinzel',Georgia,serif;
+  font-weight:600;
+  font-size:clamp(2rem,6vw,3.4rem);
+  color:var(--accent-light);
+  letter-spacing:.04em;
+  line-height:1.14;
+  text-shadow:0 0 48px rgba(91,158,201,.3),0 2px 8px rgba(0,0,0,.9);
+  margin-bottom:1rem;
 }
 .hero-sub{
-  font-size:clamp(.95rem,2vw,1.15rem);
+  font-size:clamp(.88rem,2vw,1.05rem);
   color:var(--text-dim);
-  font-style:italic;
-  max-width:480px;
+  max-width:460px;
   margin:0 auto;
-  line-height:1.6;
+  line-height:1.7;
+  font-weight:400;
 }
 .hr{
-  height:2px;
-  background:linear-gradient(90deg,transparent,var(--gold-dim),var(--gold),var(--gold-dim),transparent);
-  max-width:540px;margin:.9rem auto;opacity:.55;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent-dim),var(--accent),var(--accent-dim),transparent);
+  max-width:480px;margin:1rem auto;opacity:.4;
 }
 
 /* ── TOOLS GRID ── */
 .tools-section{
   position:relative;z-index:1;
-  max-width:900px;margin:0 auto;
+  max-width:920px;margin:0 auto;
   padding:0 1.5rem 5rem;
 }
 
 .section-label{
   font-family:'Source Code Pro',monospace;
-  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold-dim);margin-bottom:1.4rem;text-align:center;
+  font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:1.5rem;text-align:center;
 }
 
 .tools-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-  gap:1.2rem;
+  gap:1rem;
 }
 
 /* ── TOOL CARD ── */
 .card{
   background:var(--panel);
   border:1px solid var(--panel-border);
-  border-radius:5px;
+  border-radius:6px;
   padding:1.8rem 1.8rem 1.5rem;
   position:relative;
   overflow:hidden;
   text-decoration:none;
   display:block;
-  transition:border-color .22s, transform .18s, box-shadow .22s;
-  box-shadow:0 4px 24px rgba(0,0,0,.5);
+  transition:border-color .2s, transform .17s, box-shadow .2s;
+  box-shadow:0 2px 18px rgba(0,0,0,.45);
 }
 .card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent 5%,var(--gold-dim) 28%,var(--gold) 50%,var(--gold-dim) 72%,transparent 95%);
-  opacity:.45;transition:opacity .22s;
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 5%,var(--accent-dim) 30%,var(--accent) 50%,var(--accent-dim) 70%,transparent 95%);
+  opacity:.35;transition:opacity .2s;
 }
 .card::after{
   content:'';
   position:absolute;
   inset:0;
-  background:radial-gradient(ellipse at 50% 0%,rgba(201,162,39,.055) 0%,transparent 65%);
-  opacity:0;transition:opacity .22s;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 0%,rgba(91,158,201,.04) 0%,transparent 65%);
+  opacity:0;transition:opacity .2s;pointer-events:none;
 }
 .card:hover{
-  border-color:var(--gold-dim);
-  transform:translateY(-3px);
-  box-shadow:0 8px 36px rgba(0,0,0,.6),0 0 0 1px rgba(201,162,39,.08);
+  border-color:var(--accent-dim);
+  transform:translateY(-2px);
+  box-shadow:0 6px 30px rgba(0,0,0,.55),0 0 0 1px rgba(91,158,201,.07);
 }
-.card:hover::before{opacity:.8;}
+.card:hover::before{opacity:.75;}
 .card:hover::after{opacity:1;}
 
 .card-icon{
-  font-size:2rem;
-  margin-bottom:1rem;
+  font-size:1.8rem;
+  margin-bottom:.9rem;
   display:block;
   line-height:1;
+  filter:saturate(0.85);
 }
 .card-title{
-  font-size:1.3rem;
-  color:var(--gold-light);
-  margin-bottom:.55rem;
-  letter-spacing:.015em;
+  font-family:'Cinzel',serif;
+  font-size:1.1rem;
+  font-weight:600;
+  color:var(--accent-light);
+  margin-bottom:.5rem;
+  letter-spacing:.025em;
 }
 .card-desc{
-  font-size:.9rem;
+  font-size:.875rem;
   color:var(--text-dim);
-  font-style:italic;
-  line-height:1.65;
+  line-height:1.7;
   margin-bottom:1.2rem;
+  font-weight:400;
 }
 .card-tags{
-  display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.3rem;
+  display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:1.25rem;
 }
 .tag{
   font-family:'Source Code Pro',monospace;
-  font-size:.62rem;letter-spacing:.07em;
+  font-size:.6rem;letter-spacing:.06em;
   border:1px solid var(--panel-border);
   color:var(--text-dim);
-  padding:.18rem .52rem;border-radius:2px;
+  padding:.17rem .5rem;border-radius:3px;
+  background:rgba(91,158,201,.04);
 }
 .card-cta{
   display:inline-flex;align-items:center;gap:.4rem;
   font-family:'Source Code Pro',monospace;
-  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--gold-dim);
-  transition:color .15s,gap .15s;
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent-dim);
+  transition:color .14s,gap .14s;
 }
-.card:hover .card-cta{color:var(--gold);gap:.6rem;}
-.card-cta-arrow{transition:transform .18s;}
+.card:hover .card-cta{color:var(--accent);gap:.6rem;}
+.card-cta-arrow{transition:transform .17s;}
 .card:hover .card-cta-arrow{transform:translateX(3px);}
 
 /* ── COMING SOON CARD ── */
 .card.soon{
-  opacity:.55;pointer-events:none;
+  opacity:.45;pointer-events:none;
 }
 .card.soon .card-title{color:var(--text-dim);}
 .soon-badge{
   position:absolute;top:1rem;right:1rem;
-  font-family:'Source Code Pro',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  font-family:'Source Code Pro',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
   border:1px solid var(--panel-border);color:var(--text-dim);
-  padding:.18rem .5rem;border-radius:2px;
+  padding:.17rem .48rem;border-radius:3px;
 }
 
 /* ── FOOTER ── */
 footer{
   position:relative;z-index:1;
-  text-align:center;padding:1.5rem 1rem 2.5rem;
+  text-align:center;padding:1.4rem 1rem 2.5rem;
   font-family:'Source Code Pro',monospace;
-  font-size:.68rem;letter-spacing:.08em;
+  font-size:.65rem;letter-spacing:.08em;
   color:var(--text-dim);
   border-top:1px solid var(--panel-border);
-  max-width:900px;margin:0 auto;
+  max-width:920px;margin:0 auto;
 }
-footer a{color:var(--gold-dim);text-decoration:none;transition:color .15s;}
-footer a:hover{color:var(--gold);}
+footer a{color:var(--accent-dim);text-decoration:none;transition:color .14s;}
+footer a:hover{color:var(--accent);}
 </style>
 </head>
 <body>
@@ -184,7 +190,6 @@ footer a:hover{color:var(--gold);}
   <div class="hr"></div>
   <p class="hero-eyebrow">Old School RuneScape</p>
   <h1>Tools &amp; Calculators</h1>
-  <p class="hero-sub">Efficiency calculators for the discerning adventurer.</p>
   <div class="hr"></div>
 </div>
 
@@ -200,7 +205,7 @@ footer a:hover{color:var(--gold);}
         <span class="tag">Prayer</span>
         <span class="tag">GP/XP</span>
       </div>
-      <span class="card-cta">Open tool <span class="card-cta-arrow">→</span></span>
+      <span class="card-cta">Open <span class="card-cta-arrow">→</span></span>
     </a>
 
     <a href="./tangleroot/" class="card">
@@ -213,7 +218,7 @@ footer a:hover{color:var(--gold);}
         <span class="tag">Drop Rate</span>
         <span class="tag">Tracker</span>
       </div>
-      <span class="card-cta">Open tool <span class="card-cta-arrow">→</span></span>
+      <span class="card-cta">Open <span class="card-cta-arrow">→</span></span>
     </a>
 
   </div>
