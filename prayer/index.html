@@ -156,10 +156,10 @@ td.ctr{text-align:center;font-size:.72rem;color:var(--text-dim);}
   </div>
 </div>
 
-<!-- GE SENSITIVITY -->
+<!-- SENSITIVITY -->
 <div class="panel">
-  <div class="panel-title">📈 GE Price Sensitivity</div>
-  <div class="row">
+  <div class="panel-title">📊 Sensitivity Adjustments</div>
+  <div class="row" style="margin-bottom:.72rem;">
     <label>Price adjustment:</label>
     <div class="input-wrap" style="max-width:160px;">
       <input type="number" id="sensitivity" value="0" min="-50" max="200" step="0.5" oninput="updateSensLabel();recalc()">
@@ -173,6 +173,20 @@ td.ctr{text-align:center;font-size:.72rem;color:var(--text-dim);}
       <button class="preset-btn" onclick="setSens(25)">+25%</button>
     </div>
     <span class="xp-note" id="sensLabel"></span>
+  </div>
+  <div class="row">
+    <label>Action efficiency:</label>
+    <div class="input-wrap" style="max-width:160px;">
+      <input type="number" id="actionEff" value="0" min="-75" max="50" step="0.5" oninput="updateActionEffLabel();recalc()">
+      <span class="pfx">%</span>
+    </div>
+    <div class="presets">
+      <button class="preset-btn" onclick="setActionEff(-10)">−10%</button>
+      <button class="preset-btn" onclick="setActionEff(-5)">−5%</button>
+      <button class="preset-btn" onclick="setActionEff(0)">0%</button>
+      <button class="preset-btn" onclick="setActionEff(5)">+5%</button>
+    </div>
+    <span class="xp-note" id="actionEffLabel"></span>
   </div>
 </div>
 
@@ -311,6 +325,7 @@ let bones=[], sortCol='totalH', sortDir=1;
   });
   updateXp();
   updateSensLabel();
+  updateActionEffLabel();
 })();
 
 function updateXp(){
@@ -440,11 +455,21 @@ function updateSensLabel(){
   el.textContent=`GP/XP values scaled by ${sign}${v}% (bones cost ${v>0?'more':'less'} than listed)`;
 }
 
+function setActionEff(v){document.getElementById('actionEff').value=v;updateActionEffLabel();recalc();}
+function updateActionEffLabel(){
+  const v=parseFloat(document.getElementById('actionEff').value)||0;
+  const el=document.getElementById('actionEffLabel');
+  if(v===0){el.textContent='No adjustment — assuming optimal actions';return;}
+  const sign=v>0?'+':'';
+  el.textContent=`XP/hr scaled by ${sign}${v}% (${v>0?'faster':'slower'} than wiki values)`;
+}
+
 // calc
 function recalc(){
   if(!bones.length) return;
   const gphr=parseFloat(document.getElementById('gphr').value)||1e6;
   const sens=(parseFloat(document.getElementById('sensitivity').value)||0)/100;
+  const actionEff=(parseFloat(document.getElementById('actionEff').value)||0)/100;
   const f=+document.getElementById('fromLvl').value, t=+document.getElementById('toLvl').value;
   const xpNeeded=Math.max(0,xpAt(t)-xpAt(f));
   if(xpNeeded<=0){showEmpty('Set a target level higher than current.');return;}
@@ -458,11 +483,12 @@ function recalc(){
       if(m.method==='Chaos Altar'&&!sc) continue;
       if(m.method==='Libation Bowl'&&!ss) continue;
       const adjGpxp=m.gpxp*(1+sens);
+      const adjXphr=m.xphr*(1+actionEff);
       const totalCost=xpNeeded*adjGpxp;
       const gatherH=totalCost/gphr;
-      const trainH=xpNeeded/m.xphr;
+      const trainH=xpNeeded/adjXphr;
       const totalH=gatherH+trainH;
-      rows.push({name:bone.name,method:m.method,gpxp:adjGpxp,baseGpxp:m.gpxp,totalCost,gatherH,trainH,totalH,xphr:m.xphr});
+      rows.push({name:bone.name,method:m.method,gpxp:adjGpxp,baseGpxp:m.gpxp,totalCost,gatherH,trainH,totalH,xphr:adjXphr});
     }
   }
   if(!rows.length){showEmpty('No methods enabled or no matching data.');return;}
@@ -518,8 +544,10 @@ function renderTbl(rows,best,range,xpNeeded,gphr){
     tbody.appendChild(tr);
   });
   const sens=(parseFloat(document.getElementById('sensitivity').value)||0);
+  const aeff=(parseFloat(document.getElementById('actionEff').value)||0);
   const sensTag=sens!==0?` · GP/XP ${sens>0?'+':''}${sens}% adjustment`:'';
-  document.getElementById('tblSub').textContent=`${rows.length} options · ${fg(gphr)}/hr income · ${xpNeeded.toLocaleString()} XP needed${sensTag}`;
+  const aeffTag=aeff!==0?` · XP/hr ${aeff>0?'+':''}${aeff}% efficiency`:'';
+  document.getElementById('tblSub').textContent=`${rows.length} options · ${fg(gphr)}/hr income · ${xpNeeded.toLocaleString()} XP needed${sensTag}${aeffTag}`;
 }
 
 function renderCallout(r){
