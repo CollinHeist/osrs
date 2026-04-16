@@ -1,303 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OSRS Prayer Bone Optimizer</title>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
-<style>
-:root {
-  --gold:#c9a227;--gold-light:#f0c94a;--gold-dim:#7a621a;
-  --dark:#0d0b06;--panel:#191408;--panel-border:#332a10;
-  --text:#d4c48a;--text-dim:#8a7850;
-  --green:#4aad52;--red:#c44444;
-  --glow:rgba(201,162,39,0.13);
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{
-  background:var(--dark);color:var(--text);
-  font-family:'IM Fell English',Georgia,serif;
-  min-height:100vh;
-  background-image:radial-gradient(ellipse at 20% 10%,rgba(201,162,39,.06) 0%,transparent 55%),
-    radial-gradient(ellipse at 80% 85%,rgba(80,40,5,.1) 0%,transparent 50%);
-}
-body::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);
-}
-header{text-align:center;padding:2.2rem 1rem 1.2rem;position:relative;}
-.home-link{display:inline-block;position:absolute;top:1rem;left:1.2rem;font-family:'Source Code Pro',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .14s;}
-.home-link:hover{color:var(--gold);}
-.hr{height:2px;background:linear-gradient(90deg,transparent,var(--gold-dim),var(--gold),var(--gold-dim),transparent);max-width:600px;margin:.5rem auto;opacity:.6;}
-header h1{font-size:clamp(1.7rem,4.5vw,2.7rem);color:var(--gold-light);letter-spacing:.03em;text-shadow:0 0 28px rgba(201,162,39,.45),0 2px 4px rgba(0,0,0,.9);}
-header p{font-size:.9rem;color:var(--text-dim);font-style:italic;margin-top:.3rem;}
-.container{max-width:1120px;margin:0 auto;padding:0 1rem 3rem;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSRS Prayer Bone Optimizer</title>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --gold:#c9a227;--gold-light:#f0c94a;--gold-dim:#7a621a;
+      --dark:#0d0b06;--panel:#191408;--panel-border:#332a10;
+      --text:#d4c48a;--text-dim:#8a7850;
+      --green:#4aad52;--red:#c44444;
+      --glow:rgba(201,162,39,0.13);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      background:var(--dark);color:var(--text);
+      font-family:'IM Fell English',Georgia,serif;
+      min-height:100vh;
+      background-image:radial-gradient(ellipse at 20% 10%,rgba(201,162,39,.06) 0%,transparent 55%),
+        radial-gradient(ellipse at 80% 85%,rgba(80,40,5,.1) 0%,transparent 50%);
+    }
+    body::before{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
+      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);
+    }
+    header{text-align:center;padding:2.2rem 1rem 1.2rem;position:relative;}
+    .home-link{display:inline-block;position:absolute;top:1rem;left:1.2rem;font-family:'Source Code Pro',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .14s;}
+    .home-link:hover{color:var(--gold);}
+    .hr{height:2px;background:linear-gradient(90deg,transparent,var(--gold-dim),var(--gold),var(--gold-dim),transparent);max-width:600px;margin:.5rem auto;opacity:.6;}
+    header h1{font-size:clamp(1.7rem,4.5vw,2.7rem);color:var(--gold-light);letter-spacing:.03em;text-shadow:0 0 28px rgba(201,162,39,.45),0 2px 4px rgba(0,0,0,.9);}
+    header p{font-size:.9rem;color:var(--text-dim);font-style:italic;margin-top:.3rem;}
+    .container{max-width:1120px;margin:0 auto;padding:0 1rem 3rem;}
 
-/* panels */
-.panel{background:var(--panel);border:1px solid var(--panel-border);border-radius:4px;padding:1.3rem 1.5rem;margin-bottom:1.2rem;box-shadow:0 4px 22px rgba(0,0,0,.55),inset 0 1px 0 rgba(201,162,39,.07);position:relative;}
-.panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 8%,var(--gold-dim) 30%,var(--gold) 50%,var(--gold-dim) 70%,transparent 92%);opacity:.5;}
-.panel-title{font-family:'Source Code Pro',monospace;font-size:.65rem;letter-spacing:.17em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.85rem;}
+    /* panels */
+    .panel{background:var(--panel);border:1px solid var(--panel-border);border-radius:4px;padding:1.3rem 1.5rem;margin-bottom:1.2rem;box-shadow:0 4px 22px rgba(0,0,0,.55),inset 0 1px 0 rgba(201,162,39,.07);position:relative;}
+    .panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 8%,var(--gold-dim) 30%,var(--gold) 50%,var(--gold-dim) 70%,transparent 92%);opacity:.5;}
+    .panel-title{font-family:'Source Code Pro',monospace;font-size:.65rem;letter-spacing:.17em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.85rem;}
 
-/* row */
-.row{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
-.row label{font-style:italic;white-space:nowrap;font-size:.95rem;}
-.input-wrap{display:flex;align-items:center;gap:.4rem;background:var(--dark);border:1px solid var(--panel-border);border-radius:3px;padding:.36rem .7rem;transition:border-color .2s;max-width:240px;flex:1;}
-.input-wrap:focus-within{border-color:var(--gold-dim);box-shadow:0 0 0 2px var(--glow);}
-.pfx{color:var(--gold);font-family:'Source Code Pro',monospace;font-size:.82rem;}
-input[type=number],input[type=text]{background:none;border:none;outline:none;color:var(--gold-light);font-family:'Source Code Pro',monospace;font-size:.93rem;width:100%;}
-input[type=number]::-webkit-inner-spin-button{display:none;}
-select{background:var(--dark);border:1px solid var(--panel-border);border-radius:3px;color:var(--gold-light);font-family:'Source Code Pro',monospace;font-size:.86rem;padding:.3rem .52rem;cursor:pointer;}
-select:focus{outline:none;border-color:var(--gold-dim);}
-.presets{display:flex;gap:.32rem;flex-wrap:wrap;}
-.preset-btn{background:none;border:1px solid var(--panel-border);color:var(--text-dim);font-family:'Source Code Pro',monospace;font-size:.68rem;padding:.2rem .48rem;border-radius:3px;cursor:pointer;transition:all .15s;}
-.preset-btn:hover{border-color:var(--gold-dim);color:var(--gold);background:var(--glow);}
-.xp-note{font-family:'Source Code Pro',monospace;font-size:.76rem;color:var(--text-dim);font-style:normal;}
+    /* row */
+    .row{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+    .row label{font-style:italic;white-space:nowrap;font-size:.95rem;}
+    .input-wrap{display:flex;align-items:center;gap:.4rem;background:var(--dark);border:1px solid var(--panel-border);border-radius:3px;padding:.36rem .7rem;transition:border-color .2s;max-width:240px;flex:1;}
+    .input-wrap:focus-within{border-color:var(--gold-dim);box-shadow:0 0 0 2px var(--glow);}
+    .pfx{color:var(--gold);font-family:'Source Code Pro',monospace;font-size:.82rem;}
+    input[type=number],input[type=text]{background:none;border:none;outline:none;color:var(--gold-light);font-family:'Source Code Pro',monospace;font-size:.93rem;width:100%;}
+    input[type=number]::-webkit-inner-spin-button{display:none;}
+    select{background:var(--dark);border:1px solid var(--panel-border);border-radius:3px;color:var(--gold-light);font-family:'Source Code Pro',monospace;font-size:.86rem;padding:.3rem .52rem;cursor:pointer;}
+    select:focus{outline:none;border-color:var(--gold-dim);}
+    .presets{display:flex;gap:.32rem;flex-wrap:wrap;}
+    .preset-btn{background:none;border:1px solid var(--panel-border);color:var(--text-dim);font-family:'Source Code Pro',monospace;font-size:.68rem;padding:.2rem .48rem;border-radius:3px;cursor:pointer;transition:all .15s;}
+    .preset-btn:hover{border-color:var(--gold-dim);color:var(--gold);background:var(--glow);}
+    .xp-note{font-family:'Source Code Pro',monospace;font-size:.76rem;color:var(--text-dim);font-style:normal;}
 
-/* method toggles */
-.toggles{display:flex;gap:1.2rem;flex-wrap:wrap;}
-.toggle{display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.9rem;font-style:italic;user-select:none;}
-.toggle input{accent-color:var(--gold);width:14px;height:14px;cursor:pointer;}
+    /* method toggles */
+    .toggles{display:flex;gap:1.2rem;flex-wrap:wrap;}
+    .toggle{display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.9rem;font-style:italic;user-select:none;}
+    .toggle input{accent-color:var(--gold);width:14px;height:14px;cursor:pointer;}
 
-/* tabs */
-.tabs{display:flex;border-bottom:1px solid var(--panel-border);margin-bottom:1rem;}
-.tab{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'IM Fell English',serif;font-size:.88rem;padding:.44rem 1rem;cursor:pointer;transition:all .14s;margin-bottom:-1px;}
-.tab.active{color:var(--gold-light);border-bottom-color:var(--gold);}
-.tab:hover:not(.active){color:var(--text);}
+    /* tabs */
+    .tabs{display:flex;border-bottom:1px solid var(--panel-border);margin-bottom:1rem;}
+    .tab{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'IM Fell English',serif;font-size:.88rem;padding:.44rem 1rem;cursor:pointer;transition:all .14s;margin-bottom:-1px;}
+    .tab.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+    .tab:hover:not(.active){color:var(--text);}
 
-textarea{width:100%;background:var(--dark);border:1px solid var(--panel-border);border-radius:3px;color:var(--text);font-family:'Source Code Pro',monospace;font-size:.72rem;padding:.72rem;resize:vertical;min-height:60px;line-height:1.65;transition:border-color .2s;}
-textarea:focus{outline:none;border-color:var(--gold-dim);box-shadow:0 0 0 2px var(--glow);}
-.hint{font-size:.68rem;color:var(--text-dim);font-style:italic;margin-top:.42rem;font-family:'Source Code Pro',monospace;}
+    textarea{width:100%;background:var(--dark);border:1px solid var(--panel-border);border-radius:3px;color:var(--text);font-family:'Source Code Pro',monospace;font-size:.72rem;padding:.72rem;resize:vertical;min-height:60px;line-height:1.65;transition:border-color .2s;}
+    textarea:focus{outline:none;border-color:var(--gold-dim);box-shadow:0 0 0 2px var(--glow);}
+    .hint{font-size:.68rem;color:var(--text-dim);font-style:italic;margin-top:.42rem;font-family:'Source Code Pro',monospace;}
 
-.btn{background:linear-gradient(180deg,#2a2010,#181008);border:1px solid var(--gold-dim);color:var(--gold-light);font-family:'IM Fell English',serif;font-size:.88rem;padding:.42rem 1.15rem;border-radius:3px;cursor:pointer;transition:all .17s;}
-.btn:hover{background:linear-gradient(180deg,#382e14,#201608);box-shadow:0 0 12px rgba(201,162,39,.18);}
-.btn.sec{border-color:var(--panel-border);color:var(--text-dim);}
-.btn.sec:hover{border-color:var(--gold-dim);color:var(--gold);}
-.status{display:inline-block;margin-left:.65rem;font-family:'Source Code Pro',monospace;font-size:.74rem;}
-.status.ok{color:var(--green);}
-.status.err{color:var(--red);}
+    .btn{background:linear-gradient(180deg,#2a2010,#181008);border:1px solid var(--gold-dim);color:var(--gold-light);font-family:'IM Fell English',serif;font-size:.88rem;padding:.42rem 1.15rem;border-radius:3px;cursor:pointer;transition:all .17s;}
+    .btn:hover{background:linear-gradient(180deg,#382e14,#201608);box-shadow:0 0 12px rgba(201,162,39,.18);}
+    .btn.sec{border-color:var(--panel-border);color:var(--text-dim);}
+    .btn.sec:hover{border-color:var(--gold-dim);color:var(--gold);}
+    .status{display:inline-block;margin-left:.65rem;font-family:'Source Code Pro',monospace;font-size:.74rem;}
+    .status.ok{color:var(--green);}
+    .status.err{color:var(--red);}
 
-/* manual grid */
-.mgrid{display:grid;gap:.42rem;}
-.mrow{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 34px;gap:.42rem;align-items:center;}
-.mrow.hdr{font-family:'Source Code Pro',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);padding-bottom:.28rem;border-bottom:1px solid var(--panel-border);}
-.mi{background:var(--dark);border:1px solid var(--panel-border);border-radius:3px;color:var(--gold-light);font-family:'Source Code Pro',monospace;font-size:.78rem;padding:.26rem .44rem;width:100%;transition:border-color .14s;}
-.mi:focus{outline:none;border-color:var(--gold-dim);}
-.del{background:none;border:none;color:var(--red);cursor:pointer;opacity:.42;font-size:.88rem;padding:.08rem .2rem;transition:opacity .14s;}
-.del:hover{opacity:1;}
-.add-btn{background:none;border:1px dashed var(--panel-border);color:var(--text-dim);font-family:'IM Fell English',serif;font-size:.8rem;padding:.35rem;border-radius:3px;cursor:pointer;width:100%;margin-top:.42rem;transition:all .14s;}
-.add-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+    /* manual grid */
+    .mgrid{display:grid;gap:.42rem;}
+    .mrow{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 34px;gap:.42rem;align-items:center;}
+    .mrow.hdr{font-family:'Source Code Pro',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);padding-bottom:.28rem;border-bottom:1px solid var(--panel-border);}
+    .mi{background:var(--dark);border:1px solid var(--panel-border);border-radius:3px;color:var(--gold-light);font-family:'Source Code Pro',monospace;font-size:.78rem;padding:.26rem .44rem;width:100%;transition:border-color .14s;}
+    .mi:focus{outline:none;border-color:var(--gold-dim);}
+    .del{background:none;border:none;color:var(--red);cursor:pointer;opacity:.42;font-size:.88rem;padding:.08rem .2rem;transition:opacity .14s;}
+    .del:hover{opacity:1;}
+    .add-btn{background:none;border:1px dashed var(--panel-border);color:var(--text-dim);font-family:'IM Fell English',serif;font-size:.8rem;padding:.35rem;border-radius:3px;cursor:pointer;width:100%;margin-top:.42rem;transition:all .14s;}
+    .add-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
 
-/* callout */
-.callout{background:linear-gradient(135deg,rgba(74,173,82,.07),rgba(74,173,82,.02));border:1px solid rgba(74,173,82,.28);border-radius:4px;padding:.88rem 1.3rem;margin-bottom:1.2rem;display:none;}
-.callout.show{display:block;}
-.cbname{font-size:1.22rem;color:var(--gold-light);}
-.cstats{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:.58rem;margin-top:.65rem;}
-.cstat{background:rgba(0,0,0,.22);border-radius:3px;padding:.4rem .68rem;}
-.cslbl{font-family:'Source Code Pro',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.13rem;}
-.csval{font-family:'Source Code Pro',monospace;font-size:.9rem;color:var(--gold-light);}
-.csval.g{color:var(--green);}
+    /* sticky controls */
+    .sticky-controls{position:sticky;top:0;z-index:50;background:var(--dark);box-shadow:0 6px 24px rgba(0,0,0,.72),0 1px 0 var(--panel-border);}
+    .sticky-controls::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:6px;background:linear-gradient(to bottom,rgba(0,0,0,.28),transparent);pointer-events:none;}
+    .sticky-controls>.panel:last-child{margin-bottom:0;}
+    .sticky-controls.unstuck{position:relative;box-shadow:none;}
+    .sticky-controls.unstuck::after{display:none;}
+    .pin-btn{position:absolute;top:.55rem;right:.7rem;background:none;border:1px solid var(--panel-border);border-radius:3px;color:var(--text-dim);font-family:'Source Code Pro',monospace;font-size:.62rem;letter-spacing:.08em;padding:.18rem .48rem;cursor:pointer;transition:all .15s;z-index:1;}
+    .pin-btn:hover{border-color:var(--gold-dim);color:var(--gold);background:var(--glow);}
+    .pin-btn.active{border-color:var(--gold-dim);color:var(--gold-light);}
 
-/* table */
-.tbl-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.65rem;flex-wrap:wrap;gap:.4rem;}
-.tbl-sub{font-family:'Source Code Pro',monospace;font-size:.7rem;color:var(--text-dim);font-style:italic;}
-.tbl-wrap{overflow-x:auto;}
-table{width:100%;border-collapse:collapse;font-size:.84rem;}
-thead th{font-family:'Source Code Pro',monospace;font-size:.6rem;letter-spacing:.11em;text-transform:uppercase;color:var(--gold-dim);padding:.46rem .72rem;text-align:right;border-bottom:1px solid var(--panel-border);white-space:nowrap;cursor:pointer;user-select:none;transition:color .14s;}
-thead th:first-child{text-align:left;}
-thead th:hover{color:var(--gold);}
-thead th.asc::after{content:' ↑';}
-thead th.desc::after{content:' ↓';}
-tbody tr{border-bottom:1px solid rgba(51,42,16,.38);transition:background .11s;}
-tbody tr:hover{background:rgba(201,162,39,.04);}
-tbody tr.opt{background:rgba(74,173,82,.055);}
-tbody tr.opt td:first-child::before{content:'★ ';color:var(--gold);font-size:.76rem;}
-td{padding:.48rem .72rem;text-align:right;font-family:'Source Code Pro',monospace;font-size:.78rem;color:var(--text-dim);}
-td:first-child{text-align:left;color:var(--text);font-family:'IM Fell English',serif;font-size:1.1rem;font-style:italic;}
-td.best{color:var(--green);}
-td.worst{color:var(--red);}
-td.hi{color:var(--gold-light);}
-td.ctr{text-align:center;font-size:.72rem;color:var(--text-dim);}
-.bwrap{display:flex;align-items:center;gap:.42rem;justify-content:flex-end;}
-.bar{height:5px;border-radius:2px;background:var(--panel-border);width:52px;overflow:hidden;}
-.bfill{height:100%;border-radius:2px;}
-.empty{text-align:center;padding:2.6rem 1rem;color:var(--text-dim);font-style:italic;}
-.empty .ico{font-size:2.4rem;opacity:.22;margin-bottom:.65rem;}
-@media(max-width:580px){.mrow{grid-template-columns:1.3fr 1fr 1fr 30px;}.mrow .cc{display:none;}}
-</style>
+    /* callout */
+    .callout{background:linear-gradient(135deg,rgba(74,173,82,.07),rgba(74,173,82,.02));border:1px solid rgba(74,173,82,.28);border-radius:4px;padding:.88rem 1.3rem;margin-bottom:1.2rem;display:none;}
+    .callout.show{display:block;}
+    .cbname{font-size:1.22rem;color:var(--gold-light);}
+    .cstats{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:.58rem;margin-top:.65rem;}
+    .cstat{background:rgba(0,0,0,.22);border-radius:3px;padding:.4rem .68rem;}
+    .cslbl{font-family:'Source Code Pro',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.13rem;}
+    .csval{font-family:'Source Code Pro',monospace;font-size:.9rem;color:var(--gold-light);}
+    .csval.g{color:var(--green);}
+
+    /* table */
+    .tbl-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.65rem;flex-wrap:wrap;gap:.4rem;}
+    .tbl-sub{font-family:'Source Code Pro',monospace;font-size:.7rem;color:var(--text-dim);font-style:italic;}
+    .tbl-wrap{overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;font-size:.84rem;}
+    thead th{font-family:'Source Code Pro',monospace;font-size:.6rem;letter-spacing:.11em;text-transform:uppercase;color:var(--gold-dim);padding:.46rem .72rem;text-align:right;border-bottom:1px solid var(--panel-border);white-space:nowrap;cursor:pointer;user-select:none;transition:color .14s;}
+    thead th:first-child{text-align:left;}
+    thead th:hover{color:var(--gold);}
+    thead th.asc::after{content:' ↑';}
+    thead th.desc::after{content:' ↓';}
+    tbody tr{border-bottom:1px solid rgba(51,42,16,.38);transition:background .11s;}
+    tbody tr:hover{background:rgba(201,162,39,.04);}
+    tbody tr.opt{background:rgba(74,173,82,.055);}
+    tbody tr.opt td:first-child::before{content:'★ ';color:var(--gold);font-size:.76rem;}
+    td{padding:.48rem .72rem;text-align:right;font-family:'Source Code Pro',monospace;font-size:.78rem;color:var(--text-dim);}
+    td:first-child{text-align:left;color:var(--text);font-family:'IM Fell English',serif;font-size:1.1rem;font-style:italic;}
+    td.best{color:var(--green);}
+    td.worst{color:var(--red);}
+    td.hi{color:var(--gold-light);}
+    td.ctr{text-align:center;font-size:.72rem;color:var(--text-dim);}
+    .bwrap{display:flex;align-items:center;gap:.42rem;justify-content:flex-end;}
+    .bar{height:5px;border-radius:2px;background:var(--panel-border);width:52px;overflow:hidden;}
+    .bfill{height:100%;border-radius:2px;}
+    .empty{text-align:center;padding:2.6rem 1rem;color:var(--text-dim);font-style:italic;}
+    .empty .ico{font-size:2.4rem;opacity:.22;margin-bottom:.65rem;}
+    @media(max-width:580px){.mrow{grid-template-columns:1.3fr 1fr 1fr 30px;}.mrow .cc{display:none;}}
+  </style>
 </head>
 <body>
-<header>
-  <a href="../" class="home-link">← All Tools</a>
-  <div class="hr"></div>
-  <h1>🦴 Prayer Bone Optimizer 🦴</h1>
-  <p>Find the optimal bone given your gold-per-hour income rate</p>
-  <div class="hr"></div>
-</header>
+  <header>
+    <a href="../" class="home-link">← All Tools</a>
+    <div class="hr"></div>
+    <h1>🦴 Prayer Bone Optimizer 🦴</h1>
+    <p>Find the optimal bone given your gold-per-hour income rate</p>
+    <div class="hr"></div>
+  </header>
 
 <div class="container">
-
-<!-- GP RATE -->
-<div class="panel">
-  <div class="panel-title">⚙ Gold Accumulation Rate</div>
-  <div class="row">
-    <label>Your GP/hour:</label>
-    <div class="input-wrap">
-      <span class="pfx">gp/h</span>
-      <input type="number" id="gphr" value="1000000" min="0" step="50000" oninput="recalc()">
-    </div>
-    <div class="presets">
-      <button class="preset-btn" onclick="setGphr(300000)">300k</button>
-      <button class="preset-btn" onclick="setGphr(500000)">500k</button>
-      <button class="preset-btn" onclick="setGphr(1000000)">1m</button>
-      <button class="preset-btn" onclick="setGphr(2000000)">2m</button>
-      <button class="preset-btn" onclick="setGphr(5000000)">5m</button>
-    </div>
-  </div>
-</div>
-
-<!-- SENSITIVITY -->
-<div class="panel">
-  <div class="panel-title">📊 Sensitivity Adjustments</div>
-  <div class="row" style="margin-bottom:.72rem;">
-    <label>Price adjustment:</label>
-    <div class="input-wrap" style="max-width:160px;">
-      <input type="number" id="sensitivity" value="0" min="-50" max="200" step="0.5" oninput="updateSensLabel();recalc()">
-      <span class="pfx">%</span>
-    </div>
-    <div class="presets">
-      <button class="preset-btn" onclick="setSens(-5)">−5%</button>
-      <button class="preset-btn" onclick="setSens(0)">0%</button>
-      <button class="preset-btn" onclick="setSens(5)">+5%</button>
-      <button class="preset-btn" onclick="setSens(10)">+10%</button>
-      <button class="preset-btn" onclick="setSens(25)">+25%</button>
-    </div>
-    <span class="xp-note" id="sensLabel"></span>
-  </div>
-  <div class="row">
-    <label>Action efficiency:</label>
-    <div class="input-wrap" style="max-width:160px;">
-      <input type="number" id="actionEff" value="0" min="-75" max="50" step="0.5" oninput="updateActionEffLabel();recalc()">
-      <span class="pfx">%</span>
-    </div>
-    <div class="presets">
-      <button class="preset-btn" onclick="setActionEff(-10)">−10%</button>
-      <button class="preset-btn" onclick="setActionEff(-5)">−5%</button>
-      <button class="preset-btn" onclick="setActionEff(0)">0%</button>
-      <button class="preset-btn" onclick="setActionEff(5)">+5%</button>
-    </div>
-    <span class="xp-note" id="actionEffLabel"></span>
-  </div>
-</div>
-
-<!-- XP TARGET -->
-<div class="panel">
-  <div class="panel-title">🎯 Experience Target</div>
-  <div class="row">
-    <label>Current level:</label>
-    <select id="fromLvl" onchange="updateXp()"></select>
-    <label>→ Target:</label>
-    <select id="toLvl" onchange="updateXp()"></select>
-    <span class="xp-note" id="xpNote"></span>
-  </div>
-</div>
-
-<!-- METHODS -->
-<div class="panel">
-  <div class="panel-title">⛪ Training Methods</div>
-  <div class="toggles">
-    <label class="toggle"><input type="checkbox" id="mG" checked onchange="recalc()"> Gilded Altar</label>
-    <label class="toggle"><input type="checkbox" id="mC" checked onchange="recalc()"> Chaos Altar</label>
-    <label class="toggle"><input type="checkbox" id="mS" onchange="recalc()"> Libation Bowl (Shards)</label>
-  </div>
-</div>
-
-<!-- DATA INPUT -->
-<div class="panel">
-  <div class="panel-title">📋 Bone Data</div>
-  <div class="tabs">
-    <button class="tab active" onclick="setTab('paste',this)">Paste from Wiki</button>
-    <button class="tab" onclick="setTab('manual',this)">Manual Entry</button>
-  </div>
-
-  <div id="tab-paste">
-    <textarea id="pasteBox" rows="3" placeholder="Paste the OSRS wiki prayer training comparison table rows here.
-
-The tool parses tab-separated data copied directly from the wiki.
-It identifies bone name, GP/XP values (small numbers ~1–200), and XP/hr values (large numbers).
-
-Example lines (tab-separated from wiki):
-Dragon bones    4,643    350%    252    643,000    4.52    860,000    8.78
-Superior dragon bones    21,048    350%    525    1,340,000    22.76    1,800,000    44.26"></textarea>
-    <div class="hint">💡 On the wiki, select the comparison table rows, Ctrl+C, paste here. Multiple columns (gilded/chaos/shards) are parsed automatically.</div>
-    <div style="margin-top:.72rem;display:flex;align-items:center;flex-wrap:wrap;gap:.55rem;">
-      <button class="btn" onclick="parsePaste()">⚗ Parse Data</button>
-      <button class="btn sec" onclick="loadSample()">Load Sample Data</button>
-      <span class="status" id="pStatus"></span>
-    </div>
-  </div>
-
-  <div id="tab-manual" style="display:none">
-    <div class="mgrid" id="mgrid">
-      <div class="mrow hdr">
-        <span>Bone Name</span>
-        <span>GP/XP (Gilded)</span>
-        <span class="cc">GP/XP (Chaos)</span>
-        <span>XP/hr</span>
-        <span></span>
+  <!-- GP RATE -->
+  <div class="panel">
+    <div class="panel-title">⚙ Gold Accumulation Rate</div>
+    <div class="row">
+      <label>Your GP/hour:</label>
+      <div class="input-wrap">
+        <span class="pfx">gp/h</span>
+        <input type="number" id="gphr" value="1000000" min="0" step="50000" oninput="recalc()">
+      </div>
+      <div class="presets">
+        <button class="preset-btn" onclick="setGphr(300000)">300k</button>
+        <button class="preset-btn" onclick="setGphr(500000)">500k</button>
+        <button class="preset-btn" onclick="setGphr(1000000)">1m</button>
+        <button class="preset-btn" onclick="setGphr(2000000)">2m</button>
+        <button class="preset-btn" onclick="setGphr(5000000)">5m</button>
       </div>
     </div>
-    <button class="add-btn" onclick="addMRow()">+ Add Bone</button>
-    <div style="margin-top:.72rem;">
-      <button class="btn" onclick="readManual()">⚗ Calculate</button>
+  </div>
+
+  <!-- XP TARGET -->
+  <div class="panel">
+    <div class="panel-title">🎯 Experience Target</div>
+    <div class="row">
+      <label>Current level:</label>
+      <select id="fromLvl" onchange="updateXp()"></select>
+      <label>→ Target:</label>
+      <select id="toLvl" onchange="updateXp()"></select>
+      <span class="xp-note" id="xpNote"></span>
     </div>
   </div>
-</div>
 
-<!-- CALLOUT -->
-<div class="callout" id="callout">
-  <div class="panel-title" style="margin-bottom:.32rem;">★ Optimal Choice</div>
-  <div class="cbname" id="cbname">—</div>
-  <div class="cstats" id="cstats"></div>
-</div>
+  <!-- METHODS -->
+  <div class="panel">
+    <div class="panel-title">⛪ Training Methods</div>
+    <div class="toggles">
+      <label class="toggle"><input type="checkbox" id="mG" checked onchange="recalc()"> Gilded Altar</label>
+      <label class="toggle"><input type="checkbox" id="mC" checked onchange="recalc()"> Chaos Altar</label>
+      <label class="toggle"><input type="checkbox" id="mS" onchange="recalc()"> Libation Bowl (Shards)</label>
+    </div>
+  </div>
 
-<!-- RESULTS -->
-<div class="panel">
-  <div class="tbl-hdr">
-    <div class="panel-title" style="margin-bottom:0;">📊 All Options — Ranked by Total Effective Time</div>
-    <div class="tbl-sub" id="tblSub"></div>
+  <div class="sticky-controls" id="stickyControls">
+    <button class="pin-btn active" id="pinBtn" onclick="toggleSticky()" title="Toggle sticky controls">📌 pinned</button>
+    <!-- SENSITIVITY -->
+    <div class="panel">
+      <div class="panel-title">📊 Sensitivity Adjustments</div>
+      <div class="row" style="margin-bottom:.72rem;">
+        <label>Price adjustment:</label>
+        <div class="input-wrap" style="max-width:160px;">
+          <input type="number" id="sensitivity" value="0" min="-50" max="200" step="0.5" oninput="updateSensLabel();recalc()">
+          <span class="pfx">%</span>
+        </div>
+        <div class="presets">
+          <button class="preset-btn" onclick="setSens(-5)">−5%</button>
+          <button class="preset-btn" onclick="setSens(0)">0%</button>
+          <button class="preset-btn" onclick="setSens(5)">+5%</button>
+          <button class="preset-btn" onclick="setSens(10)">+10%</button>
+          <button class="preset-btn" onclick="setSens(25)">+25%</button>
+        </div>
+        <span class="xp-note" id="sensLabel"></span>
+      </div>
+      <div class="row">
+        <label>Action efficiency:</label>
+        <div class="input-wrap" style="max-width:160px;">
+          <input type="number" id="actionEff" value="0" min="-75" max="50" step="0.5" oninput="updateActionEffLabel();recalc()">
+          <span class="pfx">%</span>
+        </div>
+        <div class="presets">
+          <button class="preset-btn" onclick="setActionEff(-10)">−10%</button>
+          <button class="preset-btn" onclick="setActionEff(-5)">−5%</button>
+          <button class="preset-btn" onclick="setActionEff(0)">0%</button>
+          <button class="preset-btn" onclick="setActionEff(5)">+5%</button>
+        </div>
+        <span class="xp-note" id="actionEffLabel"></span>
+      </div>
+    </div>
   </div>
-  <div class="tbl-wrap">
-    <div class="empty" id="emptyMsg"><div class="ico">🦴</div><div>Paste wiki data or load sample data to begin.</div></div>
-    <table id="tbl" style="display:none;">
-      <thead><tr>
-        <th onclick="srt('name')">Bone</th>
-        <th onclick="srt('method')" style="text-align:center;">Method</th>
-        <th onclick="srt('gpxp')">GP/XP</th>
-        <th onclick="srt('totalCost')">Total Cost</th>
-        <th onclick="srt('gatherH')">Gather Time</th>
-        <th onclick="srt('trainH')">Train Time</th>
-        <th onclick="srt('totalH')">Total Time ↑</th>
-        <th>Efficiency</th>
-      </tr></thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
-</div>
+  <br>
 
-<!-- CHART -->
-<div class="panel" id="chartPanel" style="display:none;">
-  <div class="tbl-hdr">
-    <div class="panel-title" style="margin-bottom:0;">📈 Training Time vs GP/Hour Rate</div>
-    <div class="tbl-sub">Options that are best (or within 5%) at some income rate — click a legend entry to toggle it</div>
+  <!-- DATA INPUT -->
+  <div class="panel">
+    <div class="panel-title">📋 Bone Data</div>
+    <div class="tabs">
+      <button class="tab active" onclick="setTab('paste',this)">Paste from Wiki</button>
+      <button class="tab" onclick="setTab('manual',this)">Manual Entry</button>
+    </div>
+
+    <div id="tab-paste">
+      <textarea id="pasteBox" rows="3" placeholder="Paste the OSRS wiki prayer training comparison table rows here.
+
+  The tool parses tab-separated data copied directly from the wiki.
+  It identifies bone name, GP/XP values (small numbers ~1–200), and XP/hr values (large numbers).
+
+  Example lines (tab-separated from wiki):
+  Dragon bones    4,643    350%    252    643,000    4.52    860,000    8.78
+  Superior dragon bones    21,048    350%    525    1,340,000    22.76    1,800,000    44.26"></textarea>
+      <div class="hint">💡 On the wiki, select the comparison table rows, Ctrl+C, paste here. Multiple columns (gilded/chaos/shards) are parsed automatically.</div>
+      <div style="margin-top:.72rem;display:flex;align-items:center;flex-wrap:wrap;gap:.55rem;">
+        <button class="btn" onclick="parsePaste()">⚗ Parse Data</button>
+        <button class="btn sec" onclick="loadSample()">Load Sample Data</button>
+        <span class="status" id="pStatus"></span>
+      </div>
+    </div>
+
+    <div id="tab-manual" style="display:none">
+      <div class="mgrid" id="mgrid">
+        <div class="mrow hdr">
+          <span>Bone Name</span>
+          <span>GP/XP (Gilded)</span>
+          <span class="cc">GP/XP (Chaos)</span>
+          <span>XP/hr</span>
+          <span></span>
+        </div>
+      </div>
+      <button class="add-btn" onclick="addMRow()">+ Add Bone</button>
+      <div style="margin-top:.72rem;">
+        <button class="btn" onclick="readManual()">⚗ Calculate</button>
+      </div>
+    </div>
   </div>
-  <div style="position:relative;width:100%;margin-top:.85rem;">
-    <canvas id="trainingChart"></canvas>
+
+  <!-- CALLOUT -->
+  <div class="callout" id="callout">
+    <div class="panel-title" style="margin-bottom:.32rem;">★ Optimal Choice</div>
+    <div class="cbname" id="cbname">—</div>
+    <div class="cstats" id="cstats"></div>
   </div>
-  <div style="margin-top:.65rem;font-family:'Source Code Pro',monospace;font-size:.65rem;color:var(--text-dim);">
-    Solid line = Gilded Altar &nbsp;·&nbsp; Dashed = Chaos Altar &nbsp;·&nbsp; Dotted = Libation Bowl (Shards)
+
+  <!-- RESULTS -->
+  <div class="panel">
+    <div class="tbl-hdr">
+      <div class="panel-title" style="margin-bottom:0;">📊 All Options — Ranked by Total Effective Time</div>
+      <div class="tbl-sub" id="tblSub"></div>
+    </div>
+    <div class="tbl-wrap">
+      <div class="empty" id="emptyMsg"><div class="ico">🦴</div><div>Paste wiki data or load sample data to begin.</div></div>
+      <table id="tbl" style="display:none;">
+        <thead><tr>
+          <th onclick="srt('name')">Bone</th>
+          <th onclick="srt('method')" style="text-align:center;">Method</th>
+          <th onclick="srt('gpxp')">GP/XP</th>
+          <th onclick="srt('totalCost')">Total Cost</th>
+          <th onclick="srt('gatherH')">Gather Time</th>
+          <th onclick="srt('trainH')">Train Time</th>
+          <th onclick="srt('totalH')">Total Time ↑</th>
+          <th>Efficiency</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
   </div>
-</div>
+
+  <!-- CHART -->
+  <div class="panel" id="chartPanel" style="display:none;">
+    <div class="tbl-hdr">
+      <div class="panel-title" style="margin-bottom:0;">📈 Training Time vs GP/Hour Rate</div>
+      <div class="tbl-sub">Options that are best (or within 5%) at some income rate — click a legend entry to toggle it</div>
+    </div>
+    <div style="position:relative;width:100%;margin-top:.85rem;">
+      <canvas id="trainingChart"></canvas>
+    </div>
+    <div style="margin-top:.65rem;font-family:'Source Code Pro',monospace;font-size:.65rem;color:var(--text-dim);">
+      Solid line = Gilded Altar &nbsp;·&nbsp; Dashed = Chaos Altar &nbsp;·&nbsp; Dotted = Libation Bowl (Shards)
+    </div>
+  </div>
 
 </div>
 
@@ -326,7 +339,22 @@ let bones=[], sortCol='totalH', sortDir=1;
   updateXp();
   updateSensLabel();
   updateActionEffLabel();
+  // restore sticky preference
+  if(localStorage.getItem('stickyControls')==='0') applySticky(false);
 })();
+
+function toggleSticky(){
+  const pinned=!document.getElementById('stickyControls').classList.contains('unstuck');
+  applySticky(!pinned);
+  localStorage.setItem('stickyControls', !pinned ? '1' : '0');
+}
+function applySticky(pinned){
+  const el=document.getElementById('stickyControls');
+  const btn=document.getElementById('pinBtn');
+  el.classList.toggle('unstuck',!pinned);
+  btn.classList.toggle('active',pinned);
+  btn.textContent=pinned?'📌 pinned':'📌 unpinned';
+}
 
 function updateXp(){
   const f=+document.getElementById('fromLvl').value, t=+document.getElementById('toLvl').value;
@@ -690,14 +718,22 @@ function renderChart(rows,xpNeeded){
     },
   };
 
-  if(chartInst){
+  if (chartInst){
     chartInst.data.labels=xLabels;
     chartInst.data.datasets=datasets;
     chartInst.options=opts;
     chartInst.update('none');
     return;
   }
-  chartInst=new Chart(document.getElementById('trainingChart'),{type:'line',data:{labels:xLabels,datasets},options:opts});
+
+  chartInst = new Chart(
+    document.getElementById('trainingChart'),
+    {
+      type:'line',
+      data: {labels: xLabels, datasets},
+      options:opts
+    }
+  );
 }
 </script>
 </body>
