@@ -49,9 +49,10 @@ jobs:
 
       - name: Stage Pages artifact
         run: |
-          mkdir -p _site/prayer _site/tangleroot
+          mkdir -p _site/prayer _site/tangleroot _site/training
           cp index.html _site/index.html
           cp prayer/index.html _site/prayer/index.html
+          cp training/index.html _site/training/index.html
           cp -R tangleroot/dist/. _site/tangleroot/
 
       - name: Setup Pages
