@@ -37,14 +37,24 @@ jobs:
         with:
           node-version: lts/*
           cache: 'npm'
-          cache-dependency-path: 'tangleroot/package-lock.json'
+          cache-dependency-path: |
+            tangleroot/package-lock.json
+            gearsim/package-lock.json
 
-      - name: Install dependencies
+      - name: Install dependencies (tangleroot)
         working-directory: tangleroot
         run: npm ci
 
-      - name: Build
+      - name: Build (tangleroot)
         working-directory: tangleroot
+        run: npm run build
+
+      - name: Install dependencies (gearsim)
+        working-directory: gearsim
+        run: npm ci
+
+      - name: Build (gearsim)
+        working-directory: gearsim
         run: npm run build
 
       - name: Stage Pages artifact
@@ -52,9 +62,10 @@ jobs:
           mkdir -p _site/prayer _site/gear _site/tangleroot _site/training
           cp index.html _site/index.html
           cp prayer/index.html _site/prayer/index.html
-          cp gear/index.html _site/gear/index.html
           cp training/index.html _site/training/index.html
           cp -R tangleroot/dist/. _site/tangleroot/
+          cp -R gearsim/dist/. _site/gear/
+          cp gear/legacy.html _site/gear/legacy.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v6

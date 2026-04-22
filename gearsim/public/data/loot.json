@@ -1,0 +1,37 @@
+[
+  {
+    "id": 8059,
+    "name": "Vorkath",
+    "level": 732,
+    "drops": [
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Superior dragon bones",
+            "id": 22124,
+            "quantity": 2,
+            "rarity": [1, 1]
+          },
+          {
+            "name": "Blue dragonhide",
+            "id": 1751,
+            "quantity": 2,
+            "rarity": [1, 1]
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Rune longsword",
+            "id": 1303,
+            "quantity": [2, 3],
+            "rarity": [2, 30]
+          }
+        ]
+      }
+    ]
+  }
+]

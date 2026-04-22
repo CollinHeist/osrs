@@ -1,0 +1,64 @@
+:root {
+  --bg-deep: #070a12;
+  --bg-panel: rgba(18, 22, 38, 0.72);
+  --bg-elevated: rgba(26, 32, 52, 0.85);
+  --border: rgba(120, 132, 180, 0.22);
+  --border-strong: rgba(120, 132, 180, 0.38);
+  --text: #eef1fb;
+  --text-muted: #8f97b8;
+  --accent: #f0b429;
+  --accent-dim: #b8831a;
+  --accent-glow: rgba(240, 180, 41, 0.14);
+  --positive: #5cdb9a;
+  --negative: #e86b6b;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --sans: "DM Sans", system-ui, sans-serif;
+  --display: "Outfit", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg-deep);
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(240, 180, 41, 0.09), transparent),
+    radial-gradient(ellipse 50% 45% at 100% 0%, rgba(99, 140, 255, 0.08), transparent),
+    radial-gradient(ellipse 70% 50% at 0% 100%, rgba(80, 200, 180, 0.05), transparent);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
