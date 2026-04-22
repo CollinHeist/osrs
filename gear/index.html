@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSRS Gear DPS Optimizer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --steel:      #5b9ec9;
+      --steel-lt:   #88c0e0;
+      --steel-dim:  #2a4d65;
+      --copper:     #c4793a;
+      --copper-lt:  #e8a060;
+      --copper-dim: #6b3d18;
+      --dark:       #07090e;
+      --panel:      #0d1219;
+      --panel-2:    #121a26;
+      --border:     #1c2c3e;
+      --text:       #b4c8d8;
+      --text-dim:   #45606e;
+      --green:      #3aaa6a;
+      --red:        #cc4444;
+      --glow:       rgba(91,158,201,0.11);
+      --glow-cp:    rgba(196,121,58,0.10);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse at 15%  0%,  rgba(91,158,201,.05) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 100%, rgba(196,121,58,.04)  0%, transparent 50%);
+    }
+    /* scanline overlay */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,.018) 2px, rgba(0,0,0,.018) 4px
+      );
+    }
+
+    /* ── Header ─────────────────────────────────────────────────── */
+    header {
+      text-align: center; padding: 2rem 1rem 1.4rem;
+      position: relative; border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(91,158,201,.045) 0%, transparent 100%);
+    }
+    .home-link {
+      position: absolute; top: 1rem; left: 1.2rem;
+      font-family: 'Source Code Pro', monospace;
+      font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text-dim); text-decoration: none; transition: color .14s;
+    }
+    .home-link:hover { color: var(--steel); }
+    .hr-line {
+      height: 1px; max-width: 500px; margin: .38rem auto; opacity: .5;
+      background: linear-gradient(90deg, transparent, var(--steel-dim), var(--steel-lt), var(--steel-dim), transparent);
+    }
+    header h1 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 600; color: var(--steel-lt); letter-spacing: .04em;
+      text-shadow: 0 0 32px rgba(91,158,201,.3), 0 2px 6px rgba(0,0,0,.9);
+      margin: .25rem 0;
+    }
+    header p { font-size: .86rem; color: var(--text-dim); font-style: italic; margin-top: .2rem; }
+
+    /* ── Layout ──────────────────────────────────────────────────── */
+    .container { max-width: 1120px; margin: 0 auto; padding: 1.4rem 1rem 3rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* ── Panels ──────────────────────────────────────────────────── */
+    .panel {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1.15rem 1.45rem; margin-bottom: 1rem;
+      position: relative; overflow: hidden;
+      box-shadow: 0 3px 18px rgba(0,0,0,.5), inset 0 1px 0 rgba(91,158,201,.05);
+    }
+    .panel::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 6%, var(--steel-dim) 30%, var(--steel) 50%, var(--steel-dim) 70%, transparent 94%);
+      opacity: .4;
+    }
+    .panel-title {
+      font-family: 'Source Code Pro', monospace;
+      font-size: .6rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--steel-dim); margin-bottom: .88rem;
+    }
+    .panel-hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: .5rem; margin-bottom: .88rem;
+    }
+    .panel-hdr .panel-title { margin-bottom: 0; }
+    .panel-hint { font-family: 'Source Code Pro', monospace; font-size: .62rem; color: var(--text-dim); font-style: italic; }
+
+    /* ── Info box ────────────────────────────────────────────────── */
+    .info {
+      background: rgba(91,158,201,.04); border: 1px solid rgba(91,158,201,.12);
+      border-radius: 4px; padding: .58rem 1rem; margin-bottom: 1rem;
+      font-family: 'Source Code Pro', monospace; font-size: .68rem;
+      color: var(--text-dim); line-height: 1.75;
+    }
+    .info strong { color: var(--steel); }
+
+    /* ── Fields ──────────────────────────────────────────────────── */
+    .field { display: flex; align-items: center; gap: .65rem; flex-wrap: wrap; margin-bottom: .6rem; }
+    .field:last-child { margin-bottom: 0; }
+    .field label { font-size: .88rem; color: var(--text); white-space: nowrap; min-width: 92px; }
+    .iw {
+      display: flex; align-items: center; gap: .35rem;
+      background: var(--dark); border: 1px solid var(--border);
+      border-radius: 3px; padding: .3rem .62rem;
+      transition: border-color .18s; flex: 1; max-width: 200px;
+    }
+    .iw:focus-within { border-color: var(--steel-dim); box-shadow: 0 0 0 2px var(--glow); }
+    .pfx { font-family: 'Source Code Pro', monospace; font-size: .73rem; color: var(--steel-dim); white-space: nowrap; }
+    input[type=number], input[type=text] {
+      background: none; border: none; outline: none;
+      color: var(--steel-lt); font-family: 'Source Code Pro', monospace;
+      font-size: .84rem; width: 100%;
+    }
+    input[type=number]::-webkit-inner-spin-button { display: none; }
+    .presets { display: flex; gap: .26rem; flex-wrap: wrap; }
+    .preset {
+      background: none; border: 1px solid var(--border); color: var(--text-dim);
+      font-family: 'Source Code Pro', monospace; font-size: .62rem;
+      padding: .15rem .42rem; border-radius: 3px; cursor: pointer; transition: all .14s;
+    }
+    .preset:hover { border-color: var(--steel-dim); color: var(--steel); background: var(--glow); }
+
+    /* ── Base stat strip ─────────────────────────────────────────── */
+    .stat-strip {
+      display: flex; gap: 1.4rem; flex-wrap: wrap;
+      background: rgba(91,158,201,.04); border: 1px solid rgba(91,158,201,.1);
+      border-radius: 3px; padding: .6rem 1rem; margin-top: .82rem;
+    }
+    .sstat { display: flex; flex-direction: column; }
+    .sstat-lbl { font-family: 'Source Code Pro', monospace; font-size: .53rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); }
+    .sstat-val { font-family: 'Source Code Pro', monospace; font-size: .9rem; color: var(--steel-lt); }
+
+    /* ── Save / Load bar ─────────────────────────────────────────── */
+    .sl-bar { display: flex; align-items: center; gap: .28rem; flex-wrap: wrap; }
+    .sl-btn {
+      background: none; border: 1px solid var(--border); color: var(--text-dim);
+      font-family: 'Source Code Pro', monospace; font-size: .61rem; letter-spacing: .04em;
+      padding: .18rem .5rem; border-radius: 3px; cursor: pointer; transition: all .14s;
+    }
+    .sl-btn:hover { border-color: var(--steel-dim); color: var(--steel); background: var(--glow); }
+    .sl-btn.danger:hover { border-color: rgba(204,68,68,.5); color: var(--red); background: rgba(204,68,68,.06); }
+    .sl-sep { width: 1px; height: 13px; background: var(--border); margin: 0 .06rem; flex-shrink: 0; }
+    .sl-st { font-family: 'Source Code Pro', monospace; font-size: .64rem; margin-left: .1rem; }
+    .sl-st.ok  { color: var(--green); }
+    .sl-st.err { color: var(--red); }
+
+    /* ── Gear grid ───────────────────────────────────────────────── */
+    .gear-grid { display: grid; gap: .32rem; }
+    .grow { display: grid; grid-template-columns: 2.4fr 1fr 1.2fr 28px; gap: .32rem; align-items: center; }
+    .grow.hdr {
+      font-family: 'Source Code Pro', monospace; font-size: .55rem;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim);
+      padding-bottom: .28rem; border-bottom: 1px solid var(--border);
+    }
+    .gi {
+      background: var(--dark); border: 1px solid var(--border); border-radius: 3px;
+      color: var(--text); font-family: 'Source Code Pro', monospace; font-size: .78rem;
+      padding: .24rem .42rem; width: 100%; transition: border-color .14s;
+    }
+    .gi:focus { outline: none; border-color: var(--steel-dim); }
+    .gi.num { text-align: right; }
+    .del { background: none; border: none; color: var(--red); cursor: pointer; opacity: .3; font-size: .82rem; padding: .05rem .2rem; transition: opacity .14s; line-height: 1; }
+    .del:hover { opacity: 1; }
+    .add-row {
+      background: none; border: 1px dashed var(--border); color: var(--text-dim);
+      font-size: .76rem; padding: .3rem; border-radius: 3px;
+      cursor: pointer; width: 100%; margin-top: .38rem; transition: all .14s;
+    }
+    .add-row:hover { border-color: var(--steel-dim); color: var(--steel); }
+
+    /* ── Goal panel ──────────────────────────────────────────────── */
+    .goal-modes { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: .88rem; }
+    .gmode {
+      display: flex; align-items: center; gap: .38rem; cursor: pointer;
+      font-size: .85rem; color: var(--text-dim);
+      padding: .28rem .7rem; border-radius: 3px; border: 1px solid var(--border);
+      transition: all .14s; user-select: none;
+    }
+    .gmode:has(input:checked) { border-color: var(--steel-dim); color: var(--steel); background: rgba(91,158,201,.07); }
+    .gmode input { accent-color: var(--steel); width: 13px; height: 13px; cursor: pointer; }
+    .goal-pane { display: none; }
+    .goal-pane.active { display: block; }
+    .level-row { display: flex; align-items: center; gap: .65rem; flex-wrap: wrap; }
+    .goal-note { font-family: 'Source Code Pro', monospace; font-size: .69rem; color: var(--text-dim); margin-top: .5rem; }
+    .goal-note span { color: var(--steel); }
+
+    /* ── Callouts ────────────────────────────────────────────────── */
+    .callout {
+      border-radius: 4px; padding: .88rem 1.3rem; margin-bottom: 1rem;
+      display: none; position: relative; overflow: hidden;
+      box-shadow: 0 3px 18px rgba(0,0,0,.4);
+    }
+    .callout.show { display: block; }
+    .callout::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    }
+    .co-cp {
+      background: linear-gradient(135deg, rgba(196,121,58,.08), rgba(196,121,58,.02));
+      border: 1px solid rgba(196,121,58,.28);
+    }
+    .co-cp::before { background: linear-gradient(90deg, transparent 8%, var(--copper-dim) 35%, var(--copper) 50%, var(--copper-dim) 65%, transparent 92%); }
+    .co-st {
+      background: linear-gradient(135deg, rgba(91,158,201,.08), rgba(91,158,201,.02));
+      border: 1px solid rgba(91,158,201,.25);
+    }
+    .co-st::before { background: linear-gradient(90deg, transparent 8%, var(--steel-dim) 35%, var(--steel) 50%, var(--steel-dim) 65%, transparent 92%); }
+    .co-eyebrow { font-family: 'Source Code Pro', monospace; font-size: .57rem; letter-spacing: .16em; text-transform: uppercase; }
+    .co-cp .co-eyebrow { color: var(--copper); }
+    .co-st .co-eyebrow { color: var(--steel); }
+    .co-name { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 500; color: var(--steel-lt); margin-top: .2rem; }
+    .co-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); gap: .45rem; margin-top: .62rem; }
+    .cos { background: rgba(0,0,0,.22); border-radius: 3px; padding: .35rem .62rem; }
+    .cos-lbl { font-family: 'Source Code Pro', monospace; font-size: .52rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: .07rem; }
+    .cos-val { font-family: 'Source Code Pro', monospace; font-size: .86rem; color: var(--text); }
+    .cos-val.cp  { color: var(--copper-lt); }
+    .cos-val.st  { color: var(--steel-lt); }
+    .cos-val.g   { color: var(--green); }
+    .cos-val.rd  { color: var(--red); }
+    .cos-val.dim { color: var(--text-dim); }
+
+    /* ── Results table ───────────────────────────────────────────── */
+    .tbl-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      font-family: 'Source Code Pro', monospace; font-size: .55rem;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim);
+      padding: .42rem .62rem; text-align: right; border-bottom: 1px solid var(--border);
+      white-space: nowrap; cursor: pointer; user-select: none; transition: color .14s;
+    }
+    thead th:first-child { text-align: left; }
+    thead th:hover { color: var(--steel); }
+    thead th.asc::after  { content: ' ↑'; }
+    thead th.desc::after { content: ' ↓'; }
+    tbody tr { border-bottom: 1px solid rgba(28,44,62,.55); transition: background .1s; }
+    tbody tr:hover { background: rgba(91,158,201,.025); }
+    tbody tr.is-base td { opacity: .62; }
+    tbody tr.is-base td:first-child { opacity: 1; }
+    tbody tr.is-best    { background: rgba(196,121,58,.055); }
+    tbody tr.is-fastest { background: rgba(91,158,201,.05); }
+    tbody tr.is-best.is-fastest { background: rgba(140,110,64,.065); }
+    td { padding: .42rem .62rem; text-align: right; font-family: 'Source Code Pro', monospace; font-size: .75rem; color: var(--text-dim); }
+    td:first-child { text-align: left; color: var(--text); font-size: .8rem; }
+    td.hi  { color: var(--steel-lt); }
+    td.g   { color: var(--green); }
+    td.rd  { color: var(--red); }
+    td.cp  { color: var(--copper-lt); }
+    td.dim { color: var(--text-dim); }
+    .bwrap { display: flex; align-items: center; gap: .35rem; justify-content: flex-end; }
+    .bar   { height: 4px; border-radius: 2px; background: var(--border); width: 44px; overflow: hidden; flex-shrink: 0; }
+    .bfill { height: 100%; border-radius: 2px; }
+    /* inline delta chips */
+    .Δ { font-family: 'Source Code Pro', monospace; font-size: .62rem; margin-left: .2rem; }
+    .Δ.g  { color: var(--green); }
+    .Δ.rd { color: var(--red); }
+
+    /* ── Legend ──────────────────────────────────────────────────── */
+    .legend { display: flex; gap: 1.1rem; flex-wrap: wrap; margin-top: .62rem; font-family: 'Source Code Pro', monospace; font-size: .6rem; color: var(--text-dim); }
+    .legend-item { display: flex; align-items: center; gap: .28rem; }
+    .ldot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    @media (max-width: 660px) {
+      .grid-2  { grid-template-columns: 1fr; }
+      .grow    { grid-template-columns: 1.5fr 1fr 1fr 26px; }
+      .co-stats { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+      .sl-bar  { gap: .2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="../" class="home-link">← All Tools</a>
+  <div class="hr-line"></div>
+  <h1>⚔ Gear DPS Optimizer</h1>
+  <p>Find which gear upgrade delivers the best damage per gold spent</p>
+  <div class="hr-line"></div>
+</header>
+
+<div class="container">
+
+  <div class="info">
+    Set your <strong>base DPS</strong>, then add loadouts with their new total DPS and cost.
+    The tool ranks by <strong>DPS gain per million GP</strong> — highest ratio is best value.
+    Add <strong>Kill Parameters</strong> for kills/hr &amp; GP/hr, and set a <strong>Training Goal</strong>
+    to see which setup reaches it fastest.
+  </div>
+
+  <div class="grid-2">
+
+    <!-- ── Combat Setup ─────────────────────────────────────────── -->
+    <div class="panel">
+      <div class="panel-title">Combat Setup</div>
+
+      <div class="field">
+        <label>Base DPS</label>
+        <div class="iw">
+          <span class="pfx">dps</span>
+          <input type="number" id="baseDps" value="4.2" min="0" step="0.05" oninput="recalc()">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>XP / damage</label>
+        <div class="iw">
+          <span class="pfx">xp</span>
+          <input type="number" id="xpPerDmg" value="4" min="0" step="0.01" oninput="recalc()">
+        </div>
+        <div class="presets">
+          <button class="preset" onclick="setV('xpPerDmg',4)"    title="Melee / Ranged — 1 stat">4.0</button>
+          <button class="preset" onclick="setV('xpPerDmg',5.33)" title="Melee / Ranged + Hitpoints">5.33</button>
+          <button class="preset" onclick="setV('xpPerDmg',2)"    title="Magic (approximate)">2.0</button>
+        </div>
+      </div>
+
+      <div class="stat-strip">
+        <div class="sstat"><span class="sstat-lbl">XP / hr</span><span class="sstat-val" id="bXphr">—</span></div>
+        <div class="sstat"><span class="sstat-lbl">Kills / hr</span><span class="sstat-val" id="bKph">—</span></div>
+        <div class="sstat"><span class="sstat-lbl">GP / hr</span><span class="sstat-val" id="bGphr">—</span></div>
+      </div>
+    </div>
+
+    <!-- ── Kill Parameters ──────────────────────────────────────── -->
+    <div class="panel">
+      <div class="panel-hdr">
+        <div class="panel-title">Kill Parameters</div>
+        <span class="panel-hint">optional — enables kills/hr, GP/hr &amp; break-even</span>
+      </div>
+
+      <div class="field">
+        <label>Monster HP</label>
+        <div class="iw"><span class="pfx">hp</span><input type="number" id="monsterHp" min="1" placeholder="e.g. 255" oninput="recalc()"></div>
+      </div>
+
+      <div class="field">
+        <label>Wait time</label>
+        <div class="iw"><span class="pfx">sec</span><input type="number" id="waitTime" min="0" step="0.5" placeholder="e.g. 3" oninput="recalc()"></div>
+        <span class="panel-hint">between kills</span>
+      </div>
+
+      <div class="field">
+        <label>GP / kill</label>
+        <div class="iw"><span class="pfx">gp</span><input type="number" id="gpPerKill" min="0" placeholder="e.g. 5000" oninput="recalc()"></div>
+        <div class="presets">
+          <button class="preset" onclick="setV('gpPerKill',1000)">1k</button>
+          <button class="preset" onclick="setV('gpPerKill',5000)">5k</button>
+          <button class="preset" onclick="setV('gpPerKill',10000)">10k</button>
+          <button class="preset" onclick="setV('gpPerKill',50000)">50k</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid-2 -->
+
+  <!-- ── Gear Loadouts ─────────────────────────────────────────── -->
+  <div class="panel">
+    <div class="panel-hdr">
+      <div class="panel-title">Gear Loadouts</div>
+      <div class="sl-bar">
+        <button class="sl-btn" onclick="saveLocal()"  title="Save session to browser">💾 Save</button>
+        <button class="sl-btn" onclick="loadLocal()"  title="Load session from browser">📂 Load</button>
+        <div class="sl-sep"></div>
+        <button class="sl-btn" onclick="exportJSON()" title="Download as .json file">↓ Export</button>
+        <button class="sl-btn" onclick="document.getElementById('importFile').click()" title="Import from .json file">↑ Import</button>
+        <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)">
+        <div class="sl-sep"></div>
+        <button class="sl-btn danger" onclick="clearAll()" title="Remove all loadouts">✕ Clear</button>
+        <span class="sl-st" id="saveStatus"></span>
+      </div>
+    </div>
+
+    <div class="gear-grid" id="gearGrid">
+      <div class="grow hdr">
+        <span>Gear / Upgrade Name</span>
+        <span style="text-align:right">New DPS</span>
+        <span style="text-align:right">Cost (GP)</span>
+        <span></span>
+      </div>
+    </div>
+    <button class="add-row" onclick="addRow()">+ Add Gear Loadout</button>
+  </div>
+
+  <!-- ── Training Goal ─────────────────────────────────────────── -->
+  <div class="panel">
+    <div class="panel-hdr">
+      <div class="panel-title">Training Goal</div>
+      <span class="panel-hint">optional — reveals Time to Goal &amp; Time Saved columns</span>
+    </div>
+
+    <div class="goal-modes">
+      <label class="gmode"><input type="radio" name="goalType" value="none"   checked onchange="updateGoalUI();recalc()"><span>None</span></label>
+      <label class="gmode"><input type="radio" name="goalType" value="xp"           onchange="updateGoalUI();recalc()"><span>XP Target</span></label>
+      <label class="gmode"><input type="radio" name="goalType" value="kills"        onchange="updateGoalUI();recalc()"><span>Kill Count</span></label>
+      <label class="gmode"><input type="radio" name="goalType" value="levels"       onchange="updateGoalUI();recalc()"><span>Level Range</span></label>
+    </div>
+
+    <!-- XP Target -->
+    <div class="goal-pane" id="paneXp">
+      <div class="field">
+        <label>Target XP</label>
+        <div class="iw"><span class="pfx">xp</span><input type="number" id="goalXp" min="1" placeholder="e.g. 1,000,000" oninput="recalc()"></div>
+        <div class="presets">
+          <button class="preset" onclick="setV('goalXp',100000)">100k</button>
+          <button class="preset" onclick="setV('goalXp',500000)">500k</button>
+          <button class="preset" onclick="setV('goalXp',1000000)">1m</button>
+          <button class="preset" onclick="setV('goalXp',13034431)" title="Total XP to level 99">→ 99</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kill Count -->
+    <div class="goal-pane" id="paneKills">
+      <div class="field">
+        <label>Kill Count</label>
+        <div class="iw"><span class="pfx">kills</span><input type="number" id="goalKills" min="1" placeholder="e.g. 500" oninput="recalc()"></div>
+        <div class="presets">
+          <button class="preset" onclick="setV('goalKills',100)">100</button>
+          <button class="preset" onclick="setV('goalKills',500)">500</button>
+          <button class="preset" onclick="setV('goalKills',1000)">1k</button>
+          <button class="preset" onclick="setV('goalKills',5000)">5k</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Level Range -->
+    <div class="goal-pane" id="paneLevels">
+      <div class="level-row">
+        <div class="field" style="margin-bottom:0;flex:0 0 auto">
+          <label>From level</label>
+          <div class="iw" style="max-width:90px"><span class="pfx">lvl</span><input type="number" id="goalFrom" min="1" max="98" value="70" oninput="updateGoalNote();recalc()"></div>
+        </div>
+        <span style="font-family:'Source Code Pro',monospace;color:var(--text-dim)">→</span>
+        <div class="field" style="margin-bottom:0;flex:0 0 auto">
+          <label>To level</label>
+          <div class="iw" style="max-width:90px"><span class="pfx">lvl</span><input type="number" id="goalTo" min="2" max="99" value="99" oninput="updateGoalNote();recalc()"></div>
+        </div>
+        <div class="presets" style="margin-left:.4rem">
+          <button class="preset" onclick="setLvls(1,99)">1→99</button>
+          <button class="preset" onclick="setLvls(70,99)">70→99</button>
+          <button class="preset" onclick="setLvls(80,99)">80→99</button>
+          <button class="preset" onclick="setLvls(90,99)">90→99</button>
+        </div>
+      </div>
+      <div class="goal-note" id="lvlNote"></div>
+    </div>
+  </div>
+
+  <!-- ── Best Value callout ────────────────────────────────────── -->
+  <div class="callout co-cp" id="bestCallout">
+    <div class="co-eyebrow">★ Best Value Upgrade</div>
+    <div class="co-name" id="bestName">—</div>
+    <div class="co-stats" id="bestStats"></div>
+  </div>
+
+  <!-- ── Fastest to Goal callout ───────────────────────────────── -->
+  <div class="callout co-st" id="fastCallout">
+    <div class="co-eyebrow">⏱ Fastest to Goal</div>
+    <div class="co-name" id="fastName">—</div>
+    <div class="co-stats" id="fastStats"></div>
+  </div>
+
+  <!-- ── Comparison table ──────────────────────────────────────── -->
+  <div class="panel" id="resPanel" style="display:none">
+    <div class="panel-hdr">
+      <div class="panel-title">Comparison</div>
+      <span class="panel-hint" id="resSub"></span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th id="thName"  onclick="srt('name')">Loadout</th>
+            <th id="thDps"   onclick="srt('dps')"  title="Total DPS — bar scaled min→max across all setups">DPS</th>
+            <th id="thGain"  onclick="srt('gain')"  title="DPS delta vs your base setup">DPS Gain</th>
+            <th id="thEff"   onclick="srt('eff')"   title="DPS gained per million GP spent — higher = better value">Gain / MGP</th>
+            <th id="thXphr"  onclick="srt('xphr')"  title="Estimated XP per hour; Δ vs base">XP / hr</th>
+            <th id="thKph"   onclick="srt('kph')"   title="Estimated kills per hour; Δ vs base" class="kcol" style="display:none">Kills / hr</th>
+            <th id="thGphr"  onclick="srt('gphr')"  title="Estimated GP per hour from drops; Δ vs base" class="gcol" style="display:none">GP / hr</th>
+            <th id="thBe"    onclick="srt('be')"    title="Hours to recoup gear cost via extra GP/hr" class="becol" style="display:none">Break Even</th>
+            <th id="thTtg"   onclick="srt('ttg')"   title="Time to complete the training goal" class="goalcol" style="display:none">Time to Goal</th>
+            <th id="thSaved" onclick="srt('saved')" title="Time saved vs base setup (green = faster)" class="goalcol" style="display:none">Time Saved</th>
+            <th id="thCost"  onclick="srt('cost')"  title="Total GP cost of this loadout">Cost</th>
+          </tr>
+        </thead>
+        <tbody id="resTbody"></tbody>
+      </table>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="ldot" style="background:var(--steel)"></div><span>DPS bar — min→max scaled</span></div>
+      <div class="legend-item"><div class="ldot" style="background:var(--copper)"></div><span>Gain/MGP bar</span></div>
+      <div class="legend-item" style="color:var(--copper)">★ best value</div>
+      <div class="legend-item" style="color:var(--steel)">⏱ fastest to goal</div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────
+let rowId   = 0;
+let sortCol = 'eff';
+let sortDir = -1;
+
+// ── OSRS XP table ─────────────────────────────────────────────────────
+// t[n] = total XP to reach level n  (t[1]=0, t[2]=83, … t[99]=13034431)
+const XP_TABLE = (() => {
+  const t = [0, 0];
+  let acc = 0;
+  for (let l = 1; l <= 98; l++) {
+    acc += Math.floor(l + 300 * Math.pow(2, l / 7));
+    t.push(Math.floor(acc / 4));
+  }
+  return t;
+})();
+
+function xpAtLevel(n) { return XP_TABLE[Math.max(1, Math.min(99, Math.round(n)))] ?? 0; }
+
+// ── Row management ────────────────────────────────────────────────────
+function addRow(name = '', dps = '', cost = '', skip = false) {
+  const id   = rowId++;
+  const grid = document.getElementById('gearGrid');
+  const div  = document.createElement('div');
+  div.className = 'grow';
+  div.id = 'gr' + id;
+  div.innerHTML = `
+    <input class="gi"     type="text"   placeholder="e.g. Blade of Saeldor" value="${name}" oninput="recalc()">
+    <input class="gi num" type="number" placeholder="DPS"     min="0" step="0.01" value="${dps}"  oninput="recalc()">
+    <input class="gi num" type="number" placeholder="GP Cost" min="0" step="1000" value="${cost}" oninput="recalc()">
+    <button class="del" onclick="delRow(${id})" title="Remove">✕</button>
+  `;
+  grid.appendChild(div);
+  if (!skip) recalc();
+}
+
+function delRow(id) {
+  const el = document.getElementById('gr' + id);
+  if (el) el.remove();
+  recalc();
+}
+
+function clearGearRows() {
+  document.querySelectorAll('#gearGrid .grow:not(.hdr)').forEach(r => r.remove());
+  rowId = 0;
+}
+
+function clearAll() { clearGearRows(); recalc(); showSt('Cleared', 'ok'); }
+
+function collectRows() {
+  const out = [];
+  document.querySelectorAll('#gearGrid .grow:not(.hdr)').forEach(row => {
+    const inp = row.querySelectorAll('input');
+    out.push({ name: inp[0].value.trim(), dps: inp[1].value, cost: inp[2].value });
+  });
+  return out;
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────
+function setV(id, v) { document.getElementById(id).value = v; recalc(); }
+function setLvls(a, b) { setV('goalFrom', a); setV('goalTo', b); updateGoalNote(); recalc(); }
+
+function pn(id) {
+  const v = parseFloat(document.getElementById(id).value);
+  return isNaN(v) ? null : v;
+}
+
+function fg(n) {
+  if (n == null || isNaN(n) || !isFinite(n)) return '—';
+  const s = n < 0 ? '−' : '', a = Math.abs(n);
+  if (a >= 1e9) return s + (a / 1e9).toFixed(1) + 'b';
+  if (a >= 1e6) return s + (a / 1e6).toFixed(1) + 'm';
+  if (a >= 1e3) return s + (a / 1e3).toFixed(1) + 'k';
+  return s + Math.round(a).toLocaleString();
+}
+
+function fd(n, d = 2) { return (n == null || isNaN(n) || !isFinite(n)) ? '—' : n.toFixed(d); }
+
+function fh(h) {
+  if (h == null || isNaN(h) || !isFinite(h) || h <= 0) return '—';
+  const mins = Math.round(h * 60);
+  if (mins < 1) return '<1m';
+  const hh = Math.floor(mins / 60), mm = mins % 60;
+  return hh === 0 ? mm + 'm' : mm > 0 ? `${hh}h ${mm}m` : `${hh}h`;
+}
+
+// Inline delta chip: "+8.4k" / "−1.2" coloured green/red
+function dChip(val, baseVal, fmt = fg) {
+  if (val == null || baseVal == null) return '';
+  const d = val - baseVal;
+  if (Math.abs(d) < 0.001) return '';
+  const cls = d > 0 ? 'g' : 'rd';
+  const str = d > 0 ? `+${fmt(d)}` : `−${fmt(Math.abs(d))}`;
+  return `<span class="Δ ${cls}">${str}</span>`;
+}
+
+// ── Kill math ─────────────────────────────────────────────────────────
+function kStats(dps) {
+  const hp   = pn('monsterHp');
+  const wait = pn('waitTime') ?? 0;
+  const gpk  = pn('gpPerKill');
+  if (!hp || hp <= 0 || !dps || dps <= 0) return { kph: null, gphr: null };
+  const kph = 3600 / (hp / dps + wait);
+  return { kph, gphr: gpk != null ? kph * gpk : null };
+}
+
+// ── Goal helpers ──────────────────────────────────────────────────────
+function goalType() { return document.querySelector('input[name=goalType]:checked')?.value ?? 'none'; }
+
+function goalXpNeeded() {
+  const gt = goalType();
+  if (gt === 'xp')     return pn('goalXp');
+  if (gt === 'levels') {
+    const from = Math.round(pn('goalFrom') ?? 1);
+    const to   = Math.round(pn('goalTo')   ?? 99);
+    if (to <= from || from < 1 || to > 99) return null;
+    return xpAtLevel(to) - xpAtLevel(from);
+  }
+  return null;
+}
+
+function goalTimeHrs(row) {
+  const gt = goalType();
+  if (gt === 'none') return null;
+  if (gt === 'kills') {
+    const k = pn('goalKills');
+    return (k && row.kph) ? k / row.kph : null;
+  }
+  const xpNeeded = goalXpNeeded();
+  if (!xpNeeded || xpNeeded <= 0 || !row.xphr || row.xphr <= 0) return null;
+  return xpNeeded / row.xphr;
+}
+
+function updateGoalUI() {
+  ['paneXp','paneKills','paneLevels'].forEach(id => document.getElementById(id).classList.remove('active'));
+  const gt = goalType();
+  if (gt === 'xp')     document.getElementById('paneXp').classList.add('active');
+  if (gt === 'kills')  document.getElementById('paneKills').classList.add('active');
+  if (gt === 'levels') { document.getElementById('paneLevels').classList.add('active'); updateGoalNote(); }
+}
+
+function updateGoalNote() {
+  const from = pn('goalFrom') ?? 1, to = pn('goalTo') ?? 99;
+  const el = document.getElementById('lvlNote');
+  if (to > from && to <= 99) {
+    const xp = xpAtLevel(to) - xpAtLevel(from);
+    el.innerHTML = `XP needed: <span>${fg(xp)} XP</span>`;
+  } else {
+    el.innerHTML = to <= from ? '<span style="color:var(--red)">To level must be greater than From level</span>' : '';
+  }
+}
+
+// ── Save / Load ───────────────────────────────────────────────────────
+const LS_KEY = 'gearOpt_v1';
+
+function getState() {
+  return {
+    v: 1,
+    baseDps: pn('baseDps'), xpPerDmg: pn('xpPerDmg'),
+    monsterHp: pn('monsterHp'), waitTime: pn('waitTime'), gpPerKill: pn('gpPerKill'),
+    goalType: goalType(), goalXp: pn('goalXp'), goalKills: pn('goalKills'),
+    goalFrom: pn('goalFrom'), goalTo: pn('goalTo'),
+    rows: collectRows(),
+  };
+}
+
+function applyState(s) {
+  if (!s || s.v !== 1) return false;
+  const sv = (id, val) => { if (val != null) document.getElementById(id).value = val; };
+  sv('baseDps', s.baseDps); sv('xpPerDmg', s.xpPerDmg);
+  sv('monsterHp', s.monsterHp); sv('waitTime', s.waitTime); sv('gpPerKill', s.gpPerKill);
+  sv('goalXp', s.goalXp); sv('goalKills', s.goalKills);
+  sv('goalFrom', s.goalFrom); sv('goalTo', s.goalTo);
+  const radio = document.querySelector(`input[name=goalType][value="${s.goalType ?? 'none'}"]`);
+  if (radio) radio.checked = true;
+  clearGearRows();
+  (s.rows ?? []).forEach(r => addRow(r.name, r.dps, r.cost, true));
+  updateGoalUI();
+  recalc();
+  return true;
+}
+
+function showSt(msg, cls, dur = 2800) {
+  const el = document.getElementById('saveStatus');
+  el.textContent = msg; el.className = 'sl-st ' + cls;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.textContent = ''; el.className = 'sl-st'; }, dur);
+}
+
+function saveLocal() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(getState())); showSt('✓ Saved', 'ok'); }
+  catch(e) { showSt('Save failed', 'err'); }
+}
+
+function loadLocal() {
+  const raw = localStorage.getItem(LS_KEY);
+  if (!raw) { showSt('Nothing saved', 'err'); return; }
+  try { if (applyState(JSON.parse(raw))) showSt('✓ Loaded', 'ok'); }
+  catch(e) { showSt('Load failed', 'err'); }
+}
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(getState(), null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = Object.assign(document.createElement('a'), { href: url, download: 'gear-comparison.json' });
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function handleImport(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const s = JSON.parse(ev.target.result);
+      if (applyState(s)) showSt(`✓ Imported ${s.rows?.length ?? 0} rows`, 'ok');
+      else showSt('Unrecognized format', 'err');
+    } catch { showSt('Invalid JSON', 'err'); }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+// ── Main recalc ───────────────────────────────────────────────────────
+function recalc() {
+  const baseDps  = pn('baseDps');
+  const xpPerDmg = pn('xpPerDmg') ?? 4;
+
+  // Base stat strip
+  if (baseDps != null && baseDps > 0) {
+    const { kph, gphr } = kStats(baseDps);
+    document.getElementById('bXphr').textContent = fg(baseDps * xpPerDmg * 3600);
+    document.getElementById('bKph').textContent  = kph  ? fd(kph, 1) : '—';
+    document.getElementById('bGphr').textContent = gphr ? fg(gphr)   : '—';
+  } else {
+    ['bXphr','bKph','bGphr'].forEach(id => document.getElementById(id).textContent = '—');
+  }
+
+  // Collect gear rows
+  const raw = [];
+  document.querySelectorAll('#gearGrid .grow:not(.hdr)').forEach(row => {
+    const inp = row.querySelectorAll('input');
+    const name = inp[0].value.trim() || 'Unnamed';
+    const dps  = parseFloat(inp[1].value);
+    const cost = parseFloat(inp[2].value);
+    if (!isNaN(dps) && dps > 0) raw.push({ name, dps, cost: isNaN(cost) ? 0 : cost });
+  });
+
+  if (!raw.length || baseDps == null) {
+    document.getElementById('bestCallout').classList.remove('show');
+    document.getElementById('fastCallout').classList.remove('show');
+    document.getElementById('resPanel').style.display = 'none';
+    return;
+  }
+
+  const baseKS  = kStats(baseDps);
+  const baseXphr = baseDps * xpPerDmg * 3600;
+
+  // Synthetic base row (for table + goal reference)
+  const baseRow = {
+    name: '(current setup)', dps: baseDps, cost: 0,
+    gain: 0, eff: null, xphr: baseXphr,
+    kph: baseKS.kph, gphr: baseKS.gphr, be: null,
+    _isBase: true,
+  };
+  baseRow.ttg   = goalTimeHrs(baseRow);
+  baseRow.saved = 0;
+
+  // Compute all loadout metrics
+  const rows = raw.map(r => {
+    const gain  = r.dps - baseDps;
+    const eff   = (r.cost > 0 && gain > 0) ? (gain / r.cost) * 1e6 : null;
+    const xphr  = r.dps * xpPerDmg * 3600;
+    const { kph, gphr } = kStats(r.dps);
+    const extraGphr = (gphr != null && baseKS.gphr != null) ? gphr - baseKS.gphr : null;
+    const be    = (extraGphr != null && extraGphr > 0 && r.cost > 0) ? r.cost / extraGphr : null;
+    const row   = { ...r, gain, eff, xphr, kph, gphr, be, _isBase: false };
+    row.ttg     = goalTimeHrs(row);
+    row.saved   = (baseRow.ttg != null && row.ttg != null) ? baseRow.ttg - row.ttg : null;
+    return row;
+  });
+
+  // ── Best value: highest Gain/MGP, else highest DPS
+  const withEff = rows.filter(r => r.eff != null);
+  const best = withEff.length
+    ? withEff.reduce((a, b) => b.eff > a.eff ? b : a)
+    : rows.reduce((a, b) => b.dps > a.dps ? b : a);
+
+  // Best callout
+  const showKill = pn('monsterHp') != null;
+  document.getElementById('bestCallout').classList.add('show');
+  document.getElementById('bestName').textContent = best.name;
+  document.getElementById('bestStats').innerHTML = [
+    `<div class="cos"><div class="cos-lbl">DPS</div><div class="cos-val st">${fd(best.dps)}</div></div>`,
+    `<div class="cos"><div class="cos-lbl">DPS Gain</div><div class="cos-val g">+${fd(best.gain)}</div></div>`,
+    best.eff != null ? `<div class="cos"><div class="cos-lbl">Gain / MGP</div><div class="cos-val cp">${fd(best.eff, 3)}</div></div>` : '',
+    `<div class="cos"><div class="cos-lbl">XP / hr</div><div class="cos-val">${fg(best.xphr)}</div></div>`,
+    `<div class="cos"><div class="cos-lbl">Cost</div><div class="cos-val">${best.cost > 0 ? fg(best.cost) : 'Free'}</div></div>`,
+    showKill && best.kph  != null ? `<div class="cos"><div class="cos-lbl">Kills / hr</div><div class="cos-val">${fd(best.kph, 1)}</div></div>` : '',
+    showKill && best.gphr != null ? `<div class="cos"><div class="cos-lbl">GP / hr</div><div class="cos-val g">${fg(best.gphr)}</div></div>` : '',
+    best.be  != null ? `<div class="cos"><div class="cos-lbl">Break Even</div><div class="cos-val">${fh(best.be)}</div></div>` : '',
+  ].join('');
+
+  // ── Fastest to goal
+  const gt = goalType();
+  const withGoal = rows.filter(r => r.ttg != null);
+  const hasGoal  = gt !== 'none' && withGoal.length > 0;
+
+  if (hasGoal) {
+    const fastest = withGoal.reduce((a, b) => b.ttg < a.ttg ? b : a);
+    document.getElementById('fastCallout').classList.add('show');
+    document.getElementById('fastName').textContent = fastest.name;
+    document.getElementById('fastStats').innerHTML = [
+      `<div class="cos"><div class="cos-lbl">Time to Goal</div><div class="cos-val st">${fh(fastest.ttg)}</div></div>`,
+      fastest.saved != null && fastest.saved > 1/60
+        ? `<div class="cos"><div class="cos-lbl">Time Saved</div><div class="cos-val g">−${fh(fastest.saved)}</div></div>` : '',
+      fastest.saved != null && fastest.saved < -1/60
+        ? `<div class="cos"><div class="cos-lbl">Extra Time</div><div class="cos-val rd">+${fh(-fastest.saved)}</div></div>` : '',
+      baseRow.ttg != null
+        ? `<div class="cos"><div class="cos-lbl">Base Time</div><div class="cos-val dim">${fh(baseRow.ttg)}</div></div>` : '',
+      `<div class="cos"><div class="cos-lbl">DPS</div><div class="cos-val">${fd(fastest.dps)}</div></div>`,
+      `<div class="cos"><div class="cos-lbl">XP / hr</div><div class="cos-val">${fg(fastest.xphr)}</div></div>`,
+    ].join('');
+  } else {
+    document.getElementById('fastCallout').classList.remove('show');
+  }
+
+  // ── Conditional columns
+  const hasKph  = rows.some(r => r.kph  != null);
+  const hasGphr = rows.some(r => r.gphr != null);
+  const hasBe   = rows.some(r => r.be   != null);
+  document.querySelectorAll('.kcol').forEach(el  => el.style.display = hasKph  ? '' : 'none');
+  document.querySelectorAll('.gcol').forEach(el  => el.style.display = hasGphr ? '' : 'none');
+  document.querySelectorAll('.becol').forEach(el => el.style.display = hasBe   ? '' : 'none');
+  document.querySelectorAll('.goalcol').forEach(el => el.style.display = hasGoal ? '' : 'none');
+
+  // ── Sort
+  const fastest = hasGoal ? withGoal.reduce((a, b) => b.ttg < a.ttg ? b : a) : null;
+  const all = [baseRow, ...rows];
+  all.sort((a, b) => {
+    if (a._isBase && !b._isBase) return sortDir;
+    if (!a._isBase && b._isBase) return -sortDir;
+    const av = a[sortCol] ?? (sortDir === 1 ? Infinity : -Infinity);
+    const bv = b[sortCol] ?? (sortDir === 1 ? Infinity : -Infinity);
+    if (typeof av === 'string') return av.localeCompare(bv) * sortDir;
+    return (av - bv) * sortDir;
+  });
+
+  // DPS bar: min→max across all setups
+  const allDps  = all.map(r => r.dps);
+  const minDps  = Math.min(...allDps);
+  const maxDps  = Math.max(...allDps);
+  const dpsSpan = maxDps - minDps || 1;
+
+  // Gain/MGP bar: 0→max
+  const maxEff = Math.max(0, ...rows.filter(r => r.eff != null).map(r => r.eff));
+
+  // ── Render rows
+  document.getElementById('resPanel').style.display = '';
+  document.getElementById('resSub').textContent = `${rows.length} loadout${rows.length !== 1 ? 's' : ''} vs. base`;
+
+  document.getElementById('resTbody').innerHTML = all.map(r => {
+    const isBest    = !r._isBase && r === best;
+    const isFastest = !r._isBase && fastest != null && r.name === fastest.name && r.ttg != null;
+
+    const dpsPct = ((r.dps - minDps) / dpsSpan * 100).toFixed(1);
+    const effPct = maxEff > 0 && r.eff != null ? (r.eff / maxEff * 100).toFixed(1) : 0;
+
+    const gainCls = r.gain > 0.001 ? 'g' : r.gain < -0.001 ? 'rd' : 'dim';
+    const gainStr = r.gain > 0 ? `+${fd(r.gain)}` : r.gain < -0.001 ? fd(r.gain) : '—';
+
+    // Row icon prefix
+    let prefix = '';
+    if (isBest && isFastest) prefix = `<span style="color:var(--copper)">★</span><span style="color:var(--steel)">⏱</span> `;
+    else if (isBest)         prefix = `<span style="color:var(--copper)">★</span> `;
+    else if (isFastest)      prefix = `<span style="color:var(--steel)">⏱</span> `;
+
+    // Delta chips for rate columns
+    const xpDelta  = !r._isBase ? dChip(r.xphr, baseXphr) : '';
+    const kphDelta = !r._isBase ? dChip(r.kph,  baseKS.kph, (n) => fd(n, 1)) : '';
+    const gpDelta  = !r._isBase ? dChip(r.gphr, baseKS.gphr) : '';
+
+    // Time Saved cell
+    let savedCell;
+    if (r._isBase) {
+      savedCell = baseRow.ttg != null
+        ? `<span class="dim" style="font-size:.65rem;font-style:italic">base</span>`
+        : '<span class="dim">—</span>';
+    } else if (r.saved == null) {
+      savedCell = '<span class="dim">—</span>';
+    } else if (r.saved > 1/60) {
+      savedCell = `<span class="g">−${fh(r.saved)}</span>`;
+    } else if (r.saved < -1/60) {
+      savedCell = `<span class="rd">+${fh(-r.saved)}</span>`;
+    } else {
+      savedCell = '<span class="dim">±0m</span>';
+    }
+
+    // Time to Goal cell
+    const ttgCell = r.ttg != null
+      ? fh(r.ttg)
+      : (gt === 'kills' && !r.kph
+          ? '<span class="dim" title="Set Monster HP to enable kill rate">need HP</span>'
+          : '<span class="dim">—</span>');
+
+    const rowCls = [isBest ? 'is-best' : '', isFastest ? 'is-fastest' : ''].filter(Boolean).join(' ');
+
+    return `<tr${rowCls ? ` class="${rowCls}"` : ''}>
+      <td>${prefix}${r._isBase ? '<span style="font-style:italic;color:var(--text-dim)">Base setup</span>' : r.name}</td>
+      <td class="hi">
+        <div class="bwrap">
+          <span>${fd(r.dps)}</span>
+          <div class="bar"><div class="bfill" style="width:${dpsPct}%;background:var(--steel)"></div></div>
+        </div>
+      </td>
+      <td class="${gainCls}">${gainStr}</td>
+      <td class="cp">
+        ${r.eff != null
+          ? `<div class="bwrap"><span>${fd(r.eff, 3)}</span><div class="bar"><div class="bfill" style="width:${effPct}%;background:var(--copper)"></div></div></div>`
+          : '<span class="dim">—</span>'}
+      </td>
+      <td>${fg(r.xphr)}${xpDelta}</td>
+      <td class="kcol"  style="${!hasKph  ? 'display:none' : ''}">${r.kph  != null ? fd(r.kph, 1) + kphDelta : '<span class="dim">—</span>'}</td>
+      <td class="gcol"  style="${!hasGphr ? 'display:none' : ''}">${r.gphr != null ? fg(r.gphr)   + gpDelta   : '<span class="dim">—</span>'}</td>
+      <td class="becol dim" style="${!hasBe  ? 'display:none' : ''}">${r.be  != null ? fh(r.be) : '<span class="dim">—</span>'}</td>
+      <td class="goalcol" style="${!hasGoal ? 'display:none' : ''}">${ttgCell}</td>
+      <td class="goalcol" style="${!hasGoal ? 'display:none' : ''}">${savedCell}</td>
+      <td class="dim">${r.cost > 0 ? fg(r.cost) : '<span style="font-size:.62rem;font-style:italic">free</span>'}</td>
+    </tr>`;
+  }).join('');
+
+  // Sort indicators
+  const colMap = { name:'Name', dps:'Dps', gain:'Gain', eff:'Eff', xphr:'Xphr', kph:'Kph', gphr:'Gphr', be:'Be', ttg:'Ttg', saved:'Saved', cost:'Cost' };
+  Object.entries(colMap).forEach(([col, sfx]) => {
+    const el = document.getElementById('th' + sfx);
+    if (!el) return;
+    el.classList.remove('asc', 'desc');
+    if (col === sortCol) el.classList.add(sortDir === 1 ? 'asc' : 'desc');
+  });
+}
+
+function srt(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = col === 'name' ? 1 : -1; }
+  recalc();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────
+(function init() {
+  const raw = localStorage.getItem(LS_KEY);
+  if (raw) {
+    try { if (applyState(JSON.parse(raw))) return; } catch(e) {}
+  }
+  // Sample data fallback
+  addRow('Berserker ring (i)',  4.45,   8_000_000, true);
+  addRow('Abyssal tentacle',    5.10,  45_000_000, true);
+  addRow('Blade of Saeldor',    6.80,  65_000_000, true);
+  addRow('Scythe of Vitur',     9.20, 285_000_000, true);
+  recalc();
+})();
+</script>
+</body>
+</html>
