@@ -192,6 +192,11 @@ const S = {
     letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: `1px solid ${C.border}`, fontWeight: 400,
   },
   td: { padding: "0.5rem 0.65rem", borderBottom: `1px solid ${C.border}`, verticalAlign: "middle" },
+  logMilestoneTd: {
+    padding: "0.38rem 0.65rem", borderBottom: `1px solid ${C.border}`, textAlign: "center",
+    fontSize: "0.62rem", letterSpacing: "0.05em", color: C.gold,
+    background: `linear-gradient(90deg, transparent, ${C.accentBg} 22%, ${C.accentBg} 78%, transparent)`,
+  },
   miniBar: { height: "5px", background: C.surface, borderRadius: "3px", overflow: "hidden", minWidth: "70px" },
   empty: { textAlign: "center", color: C.muted, fontSize: "0.72rem", padding: "3rem 1rem", letterSpacing: "0.04em", lineHeight: 1.8 },
   toast: {
@@ -425,7 +430,7 @@ function ChartsTab({ days }) {
         </div>
         <div style={{ ...S.chartNote, marginTop:"0.3rem" }}>
           {currentCum < 50
-            ? `Your actual curve is at ${currentCum.toFixed(2)}% — ${(50 - currentCum).toFixed(2)}% below the median. You have been getting lucky rolls.`
+            ? `Your actual curve is at ${currentCum.toFixed(2)}% — ${(50 - currentCum).toFixed(2)}% below the median.`
             : currentCum < 90
             ? `Your actual curve is at ${currentCum.toFixed(2)}%. You have passed the median (day ${p50day}) and are in the unlucky half.`
             : `Your actual curve is at ${currentCum.toFixed(2)}% — beyond p90. Statistically only 1 in 10 players goes this long without a drop.`}
@@ -506,8 +511,30 @@ function summarizeDay(d) {
   return parts.join(", ") + more;
 }
 
+// Cumulative P thresholds: insert a banner row in the harvest log when first crossed (chronological order).
+const LOG_CUM_MILESTONES = [0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.99];
+
+function computeLogCumulativeMeta(days) {
+  const byDateAsc = (a, b) => a.date.localeCompare(b.date);
+  const sortedAsc = [...days].sort(byDateAsc);
+  const cumById = new Map();
+  const milestoneById = new Map();
+  let cumFail = 1;
+  for (const x of sortedAsc) {
+    const cumBefore = 1 - cumFail;
+    cumFail *= (1 - x.chance);
+    const cumAfter = 1 - cumFail;
+    cumById.set(x.id, cumAfter);
+    const crossed = LOG_CUM_MILESTONES.filter(b => cumBefore < b && cumAfter >= b);
+    if (crossed.length) milestoneById.set(x.id, crossed);
+  }
+  return { cumById, milestoneById };
+}
+
 // ─── Log tab ──────────────────────────────────────────────────────────────────
 function LogTab({ days, removeDay, clearAll }) {
+  const { cumById, milestoneById } = computeLogCumulativeMeta(days);
+
   return (
     <div>
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"0.65rem" }}>
@@ -536,38 +563,43 @@ function LogTab({ days, removeDay, clearAll }) {
             </tr>
           </thead>
           <tbody>
-            {(() => {
-              const byDateAsc = (a, b) => a.date.localeCompare(b.date);
-              const cumById = new Map();
-              let cumFail = 1;
-              for (const x of [...days].sort(byDateAsc)) {
-                cumFail *= (1 - x.chance);
-                cumById.set(x.id, 1 - cumFail);
-              }
-              return [...days].sort((a, b) => b.date.localeCompare(a.date)).map(d => {
-                const cum = cumById.get(d.id);
-                return (
-                  <tr key={d.id}>
-                    <td style={S.td}>{d.date}</td>
-                    <td style={{ ...S.td, color:C.muted }}>{d.level}</td>
-                    <td style={{ ...S.td, color:d.approximate ? C.gold : C.muted, fontSize:"0.65rem" }}>
-                      {d.approximate ? "≈ approx" : "tracked"}
-                    </td>
-                    <td style={{ ...S.td, color:C.muted, fontSize:"0.62rem", maxWidth:"220px", wordBreak:"break-word" }}>{summarizeDay(d)}</td>
-                    <td style={S.td}><span style={{ color:C.accent, fontWeight:600 }}>{fmtPct(d.chance,3)}</span></td>
-                    <td style={S.td}>
-                      <div style={{ display:"flex", alignItems:"center", gap:"7px" }}>
-                        <div style={S.miniBar}>
-                          <div style={{ height:"100%", width:`${Math.min(cum*100,100)}%`, background:cum>0.75?C.gold:C.accent, borderRadius:"3px" }} />
-                        </div>
-                        <span style={{ color:cum>0.5?C.gold:C.muted, fontSize:"0.68rem", minWidth:"40px" }}>{fmtPct(cum,1)}</span>
+            {[...days].sort((a, b) => b.date.localeCompare(a.date)).flatMap(d => {
+              const cum = cumById.get(d.id);
+              const crossed = milestoneById.get(d.id);
+              const rows = [
+                <tr key={d.id}>
+                  <td style={S.td}>{d.date}</td>
+                  <td style={{ ...S.td, color:C.muted }}>{d.level}</td>
+                  <td style={{ ...S.td, color:d.approximate ? C.gold : C.muted, fontSize:"0.65rem" }}>
+                    {d.approximate ? "≈ approx" : "tracked"}
+                  </td>
+                  <td style={{ ...S.td, color:C.muted, fontSize:"0.62rem", maxWidth:"220px", wordBreak:"break-word" }}>{summarizeDay(d)}</td>
+                  <td style={S.td}><span style={{ color:C.accent, fontWeight:600 }}>{fmtPct(d.chance,3)}</span></td>
+                  <td style={S.td}>
+                    <div style={{ display:"flex", alignItems:"center", gap:"7px" }}>
+                      <div style={S.miniBar}>
+                        <div style={{ height:"100%", width:`${Math.min(cum*100,100)}%`, background:cum>0.75?C.gold:C.accent, borderRadius:"3px" }} />
                       </div>
+                      <span style={{ color:cum>0.5?C.gold:C.muted, fontSize:"0.68rem", minWidth:"40px" }}>{fmtPct(cum,1)}</span>
+                    </div>
+                  </td>
+                  <td style={S.td}><button style={S.btnSecondary} onClick={() => removeDay(d.id)}>✕</button></td>
+                </tr>,
+              ];
+              if (crossed?.length) {
+                const label = crossed.map(b => fmtPct(b, 0)).join(" · ");
+                rows.push(
+                  <tr key={`${d.id}-milestone`}>
+                    <td colSpan={7} style={S.logMilestoneTd}>
+                      <span style={{ color: C.accentDim }}>╌╌</span>
+                      {" "}Crossed <span style={{ fontWeight: 600 }}>{label}</span> cumulative probability
+                      {" "}<span style={{ color: C.accentDim }}>╌╌</span>
                     </td>
-                    <td style={S.td}><button style={S.btnSecondary} onClick={() => removeDay(d.id)}>✕</button></td>
-                  </tr>
+                  </tr>,
                 );
-              });
-            })()}
+              }
+              return rows;
+            })}
           </tbody>
         </table>
       )}
@@ -844,6 +876,16 @@ export default function App() {
       <div style={S.layout}>
         {/* Sidebar */}
         <div style={S.sidebar}>
+          <div style={S.preview}>
+            <div>
+              <div style={{ fontSize:"0.58rem", color:C.accentDim, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:"0.15rem" }}>Daily chance</div>
+              <div style={S.previewNum}>{fmtPct(preview,3)}</div>
+            </div>
+            <div style={{ textAlign:"right" }}>
+              <div style={{ fontSize:"0.58rem", color:C.accentDim, marginBottom:"0.15rem" }}>approx.</div>
+              <div style={S.previewFrac}>{fmt1in(preview)}</div>
+            </div>
+          </div>
           <p style={S.secLabel}>Log a harvest day</p>
           <div style={S.card}>
             <label style={{ ...S.secLabel, display:"block", marginBottom:"0.35rem" }}>Date</label>
@@ -854,7 +896,7 @@ export default function App() {
                 onChange={e => setLevel(Number(e.target.value))} />
               <span style={S.lvlVal}>{level}</span>
             </div>
-            <p style={{ ...S.secLabel, margin:"0 0 0.4rem" }}>Harvests (wiki produce)</p>
+            <p style={{ ...S.secLabel, margin:"0 0 0.4rem" }}>Harvests</p>
             <p style={{ fontSize:"0.58rem", color:C.muted, margin:"0 0 0.5rem", lineHeight:1.6 }}>
               Each line is one roll source from the wiki Tangleroot table (e.g. Oak ×4, Flax ×10). Quantities are pet-roll counts for that crop.
             </p>
@@ -931,16 +973,6 @@ export default function App() {
                 Delete selected run
               </button>
             )}
-          </div>
-          <div style={S.preview}>
-            <div>
-              <div style={{ fontSize:"0.58rem", color:C.accentDim, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:"0.15rem" }}>Daily chance</div>
-              <div style={S.previewNum}>{fmtPct(preview,3)}</div>
-            </div>
-            <div style={{ textAlign:"right" }}>
-              <div style={{ fontSize:"0.58rem", color:C.accentDim, marginBottom:"0.15rem" }}>approx.</div>
-              <div style={S.previewFrac}>{fmt1in(preview)}</div>
-            </div>
           </div>
           <button style={S.btnPrimary} onClick={addDay}>+ Log this day</button>
           <div style={{ ...S.card, marginTop: "0.65rem" }}>
