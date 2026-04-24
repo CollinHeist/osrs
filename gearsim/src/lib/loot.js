@@ -1,4 +1,23 @@
 /**
+ * Display quantity as a fixed value or "min–max" for a range (JSON may use [2, 3]).
+ * @param {number | number[]} quantity
+ */
+export function formatQuantityLabel(quantity) {
+  if (typeof quantity === "number" && Number.isFinite(quantity)) {
+    return String(Math.trunc(quantity));
+  }
+  if (Array.isArray(quantity) && quantity.length >= 2) {
+    const a = Math.trunc(+quantity[0]);
+    const b = Math.trunc(+quantity[1]);
+    if (Number.isFinite(a) && Number.isFinite(b)) {
+      if (a === b) return String(a);
+      return `${a}-${b}`;
+    }
+  }
+  return "—";
+}
+
+/**
  * @param {number | number[]} quantity
  */
 export function meanQuantity(quantity) {
@@ -22,9 +41,21 @@ export function dropProbability(rarity) {
 }
 
 /**
+ * Display rarity as the raw fraction from loot data (e.g. 2/30, 1/128).
+ * @param {unknown} rarity
+ */
+export function formatRarityFraction(rarity) {
+  if (!Array.isArray(rarity) || rarity.length < 2) return "—";
+  const n = Math.trunc(Number(rarity[0]));
+  const d = Math.trunc(Number(rarity[1]));
+  if (!Number.isFinite(n) || !Number.isFinite(d) || d <= 0) return "—";
+  return `${n}/${d}`;
+}
+
+/**
  * @param {any} lootMonster entry from loot.json
  * @param {Record<string, number>} priceById
- * @returns {Array<{ key: string, tableName: string, itemId: number, name: string, avgQty: number, pDrop: number, unitPrice: number, evGp: number }>}
+ * @returns {Array<{ key: string, tableName: string, itemId: number, name: string, avgQty: number, quantityLabel: string, rarityLabel: string, pDrop: number, unitPrice: number, evGp: number }>}
  */
 /**
  * @param {any} lootData loot.json root: array of monsters OR legacy object map
@@ -49,6 +80,8 @@ export function getFlattenedLootRows(lootData, monsterId, priceById) {
       itemId: typeof r.id === "number" ? r.id : null,
       name: r.name ?? "—",
       avgQty: 1,
+      quantityLabel: "1",
+      rarityLabel: "1/1",
       pDrop: 1,
       unitPrice:
         typeof r.id === "number" ? priceById[String(r.id)] ?? 0 : 0,
@@ -76,6 +109,8 @@ export function flattenLootRows(lootMonster, priceById) {
         itemId,
         name: item.name ?? `Item ${itemId}`,
         avgQty,
+        quantityLabel: formatQuantityLabel(item.quantity),
+        rarityLabel: formatRarityFraction(item.rarity),
         pDrop,
         unitPrice,
         evGp,

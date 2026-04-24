@@ -1,5 +1,22 @@
 import { meleeCombatSnapshot } from "../engine/melee.js";
-import { sumMeleeEquipment, meleeItemScore } from "./equipment.js";
+import { sumMeleeEquipment, meleeItemScore, SLOTS } from "./equipment.js";
+
+/**
+ * GP cost to buy every slot that differs from the base loadout (base assumed owned).
+ * @param {Record<string, string | null>} baseEquip
+ * @param {Record<string, string | null>} candidateEquip
+ * @param {Record<string, number>} priceById
+ */
+export function marginalUpgradeCost(baseEquip, candidateEquip, priceById) {
+  let sum = 0;
+  for (const slot of SLOTS) {
+    const c = candidateEquip[slot];
+    const b = baseEquip[slot];
+    if (!c || c === b) continue;
+    sum += priceById[c] ?? 0;
+  }
+  return sum;
+}
 
 /**
  * @param {Object} o
@@ -8,7 +25,6 @@ import { sumMeleeEquipment, meleeItemScore } from "./equipment.js";
  * @param {Record<string, string[]>} o.candidatesBySlot item ids per slot
  * @param {Record<string, any>} o.itemsById
  * @param {Record<string, number>} o.priceById
- * @param {Record<string, boolean>} o.owned
  * @param {number} o.budgetGp
  * @param {number} o.maxCombinations
  * @param {any} o.combatParams passed to meleeCombatSnapshot
@@ -24,7 +40,7 @@ export function enumerateLoadouts(o) {
   function rec(i, equip) {
     if (out.length >= o.maxCombinations) return;
     if (i >= axes.length) {
-      const cost = loadoutCost(equip, o.priceById, o.owned);
+      const cost = marginalUpgradeCost(o.baseEquip, equip, o.priceById);
       if (cost > o.budgetGp) return;
       const bonuses = sumMeleeEquipment(equip, o.itemsById);
       const snap = meleeCombatSnapshot({
@@ -48,21 +64,6 @@ export function enumerateLoadouts(o) {
 
   rec(0, { ...o.baseEquip });
   return out;
-}
-
-/**
- * @param {Record<string, string | null>} equip
- * @param {Record<string, number>} priceById
- * @param {Record<string, boolean>} owned
- */
-export function loadoutCost(equip, priceById, owned) {
-  let sum = 0;
-  for (const id of Object.values(equip)) {
-    if (!id) continue;
-    if (owned[id] !== false) continue;
-    sum += priceById[id] ?? 0;
-  }
-  return sum;
 }
 
 /**

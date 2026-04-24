@@ -307,13 +307,14 @@ const loot = {
 };
 
 async function main() {
-  await mkdir(outDir, { recursive: true });
-  await writeFile(join(outDir, "meta.json"), JSON.stringify(meta, null, 2));
-  await writeFile(join(outDir, "monsters.json"), JSON.stringify(monsters, null, 2));
-  await writeFile(join(outDir, "items.json"), JSON.stringify(items, null, 2));
-  await writeFile(join(outDir, "prices.json"), JSON.stringify(prices, null, 2));
-  await writeFile(join(outDir, "loot.json"), JSON.stringify(loot, null, 2));
-  console.log("Wrote data to", outDir);
+  // Do not uncomment these - complete data has already been generated
+  // await mkdir(outDir, { recursive: true });
+  // await writeFile(join(outDir, "meta.json"), JSON.stringify(meta, null, 2));
+  // await writeFile(join(outDir, "monsters.json"), JSON.stringify(monsters, null, 2));
+  // await writeFile(join(outDir, "items.json"), JSON.stringify(items, null, 2));
+  // await writeFile(join(outDir, "prices.json"), JSON.stringify(prices, null, 2));
+  // await writeFile(join(outDir, "loot.json"), JSON.stringify(loot, null, 2));
+  // console.log("Wrote data to", outDir);
 }
 
 main().catch((e) => {

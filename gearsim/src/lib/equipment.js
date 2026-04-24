@@ -63,6 +63,34 @@ export function sumMeleeEquipment(equippedBySlot, itemsById) {
 }
 
 /**
+ * Drop cosmetic duplicate items: same trimmed name, same slot, and same
+ * melee-relevant stats ({@link itemMeleeBonuses}). First occurrence in array
+ * order is kept. Full {@link itemsToMap} should still be built from the raw
+ * list so loot and loadouts can resolve every item id.
+ * @param {any[]} items
+ * @returns {any[]}
+ */
+export function dedupeCosmeticMeleeVariants(items) {
+  if (!Array.isArray(items)) return [];
+  /** @type {Set<string>} */
+  const seen = new Set();
+  /** @type {any[]} */
+  const out = [];
+  for (const it of items) {
+    if (!it || typeof it.id !== "number") continue;
+    const name = String(it.name ?? "").trim();
+    const slot = String(it.slot ?? "");
+    const m = itemMeleeBonuses(it);
+    const statKey = `${m.stabAtt},${m.slashAtt},${m.crushAtt},${m.str},${m.speed}`;
+    const key = `${name}\0${slot}\0${statKey}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(it);
+  }
+  return out;
+}
+
+/**
  * @param {any[]} items
  * @returns {Record<string, any>}
  */
