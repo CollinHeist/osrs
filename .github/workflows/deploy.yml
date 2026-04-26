@@ -49,8 +49,9 @@ jobs:
 
       - name: Stage Pages artifact
         run: |
-          mkdir -p _site/prayer _site/gear _site/tangleroot _site/training
+          mkdir -p _site/herblore _site/prayer _site/gear _site/tangleroot _site/training
           cp index.html _site/index.html
+          cp herblore/index.html _site/herblore/index.html
           cp prayer/index.html _site/prayer/index.html
           cp gear/index.html _site/gear/index.html
           cp training/index.html _site/training/index.html
