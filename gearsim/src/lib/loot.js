@@ -101,7 +101,8 @@ export function flattenLootRows(lootMonster, priceById) {
       const avgQty = meanQuantity(item.quantity);
       const pDrop = dropProbability(item.rarity);
       const itemId = item.id;
-      const unitPrice = priceById[String(itemId)] ?? 0;
+      const isCoins = item.name?.toLowerCase() === "coins" || itemId === 995;
+      const unitPrice = isCoins ? 1 : (priceById[String(itemId)] ?? 0);
       const evGp = avgQty * pDrop * unitPrice;
       rows.push({
         key: `${lootMonster.id}-${ti}-${ii}`,
