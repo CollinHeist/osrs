@@ -1,0 +1,16 @@
+export const CHART_PALETTE = [
+  '#c9a227',
+  '#4aad52',
+  '#4a9acc',
+  '#c44',
+  '#cc7a4a',
+  '#9a4acc',
+  '#4accb8',
+  '#cc4a9a',
+  '#a3cc4a',
+  '#cc9a3e',
+  '#4a6bcc',
+  '#cc5050',
+  '#3eccaa',
+  '#cc4a7a',
+];

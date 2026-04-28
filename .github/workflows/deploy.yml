@@ -37,25 +37,36 @@ jobs:
         with:
           node-version: lts/*
           cache: 'npm'
-          cache-dependency-path: 'tangleroot/package-lock.json'
+          cache-dependency-path: |
+            tangleroot/package-lock.json
+            calculators/package-lock.json
 
-      - name: Install dependencies
+      - name: Install tangleroot dependencies
         working-directory: tangleroot
         run: npm ci
 
-      - name: Build
+      - name: Build tangleroot
         working-directory: tangleroot
+        run: npm run build
+
+      - name: Install calculators dependencies
+        working-directory: calculators
+        run: npm ci
+
+      - name: Build calculators
+        working-directory: calculators
         run: npm run build
 
       - name: Stage Pages artifact
         run: |
-          mkdir -p _site/herblore _site/prayer _site/gear _site/tangleroot _site/training
+          mkdir -p _site/herblore _site/prayer _site/gear _site/tangleroot _site/training _site/calculators
           cp index.html _site/index.html
           cp herblore/index.html _site/herblore/index.html
           cp prayer/index.html _site/prayer/index.html
           cp gear/index.html _site/gear/index.html
           cp training/index.html _site/training/index.html
           cp -R tangleroot/dist/. _site/tangleroot/
+          cp -R calculators/dist/. _site/calculators/
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
