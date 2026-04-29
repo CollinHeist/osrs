@@ -7,9 +7,15 @@ import { defaultGphrPoints } from '../lib/gphrSamplePoints.js';
 import { buildLineChartDatasets } from '../lib/chartData.js';
 import { CHART_PALETTE } from '../lib/palette.js';
 import { parsePrayerPaste } from '../lib/prayerParse.js';
-import { usePersistedGphr } from '../lib/usePersistedGphr.js';
+import {
+  loadCalculatorSnapshot,
+  saveCalculatorSnapshot,
+  CALCULATOR_STORAGE_KEYS,
+} from '../lib/calculatorStorage.js';
 import { MAIN_SITE_INDEX } from '../lib/sitePaths.js';
 import { TrainingTimeChart } from '../components/TrainingTimeChart.jsx';
+import { ProfitTimeCreditToggle } from '../components/ProfitTimeCreditToggle.jsx';
+import { useProfitTimeCredit } from '../lib/useProfitTimeCredit.js';
 
 const PRAYER_SAMPLE = [
   ['Regular bones', 0.9, 23100, 0.46, 30800],
@@ -37,27 +43,114 @@ function sampleToBones(gilded, chaos) {
 
 const GPHR_PRESETS = [300000, 500000, 1000000, 2000000, 5000000];
 
+const PRAYER_DEFAULTS = {
+  gphr: 1_000_000,
+  fromLvl: 1,
+  toLvl: 99,
+  gilded: true,
+  chaos: true,
+  libation: false,
+  sensitivity: 0,
+  actionEff: 0,
+  sticky: true,
+  tab: 'paste',
+  pasteRaw: '',
+  bones: [],
+  manualRows: [{ id: 'm0', name: '', gildedGpxp: '', chaosGpxp: '', xphr: '643000' }],
+  sortCol: 'totalH',
+  sortDir: 1,
+};
+
+function normalizePrayer(raw) {
+  const s = { ...PRAYER_DEFAULTS, ...raw };
+  s.gphr = Number(s.gphr);
+  if (!Number.isFinite(s.gphr) || s.gphr < 0) s.gphr = PRAYER_DEFAULTS.gphr;
+  s.fromLvl = Math.min(99, Math.max(1, Math.floor(Number(s.fromLvl)) || PRAYER_DEFAULTS.fromLvl));
+  s.toLvl = Math.min(99, Math.max(1, Math.floor(Number(s.toLvl)) || PRAYER_DEFAULTS.toLvl));
+  s.gilded = Boolean(s.gilded);
+  s.chaos = Boolean(s.chaos);
+  s.libation = Boolean(s.libation);
+  s.sensitivity = Number.isFinite(Number(s.sensitivity)) ? Number(s.sensitivity) : 0;
+  s.actionEff = Number.isFinite(Number(s.actionEff)) ? Number(s.actionEff) : 0;
+  s.sticky = s.sticky !== false;
+  s.tab = s.tab === 'manual' ? 'manual' : 'paste';
+  s.pasteRaw = typeof s.pasteRaw === 'string' ? s.pasteRaw : '';
+  s.bones = Array.isArray(s.bones) ? s.bones : [];
+  s.sortCol = typeof s.sortCol === 'string' ? s.sortCol : PRAYER_DEFAULTS.sortCol;
+  s.sortDir = s.sortDir === -1 ? -1 : 1;
+  s.manualRows =
+    Array.isArray(s.manualRows) && s.manualRows.length
+      ? s.manualRows.map((r, i) => ({
+          id: typeof r?.id === 'string' ? r.id : `m${i}`,
+          name: r?.name != null ? String(r.name) : '',
+          gildedGpxp: r?.gildedGpxp != null ? String(r.gildedGpxp) : '',
+          chaosGpxp: r?.chaosGpxp != null ? String(r.chaosGpxp) : '',
+          xphr: r?.xphr != null ? String(r.xphr) : '643000',
+        }))
+      : PRAYER_DEFAULTS.manualRows.map((r) => ({ ...r }));
+  return s;
+}
+
 export function PrayerPage() {
-  const [gphr, setGphr] = usePersistedGphr();
-  const [fromLvl, setFromLvl] = useState(1);
-  const [toLvl, setToLvl] = useState(99);
-  const [gilded, setGilded] = useState(true);
-  const [chaos, setChaos] = useState(true);
-  const [libation, setLibation] = useState(false);
-  const [sensitivity, setSensitivity] = useState(0);
-  const [actionEff, setActionEff] = useState(0);
-  const [sticky, setSticky] = useState(() => localStorage.getItem('prayerStickyControls') !== '0');
-  const [tab, setTab] = useState('paste');
-  const [pasteRaw, setPasteRaw] = useState('');
+  const [initial] = useState(() =>
+    normalizePrayer(loadCalculatorSnapshot(CALCULATOR_STORAGE_KEYS.prayer, PRAYER_DEFAULTS)),
+  );
+
+  const [gphr, setGphr] = useState(initial.gphr);
+  const [fromLvl, setFromLvl] = useState(initial.fromLvl);
+  const [toLvl, setToLvl] = useState(initial.toLvl);
+  const [gilded, setGilded] = useState(initial.gilded);
+  const [chaos, setChaos] = useState(initial.chaos);
+  const [libation, setLibation] = useState(initial.libation);
+  const [sensitivity, setSensitivity] = useState(initial.sensitivity);
+  const [actionEff, setActionEff] = useState(initial.actionEff);
+  const [sticky, setSticky] = useState(initial.sticky);
+  const [tab, setTab] = useState(initial.tab);
+  const [pasteRaw, setPasteRaw] = useState(initial.pasteRaw);
   const deferredPaste = useDeferredValue(pasteRaw);
-  const [bones, setBones] = useState([]);
+  const [bones, setBones] = useState(initial.bones);
   const [parseStatus, setParseStatus] = useState({ type: '', msg: '' });
 
-  const [manualRows, setManualRows] = useState([
-    { id: 'm0', name: '', gildedGpxp: '', chaosGpxp: '', xphr: '643000' },
+  const [manualRows, setManualRows] = useState(initial.manualRows);
+  const [sortCol, setSortCol] = useState(initial.sortCol);
+  const [sortDir, setSortDir] = useState(initial.sortDir);
+  const [profitTimeCredit, setProfitTimeCredit] = useProfitTimeCredit();
+
+  useEffect(() => {
+    saveCalculatorSnapshot(CALCULATOR_STORAGE_KEYS.prayer, {
+      gphr,
+      fromLvl,
+      toLvl,
+      gilded,
+      chaos,
+      libation,
+      sensitivity,
+      actionEff,
+      sticky,
+      tab,
+      pasteRaw,
+      bones,
+      manualRows,
+      sortCol,
+      sortDir,
+    });
+  }, [
+    gphr,
+    fromLvl,
+    toLvl,
+    gilded,
+    chaos,
+    libation,
+    sensitivity,
+    actionEff,
+    sticky,
+    tab,
+    pasteRaw,
+    bones,
+    manualRows,
+    sortCol,
+    sortDir,
   ]);
-  const [sortCol, setSortCol] = useState('totalH');
-  const [sortDir, setSortDir] = useState(1);
 
   const xpNeeded = useMemo(() => xpNeededBetween(fromLvl, toLvl), [fromLvl, toLvl]);
 
@@ -108,7 +201,7 @@ export function PrayerPage() {
 
         const adjGpxp = m.gpxp * (1 + sensFrac);
         const adjXphr = m.xphr * (1 + actionFrac);
-        const t = computeMethodTimes({ xpNeeded, gpxp: adjGpxp, xphr: adjXphr, gphr });
+        const t = computeMethodTimes({ xpNeeded, gpxp: adjGpxp, xphr: adjXphr, gphr, profitTimeCredit });
         const shortM = m.method.replace(' Altar', '').replace('Libation Bowl', 'Shards');
         flat.push({
           id: `${bone.name}::${m.method}`,
@@ -145,6 +238,7 @@ export function PrayerPage() {
     sortCol,
     sortDir,
     tab,
+    profitTimeCredit,
   ]);
 
   const gphrPoints = useMemo(() => defaultGphrPoints(), []);
@@ -158,8 +252,8 @@ export function PrayerPage() {
       xphr: r.xphr,
       borderDash: r.borderDash,
     }));
-    return buildLineChartDatasets(chartRows, xpNeeded, gphrPoints, CHART_PALETTE, '#f0c94a');
-  }, [rows, xpNeeded, gphrPoints]);
+    return buildLineChartDatasets(chartRows, xpNeeded, gphrPoints, CHART_PALETTE, '#f0c94a', profitTimeCredit);
+  }, [rows, xpNeeded, gphrPoints, profitTimeCredit]);
 
   function toggleSort(col) {
     if (sortCol === col) setSortDir((d) => -d);
@@ -171,7 +265,6 @@ export function PrayerPage() {
 
   function applySticky(next) {
     setSticky(next);
-    localStorage.setItem('prayerStickyControls', next ? '1' : '0');
   }
 
   useEffect(() => {
@@ -253,12 +346,12 @@ export function PrayerPage() {
           <span className="calc-page-title-icon" aria-hidden="true">
             🦴
           </span>{' '}
-          Prayer bone optimizer{' '}
+          Prayer Bone Optimizer{' '}
           <span className="calc-page-title-icon" aria-hidden="true">
             🦴
           </span>
         </h1>
-        <p>Find the optimal bone given your gold-per-hour income rate</p>
+        {/* <p>Find the optimal bone given your gold-per-hour income rate</p> */}
         <div className="hr" />
       </header>
 
@@ -266,7 +359,8 @@ export function PrayerPage() {
         <div className="sign-legend">
           <strong>GP/XP sign:</strong> negative = costs GP per XP (money leaves your bank). Positive = profit per XP
           (no GP gathering time). Wiki prayer tables often show costs as positive numbers — this tool stores them as
-          negatives internally.
+          negatives internally. Optional <strong>Credit profit as gather time</strong> is in the Gold accumulation rate
+          panel.
         </div>
 
         <div className="panel">
@@ -285,6 +379,7 @@ export function PrayerPage() {
               ))}
             </div>
           </div>
+          <ProfitTimeCreditToggle enabled={profitTimeCredit} onChange={setProfitTimeCredit} />
         </div>
 
         <div className="panel">
@@ -494,7 +589,9 @@ export function PrayerPage() {
               </div>
               <div className="cstat">
                 <div className="cslbl">Gather time</div>
-                <div className="csval">{best.gatherH === 0 ? 'none' : formatHours(best.gatherH)}</div>
+                <div className="csval">
+                  {best.gpxp > 0 && best.gatherH === 0 ? 'none' : formatHours(best.gatherH)}
+                </div>
               </div>
               <div className="cstat">
                 <div className="cslbl">Train time</div>
@@ -607,7 +704,9 @@ export function PrayerPage() {
           </div>
         </div>
 
-        {chartPayload && <TrainingTimeChart {...chartPayload} colors={chartColors} />}
+        {chartPayload && (
+          <TrainingTimeChart {...chartPayload} colors={chartColors} allowNegativeY={profitTimeCredit} />
+        )}
       </div>
     </div>
   );

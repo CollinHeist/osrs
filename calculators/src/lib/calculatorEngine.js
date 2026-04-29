@@ -1,9 +1,12 @@
 /**
  * Standard semantics:
  * - Negative GP/XP = costs money (GP leaves your bank per XP).
- * - Positive GP/XP = net profit (GP gained per XP); gather time is 0.
+ * - Positive GP/XP = net profit (GP gained per XP); gather time is 0 by default.
+ * @param {object} opts
+ * @param {boolean} [opts.profitTimeCredit=false] When true, GP profit applies as negative gather time
+ *   (totalCost / gphr even when totalCost is negative), crediting earned GP at your GP/hour rate.
  */
-export function computeMethodTimes({ xpNeeded, gpxp, xphr, gphr }) {
+export function computeMethodTimes({ xpNeeded, gpxp, xphr, gphr, profitTimeCredit = false }) {
   if (xpNeeded <= 0 || !Number.isFinite(xphr) || xphr <= 0 || !Number.isFinite(gphr) || gphr <= 0) {
     return {
       totalCost: 0,
@@ -14,7 +17,7 @@ export function computeMethodTimes({ xpNeeded, gpxp, xphr, gphr }) {
   }
 
   const totalCost = xpNeeded * (-gpxp);
-  const gatherH = totalCost > 0 ? totalCost / gphr : 0;
+  const gatherH = profitTimeCredit || totalCost > 0 ? totalCost / gphr : 0;
   const trainH = xpNeeded / xphr;
   const totalH = gatherH + trainH;
 

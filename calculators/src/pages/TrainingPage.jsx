@@ -6,9 +6,15 @@ import { formatGpSigned, formatHours, formatGpCompact, formatRateK, describeGpxp
 import { defaultGphrPoints } from '../lib/gphrSamplePoints.js';
 import { buildLineChartDatasets } from '../lib/chartData.js';
 import { CHART_PALETTE } from '../lib/palette.js';
-import { usePersistedGphr } from '../lib/usePersistedGphr.js';
+import {
+  loadCalculatorSnapshot,
+  saveCalculatorSnapshot,
+  CALCULATOR_STORAGE_KEYS,
+} from '../lib/calculatorStorage.js';
 import { MAIN_SITE_INDEX } from '../lib/sitePaths.js';
 import { TrainingTimeChart } from '../components/TrainingTimeChart.jsx';
+import { ProfitTimeCreditToggle } from '../components/ProfitTimeCreditToggle.jsx';
+import { useProfitTimeCredit } from '../lib/useProfitTimeCredit.js';
 
 const GPHR_PRESETS = [300000, 500000, 1000000, 2000000, 5000000];
 
@@ -18,6 +24,63 @@ const SAMPLE = [
   ['Standard (\u221212 GP/XP)', -12, 500000],
   ['Fast (\u221222 GP/XP)', -22, 700000],
 ];
+
+function defaultManualMethods() {
+  return SAMPLE.map(([n, g, x], i) => ({
+    id: `m${i}`,
+    name: n,
+    gpxp: g,
+    xphr: x,
+    color: CHART_PALETTE[i % CHART_PALETTE.length],
+  }));
+}
+
+const TRAINING_DEFAULTS = {
+  gphr: 1_000_000,
+  fromLvl: 1,
+  toLvl: 99,
+  tab: 'manual',
+  pasteRaw: '',
+  colName: -1,
+  colGpxp: -1,
+  colXphr: -1,
+  manualMethods: defaultManualMethods(),
+  sortCol: 'totalH',
+  sortDir: 1,
+};
+
+function normalizeTraining(raw) {
+  const s = { ...TRAINING_DEFAULTS, ...raw };
+  s.gphr = Number(s.gphr);
+  if (!Number.isFinite(s.gphr) || s.gphr < 0) s.gphr = TRAINING_DEFAULTS.gphr;
+  s.fromLvl = Math.min(99, Math.max(1, Math.floor(Number(s.fromLvl)) || TRAINING_DEFAULTS.fromLvl));
+  s.toLvl = Math.min(99, Math.max(1, Math.floor(Number(s.toLvl)) || TRAINING_DEFAULTS.toLvl));
+  s.tab = s.tab === 'paste' ? 'paste' : 'manual';
+  s.pasteRaw = typeof s.pasteRaw === 'string' ? s.pasteRaw : '';
+  const ci = (v) => {
+    const n = Math.floor(Number(v));
+    return Number.isFinite(n) ? n : -1;
+  };
+  s.colName = ci(s.colName);
+  s.colGpxp = ci(s.colGpxp);
+  s.colXphr = ci(s.colXphr);
+  s.sortCol = typeof s.sortCol === 'string' ? s.sortCol : TRAINING_DEFAULTS.sortCol;
+  s.sortDir = s.sortDir === -1 ? -1 : 1;
+  s.manualMethods =
+    Array.isArray(s.manualMethods) && s.manualMethods.length
+      ? s.manualMethods.map((m, i) => ({
+          id: typeof m?.id === 'string' ? m.id : `m${i}`,
+          name: m?.name != null ? String(m.name) : '',
+          gpxp: m?.gpxp === '' || m?.gpxp == null ? '' : typeof m.gpxp === 'number' ? m.gpxp : String(m.gpxp),
+          xphr: m?.xphr === '' || m?.xphr == null ? '' : typeof m.xphr === 'number' ? m.xphr : String(m.xphr),
+          color:
+            typeof m?.color === 'string' && m.color
+              ? m.color
+              : CHART_PALETTE[i % CHART_PALETTE.length],
+        }))
+      : defaultManualMethods();
+  return s;
+}
 
 function parseTable(raw) {
   const lines = raw.split('\n').map((l) => l.trimEnd()).filter((l) => l.trim().length > 0);
@@ -78,25 +141,38 @@ function buildPasteMethods(parsed, colName, colGpxp, colXphr) {
 }
 
 export function TrainingPage() {
-  const [gphr, setGphr] = usePersistedGphr();
-  const [fromLvl, setFromLvl] = useState(1);
-  const [toLvl, setToLvl] = useState(99);
-  const [tab, setTab] = useState('manual');
-  const [pasteRaw, setPasteRaw] = useState('');
-  const [colName, setColName] = useState(-1);
-  const [colGpxp, setColGpxp] = useState(-1);
-  const [colXphr, setColXphr] = useState(-1);
-  const [manualMethods, setManualMethods] = useState(() =>
-    SAMPLE.map(([n, g, x], i) => ({
-      id: `m${i}`,
-      name: n,
-      gpxp: g,
-      xphr: x,
-      color: CHART_PALETTE[i % CHART_PALETTE.length],
-    })),
+  const [initial] = useState(() =>
+    normalizeTraining(loadCalculatorSnapshot(CALCULATOR_STORAGE_KEYS.training, TRAINING_DEFAULTS)),
   );
-  const [sortCol, setSortCol] = useState('totalH');
-  const [sortDir, setSortDir] = useState(1);
+
+  const [gphr, setGphr] = useState(initial.gphr);
+  const [fromLvl, setFromLvl] = useState(initial.fromLvl);
+  const [toLvl, setToLvl] = useState(initial.toLvl);
+  const [tab, setTab] = useState(initial.tab);
+  const [pasteRaw, setPasteRaw] = useState(initial.pasteRaw);
+  const [colName, setColName] = useState(initial.colName);
+  const [colGpxp, setColGpxp] = useState(initial.colGpxp);
+  const [colXphr, setColXphr] = useState(initial.colXphr);
+  const [manualMethods, setManualMethods] = useState(initial.manualMethods);
+  const [sortCol, setSortCol] = useState(initial.sortCol);
+  const [sortDir, setSortDir] = useState(initial.sortDir);
+  const [profitTimeCredit, setProfitTimeCredit] = useProfitTimeCredit();
+
+  useEffect(() => {
+    saveCalculatorSnapshot(CALCULATOR_STORAGE_KEYS.training, {
+      gphr,
+      fromLvl,
+      toLvl,
+      tab,
+      pasteRaw,
+      colName,
+      colGpxp,
+      colXphr,
+      manualMethods,
+      sortCol,
+      sortDir,
+    });
+  }, [gphr, fromLvl, toLvl, tab, pasteRaw, colName, colGpxp, colXphr, manualMethods, sortCol, sortDir]);
 
   const xpNeeded = useMemo(() => xpNeededBetween(fromLvl, toLvl), [fromLvl, toLvl]);
 
@@ -137,7 +213,7 @@ export function TrainingPage() {
       const gpxp = typeof m.gpxp === 'number' ? m.gpxp : parseFloat(String(m.gpxp));
       const xphr = typeof m.xphr === 'number' ? m.xphr : parseFloat(String(m.xphr));
       if (!m.name?.trim() || Number.isNaN(gpxp) || !Number.isFinite(gpxp) || Number.isNaN(xphr) || xphr <= 0) continue;
-      const t = computeMethodTimes({ xpNeeded, gpxp, xphr, gphr });
+      const t = computeMethodTimes({ xpNeeded, gpxp, xphr, gphr, profitTimeCredit });
       flat.push({
         id: m.id,
         name: m.name.trim(),
@@ -165,7 +241,7 @@ export function TrainingPage() {
     const sorted = sortRows(flat, sortCol, sortDir);
     const b = pickBestRow(sorted);
     return { rows: sorted, best: b, range: efficiencyRange(sorted, b), emptyMsg: '' };
-  }, [methodsForCalc, xpNeeded, gphr, sortCol, sortDir, tab, pasteMethods.length]);
+  }, [methodsForCalc, xpNeeded, gphr, sortCol, sortDir, tab, pasteMethods.length, profitTimeCredit]);
 
   const gphrPoints = useMemo(() => defaultGphrPoints(), []);
   const chartPayload = useMemo(() => {
@@ -178,8 +254,8 @@ export function TrainingPage() {
       gpxp: r.gpxp,
       xphr: r.xphr,
     }));
-    return buildLineChartDatasets(chartRows, xpNeeded, gphrPoints, CHART_PALETTE, '#7ac8e8');
-  }, [rows, xpNeeded, gphrPoints]);
+    return buildLineChartDatasets(chartRows, xpNeeded, gphrPoints, CHART_PALETTE, '#7ac8e8', profitTimeCredit);
+  }, [rows, xpNeeded, gphrPoints, profitTimeCredit]);
 
   function toggleSort(col) {
     if (sortCol === col) setSortDir((d) => -d);
@@ -209,15 +285,7 @@ export function TrainingPage() {
   }
 
   function loadSample() {
-    setManualMethods(
-      SAMPLE.map(([n, g, x], i) => ({
-        id: `m${i}`,
-        name: n,
-        gpxp: g,
-        xphr: x,
-        color: CHART_PALETTE[i % CHART_PALETTE.length],
-      })),
-    );
+    setManualMethods(defaultManualMethods());
   }
 
   function clearAll() {
@@ -260,7 +328,7 @@ export function TrainingPage() {
           <span className="calc-page-title-icon" aria-hidden="true">
             ⚗
           </span>{' '}
-          Training cost optimizer{' '}
+          Training Cost Optimizer{' '}
           <span className="calc-page-title-icon" aria-hidden="true">
             ⚗
           </span>
@@ -271,8 +339,9 @@ export function TrainingPage() {
 
       <div className="container">
         <div className="sign-legend">
-          <strong>GP/XP sign:</strong> negative = costs GP per XP (gather time applies). Positive = profit per XP (no
-          gather time).
+          <strong>GP/XP sign:</strong> negative = costs GP per XP (money leaves your bank). Positive = profit per XP (no
+          gather time by default). Turn on <strong>Credit profit as gather time</strong> in the Gold accumulation rate
+          panel to value profit at your GP/hour.
         </div>
 
         <div className="panel">
@@ -291,6 +360,7 @@ export function TrainingPage() {
               ))}
             </div>
           </div>
+          <ProfitTimeCreditToggle enabled={profitTimeCredit} onChange={setProfitTimeCredit} />
         </div>
 
         <div className="panel">
@@ -518,8 +588,8 @@ export function TrainingPage() {
               </div>
               <div className="cstat">
                 <div className="cslbl">Gather time</div>
-                <div className={`csval ${best.gatherH === 0 ? 'g' : ''}`}>
-                  {best.gatherH === 0 ? 'none' : formatHours(best.gatherH)}
+                <div className={`csval ${best.gpxp > 0 && best.gatherH === 0 ? '' : best.gatherH <= 0 ? 'g' : ''}`}>
+                  {best.gpxp > 0 && best.gatherH === 0 ? 'none' : formatHours(best.gatherH)}
                 </div>
               </div>
               <div className="cstat">
@@ -633,7 +703,9 @@ export function TrainingPage() {
           </div>
         </div>
 
-        {chartPayload && <TrainingTimeChart {...chartPayload} colors={chartColors} />}
+        {chartPayload && (
+          <TrainingTimeChart {...chartPayload} colors={chartColors} allowNegativeY={profitTimeCredit} />
+        )}
       </div>
     </div>
   );

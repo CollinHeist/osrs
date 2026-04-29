@@ -19,8 +19,9 @@ Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryS
  * @param {object[]} props.datasets
  * @param {{ grid: string; tick: string; title: string; tooltipBg?: string }} props.colors
  * @param {string} [props.subtitle]
+ * @param {boolean} [props.allowNegativeY] When true, Y axis is not clamped at 0 (for profit gather credits).
  */
-export function TrainingTimeChart({ labels, datasets, colors, subtitle }) {
+export function TrainingTimeChart({ labels, datasets, colors, subtitle, allowNegativeY = false }) {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
 
@@ -91,7 +92,7 @@ export function TrainingTimeChart({ labels, datasets, colors, subtitle }) {
             color: colors.tick,
             font: { family: mono, size: 10 },
           },
-          min: 0,
+          ...(allowNegativeY ? {} : { min: 0 }),
         },
       },
     };
@@ -108,7 +109,7 @@ export function TrainingTimeChart({ labels, datasets, colors, subtitle }) {
       chartRef.current.options = opts;
       chartRef.current.update('none');
     }
-  }, [labels, datasets, colors]);
+  }, [labels, datasets, colors, allowNegativeY]);
 
   useEffect(
     () => () => {

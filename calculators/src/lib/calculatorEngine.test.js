@@ -10,11 +10,25 @@ test('computeMethodTimes: negative GP/XP costs GP and adds gather time', () => {
   assert.ok(Math.abs(r.totalH - 0.02) < 1e-9);
 });
 
-test('computeMethodTimes: positive GP/XP has zero gather time', () => {
+test('computeMethodTimes: positive GP/XP has zero gather time by default', () => {
   const r = computeMethodTimes({ xpNeeded: 1000, gpxp: 5, xphr: 100000, gphr: 1_000_000 });
   assert(r.totalCost < 0);
   assert.equal(r.gatherH, 0);
   assert.equal(r.trainH, 0.01);
+});
+
+test('computeMethodTimes: profitTimeCredit applies negative gather for profit GP/XP', () => {
+  const r = computeMethodTimes({
+    xpNeeded: 1000,
+    gpxp: 5,
+    xphr: 100_000,
+    gphr: 1_000_000,
+    profitTimeCredit: true,
+  });
+  assert.equal(r.totalCost, -5000);
+  assert.equal(r.gatherH, -0.005);
+  assert.equal(r.trainH, 0.01);
+  assert.ok(Math.abs(r.totalH - 0.005) < 1e-9);
 });
 
 test('pickBestRow chooses lowest totalH', () => {

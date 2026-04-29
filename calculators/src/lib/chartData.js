@@ -1,15 +1,17 @@
 import { filterChartRows } from './chartFilter.js';
 import { formatGphrAxis } from './format.js';
 
-export function totalTimeAtGphr(xpNeeded, gpxp, xphr, gphr) {
+export function totalTimeAtGphr(xpNeeded, gpxp, xphr, gphr, profitTimeCredit = false) {
   const totalCost = xpNeeded * (-gpxp);
-  const gatherH = totalCost > 0 ? totalCost / gphr : 0;
+  const gatherH = profitTimeCredit || totalCost > 0 ? totalCost / gphr : 0;
   const trainH = xpNeeded / xphr;
   return gatherH + trainH;
 }
 
-export function buildRowData(rows, xpNeeded, gphrPoints) {
-  return rows.map((r) => gphrPoints.map((g) => totalTimeAtGphr(xpNeeded, r.gpxp, r.xphr, g)));
+export function buildRowData(rows, xpNeeded, gphrPoints, profitTimeCredit = false) {
+  return rows.map((r) =>
+    gphrPoints.map((g) => totalTimeAtGphr(xpNeeded, r.gpxp, r.xphr, g, profitTimeCredit)),
+  );
 }
 
 export function buildEnvelope(rowData, rows) {
@@ -31,9 +33,9 @@ export function buildEnvelope(rowData, rows) {
  * Build Chart.js datasets with unified filtering + optimal envelope.
  * @param {Array<{name:string,chartLabel?:string,gpxp:number,xphr:number,color?:string,borderDash?:number[]}>} rows
  */
-export function buildLineChartDatasets(rows, xpNeeded, gphrPoints, palette, envelopeColor) {
+export function buildLineChartDatasets(rows, xpNeeded, gphrPoints, palette, envelopeColor, profitTimeCredit = false) {
   const labels = gphrPoints.map(formatGphrAxis);
-  const rowData = buildRowData(rows, xpNeeded, gphrPoints);
+  const rowData = buildRowData(rows, xpNeeded, gphrPoints, profitTimeCredit);
   const { envelopeData, envelopeRow } = buildEnvelope(rowData, rows);
   const { filteredRows, filteredData } = filterChartRows(rows, rowData);
 

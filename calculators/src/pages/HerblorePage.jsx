@@ -12,11 +12,68 @@ import {
   WIKI_API,
   potionRowKey,
 } from '../lib/herbloreWiki.js';
-import { usePersistedGphr } from '../lib/usePersistedGphr.js';
+import {
+  loadCalculatorSnapshot,
+  saveCalculatorSnapshot,
+  CALCULATOR_STORAGE_KEYS,
+} from '../lib/calculatorStorage.js';
 import { MAIN_SITE_INDEX } from '../lib/sitePaths.js';
 import { TrainingTimeChart } from '../components/TrainingTimeChart.jsx';
+import { ProfitTimeCreditToggle } from '../components/ProfitTimeCreditToggle.jsx';
+import { useProfitTimeCredit } from '../lib/useProfitTimeCredit.js';
 
 const GPHR_PRESETS = [300000, 500000, 1000000, 2000000, 5000000];
+
+const HERB_DEFAULTS = {
+  gphr: 1_000_000,
+  fromLvl: 3,
+  toLvl: 99,
+  onlyReachable: false,
+  eqChem: false,
+  eqAlch: false,
+  eqGog: false,
+  sensitivity: 0,
+  actionEff: 0,
+  sticky: true,
+  tab: 'fetch',
+  potions: [],
+  excludedKeys: [],
+  manualRows: [{ id: 'h0', name: '', gpxp: '', xphr: '' }],
+  pasteRaw: '',
+  sortCol: 'totalH',
+  sortDir: 1,
+};
+
+function normalizeHerblore(raw) {
+  const s = { ...HERB_DEFAULTS, ...raw };
+  s.gphr = Number(s.gphr);
+  if (!Number.isFinite(s.gphr) || s.gphr < 0) s.gphr = HERB_DEFAULTS.gphr;
+  s.fromLvl = Math.min(99, Math.max(1, Math.floor(Number(s.fromLvl)) || HERB_DEFAULTS.fromLvl));
+  s.toLvl = Math.min(99, Math.max(1, Math.floor(Number(s.toLvl)) || HERB_DEFAULTS.toLvl));
+  s.onlyReachable = Boolean(s.onlyReachable);
+  s.eqChem = Boolean(s.eqChem);
+  s.eqAlch = Boolean(s.eqAlch);
+  s.eqGog = Boolean(s.eqGog);
+  s.sensitivity = Number.isFinite(Number(s.sensitivity)) ? Number(s.sensitivity) : 0;
+  s.actionEff = Number.isFinite(Number(s.actionEff)) ? Number(s.actionEff) : 0;
+  s.sticky = s.sticky !== false;
+  s.tab = ['fetch', 'paste', 'manual'].includes(s.tab) ? s.tab : 'fetch';
+  s.pasteRaw = typeof s.pasteRaw === 'string' ? s.pasteRaw : '';
+  s.potions = Array.isArray(s.potions) ? s.potions : [];
+  s.excludedKeys = Array.isArray(s.excludedKeys) ? s.excludedKeys.map(String) : [];
+  s.sortCol = typeof s.sortCol === 'string' ? s.sortCol : HERB_DEFAULTS.sortCol;
+  s.sortDir = s.sortDir === -1 ? -1 : 1;
+  s.manualRows =
+    Array.isArray(s.manualRows) && s.manualRows.length
+      ? s.manualRows.map((r, i) => ({
+          id: typeof r?.id === 'string' ? r.id : `h${i}`,
+          name: r?.name != null ? String(r.name) : '',
+          gpxp: r?.gpxp != null ? String(r.gpxp) : '',
+          xphr: r?.xphr != null ? String(r.xphr) : '',
+        }))
+      : HERB_DEFAULTS.manualRows.map((r) => ({ ...r }));
+  return s;
+}
 
 function escapeHtml(s) {
   return String(s)
@@ -26,27 +83,72 @@ function escapeHtml(s) {
 }
 
 export function HerblorePage() {
-  const [gphr, setGphr] = usePersistedGphr();
-  const [fromLvl, setFromLvl] = useState(3);
-  const [toLvl, setToLvl] = useState(99);
-  const [onlyReachable, setOnlyReachable] = useState(false);
-  const [eqChem, setEqChem] = useState(false);
-  const [eqAlch, setEqAlch] = useState(false);
-  const [eqGog, setEqGog] = useState(false);
-  const [sensitivity, setSensitivity] = useState(0);
-  const [actionEff, setActionEff] = useState(0);
-  const [sticky, setSticky] = useState(() => localStorage.getItem('hbStickyControls') !== '0');
-  const [tab, setTab] = useState('fetch');
-  const [potions, setPotions] = useState([]);
-  const [excluded, setExcluded] = useState(() => new Set());
-  const [sortCol, setSortCol] = useState('totalH');
-  const [sortDir, setSortDir] = useState(1);
+  const [initial] = useState(() =>
+    normalizeHerblore(loadCalculatorSnapshot(CALCULATOR_STORAGE_KEYS.herblore, HERB_DEFAULTS)),
+  );
+
+  const [gphr, setGphr] = useState(initial.gphr);
+  const [fromLvl, setFromLvl] = useState(initial.fromLvl);
+  const [toLvl, setToLvl] = useState(initial.toLvl);
+  const [onlyReachable, setOnlyReachable] = useState(initial.onlyReachable);
+  const [eqChem, setEqChem] = useState(initial.eqChem);
+  const [eqAlch, setEqAlch] = useState(initial.eqAlch);
+  const [eqGog, setEqGog] = useState(initial.eqGog);
+  const [sensitivity, setSensitivity] = useState(initial.sensitivity);
+  const [actionEff, setActionEff] = useState(initial.actionEff);
+  const [sticky, setSticky] = useState(initial.sticky);
+  const [tab, setTab] = useState(initial.tab);
+  const [potions, setPotions] = useState(initial.potions);
+  const [excluded, setExcluded] = useState(() => new Set(initial.excludedKeys ?? []));
+  const [sortCol, setSortCol] = useState(initial.sortCol);
+  const [sortDir, setSortDir] = useState(initial.sortDir);
+  const [profitTimeCredit, setProfitTimeCredit] = useProfitTimeCredit();
   const [fetchStatus, setFetchStatus] = useState({ type: '', msg: '' });
-  const [pasteRaw, setPasteRaw] = useState('');
+  const [pasteRaw, setPasteRaw] = useState(initial.pasteRaw);
   const [parseStatus, setParseStatus] = useState({ type: '', msg: '' });
   const deferredPaste = useDeferredValue(pasteRaw);
 
-  const [manualRows, setManualRows] = useState([{ id: 'h0', name: '', gpxp: '', xphr: '' }]);
+  const [manualRows, setManualRows] = useState(initial.manualRows);
+
+  useEffect(() => {
+    saveCalculatorSnapshot(CALCULATOR_STORAGE_KEYS.herblore, {
+      gphr,
+      fromLvl,
+      toLvl,
+      onlyReachable,
+      eqChem,
+      eqAlch,
+      eqGog,
+      sensitivity,
+      actionEff,
+      sticky,
+      tab,
+      potions,
+      excludedKeys: [...excluded].sort(),
+      manualRows,
+      pasteRaw,
+      sortCol,
+      sortDir,
+    });
+  }, [
+    gphr,
+    fromLvl,
+    toLvl,
+    onlyReachable,
+    eqChem,
+    eqAlch,
+    eqGog,
+    sensitivity,
+    actionEff,
+    sticky,
+    tab,
+    potions,
+    excluded,
+    manualRows,
+    pasteRaw,
+    sortCol,
+    sortDir,
+  ]);
 
   const xpNeeded = useMemo(() => xpNeededBetween(fromLvl, toLvl), [fromLvl, toLvl]);
   const sensFrac = sensitivity / 100;
@@ -144,7 +246,7 @@ export function HerblorePage() {
       }
 
       const gpxp = wikiPx * (1 + sensFrac);
-      const t = computeMethodTimes({ xpNeeded, gpxp, xphr: adjXphr, gphr });
+      const t = computeMethodTimes({ xpNeeded, gpxp, xphr: adjXphr, gphr, profitTimeCredit });
       /** Wiki-style total GP over the goal: positive = profit, negative = cost */
       const netGp = xpNeeded * gpxp;
 
@@ -187,6 +289,7 @@ export function HerblorePage() {
     excluded,
     sortCol,
     sortDir,
+    profitTimeCredit,
   ]);
 
   const gphrPoints = useMemo(() => defaultGphrPoints(), []);
@@ -199,8 +302,8 @@ export function HerblorePage() {
       gpxp: r.gpxp,
       xphr: r.xphr,
     }));
-    return buildLineChartDatasets(chartRows, xpNeeded, gphrPoints, CHART_PALETTE, '#8ef0a8');
-  }, [rows, xpNeeded, gphrPoints]);
+    return buildLineChartDatasets(chartRows, xpNeeded, gphrPoints, CHART_PALETTE, '#8ef0a8', profitTimeCredit);
+  }, [rows, xpNeeded, gphrPoints, profitTimeCredit]);
 
   function toggleSort(col) {
     if (sortCol === col) setSortDir((d) => -d);
@@ -212,7 +315,6 @@ export function HerblorePage() {
 
   function applySticky(next) {
     setSticky(next);
-    localStorage.setItem('hbStickyControls', next ? '1' : '0');
   }
 
   function excludeRow(pid) {
@@ -283,19 +385,21 @@ export function HerblorePage() {
           <span className="calc-page-title-icon" aria-hidden="true">
             🌿
           </span>{' '}
-          Herblore training optimizer{' '}
+          Herblore Training Optimizer{' '}
           <span className="calc-page-title-icon" aria-hidden="true">
             🌿
           </span>
         </h1>
-        <p>Wiki Making potions table — ranked by total time for your GP/hour and level goal</p>
+        {/* <p>Determine the optimal Herblore training method</p> */}
         <div className="hr" />
       </header>
 
       <div className="container">
         <div className="sign-legend">
-          <strong>GP/XP (effective)</strong> uses the wiki Profit/XP column for your equipment toggles, then the price % slider.
-          Negative = cost per XP; positive = profit per XP. <strong>Net GP</strong> is that rate × XP to goal (positive = you gain GP).
+          <strong>GP/XP (effective)</strong> uses the wiki Profit/XP column for your equipment toggles.
+          Negative = costs GP per XP (gather time applies); positive = profit per XP (no gather time by default). Use{' '}
+          <strong>Credit profit as gather time</strong> in the Gold accumulation rate panel to value profit at your
+          GP/hour.
         </div>
 
         <div className="panel">
@@ -314,6 +418,7 @@ export function HerblorePage() {
               ))}
             </div>
           </div>
+          <ProfitTimeCreditToggle enabled={profitTimeCredit} onChange={setProfitTimeCredit} />
         </div>
 
         <div className="panel">
@@ -526,7 +631,9 @@ export function HerblorePage() {
               </div>
               <div className="cstat">
                 <div className="cslbl">Gather time</div>
-                <div className="csval">{formatHours(best.gatherH)}</div>
+                <div className="csval">
+                  {best.gpxp > 0 && best.gatherH === 0 ? 'none' : formatHours(best.gatherH)}
+                </div>
               </div>
               <div className="cstat">
                 <div className="cslbl">Train time</div>
@@ -671,7 +778,9 @@ export function HerblorePage() {
           </div>
         </div>
 
-        {chartPayload && <TrainingTimeChart {...chartPayload} colors={chartColors} />}
+        {chartPayload && (
+          <TrainingTimeChart {...chartPayload} colors={chartColors} allowNegativeY={profitTimeCredit} />
+        )}
       </div>
     </div>
   );

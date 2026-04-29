@@ -397,6 +397,137 @@ textarea:focus {
   cursor: pointer;
 }
 
+/* Profit-as-time option (inside Gold accumulation rate panel; theme via .theme-*) */
+.profit-credit-block {
+  position: relative;
+  display: flex;
+  gap: 0;
+  margin-top: 1rem;
+  padding: 0.85rem 0.95rem 0.95rem 0.75rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-soft);
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--accent) 12%, var(--panel-2)) 0%,
+    var(--panel-2) 55%,
+    var(--panel) 100%
+  );
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--accent-bright) 14%, transparent);
+}
+.profit-credit-block__accent {
+  flex: 0 0 3px;
+  margin: 0.15rem 0.65rem 0.15rem 0;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent-bright), var(--accent-dim));
+  opacity: 0.85;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.profit-credit-block__body {
+  flex: 1;
+  min-width: 0;
+}
+.profit-credit-block__eyebrow {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-dim);
+  margin-bottom: 0.45rem;
+}
+.profit-credit-block__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  cursor: pointer;
+  user-select: none;
+}
+.profit-credit-block__chk {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  width: 15px;
+  height: 15px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.profit-credit-block__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.profit-credit-block__title {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--accent-bright);
+  line-height: 1.25;
+  text-shadow: 0 0 18px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+.profit-credit-block__hint {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.theme-prayer .profit-credit-block {
+  border-color: rgba(201, 162, 39, 0.28);
+  background: linear-gradient(
+    165deg,
+    rgba(201, 162, 39, 0.1) 0%,
+    rgba(25, 20, 8, 0.92) 42%,
+    rgba(20, 16, 6, 0.98) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(240, 201, 74, 0.12),
+    0 0 24px rgba(201, 162, 39, 0.06);
+}
+.theme-prayer .profit-credit-block__accent {
+  box-shadow: 0 0 12px rgba(240, 201, 74, 0.35);
+}
+.theme-prayer .profit-credit-block__title {
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+}
+
+.theme-herblore .profit-credit-block {
+  border-color: rgba(110, 207, 138, 0.28);
+  background: linear-gradient(
+    165deg,
+    rgba(110, 207, 138, 0.09) 0%,
+    rgba(16, 26, 20, 0.95) 45%,
+    rgba(12, 20, 15, 0.99) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(142, 240, 168, 0.1),
+    0 0 22px rgba(62, 122, 77, 0.08);
+}
+.theme-herblore .profit-credit-block__accent {
+  box-shadow: 0 0 12px rgba(110, 207, 138, 0.35);
+}
+.theme-herblore .profit-credit-block__title {
+  font-family: var(--font-body);
+  letter-spacing: 0.01em;
+}
+
+.theme-training .profit-credit-block {
+  border-color: rgba(74, 156, 197, 0.3);
+  background: linear-gradient(
+    165deg,
+    rgba(74, 156, 197, 0.11) 0%,
+    rgba(17, 22, 32, 0.96) 44%,
+    rgba(14, 18, 26, 0.99) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(122, 196, 232, 0.1),
+    0 0 22px rgba(37, 88, 114, 0.12);
+}
+.theme-training .profit-credit-block__accent {
+  box-shadow: 0 0 14px rgba(74, 156, 197, 0.38);
+}
+
 .mgrid {
   display: grid;
   gap: 0.4rem;

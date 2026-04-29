@@ -20,14 +20,20 @@ export function formatRateK(n) {
 }
 
 export function formatHours(h) {
-  if (h < 1 / 60) return `${Math.round(h * 3600)}s`;
-  if (h < 1) {
-    const m = Math.round(h * 60);
-    return `${m}m`;
+  if (h === 0) return '0s';
+  const neg = h < 0;
+  const a = Math.abs(h);
+  let s;
+  if (a < 1 / 60) s = `${Math.round(a * 3600)}s`;
+  else if (a < 1) {
+    const m = Math.round(a * 60);
+    s = `${m}m`;
+  } else {
+    const hh = Math.floor(a);
+    const mm = Math.round((a - hh) * 60);
+    s = mm > 0 ? `${hh}h ${mm}m` : `${hh}h`;
   }
-  const hh = Math.floor(h);
-  const mm = Math.round((h - hh) * 60);
-  return mm > 0 ? `${hh}h ${mm}m` : `${hh}h`;
+  return neg ? `\u2212${s}` : s;
 }
 
 /** Axis label for GP/hr */
