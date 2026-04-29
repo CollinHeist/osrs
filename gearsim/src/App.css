@@ -1226,3 +1226,49 @@ table.price-override-table {
   max-width: 1100px;
   margin: 0 auto;
 }
+
+.training-kv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.65rem 0.9rem;
+}
+
+.training-kv-grid > div {
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid rgba(120, 132, 180, 0.2);
+  background: rgba(8, 10, 18, 0.35);
+}
+
+.training-kv-label {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.training-kv-value {
+  font-family: var(--mono);
+  color: var(--accent);
+  font-size: 0.95rem;
+}
+
+.training-plan-table th:first-child,
+.training-plan-table td:first-child {
+  text-align: left;
+}
+
+.training-stat-cell {
+  font-weight: 600;
+}
+
+.training-active-skill {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.training-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}

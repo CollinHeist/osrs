@@ -27,6 +27,7 @@ import { sampleDpsForLoadout } from "./engine/simulate.js";
 import { MonsterSearch } from "./components/MonsterSearch.jsx";
 import { ItemSlotPicker } from "./components/ItemSlotPicker.jsx";
 import { DpsDistributionChart } from "./components/DpsDistributionChart.jsx";
+import { StatTrainingPlanner } from "./components/StatTrainingPlanner.jsx";
 
 const DEFAULT_EQUIP = {
   head: "3751",
@@ -46,6 +47,7 @@ const TABS = [
   { id: "loadout", label: "Loadout" },
   { id: "target", label: "Target" },
   { id: "results", label: "Results" },
+  { id: "training", label: "Training plan" },
   { id: "equipment", label: "Equipment" },
 ];
 
@@ -198,6 +200,16 @@ export default function App() {
     }
     return o;
   }, [itemsCombatCatalog]);
+
+  const allItemsBySlot = useMemo(() => {
+    /** @type {Record<string, any[]>} */
+    const o = Object.fromEntries(SLOTS.map((s) => [s, []]));
+    for (const it of data.items) {
+      const sl = it?.slot;
+      if (o[sl]) o[sl].push(it);
+    }
+    return o;
+  }, [data.items]);
 
   const topMeleeBySlot = useMemo(
     () => precomputeTopMeleeBySlot(itemsCombatCatalog, SLOTS, 40),
@@ -866,7 +878,7 @@ export default function App() {
         </div>
       </header>
 
-      {baseSnap && (
+      {baseSnap && tab !== "training" && (
         <section className="live-strip glass" aria-live="polite">
           <div>
             <div className="metric-label">DPS (loadout)</div>
@@ -1697,6 +1709,15 @@ export default function App() {
             />
           </section>
         </div>
+      )}
+
+      {tab === "training" && (
+        <StatTrainingPlanner
+          monsters={data.monsters}
+          itemsById={itemsById}
+          itemsBySlot={allItemsBySlot}
+          defaultEquip={DEFAULT_EQUIP}
+        />
       )}
 
       <footer className="footer-note">
