@@ -60,7 +60,17 @@ export default function App() {
   );
 
   const segmentResults = useMemo(() => computeResults(filledSegments, xpMultiplier), [filledSegments, xpMultiplier]);
-  const chartData      = useMemo(() => computeChartData(filledSegments, maxPlanLevel, xpMultiplier), [filledSegments, maxPlanLevel, xpMultiplier]);
+
+  const chartData = useMemo(
+    () => computeChartData(filledSegments, maxPlanLevel, xpMultiplier),
+    [filledSegments, maxPlanLevel, xpMultiplier],
+  );
+
+  /** Only show chart data from the player's starting level onwards. */
+  const visibleChartData = useMemo(
+    () => chartData.filter(d => d.level >= startLevel),
+    [chartData, startLevel],
+  );
 
   const totalLogs   = segmentResults.reduce((s, r) => s + r.actions, 0);
   const finalChance = segmentResults.length > 0
@@ -135,50 +145,51 @@ export default function App() {
 
       {/* Main content */}
       <main style={{
-        maxWidth: 1320,
-        margin:   "0 auto",
-        padding:  "24px 2rem 4rem",
-        display:  "grid",
-        gridTemplateColumns: "minmax(320px, 380px) 1fr",
-        gridTemplateRows:    "auto",
-        gap:      20,
-        alignItems: "start",
+        maxWidth:      1320,
+        margin:        "0 auto",
+        padding:       "24px 2rem 4rem",
+        display:       "flex",
+        flexDirection: "column",
+        gap:           20,
       }}>
-        {/* Left: plan editor + bonuses */}
-        <div style={{ gridColumn: 1, gridRow: "1 / 4", display: "flex", flexDirection: "column", gap: 16 }}>
-          <SegmentEditor
-            segments={segments}
-            startLevel={startLevel}
-            onSegmentsChange={setSegments}
-            onStartLevelChange={setStartLevel}
-          />
-          <BonusesPanel bonuses={bonuses} onChange={setBonuses} />
+        {/* Two-column section: left panel + right panel side-by-side */}
+        <div style={{
+          display:             "grid",
+          gridTemplateColumns: "minmax(320px, 380px) 1fr",
+          gap:                 20,
+          alignItems:          "start",
+        }}>
+          {/* Left column: plan editor + bonuses */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <SegmentEditor
+              segments={segments}
+              startLevel={startLevel}
+              onSegmentsChange={setSegments}
+              onStartLevelChange={setStartLevel}
+            />
+            <BonusesPanel bonuses={bonuses} onChange={setBonuses} />
+          </div>
+
+          {/* Right column: summary stats + chart */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <SummaryStats
+              totalLogs={totalLogs}
+              finalChance={finalChance}
+              segmentResults={segmentResults}
+              chartData={visibleChartData}
+              xpMultiplier={xpMultiplier}
+            />
+            <ProbabilityChart
+              chartData={visibleChartData}
+              filledSegments={filledSegments}
+              maxLevel={maxPlanLevel}
+              startLevel={startLevel}
+            />
+          </div>
         </div>
 
-        {/* Right top: summary stats */}
-        <div style={{ gridColumn: 2, gridRow: 1 }}>
-          <SummaryStats
-            totalLogs={totalLogs}
-            finalChance={finalChance}
-            segmentResults={segmentResults}
-            chartData={chartData}
-            xpMultiplier={xpMultiplier}
-          />
-        </div>
-
-        {/* Right middle: chart */}
-        <div style={{ gridColumn: 2, gridRow: 2 }}>
-          <ProbabilityChart
-            chartData={chartData}
-            filledSegments={filledSegments}
-            maxLevel={maxPlanLevel}
-          />
-        </div>
-
-        {/* Full-width: breakdown table */}
-        <div style={{ gridColumn: "1 / -1", gridRow: 3 }}>
-          <BreakdownTable results={segmentResults} xpMultiplier={xpMultiplier} />
-        </div>
+        {/* Full-width breakdown table below both columns */}
+        <BreakdownTable results={segmentResults} xpMultiplier={xpMultiplier} />
       </main>
 
       {/* Footer */}

@@ -51,7 +51,7 @@ function CustomTooltip({ active, payload, label }) {
   );
 }
 
-export default function ProbabilityChart({ chartData, filledSegments, maxLevel = 99 }) {
+export default function ProbabilityChart({ chartData, filledSegments, maxLevel = 99, startLevel = 1 }) {
   const hasData = chartData.some(d => d.chance > 0);
 
   const gradientId = "beaverGradient";
@@ -158,8 +158,8 @@ export default function ProbabilityChart({ chartData, filledSegments, maxLevel =
             <XAxis
               dataKey="level"
               type="number"
-              domain={[1, maxLevel]}
-              tickCount={Math.min(10, maxLevel)}
+              domain={[startLevel, maxLevel]}
+              tickCount={Math.min(10, maxLevel - startLevel + 1)}
               tick={{ fill: C.muted, fontSize: 11, fontFamily: "'Source Code Pro', monospace" }}
               tickLine={false}
               axisLine={{ stroke: C.border }}

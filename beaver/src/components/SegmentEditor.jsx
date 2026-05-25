@@ -56,17 +56,13 @@ export default function SegmentEditor({ segments, startLevel, onSegmentsChange, 
   };
 
   const addSegment = () => {
-    const lastIdx = segments.length - 1;
-    const lastSeg = segments[lastIdx];
-    const from    = fromLevelOf(lastIdx);
-    const splitAt = Math.floor((from + lastSeg.toLevel) / 2);
-    if (splitAt <= from) return;
+    const last  = segments[segments.length - 1];
+    const newFrom = last.toLevel;
+    if (newFrom >= MAX_VIRTUAL_LEVEL) return;
+    const newTo = Math.min(newFrom + 10, MAX_VIRTUAL_LEVEL);
     const newId = `s_${++nextId.current}`;
-    onSegmentsChange([
-      ...segments.slice(0, lastIdx),
-      { ...lastSeg, toLevel: splitAt },
-      { id: newId, treeId: lastSeg.treeId, toLevel: lastSeg.toLevel },
-    ]);
+    // Append after current last segment — never mutate existing segments
+    onSegmentsChange([...segments, { id: newId, treeId: last.treeId, toLevel: newTo }]);
   };
 
   const removeSegment = (idx) => {
@@ -227,24 +223,32 @@ export default function SegmentEditor({ segments, startLevel, onSegmentsChange, 
         </div>
 
         <div style={{ padding: "10px 12px", borderTop: `1px solid ${C.border}` }}>
-          <button
-            onClick={addSegment}
-            style={{
-              width:        "100%",
-              padding:      "7px",
-              background:   "none",
-              border:       `1px dashed ${C.accentDim}`,
-              borderRadius: 7,
-              color:        C.accent,
-              cursor:       "pointer",
-              fontSize:     12,
-              fontWeight:   500,
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = "#201408"; e.currentTarget.style.borderColor = C.accent; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = C.accentDim; }}
-          >
-            + Add Segment
-          </button>
+          {(() => {
+            const atCeiling = segments[segments.length - 1]?.toLevel >= MAX_VIRTUAL_LEVEL;
+            return (
+              <button
+                onClick={addSegment}
+                disabled={atCeiling}
+                title={atCeiling ? `Plan already extends to virtual level ${MAX_VIRTUAL_LEVEL}` : "Add a segment after the current plan"}
+                style={{
+                  width:        "100%",
+                  padding:      "7px",
+                  background:   "none",
+                  border:       `1px dashed ${atCeiling ? C.border : C.accentDim}`,
+                  borderRadius: 7,
+                  color:        atCeiling ? C.muted : C.accent,
+                  cursor:       atCeiling ? "not-allowed" : "pointer",
+                  fontSize:     12,
+                  fontWeight:   500,
+                  opacity:      atCeiling ? 0.5 : 1,
+                }}
+                onMouseEnter={e => { if (!atCeiling) { e.currentTarget.style.background = "#201408"; e.currentTarget.style.borderColor = C.accent; } }}
+                onMouseLeave={e => { if (!atCeiling) { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = C.accentDim; } }}
+              >
+                + Add Segment
+              </button>
+            );
+          })()}
         </div>
       </div>
 
