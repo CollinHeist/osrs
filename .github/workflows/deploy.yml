@@ -41,6 +41,7 @@ jobs:
             tangleroot/package-lock.json
             beaver/package-lock.json
             gearsim/package-lock.json
+            slayer/package-lock.json
 
       - name: Install dependencies (tangleroot)
         working-directory: tangleroot
@@ -66,9 +67,20 @@ jobs:
         working-directory: gearsim
         run: npm run build
 
+      - name: Copy game data to slayer
+        run: mkdir -p slayer/public/data && cp -r gearsim/public/data/. slayer/public/data/
+
+      - name: Install dependencies (slayer)
+        working-directory: slayer
+        run: npm ci
+
+      - name: Build (slayer)
+        working-directory: slayer
+        run: npm run build
+
       - name: Stage Pages artifact
         run: |
-          mkdir -p _site/herblore _site/prayer _site/gear _site/tangleroot _site/training _site/beaver
+          mkdir -p _site/herblore _site/prayer _site/gear _site/tangleroot _site/training _site/beaver _site/slayer
           cp index.html _site/index.html
           cp herblore/index.html _site/herblore/index.html
           cp prayer/index.html _site/prayer/index.html
@@ -77,6 +89,7 @@ jobs:
           cp -R beaver/dist/. _site/beaver/
           cp -R gearsim/dist/. _site/gear/
           cp gear/legacy.html _site/gear/legacy.html
+          cp -R slayer/dist/. _site/slayer/
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
