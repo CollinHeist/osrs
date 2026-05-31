@@ -6,6 +6,7 @@ import {
 } from "recharts";
 import {
   HARVEST_BY_ID,
+  PATCH_TYPE_ORDER,
   DEFAULT_HARVEST_ID,
   TYPICAL_UNTRACKED_ENTRIES,
   harvestOptionsByPatchType,
@@ -531,6 +532,93 @@ function computeLogCumulativeMeta(days) {
   return { cumById, milestoneById };
 }
 
+// ─── Harvest summary tab ──────────────────────────────────────────────────────
+function HarvestSummaryTab({ days }) {
+  const trackedDays = days.filter(d => !d.approximate && d.entries?.length);
+
+  if (trackedDays.length === 0) {
+    return (
+      <div style={S.empty}>
+        <div style={{ fontSize: "2rem", marginBottom: "0.65rem" }}>☘</div>
+        No tracked harvests yet.<br />
+        Log at least one day with harvest lines to see a summary.
+      </div>
+    );
+  }
+
+  // Aggregate total rolls per harvestId across all tracked days
+  const totals = new Map();
+  for (const day of trackedDays) {
+    for (const entry of day.entries) {
+      totals.set(entry.harvestId, (totals.get(entry.harvestId) ?? 0) + entry.qty);
+    }
+  }
+
+  // Group by patch type, preserving PATCH_TYPE_ORDER
+  const byPatchType = new Map();
+  for (const [harvestId, qty] of totals) {
+    const h = HARVEST_BY_ID[harvestId];
+    if (!h) continue;
+    const pt = h.patchType;
+    if (!byPatchType.has(pt)) byPatchType.set(pt, []);
+    byPatchType.get(pt).push({ harvestId, produce: h.produce, qty });
+  }
+
+  // Sort each group by qty descending
+  for (const entries of byPatchType.values()) {
+    entries.sort((a, b) => b.qty - a.qty);
+  }
+
+  // Sort patch types by PATCH_TYPE_ORDER, then alphabetically for unknowns
+  const sortedPatchTypes = [...byPatchType.keys()].sort((a, b) => {
+    const ai = PATCH_TYPE_ORDER.indexOf(a);
+    const bi = PATCH_TYPE_ORDER.indexOf(b);
+    if (ai === -1 && bi === -1) return a.localeCompare(b);
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
+
+  const grandTotal = [...totals.values()].reduce((s, v) => s + v, 0);
+
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "0.75rem" }}>
+        <p style={{ ...S.secLabel, margin: 0 }}>Items harvested — {trackedDays.length} tracked day{trackedDays.length !== 1 ? "s" : ""}</p>
+        <span style={{ fontSize: "0.62rem", color: C.muted }}>{grandTotal.toLocaleString()} total rolls</span>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "0.65rem" }}>
+        {sortedPatchTypes.map(pt => {
+          const items = byPatchType.get(pt);
+          const groupTotal = items.reduce((s, e) => s + e.qty, 0);
+          const maxQty = items[0]?.qty ?? 1;
+
+          return (
+            <div key={pt} style={S.card}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "0.55rem" }}>
+                <span style={{ fontSize: "0.6rem", letterSpacing: "0.1em", color: C.gold, textTransform: "uppercase" }}>{pt}</span>
+                <span style={{ fontSize: "0.58rem", color: C.muted }}>{groupTotal.toLocaleString()} rolls</span>
+              </div>
+              {items.map(({ harvestId, produce, qty }) => (
+                <div key={harvestId} style={{ marginBottom: "0.4rem" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.68rem", marginBottom: "0.18rem" }}>
+                    <span style={{ color: C.text }}>{produce}</span>
+                    <span style={{ color: C.accent, fontWeight: 600 }}>{qty.toLocaleString()}</span>
+                  </div>
+                  <div style={S.miniBar}>
+                    <div style={{ height: "100%", width: `${(qty / maxQty) * 100}%`, background: C.accentDim, borderRadius: "3px" }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ─── Log tab ──────────────────────────────────────────────────────────────────
 function LogTab({ days, removeDay, clearAll }) {
   const { cumById, milestoneById } = computeLogCumulativeMeta(days);
@@ -1039,15 +1127,16 @@ export default function App() {
 
           {/* Tabs */}
           <div style={S.tabBar}>
-            {[{id:"log",label:"Log"},{id:"charts",label:"Charts"}].map(t => (
+            {[{id:"log",label:"Log"},{id:"charts",label:"Charts"},{id:"summary",label:"Summary"}].map(t => (
               <button key={t.id} style={{ ...S.tab, ...(activeTab===t.id ? S.tabActive : {}) }} onClick={() => setActiveTab(t.id)}>
                 {t.label}
               </button>
             ))}
           </div>
 
-          {activeTab === "log"    && <LogTab days={days} removeDay={removeDay} clearAll={clearAll} avgChance={avgChance} />}
-          {activeTab === "charts" && <ChartsTab days={days} />}
+          {activeTab === "log"     && <LogTab days={days} removeDay={removeDay} clearAll={clearAll} avgChance={avgChance} />}
+          {activeTab === "charts"  && <ChartsTab days={days} />}
+          {activeTab === "summary" && <HarvestSummaryTab days={days} />}
         </div>
       </div>
 
