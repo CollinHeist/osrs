@@ -50,5 +50,23 @@ export function useSlayerTasks() {
     setTasks((prev) => prev.filter((t) => t.id !== id));
   }
 
-  return { tasks, addTask, updateTask, deleteTask };
+  /**
+   * @param {object[]} incoming Parsed tasks from a JSON file.
+   * @param {"replace" | "merge"} mode
+   */
+  function importTasks(incoming, mode) {
+    if (mode === "replace") {
+      setTasks(incoming);
+    } else {
+      setTasks((prev) => {
+        const existingIds = new Set(prev.map((t) => t.id));
+        const toAdd = incoming.map((t) =>
+          existingIds.has(t.id) ? { ...t, id: crypto.randomUUID() } : t
+        );
+        return [...prev, ...toAdd];
+      });
+    }
+  }
+
+  return { tasks, addTask, updateTask, deleteTask, importTasks };
 }

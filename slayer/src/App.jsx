@@ -9,6 +9,7 @@ import { TaskDetail } from "./components/TaskDetail.jsx";
 import { TaskForm } from "./components/TaskForm.jsx";
 import { AnalyticsDashboard } from "./components/AnalyticsDashboard.jsx";
 import { XpGpScatterChart } from "./components/XpGpScatterChart.jsx";
+import { ImportExport } from "./components/ImportExport.jsx";
 
 const TABS = [
   { id: "tasks", label: "Tasks" },
@@ -17,7 +18,7 @@ const TABS = [
 
 export default function App() {
   const gameData = useGameData();
-  const { tasks, addTask, updateTask, deleteTask } = useSlayerTasks();
+  const { tasks, addTask, updateTask, deleteTask, importTasks } = useSlayerTasks();
 
   const [tab, setTab] = useState("tasks");
   const [selectedId, setSelectedId] = useState(null);
@@ -135,6 +136,7 @@ export default function App() {
               <button className="btn-primary" onClick={openAdd}>
                 + Log Task
               </button>
+              <ImportExport tasks={tasks} onImport={importTasks} />
             </div>
             <TaskList
               tasks={enrichedTasks}
