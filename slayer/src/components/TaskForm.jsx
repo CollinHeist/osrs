@@ -4,6 +4,7 @@ import { getFlattenedLootRows } from "../lib/loot.js";
 import { fmtGp, fmtInt } from "../lib/format.js";
 import { MonsterSearch } from "./MonsterSearch.jsx";
 import { LootTable } from "./LootTable.jsx";
+import { PotionList } from "./PotionList.jsx";
 
 function initDraft(initialTask) {
   if (!initialTask) {
@@ -20,6 +21,7 @@ function initDraft(initialTask) {
       inventoryNotes: "",
       useCannon: false,
       cannonballsPerHour: "",
+      potions: [],
       loadoutLinks: [],
       lootMinGpPerItem: 1000,
       lootPick: {},
@@ -40,6 +42,7 @@ function initDraft(initialTask) {
     inventoryNotes: initialTask.inventoryNotes ?? "",
     useCannon: initialTask.useCannon ?? false,
     cannonballsPerHour: String(initialTask.cannonballsPerHour ?? ""),
+    potions: initialTask.potions ?? [],
     loadoutLinks: initialTask.loadoutLinks ?? [],
     lootMinGpPerItem: initialTask.lootMinGpPerItem ?? 1000,
     lootPick: initialTask.lootPick ?? {},
@@ -129,6 +132,7 @@ export function TaskForm({ initialTask, gameData, onSave, onCancel }) {
       inventoryNotes: draft.inventoryNotes,
       useCannon: draft.useCannon,
       cannonballsPerHour: parseFloat(draft.cannonballsPerHour) || 0,
+      potions: draft.potions,
       loadoutLinks: draft.loadoutLinks,
       lootMinGpPerItem: draft.lootMinGpPerItem,
       lootPick: draft.lootPick,
@@ -358,6 +362,12 @@ export function TaskForm({ initialTask, gameData, onSave, onCancel }) {
               onChange={(e) => set("inventoryNotes", e.target.value)}
             />
           </div>
+
+          {/* Potions */}
+          <PotionList
+            potions={draft.potions}
+            onChange={(potions) => set("potions", potions)}
+          />
 
           {/* Cannon */}
           <div className="cannon-row" style={{ marginTop: "0.75rem" }}>

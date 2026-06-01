@@ -1,5 +1,6 @@
 import { getFlattenedLootRows } from "./loot.js";
 import { CANNONBALL_GP } from "./constants.js";
+import { potionGpPerHour } from "./potion.js";
 
 /**
  * Determine if a loot row should be counted based on the task's loot configuration.
@@ -58,8 +59,16 @@ export function computeTaskMetrics(task, priceById, lootData) {
       ? (task.cannonballsPerHour || 0) * CANNONBALL_GP
       : 0;
 
+  const potionCostPerHour = (task.potions || []).reduce(
+    (sum, p) => sum + potionGpPerHour(p),
+    0
+  );
+
   const gpPerHour =
-    lootEvPerHour - (task.inventoryCostPerHour || 0) - cannonCostPerHour;
+    lootEvPerHour -
+    (task.inventoryCostPerHour || 0) -
+    cannonCostPerHour -
+    potionCostPerHour;
   const totalGp = gpPerHour * timeHours;
   const totalSlayerXp = (task.slayerXpPerHour || 0) * timeHours;
   const totalCombatXp = (task.combatXpPerHour || 0) * timeHours;
@@ -74,6 +83,7 @@ export function computeTaskMetrics(task, priceById, lootData) {
     totalCombatXp,
     flatLoot,
     cannonCostPerHour,
+    potionCostPerHour,
     usingManualGp: manualGpPerKill > 0,
   };
 }

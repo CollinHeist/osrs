@@ -1381,6 +1381,98 @@ tr.loot-table-group td {
   padding: 0.15em 0.45em;
 }
 
+/* ── Potion list ── */
+.potion-list {
+  margin-top: 0.85rem;
+}
+
+.potion-list-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.potion-list-label {
+  flex: 1;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.potion-list-total {
+  font-size: 0.78rem;
+  font-family: var(--mono);
+}
+
+.potion-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.5rem 0.6rem;
+  background: rgba(0, 0, 0, 0.15);
+  /* prevent any child from punching outside the box */
+  overflow: hidden;
+}
+
+/* Shared grid layout for both the header and data rows */
+.potion-header-row,
+.potion-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 28px;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.potion-header-row {
+  padding-bottom: 0.3rem;
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* Nudge header labels to align with the text inside each input */
+.potion-header-row span {
+  padding-left: 0.45rem;
+}
+
+.potion-entry input {
+  padding: 0.3rem 0.45rem;
+  font-size: 0.8rem;
+  border-radius: 7px;
+  min-width: 0; /* allow shrinking inside grid cell */
+}
+
+/* GP/hr computed value — constrain and clip if too wide */
+.potion-entry .potion-gphr {
+  font-size: 0.78rem;
+  font-family: var(--mono);
+  text-align: right;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Potion detail in TaskDetail ── */
+.potion-detail-list {
+  margin-top: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.kv-row-total {
+  margin-top: 0.25rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--border);
+}
+
 /* ── task-list-empty ── */
 .task-list-empty {
   padding: 2.5rem 1.5rem;

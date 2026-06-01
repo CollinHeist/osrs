@@ -2,6 +2,7 @@ import { fmtInt, fmtGp, fmtHours } from "../lib/format.js";
 import { RECOMMENDATION_LABELS } from "../lib/constants.js";
 import { LootTable } from "./LootTable.jsx";
 import { EditIcon, TrashIcon } from "./Icons.jsx";
+import { potionGpPerHour } from "../lib/potion.js";
 
 /**
  * @param {object} props
@@ -137,6 +138,14 @@ export function TaskDetail({ task, gameData, onUpdate, onEdit, onDelete, onClose
               </div>
             </div>
           )}
+          {metrics.potionCostPerHour > 0 && (
+            <div className="metric-cell">
+              <div className="metric-label">Potion cost/hr</div>
+              <div className="metric-val negative-num">
+                {fmtGp(metrics.potionCostPerHour)}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -191,13 +200,38 @@ export function TaskDetail({ task, gameData, onUpdate, onEdit, onDelete, onClose
         </div>
       )}
 
-      {(task.inventoryCostPerHour > 0 || task.inventoryNotes) && (
+      {(task.inventoryCostPerHour > 0 ||
+        task.inventoryNotes ||
+        task.potions?.length > 0) && (
         <div className="panel" style={{ marginTop: "1rem" }}>
           <h2>Inventory</h2>
           {task.inventoryCostPerHour > 0 && (
             <div className="kv-row">
-              <span className="kv-label">Supply cost/hr</span>
+              <span className="kv-label">Other supply cost/hr</span>
               <span className="negative-num">{fmtGp(task.inventoryCostPerHour)}</span>
+            </div>
+          )}
+          {task.potions?.length > 0 && (
+            <div className="potion-detail-list">
+              {task.potions.map((p, i) => {
+                const gphr = potionGpPerHour(p);
+                return (
+                  <div key={p.id ?? i} className="kv-row">
+                    <span className="kv-label">{p.name || "Potion"}</span>
+                    <span className="negative-num">
+                      {gphr > 0 ? fmtGp(gphr) : "—"}/hr
+                    </span>
+                  </div>
+                );
+              })}
+              {metrics?.potionCostPerHour > 0 && (
+                <div className="kv-row kv-row-total">
+                  <span className="kv-label">Potions total</span>
+                  <span className="negative-num">
+                    {fmtGp(metrics.potionCostPerHour)}/hr
+                  </span>
+                </div>
+              )}
             </div>
           )}
           {task.inventoryNotes && (
