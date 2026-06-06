@@ -622,6 +622,16 @@ function HarvestSummaryTab({ days }) {
 // ─── Log tab ──────────────────────────────────────────────────────────────────
 function LogTab({ days, removeDay, clearAll }) {
   const { cumById, milestoneById } = computeLogCumulativeMeta(days);
+  const [expandedIds, setExpandedIds] = useState(new Set());
+
+  function toggleExpand(id) {
+    setExpandedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
 
   return (
     <div>
@@ -654,6 +664,9 @@ function LogTab({ days, removeDay, clearAll }) {
             {[...days].sort((a, b) => b.date.localeCompare(a.date)).flatMap(d => {
               const cum = cumById.get(d.id);
               const crossed = milestoneById.get(d.id);
+              const hasEntries = !d.approximate && d.entries?.length > 0;
+              const isExpanded = expandedIds.has(d.id);
+
               const rows = [
                 <tr key={d.id}>
                   <td style={S.td}>{d.date}</td>
@@ -661,7 +674,18 @@ function LogTab({ days, removeDay, clearAll }) {
                   <td style={{ ...S.td, color:d.approximate ? C.gold : C.muted, fontSize:"0.65rem" }}>
                     {d.approximate ? "≈ approx" : "tracked"}
                   </td>
-                  <td style={{ ...S.td, color:C.muted, fontSize:"0.62rem", maxWidth:"220px", wordBreak:"break-word" }}>{summarizeDay(d)}</td>
+                  <td
+                    style={{ ...S.td, color:C.muted, fontSize:"0.62rem", maxWidth:"220px", wordBreak:"break-word", cursor: hasEntries ? "pointer" : "default" }}
+                    onClick={() => hasEntries && toggleExpand(d.id)}
+                    title={hasEntries ? (isExpanded ? "Collapse harvests" : "Expand harvests") : undefined}
+                  >
+                    {hasEntries && (
+                      <span style={{ color: C.accentDim, marginRight: "0.3rem", fontSize: "0.65rem", userSelect: "none" }}>
+                        {isExpanded ? "▾" : "▸"}
+                      </span>
+                    )}
+                    {summarizeDay(d)}
+                  </td>
                   <td style={S.td}><span style={{ color:C.accent, fontWeight:600 }}>{fmtPct(d.chance,3)}</span></td>
                   <td style={S.td}>
                     <div style={{ display:"flex", alignItems:"center", gap:"7px" }}>
@@ -674,6 +698,28 @@ function LogTab({ days, removeDay, clearAll }) {
                   <td style={S.td}><button style={S.btnSecondary} onClick={() => removeDay(d.id)}>✕</button></td>
                 </tr>,
               ];
+
+              if (isExpanded && hasEntries) {
+                rows.push(
+                  <tr key={`${d.id}-expand`}>
+                    <td colSpan={7} style={{ padding: "0 0.65rem 0.6rem 2rem", borderBottom: `1px solid ${C.border}`, background: C.surface }}>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", paddingTop: "0.4rem" }}>
+                        {d.entries.map(e => {
+                          const h = HARVEST_BY_ID[e.harvestId];
+                          return (
+                            <span key={e.harvestId} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: "3px", padding: "0.18rem 0.5rem", fontSize: "0.62rem", display: "inline-flex", gap: "0.3rem", alignItems: "baseline" }}>
+                              <span style={{ color: C.muted, fontSize: "0.55rem" }}>{h?.patchType ?? "?"}</span>
+                              <span style={{ color: C.text }}>{h?.produce ?? e.harvestId}</span>
+                              <span style={{ color: C.accent }}>×{e.qty}</span>
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </td>
+                  </tr>,
+                );
+              }
+
               if (crossed?.length) {
                 const label = crossed.map(b => fmtPct(b, 0)).join(" · ");
                 rows.push(
@@ -765,7 +811,7 @@ export default function App() {
     const delta = mergeEntryLists(deltaEntries, []);
     if (!delta.length) {
       showToast("Add at least one harvest line with quantity > 0", true);
-      return;
+      return false;
     }
     let toastMsg;
     setDays(prev => {
@@ -796,10 +842,12 @@ export default function App() {
         .sort((a, b) => a.date.localeCompare(b.date));
     });
     showToast(toastMsg);
+    return true;
   }
 
   function addDay() {
-    addOrMergeTrackedDay(editorMerged, "");
+    const ok = addOrMergeTrackedDay(editorMerged, "");
+    if (ok) setEntries(emptyEntries());
   }
 
   function logSelectedRun() {
