@@ -106,20 +106,34 @@ function percentileRank(arr, value) {
  * @param {object[]} allTasks
  * @param {Record<string, number>} priceById
  * @param {any[]} lootData
+ * @param {object} [settings]
  * @returns {{ type: string, reason: string }}
  */
-export function getTaskRecommendation(task, allTasks, priceById, lootData) {
+export function getTaskRecommendation(task, allTasks, priceById, lootData, settings = {}) {
+  const {
+    skipThreshold = 25,
+    extendThreshold = 70,
+    speedupThreshold = 40,
+    longTaskHours = 2,
+    xpWeight = 0.6,
+    gpWeight = 0.4,
+    absoluteMinXpHr = 20000,
+    absoluteGoodXpHr = 60000,
+    absoluteMinGpHr = -50000,
+    absoluteGoodGpHr = 200000,
+  } = settings;
+
   const myMetrics = computeTaskMetrics(task, priceById, lootData);
   const { timeHours } = myMetrics;
   const myXpHr = task.slayerXpPerHour || 0;
   const myGpHr = myMetrics.gpPerHour;
-  const isLong = timeHours > 2;
+  const isLong = timeHours > longTaskHours;
 
   if (allTasks.length < 2) {
-    const isLowXp = myXpHr < 20000;
-    const isNegativeGp = myGpHr < -50000;
-    const isHighXp = myXpHr >= 60000;
-    const isGoodGp = myGpHr >= 200000;
+    const isLowXp = myXpHr < absoluteMinXpHr;
+    const isNegativeGp = myGpHr < absoluteMinGpHr;
+    const isHighXp = myXpHr >= absoluteGoodXpHr;
+    const isGoodGp = myGpHr >= absoluteGoodGpHr;
 
     if (isLowXp && isNegativeGp) {
       return { type: "skip", reason: "Low XP/hr and negative GP/hr." };
@@ -130,7 +144,7 @@ export function getTaskRecommendation(task, allTasks, priceById, lootData) {
     if (isHighXp || isGoodGp) {
       return { type: "extend", reason: "Excellent rates — worth extending." };
     }
-    if (isLong && myXpHr >= 20000) {
+    if (isLong && myXpHr >= absoluteMinXpHr) {
       return { type: "speedup", reason: "Long task with decent rates — consider using cannon/burst." };
     }
     return { type: "keep", reason: "Log more tasks for a full comparison." };
@@ -142,27 +156,27 @@ export function getTaskRecommendation(task, allTasks, priceById, lootData) {
 
   const xpPct = percentileRank(allXpHrs, myXpHr);
   const gpPct = percentileRank(allGpHrs, myGpHr);
-  const composite = xpPct * 0.6 + gpPct * 0.4;
+  const composite = xpPct * xpWeight + gpPct * gpWeight;
 
-  if (composite < 25) {
+  if (composite < skipThreshold) {
     return {
       type: "skip",
       reason: `Bottom ${Math.round(100 - composite)}% combined score — consider skipping this task.`,
     };
   }
-  if (composite >= 70 && isLong) {
+  if (composite >= extendThreshold && isLong) {
     return {
       type: "extend-speedup",
       reason: `Top ${Math.round(composite)}% combined score with a ${fmtH(timeHours)} task — extend and speed up.`,
     };
   }
-  if (composite >= 70) {
+  if (composite >= extendThreshold) {
     return {
       type: "extend",
       reason: `Top ${Math.round(composite)}% combined score — worth extending.`,
     };
   }
-  if (composite >= 40 && isLong) {
+  if (composite >= speedupThreshold && isLong) {
     return {
       type: "speedup",
       reason: `${fmtH(timeHours)} task with decent rates (${Math.round(composite)}th pct) — consider cannon or burst.`,
@@ -188,10 +202,12 @@ function fmtH(h) {
  * @param {object[]} tasks
  * @param {Record<string, number>} priceById
  * @param {any[]} lootData
+ * @param {object} [settings]
  * @returns {Array<{ task: object, metrics: object, composite: number }>}
  */
-export function rankTasks(tasks, priceById, lootData) {
+export function rankTasks(tasks, priceById, lootData, settings = {}) {
   if (!tasks.length) return [];
+  const { xpWeight = 0.6, gpWeight = 0.4 } = settings;
   const metricsArr = tasks.map((t) => computeTaskMetrics(t, priceById, lootData));
   const allXpHrs = tasks.map((t) => t.slayerXpPerHour || 0);
   const allGpHrs = metricsArr.map((m) => m.gpPerHour);
@@ -200,7 +216,7 @@ export function rankTasks(tasks, priceById, lootData) {
     .map((t, i) => {
       const xpPct = percentileRank(allXpHrs, allXpHrs[i]);
       const gpPct = percentileRank(allGpHrs, allGpHrs[i]);
-      const composite = xpPct * 0.6 + gpPct * 0.4;
+      const composite = xpPct * xpWeight + gpPct * gpWeight;
       return { task: t, metrics: metricsArr[i], composite };
     })
     .sort((a, b) => b.composite - a.composite);

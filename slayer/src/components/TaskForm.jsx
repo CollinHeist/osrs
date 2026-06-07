@@ -55,10 +55,11 @@ function initDraft(initialTask) {
  * @param {object} props
  * @param {object | null} props.initialTask
  * @param {{ monsters: any[], loot: any[], priceById: Record<string, number> }} props.gameData
+ * @param {object[]} props.globalPotions
  * @param {(data: object) => void} props.onSave
  * @param {() => void} props.onCancel
  */
-export function TaskForm({ initialTask, gameData, onSave, onCancel }) {
+export function TaskForm({ initialTask, gameData, globalPotions = [], onSave, onCancel }) {
   const [draft, setDraft] = useState(() => initDraft(initialTask));
   const [linkInput, setLinkInput] = useState("");
   const [errors, setErrors] = useState({});
@@ -366,6 +367,7 @@ export function TaskForm({ initialTask, gameData, onSave, onCancel }) {
           {/* Potions */}
           <PotionList
             potions={draft.potions}
+            globalPotions={globalPotions}
             onChange={(potions) => set("potions", potions)}
           />
 

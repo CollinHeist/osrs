@@ -26,12 +26,13 @@ const REC_COLORS = {
  * @param {object} props
  * @param {any[]} props.tasks enriched tasks with metrics + recommendation
  * @param {object} props.gameData
+ * @param {object} [props.settings]
  */
-export function AnalyticsDashboard({ tasks, gameData }) {
+export function AnalyticsDashboard({ tasks, gameData, settings = {} }) {
   const ranked = useMemo(() => {
     if (gameData.loading || !tasks.length) return [];
-    return rankTasks(tasks, gameData.priceById, gameData.loot);
-  }, [tasks, gameData]);
+    return rankTasks(tasks, gameData.priceById, gameData.loot, settings);
+  }, [tasks, gameData, settings]);
 
   const xpChartData = useMemo(
     () =>
@@ -91,7 +92,10 @@ export function AnalyticsDashboard({ tasks, gameData }) {
     border: "1px solid rgba(120,132,180,0.38)",
     borderRadius: 8,
     fontSize: 12,
+    color: "#eef1fb",
   };
+  const chartLabelStyle = { color: "#eef1fb" };
+  const chartItemStyle = { color: "#eef1fb" };
 
   return (
     <div className="analytics-layout">
@@ -122,8 +126,9 @@ export function AnalyticsDashboard({ tasks, gameData }) {
                 />
                 <Tooltip
                   contentStyle={chartTooltipStyle}
+                  labelStyle={chartLabelStyle}
+                  itemStyle={chartItemStyle}
                   formatter={(v) => [fmtInt(v), "XP/hr"]}
-                  labelStyle={{ color: "#eef1fb" }}
                 />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                   {xpChartData.map((d, i) => (
@@ -167,8 +172,9 @@ export function AnalyticsDashboard({ tasks, gameData }) {
                 />
                 <Tooltip
                   contentStyle={chartTooltipStyle}
+                  labelStyle={chartLabelStyle}
+                  itemStyle={chartItemStyle}
                   formatter={(v) => [fmtGp(v), "GP/hr"]}
-                  labelStyle={{ color: "#eef1fb" }}
                 />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                   {gpChartData.map((d, i) => (

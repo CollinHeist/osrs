@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import "./App.css";
 import { useGameData } from "./hooks/useGameData.js";
 import { useSlayerTasks } from "./hooks/useSlayerTasks.js";
+import { useSettings } from "./hooks/useSettings.js";
+import { useGlobalPotions } from "./hooks/useGlobalPotions.js";
 import { computeTaskMetrics, getTaskRecommendation } from "./lib/analytics.js";
 import { StatsBanner } from "./components/StatsBanner.jsx";
 import { TaskList } from "./components/TaskList.jsx";
@@ -10,36 +12,68 @@ import { TaskForm } from "./components/TaskForm.jsx";
 import { AnalyticsDashboard } from "./components/AnalyticsDashboard.jsx";
 import { XpGpScatterChart } from "./components/XpGpScatterChart.jsx";
 import { ImportExport } from "./components/ImportExport.jsx";
+import { SettingsTab } from "./components/SettingsTab.jsx";
+import { PotionsTab } from "./components/PotionsTab.jsx";
 
 const TABS = [
   { id: "tasks", label: "Tasks" },
   { id: "analytics", label: "Analytics" },
+  { id: "potions", label: "Potions" },
+  { id: "settings", label: "Settings" },
 ];
 
 export default function App() {
   const gameData = useGameData();
   const { tasks, addTask, updateTask, deleteTask, importTasks } = useSlayerTasks();
+  const { settings, updateSetting, resetSettings } = useSettings();
+  const { globalPotions, addGlobalPotion, updateGlobalPotion, deleteGlobalPotion } =
+    useGlobalPotions();
 
   const [tab, setTab] = useState("tasks");
   const [selectedId, setSelectedId] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
 
+  // Resolve task potions against the global library before computing metrics.
+  // If a potion has a globalId, its cost/duration is always taken from the library.
+  const resolvedTasks = useMemo(
+    () =>
+      tasks.map((task) => ({
+        ...task,
+        potions: (task.potions || []).map((p) => {
+          if (p.globalId) {
+            const gp = globalPotions.find((g) => g.id === p.globalId);
+            if (gp) {
+              return {
+                ...p,
+                name: gp.name,
+                costPerDose: gp.costPerDose,
+                minutesPerDose: gp.minutesPerDose,
+              };
+            }
+          }
+          return p;
+        }),
+      })),
+    [tasks, globalPotions]
+  );
+
   const enrichedTasks = useMemo(() => {
     if (gameData.loading) {
-      return tasks.map((t) => ({ ...t, metrics: null, recommendation: null }));
+      return resolvedTasks.map((t) => ({ ...t, metrics: null, recommendation: null }));
     }
-    return tasks.map((task) => {
+    return resolvedTasks.map((task) => {
       const metrics = computeTaskMetrics(task, gameData.priceById, gameData.loot);
       const recommendation = getTaskRecommendation(
         task,
-        tasks,
+        resolvedTasks,
         gameData.priceById,
-        gameData.loot
+        gameData.loot,
+        settings
       );
       return { ...task, metrics, recommendation };
     });
-  }, [tasks, gameData]);
+  }, [resolvedTasks, gameData, settings]);
 
   const selectedEnrichedTask = useMemo(
     () => enrichedTasks.find((t) => t.id === selectedId) ?? null,
@@ -164,7 +198,29 @@ export default function App() {
 
       {tab === "analytics" && (
         <div className="tab-panel">
-          <AnalyticsDashboard tasks={enrichedTasks} gameData={gameData} />
+          <AnalyticsDashboard tasks={enrichedTasks} gameData={gameData} settings={settings} />
+        </div>
+      )}
+
+      {tab === "potions" && (
+        <div className="tab-panel">
+          <PotionsTab
+            globalPotions={globalPotions}
+            tasks={tasks}
+            onAdd={addGlobalPotion}
+            onUpdate={updateGlobalPotion}
+            onDelete={deleteGlobalPotion}
+          />
+        </div>
+      )}
+
+      {tab === "settings" && (
+        <div className="tab-panel">
+          <SettingsTab
+            settings={settings}
+            updateSetting={updateSetting}
+            resetSettings={resetSettings}
+          />
         </div>
       )}
 
@@ -179,6 +235,7 @@ export default function App() {
             <TaskForm
               initialTask={editingTask}
               gameData={gameData}
+              globalPotions={globalPotions}
               onSave={handleSave}
               onCancel={closeForm}
             />
