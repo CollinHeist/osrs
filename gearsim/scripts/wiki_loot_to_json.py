@@ -38,7 +38,7 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from bs4 import BeautifulSoup
+    from bs4 import BeautifulSoup, Tag
 except ImportError:
     print("Missing dependency: pip install beautifulsoup4", file=sys.stderr)
     sys.exit(1)
@@ -93,6 +93,7 @@ def merge_loot_entry(loot_path: Path, entry: dict[str, Any]) -> bool:
 
 
 def fetch(url: str) -> str:
+    """Fetch the raw text content of a URL using the wiki-friendly User-Agent."""
     req = urllib.request.Request(
         url,
         headers={"User-Agent": USER_AGENT, "Accept-Language": "en-GB,en;q=0.9"},
@@ -103,6 +104,7 @@ def fetch(url: str) -> str:
 
 
 def page_title_from_url(url: str) -> str:
+    """Extract the MediaWiki page title from a full oldschool.runescape.wiki URL."""
     parsed = urllib.parse.urlparse(url)
     if not parsed.netloc.endswith("runescape.wiki"):
         raise ValueError(f"Expected an oldschool.runescape.wiki URL, got: {url!r}")
@@ -117,11 +119,13 @@ def page_title_from_url(url: str) -> str:
 
 
 def raw_wikitext_url(title: str) -> str:
+    """Return the ``?action=raw`` URL for a given MediaWiki page title."""
     q = urllib.parse.quote(title.replace(" ", "_"), safe="():%")
     return f"{WIKI_ORIGIN}/w/{q}?action=raw"
 
 
 def render_html_url(title: str) -> str:
+    """Return the ``?action=render`` URL for a given MediaWiki page title."""
     q = urllib.parse.quote(title.replace(" ", "_"), safe="():%")
     return f"{WIKI_ORIGIN}/w/{q}?action=render"
 
@@ -169,10 +173,22 @@ def parse_infobox_monster(wikitext: str) -> dict[str, Any]:
 
 
 def strip_commas_num(s: str) -> str:
+    """Strip thousands separators and narrow no-break spaces from a numeric string."""
     return s.replace(",", "").replace("\u202f", "").strip()
 
 
-def parse_rarity(cell) -> tuple[float, float] | None:
+def parse_rarity(cell: Tag) -> tuple[float, float] | None:
+    """
+    Parse the rarity fraction from a drop-table rarity cell.
+
+    Returns ``(numerator, denominator)`` or ``None`` when the rarity is
+    unknown/variable.  Handles the following text formats:
+
+    * ``1/128``  – simple fraction
+    * ``2/3``    – non-unit numerator
+    * ``Always`` – mapped to ``(1, 1)``
+    * ``2 × 1/250`` – multi-roll: N rolls of P/D, stored as ``(N*P, D)``
+    """
     span = cell.find("span", attrs={"data-drop-fraction": True})
     if span and span.get("data-drop-fraction"):
         raw = strip_commas_num(span["data-drop-fraction"])
@@ -193,6 +209,17 @@ def parse_rarity(cell) -> tuple[float, float] | None:
     if low in ("unknown", "random", "varies", "n/a", "not sold"):
         return None
 
+    # Multi-roll format: "N × P/D" (e.g. "2 × 1/250") – store as (N*P, D)
+    m = re.match(
+        r"^\s*(\d+(?:\.\d+)?)\s*[×x]\s*(\d+(?:\.\d+)?)\s*/\s*(\d+(?:\.\d+)?)\s*$",
+        strip_commas_num(text),
+        flags=re.IGNORECASE,
+    )
+    if m:
+        rolls, numer, denom = float(m.group(1)), float(m.group(2)), float(m.group(3))
+        if denom > 0:
+            return (rolls * numer, denom)
+
     m = re.match(
         r"^\s*(\d+(?:\.\d+)?)\s*/\s*(\d+(?:\.\d+)?)\s*$",
         strip_commas_num(text),
@@ -209,7 +236,13 @@ def parse_rarity(cell) -> tuple[float, float] | None:
     return None
 
 
-def parse_quantity(cell) -> int | list[int]:
+def parse_quantity(cell: Tag) -> int | list[int]:
+    """
+    Parse the quantity from a drop-table quantity cell.
+
+    Returns a single ``int`` for fixed quantities or ``[min, max]`` for ranges.
+    Falls back to ``1`` when the cell text cannot be parsed.
+    """
     raw = cell.get("data-sort-value")
     if raw is not None and str(raw).strip() != "":
         try:
@@ -236,7 +269,7 @@ def parse_quantity(cell) -> int | list[int]:
     return 1
 
 
-def heading_before_table(table) -> str:
+def heading_before_table(table: Tag) -> str:
     prev = table.find_previous_sibling()
     while prev is not None:
         classes = prev.get("class") or []
@@ -262,24 +295,31 @@ def parse_item_drop_tables(html: str) -> list[dict[str, Any]]:
         rows = table.select("tbody > tr")
         if not rows:
             continue
+
         for tr in rows[1:]:
             cells = tr.find_all("td", recursive=False)
             if len(cells) < 4:
                 continue
             item_cell = cells[1]
-            link = item_cell.find("a", href=True, title=True)
+
+            link: Tag | None = item_cell.find("a", href=True, title=True)
             if not link:
+                print(f'No link found for {item_cell=}')
                 continue
+
             name = link.get("title", "").strip() or link.get_text(strip=True)
             if not name or name.lower() == "nothing":
+                print(f'No name found for {item_cell=}')
                 continue
 
             qty = parse_quantity(cells[2])
             rarity = parse_rarity(cells[3])
             if rarity is None:
+                print(f'No rarity found for {item_cell=}')
                 continue
 
             def _num(x: float) -> int | float:
+                """Return ``int`` when the float value is a whole number."""
                 if isinstance(x, float) and x.is_integer():
                     return int(x)
                 return x
@@ -368,10 +408,10 @@ def build_entry(
             "Could not determine monster id: infobox has no id1.. fields; pass --monster-id"
         )
 
-    name = infobox.get("name") or page_title
-    level = infobox.get("level")
-    if level is None:
-        raise ValueError("Could not read combat level from infobox (|combat=)")
+    name = infobox.get('name') or page_title
+    if (level := infobox.get('level')) is None:
+        pass
+        # raise ValueError('Could not read combat level from infobox (|combat=)')
 
     return {
         "id": mid,

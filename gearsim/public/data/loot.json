@@ -935,5 +935,457 @@
         ]
       }
     ]
+  },
+  {
+    "id": 7851,
+    "name": "Grotesque Guardians",
+    "level": null,
+    "drops": [
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Granite dust",
+            "quantity": 100,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Unique",
+        "items": [
+          {
+            "name": "Granite maul",
+            "quantity": 1,
+            "rarity": [
+              2,
+              250
+            ],
+            "id": 4153
+          },
+          {
+            "name": "Granite gloves",
+            "quantity": 1,
+            "rarity": [
+              2,
+              500
+            ],
+            "id": 21736
+          },
+          {
+            "name": "Granite ring",
+            "quantity": 1,
+            "rarity": [
+              2,
+              500
+            ],
+            "id": 21739
+          },
+          {
+            "name": "Granite hammer",
+            "quantity": 1,
+            "rarity": [
+              2,
+              750
+            ],
+            "id": 21742
+          },
+          {
+            "name": "Black tourmaline core",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1000
+            ],
+            "id": 21730
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Rune pickaxe",
+            "quantity": 1,
+            "rarity": [
+              12,
+              142
+            ],
+            "id": 1275
+          },
+          {
+            "name": "Rune full helm",
+            "quantity": 1,
+            "rarity": [
+              10,
+              142
+            ],
+            "id": 1163
+          },
+          {
+            "name": "Rune platelegs",
+            "quantity": 1,
+            "rarity": [
+              10,
+              142
+            ],
+            "id": 1079
+          },
+          {
+            "name": "Rune 2h sword",
+            "quantity": 1,
+            "rarity": [
+              8,
+              142
+            ],
+            "id": 1319
+          },
+          {
+            "name": "Rune battleaxe",
+            "quantity": 1,
+            "rarity": [
+              6,
+              142
+            ],
+            "id": 1373
+          },
+          {
+            "name": "Dragon longsword",
+            "quantity": 1,
+            "rarity": [
+              2,
+              142
+            ],
+            "id": 1305
+          },
+          {
+            "name": "Adamant boots",
+            "quantity": 1,
+            "rarity": [
+              2,
+              142
+            ],
+            "id": 4129
+          },
+          {
+            "name": "Dragon med helm",
+            "quantity": 1,
+            "rarity": [
+              2,
+              142
+            ],
+            "id": 1149
+          }
+        ]
+      },
+      {
+        "table_name": "Supplies",
+        "items": [
+          {
+            "name": "Mushroom potato",
+            "quantity": 6,
+            "rarity": [
+              20,
+              142
+            ],
+            "id": 7058
+          },
+          {
+            "name": "Saradomin brew(4)",
+            "quantity": 2,
+            "rarity": [
+              16,
+              142
+            ],
+            "id": 6685
+          },
+          {
+            "name": "Magic potion(2)",
+            "quantity": 1,
+            "rarity": [
+              12,
+              142
+            ],
+            "id": 3044
+          },
+          {
+            "name": "Ranging potion(2)",
+            "quantity": 1,
+            "rarity": [
+              12,
+              142
+            ],
+            "id": 171
+          },
+          {
+            "name": "Super combat potion(2)",
+            "quantity": 1,
+            "rarity": [
+              12,
+              142
+            ],
+            "id": 12699
+          },
+          {
+            "name": "Prayer potion(4)",
+            "quantity": 2,
+            "rarity": [
+              8,
+              142
+            ],
+            "id": 2434
+          }
+        ]
+      },
+      {
+        "table_name": "Resources",
+        "items": [
+          {
+            "name": "Gold ore",
+            "quantity": 50,
+            "rarity": [
+              14,
+              142
+            ],
+            "id": 444
+          },
+          {
+            "name": "Adamantite bar",
+            "quantity": 40,
+            "rarity": [
+              12,
+              142
+            ],
+            "id": 2361
+          },
+          {
+            "name": "Gold bar",
+            "quantity": 50,
+            "rarity": [
+              12,
+              142
+            ],
+            "id": 2357
+          },
+          {
+            "name": "Mithril bar",
+            "quantity": 45,
+            "rarity": [
+              12,
+              142
+            ],
+            "id": 2359
+          },
+          {
+            "name": "Coal",
+            "quantity": 250,
+            "rarity": [
+              10,
+              142
+            ],
+            "id": 453
+          },
+          {
+            "name": "Runite ore",
+            "quantity": 6,
+            "rarity": [
+              8,
+              142
+            ],
+            "id": 451
+          },
+          {
+            "name": "Runite bar",
+            "quantity": 5,
+            "rarity": [
+              6,
+              142
+            ],
+            "id": 2363
+          }
+        ]
+      },
+      {
+        "table_name": "Shark drop table",
+        "items": [
+          {
+            "name": "Raw shark",
+            "quantity": 20,
+            "rarity": [
+              3,
+              142
+            ],
+            "id": 383
+          },
+          {
+            "name": "Shark lure",
+            "quantity": 40,
+            "rarity": [
+              3,
+              142
+            ],
+            "id": 30900
+          },
+          {
+            "name": "Raw sea turtle",
+            "quantity": 20,
+            "rarity": [
+              2,
+              142
+            ],
+            "id": 395
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 20000,
+            "rarity": [
+              20,
+              142
+            ],
+            "id": null
+          },
+          {
+            "name": "Chaos rune",
+            "quantity": 150,
+            "rarity": [
+              16,
+              142
+            ],
+            "id": 562
+          },
+          {
+            "name": "Coins",
+            "quantity": 25000,
+            "rarity": [
+              10,
+              142
+            ],
+            "id": null
+          },
+          {
+            "name": "Crystal key",
+            "quantity": 1,
+            "rarity": [
+              10,
+              142
+            ],
+            "id": 989
+          },
+          {
+            "name": "Death rune",
+            "quantity": 130,
+            "rarity": [
+              10,
+              142
+            ],
+            "id": 560
+          },
+          {
+            "name": "Dragon dart tip",
+            "quantity": 25,
+            "rarity": [
+              10,
+              142
+            ],
+            "id": 11232
+          },
+          {
+            "name": "Diamond bolt tips",
+            "quantity": 150,
+            "rarity": [
+              6,
+              142
+            ],
+            "id": 9192
+          },
+          {
+            "name": "Dragonstone bolt tips",
+            "quantity": 40,
+            "rarity": [
+              4,
+              142
+            ],
+            "id": 9193
+          },
+          {
+            "name": "Onyx bolt tips",
+            "quantity": 15,
+            "rarity": [
+              4,
+              142
+            ],
+            "id": 9194
+          },
+          {
+            "name": "Dragon arrowtips",
+            "quantity": 150,
+            "rarity": [
+              2,
+              142
+            ],
+            "id": 11237
+          },
+          {
+            "name": "Soul rune",
+            "quantity": 40,
+            "rarity": [
+              2,
+              142
+            ],
+            "id": 566
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Brimstone key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              44
+            ],
+            "id": null
+          },
+          {
+            "name": "Clue scroll (elite)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              230
+            ],
+            "id": null
+          },
+          {
+            "name": "Noon",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3000
+            ],
+            "id": null
+          },
+          {
+            "name": "Jar of stone",
+            "quantity": 1,
+            "rarity": [
+              1,
+              5000
+            ],
+            "id": 21745
+          }
+        ]
+      }
+    ]
   }
 ]
