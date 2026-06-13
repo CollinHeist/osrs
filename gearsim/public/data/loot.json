@@ -1387,5 +1387,371 @@
         ]
       }
     ]
+  },
+  {
+    "id": 412,
+    "name": "Gargoyle",
+    "level": 111,
+    "drops": [
+      {
+        "table_name": "Pre-roll",
+        "items": [
+          {
+            "name": "Granite maul",
+            "quantity": 1,
+            "rarity": [
+              1,
+              256
+            ],
+            "id": 4153
+          },
+          {
+            "name": "Mystic robe top (dark)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              512
+            ],
+            "id": 4101
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Adamant platelegs",
+            "quantity": 1,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 1073
+          },
+          {
+            "name": "Rune full helm",
+            "quantity": 1,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 1163
+          },
+          {
+            "name": "Rune 2h sword",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 1319
+          },
+          {
+            "name": "Adamant boots",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 4129
+          },
+          {
+            "name": "Rune battleaxe",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 1373
+          },
+          {
+            "name": "Rune platelegs",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 1079
+          }
+        ]
+      },
+      {
+        "table_name": "Runes",
+        "items": [
+          {
+            "name": "Fire rune",
+            "quantity": 75,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 554
+          },
+          {
+            "name": "Chaos rune",
+            "quantity": 30,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": 562
+          },
+          {
+            "name": "Fire rune",
+            "quantity": 150,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 554
+          },
+          {
+            "name": "Death rune",
+            "quantity": 15,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 560
+          }
+        ]
+      },
+      {
+        "table_name": "Materials",
+        "items": [
+          {
+            "name": "Gold ore",
+            "quantity": 20,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 444
+          },
+          {
+            "name": "Pure essence",
+            "quantity": 150,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 7936
+          },
+          {
+            "name": "Steel bar",
+            "quantity": 15,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 2353
+          },
+          {
+            "name": "Gold bar",
+            "quantity": 15,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 2357
+          },
+          {
+            "name": "Mithril bar",
+            "quantity": 15,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 2359
+          },
+          {
+            "name": "Runite ore",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 451
+          }
+        ]
+      },
+      {
+        "table_name": "Coins",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 800,
+            "rarity": [
+              28,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 1000,
+            "rarity": [
+              20,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 10000,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Gem drop table",
+        "items": [
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              1,
+              102.4
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              1,
+              204.8
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              1,
+              409.6
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Chaos talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1092.27
+            ],
+            "id": 1452
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1092.27
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1638.4
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              1,
+              3276.8
+            ],
+            "id": 830
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3276.8
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3276.8
+            ],
+            "id": 985
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              52428.8
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              1,
+              104857.6
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              139810.13
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Brimstone key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              78
+            ],
+            "id": null
+          },
+          {
+            "name": "Clue scroll (hard)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Brittle key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              150
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]
