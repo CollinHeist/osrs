@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import {
   LineChart, Line, BarChart, Bar,
+  PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
   ResponsiveContainer, Label,
 } from "recharts";
@@ -532,6 +533,25 @@ function computeLogCumulativeMeta(days) {
   return { cumById, milestoneById };
 }
 
+// Rotating colour palette for pie slices
+const PIE_COLORS = [
+  C.accent, C.gold, C.blue, "#a07848", "#8a9fd4",
+  "#7cb8a0", "#d4c44b", C.red, "#9fd46a", C.accentDim,
+];
+
+function PieTooltip({ active, payload, groupTotal }) {
+  if (!active || !payload?.length) return null;
+  const { name, value } = payload[0];
+  const pct = ((value / groupTotal) * 100).toFixed(1);
+  return (
+    <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: "4px", padding: "0.4rem 0.65rem", fontSize: "0.65rem", fontFamily: "'IBM Plex Mono', monospace" }}>
+      <div style={{ color: C.text, fontWeight: 600, marginBottom: "0.1rem" }}>{name}</div>
+      <div style={{ color: C.accent }}>{value.toLocaleString()} rolls</div>
+      <div style={{ color: C.muted }}>{pct}% of group</div>
+    </div>
+  );
+}
+
 // ─── Harvest summary tab ──────────────────────────────────────────────────────
 function HarvestSummaryTab({ days }) {
   const trackedDays = days.filter(d => !d.approximate && d.entries?.length);
@@ -588,11 +608,11 @@ function HarvestSummaryTab({ days }) {
         <span style={{ fontSize: "0.62rem", color: C.muted }}>{grandTotal.toLocaleString()} total rolls</span>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "0.65rem" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "0.65rem" }}>
         {sortedPatchTypes.map(pt => {
           const items = byPatchType.get(pt);
           const groupTotal = items.reduce((s, e) => s + e.qty, 0);
-          const maxQty = items[0]?.qty ?? 1;
+          const pieData = items.map(({ produce, qty }) => ({ name: produce, value: qty }));
 
           return (
             <div key={pt} style={S.card}>
@@ -600,17 +620,41 @@ function HarvestSummaryTab({ days }) {
                 <span style={{ fontSize: "0.6rem", letterSpacing: "0.1em", color: C.gold, textTransform: "uppercase" }}>{pt}</span>
                 <span style={{ fontSize: "0.58rem", color: C.muted }}>{groupTotal.toLocaleString()} rolls</span>
               </div>
-              {items.map(({ harvestId, produce, qty }) => (
-                <div key={harvestId} style={{ marginBottom: "0.4rem" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.68rem", marginBottom: "0.18rem" }}>
-                    <span style={{ color: C.text }}>{produce}</span>
-                    <span style={{ color: C.accent, fontWeight: 600 }}>{qty.toLocaleString()}</span>
+
+              <ResponsiveContainer width="100%" height={150}>
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={38}
+                    outerRadius={62}
+                    dataKey="value"
+                    strokeWidth={2}
+                    stroke={C.card}
+                    isAnimationActive={false}
+                  >
+                    {pieData.map((_, idx) => (
+                      <Cell key={idx} fill={PIE_COLORS[idx % PIE_COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip content={<PieTooltip groupTotal={groupTotal} />} />
+                </PieChart>
+              </ResponsiveContainer>
+
+              {/* Legend */}
+              <div style={{ marginTop: "0.35rem" }}>
+                {items.map(({ harvestId, produce, qty }, idx) => (
+                  <div key={harvestId} style={{ display: "flex", alignItems: "center", gap: "0.45rem", marginBottom: "0.22rem", fontSize: "0.65rem" }}>
+                    <div style={{ width: "8px", height: "8px", borderRadius: "2px", background: PIE_COLORS[idx % PIE_COLORS.length], flexShrink: 0 }} />
+                    <span style={{ color: C.text, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{produce}</span>
+                    <span style={{ color: C.accent, fontWeight: 600, flexShrink: 0 }}>{qty.toLocaleString()}</span>
+                    <span style={{ color: C.muted, flexShrink: 0, minWidth: "3.5ch", textAlign: "right", fontSize: "0.58rem" }}>
+                      {((qty / groupTotal) * 100).toFixed(1)}%
+                    </span>
                   </div>
-                  <div style={S.miniBar}>
-                    <div style={{ height: "100%", width: `${(qty / maxQty) * 100}%`, background: C.accentDim, borderRadius: "3px" }} />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           );
         })}
