@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import {
-  LineChart, Line, BarChart, Bar,
+  LineChart, Line, BarChart, Bar, ComposedChart,
   PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
   ResponsiveContainer, Label,
@@ -317,6 +317,175 @@ function LuckGauge({ cumProb }) {
   );
 }
 
+// ─── Luck delta chart ─────────────────────────────────────────────────────────
+function LuckDeltaChart({ days }) {
+  const sortedDays = [...days].sort((a, b) => a.date.localeCompare(b.date));
+  const n = sortedDays.length;
+  const avgP = n ? sortedDays.reduce((a, d) => a + d.chance, 0) / n : 0;
+
+  // Compute signed delta: actual cumulative P minus expected cumulative P (using avg as baseline)
+  const data = [];
+  let cumFail = 1;
+  let expFail = 1;
+  for (let i = 0; i < n; i++) {
+    cumFail *= (1 - sortedDays[i].chance);
+    expFail  *= (1 - avgP);
+    data.push({
+      day:   i + 1,
+      date:  sortedDays[i].date,
+      delta: parseFloat(((1 - cumFail) * 100 - (1 - expFail) * 100).toFixed(3)),
+    });
+  }
+
+  const axTick  = { fill: C.muted, fontSize: 10, fontFamily: "'IBM Plex Mono', monospace" };
+  const gridProp = { stroke: C.border, strokeDasharray: "3 3" };
+  const maxAbs  = data.reduce((m, d) => Math.max(m, Math.abs(d.delta)), 0.1);
+  const yDomain = [-(maxAbs * 1.15), maxAbs * 1.15];
+  const last    = data[data.length - 1];
+
+  return (
+    <div style={S.chartCard}>
+      <div style={S.chartTitle}>Luck delta — actual vs. expected cumulative P</div>
+      <ResponsiveContainer width="100%" height={220}>
+        <LineChart data={data} margin={{ top: 8, right: 28, bottom: 24, left: 4 }}>
+          <CartesianGrid {...gridProp} />
+          <XAxis dataKey="day" tick={axTick} tickLine={false} axisLine={{ stroke: C.border }}>
+            <Label value="Day number" position="insideBottom" offset={-14} style={{ ...axTick, fill: C.muted }} />
+          </XAxis>
+          <YAxis
+            domain={yDomain}
+            tickFormatter={v => `${v > 0 ? "+" : ""}${v.toFixed(1)}%`}
+            tick={axTick} tickLine={false} axisLine={{ stroke: C.border }} width={56}
+          />
+          <Tooltip content={
+            <ChartTip
+              labelFmt={r => `Day ${r.day} — ${r.date}`}
+              valFmt={v => `${v > 0 ? "+" : ""}${v.toFixed(3)}% vs expected`}
+            />
+          } />
+          <ReferenceLine y={0} stroke={C.border} strokeWidth={1.5} />
+          <Line type="monotone" dataKey="delta" name="delta" stroke={C.accent} strokeWidth={2} dot={false} />
+        </LineChart>
+      </ResponsiveContainer>
+      <div style={S.chartNote}>
+        Positive = luckier than expected; negative = unluckier. Uses your average daily % as the geometric baseline.
+        {last && ` Currently ${last.delta > 0 ? "+" : ""}${last.delta.toFixed(2)}% vs. the expectation curve.`}
+      </div>
+    </div>
+  );
+}
+
+// ─── Patch type contribution chart ────────────────────────────────────────────
+function PatchContributionChart({ days }) {
+  const trackedDays = days.filter(d => !d.approximate && d.entries?.length);
+
+  // Sum roll qty per patch type across all tracked days
+  const totalsMap = new Map();
+  for (const day of trackedDays) {
+    for (const entry of day.entries) {
+      const h = HARVEST_BY_ID[entry.harvestId];
+      if (!h) continue;
+      totalsMap.set(h.patchType, (totalsMap.get(h.patchType) ?? 0) + entry.qty);
+    }
+  }
+
+  const grandTotal = [...totalsMap.values()].reduce((s, v) => s + v, 0);
+
+  const data = [...totalsMap.entries()]
+    .map(([patchType, qty]) => ({
+      patchType,
+      qty,
+      pct: grandTotal > 0 ? parseFloat(((qty / grandTotal) * 100).toFixed(1)) : 0,
+    }))
+    .sort((a, b) => b.qty - a.qty);
+
+  const axTick  = { fill: C.muted, fontSize: 10, fontFamily: "'IBM Plex Mono', monospace" };
+  const gridProp = { stroke: C.border, strokeDasharray: "3 3" };
+
+  if (data.length === 0) {
+    return (
+      <div style={S.chartCard}>
+        <div style={S.chartTitle}>Roll volume by patch type</div>
+        <div style={{ ...S.empty, padding: "2.5rem 0", fontSize: "0.65rem" }}>Log tracked days to see patch breakdown.</div>
+      </div>
+    );
+  }
+
+  const chartHeight = Math.max(160, data.length * 30 + 50);
+
+  return (
+    <div style={S.chartCard}>
+      <div style={S.chartTitle}>Roll volume by patch type</div>
+      <ResponsiveContainer width="100%" height={chartHeight}>
+        <BarChart data={data} layout="vertical" margin={{ top: 4, right: 52, bottom: 8, left: 8 }}>
+          <CartesianGrid {...gridProp} horizontal={false} />
+          <XAxis type="number" tick={axTick} tickLine={false} axisLine={{ stroke: C.border }} />
+          <YAxis type="category" dataKey="patchType" tick={{ ...axTick, fontSize: 9 }} tickLine={false} axisLine={false} width={82} />
+          <Tooltip content={
+            <ChartTip
+              labelFmt={r => `${r.patchType} — ${r.pct}%`}
+              valFmt={v => `${v.toLocaleString()} rolls`}
+            />
+          } />
+          <Bar
+            dataKey="qty" fill={C.blue} radius={[0, 2, 2, 0]}
+            label={{ position: "right", fill: C.muted, fontSize: 9, fontFamily: "'IBM Plex Mono', monospace", formatter: (v) => `${((v / grandTotal) * 100).toFixed(0)}%` }}
+          />
+        </BarChart>
+      </ResponsiveContainer>
+      <div style={S.chartNote}>
+        Total roll volume by patch type across {trackedDays.length} tracked day{trackedDays.length !== 1 ? "s" : ""} ({grandTotal.toLocaleString()} rolls). Higher volume generally means greater pet chance contribution.
+      </div>
+    </div>
+  );
+}
+
+// ─── Days remaining projection chart ──────────────────────────────────────────
+function DaysRemainingChart({ avgP }) {
+  const axTick  = { fill: C.muted, fontSize: 10, fontFamily: "'IBM Plex Mono', monospace" };
+  const gridProp = { stroke: C.border, strokeDasharray: "3 3" };
+
+  // P(pet within k more days | no pet yet) = 1 − (1 − avgP)^k (memoryless geometric)
+  const data = [];
+  for (let k = 1; k <= 180; k++) {
+    data.push({ k, prob: parseFloat(((1 - Math.pow(1 - avgP, k)) * 100).toFixed(3)) });
+  }
+
+  const daysFor = pct => avgP > 0 ? Math.ceil(Math.log(1 - pct / 100) / Math.log(1 - avgP)) : null;
+
+  return (
+    <div style={S.chartCard}>
+      <div style={S.chartTitle}>Forward projection — probability within next N days</div>
+      <ResponsiveContainer width="100%" height={220}>
+        <LineChart data={data} margin={{ top: 8, right: 28, bottom: 24, left: 4 }}>
+          <CartesianGrid {...gridProp} />
+          <XAxis dataKey="k" tick={axTick} tickLine={false} axisLine={{ stroke: C.border }}>
+            <Label value="Additional days" position="insideBottom" offset={-14} style={{ ...axTick, fill: C.muted }} />
+          </XAxis>
+          <YAxis domain={[0, 100]} tickFormatter={v => `${v}%`} tick={axTick} tickLine={false} axisLine={{ stroke: C.border }} width={42} />
+          <Tooltip content={
+            <ChartTip
+              labelFmt={r => `+${r.k} more day${r.k !== 1 ? "s" : ""}`}
+              valFmt={v => `${v.toFixed(2)}% chance`}
+            />
+          } />
+          {[25, 50, 75, 90].map(p => (
+            <ReferenceLine key={p} y={p}
+              stroke={p >= 75 ? C.gold : C.muted} strokeDasharray="3 3"
+              label={{ value: `${p}%`, position: "right", fill: p >= 75 ? C.gold : C.muted, fontSize: 9, fontFamily: "'IBM Plex Mono', monospace" }}
+            />
+          ))}
+          <Line type="monotone" dataKey="prob" name="prob" stroke={C.accent} strokeWidth={2} dot={false} />
+        </LineChart>
+      </ResponsiveContainer>
+      <div style={S.chartNote}>
+        Given the pet has not yet dropped, the probability of receiving it within the next N days at {fmtPct(avgP, 4)}/day.
+        {` p50 in ${daysFor(50) ?? "?"} more days · p90 in ${daysFor(90) ?? "?"} more days.`}
+      </div>
+    </div>
+  );
+}
+
 // ─── Charts tab ───────────────────────────────────────────────────────────────
 function ChartsTab({ days }) {
   const sortedDays = [...days].sort((a, b) => a.date.localeCompare(b.date));
@@ -348,13 +517,19 @@ function ChartsTab({ days }) {
 
   const currentCum = n > 0 ? (1 - sortedDays.reduce((f, d) => f * (1 - d.chance), 1)) * 100 : 0;
 
-  // ── Daily bar data ──
-  const dailyData = sortedDays.map((d, i) => ({
-    idx:    i + 1,
-    date:   d.date,
-    pct:    parseFloat((d.chance * 100).toFixed(4)),
-    isHigh: d.chance >= avgP,
-  }));
+  // ── Daily bar data (with trailing 7-day rolling average) ──
+  const dailyData = sortedDays.map((d, i) => {
+    const windowStart = Math.max(0, i - 6);
+    const rollingWindow = sortedDays.slice(windowStart, i + 1);
+    const rollingAvg = rollingWindow.reduce((s, x) => s + x.chance * 100, 0) / rollingWindow.length;
+    return {
+      idx:        i + 1,
+      date:       d.date,
+      pct:        parseFloat((d.chance * 100).toFixed(4)),
+      isHigh:     d.chance >= avgP,
+      rollingAvg: parseFloat(rollingAvg.toFixed(4)),
+    };
+  });
 
   // ── Histogram of daily % values ──
   const BUCKETS = 12;
@@ -442,31 +617,35 @@ function ChartsTab({ days }) {
       {/* ── Two column: daily bar + histogram ── */}
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"1rem" }}>
 
-        {/* Daily % bar chart */}
+        {/* Daily % bar chart with rolling avg overlay */}
         <div style={S.chartCard}>
           <div style={S.chartTitle}>Daily chance per logged day</div>
           <ResponsiveContainer width="100%" height={210}>
-            <BarChart data={dailyData} margin={{ top:4, right:8, bottom:22, left:4 }}>
+            <ComposedChart data={dailyData} margin={{ top:4, right:8, bottom:22, left:4 }}>
               <CartesianGrid {...gridProp} vertical={false} />
               <XAxis dataKey="idx" tick={axTick} tickLine={false} axisLine={{ stroke:C.border }}>
                 <Label value="Day #" position="insideBottom" offset={-14} style={{ ...axTick, fill:C.muted }} />
               </XAxis>
               <YAxis tickFormatter={v=>`${v.toFixed(2)}%`} tick={axTick} tickLine={false} axisLine={{ stroke:C.border }} width={48} />
               <Tooltip content={
-                <ChartTip labelFmt={r=>`Day ${r.idx} — ${r.date}`} valFmt={v=>`${v.toFixed(4)}%`} />
+                <ChartTip
+                  labelFmt={r=>`Day ${r.idx} — ${r.date}`}
+                  valFmt={(v, name) => name === "rollingAvg" ? `7-day avg: ${v.toFixed(4)}%` : `${v.toFixed(4)}%`}
+                />
               } />
-              <Bar dataKey="pct" radius={[2,2,0,0]}
-                fill={C.accentDim}
-                /* colour bars above/below avg differently */
-              />
+              <Bar dataKey="pct" fill={C.accentDim} radius={[2,2,0,0]} />
               {avgP > 0 && (
                 <ReferenceLine y={avgP * 100} stroke={C.gold} strokeDasharray="3 3"
                   label={{ value:"avg", position:"right", fill:C.gold, fontSize:9, fontFamily:"'IBM Plex Mono', monospace" }} />
               )}
-            </BarChart>
+              {n >= 2 && (
+                <Line type="monotone" dataKey="rollingAvg" name="rollingAvg" stroke={C.blue} strokeWidth={1.5} dot={false} />
+              )}
+            </ComposedChart>
           </ResponsiveContainer>
           <div style={S.chartNote}>
-            <span style={{ color:C.gold }}>╌╌╌</span> Average daily % across all logged days ({fmtPct(avgP, 4)})
+            <span style={{ color:C.gold }}>╌╌╌</span> Overall average ({fmtPct(avgP, 4)}) &nbsp;&nbsp;
+            {n >= 2 && <><span style={{ color:C.blue }}>━━</span> 7-day rolling average</>}
           </div>
         </div>
 
@@ -495,6 +674,15 @@ function ChartsTab({ days }) {
             How varied your daily chances are — a wide spread means inconsistent run composition across days.
           </div>
         </div>
+      </div>
+
+      {/* ── Luck delta ── */}
+      <LuckDeltaChart days={days} />
+
+      {/* ── Two column: patch contribution + days remaining ── */}
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"1rem" }}>
+        <PatchContributionChart days={days} />
+        {avgP > 0 && <DaysRemainingChart avgP={avgP} />}
       </div>
     </div>
   );
