@@ -1753,5 +1753,1191 @@
         ]
       }
     ]
+  },
+  {
+    "id": 7278,
+    "name": "Greater Nechryael",
+    "level": 200,
+    "drops": [
+      {
+        "table_name": "Regular",
+        "items": [
+          {
+            "name": "Malicious ashes",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 25772
+          }
+        ]
+      },
+      {
+        "table_name": "Regular",
+        "items": [
+          {
+            "name": "Adamant kiteshield",
+            "quantity": 1,
+            "rarity": [
+              7,
+              128
+            ],
+            "id": 1199
+          },
+          {
+            "name": "Rune axe",
+            "quantity": 1,
+            "rarity": [
+              7,
+              128
+            ],
+            "id": 1359
+          },
+          {
+            "name": "Rune sq shield",
+            "quantity": 1,
+            "rarity": [
+              7,
+              128
+            ],
+            "id": 1185
+          },
+          {
+            "name": "Adamant battleaxe",
+            "quantity": 1,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 1371
+          },
+          {
+            "name": "Rune med helm",
+            "quantity": 1,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 1147
+          },
+          {
+            "name": "Rune full helm",
+            "quantity": 1,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 1163
+          },
+          {
+            "name": "Mystic air staff",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 1405
+          },
+          {
+            "name": "Rune boots",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 4131
+          },
+          {
+            "name": "Rune chainbody",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 1113
+          }
+        ]
+      },
+      {
+        "table_name": "Regular",
+        "items": [
+          {
+            "name": "Death rune",
+            "quantity": 23,
+            "rarity": [
+              12,
+              128
+            ],
+            "id": 560
+          },
+          {
+            "name": "Blood rune",
+            "quantity": 20,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 565
+          },
+          {
+            "name": "Chaos rune",
+            "quantity": 50,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 562
+          },
+          {
+            "name": "Air rune",
+            "quantity": 150,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 556
+          },
+          {
+            "name": "Soul rune",
+            "quantity": 25,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 566
+          }
+        ]
+      },
+      {
+        "table_name": "Regular",
+        "items": [
+          {
+            "name": "Grimy guam leaf",
+            "quantity": 1,
+            "rarity": [
+              1,
+              73.1
+            ],
+            "id": 199
+          },
+          {
+            "name": "Grimy marrentill",
+            "quantity": 1,
+            "rarity": [
+              1,
+              97.5
+            ],
+            "id": 201
+          },
+          {
+            "name": "Grimy tarromin",
+            "quantity": 1,
+            "rarity": [
+              1,
+              130
+            ],
+            "id": 203
+          },
+          {
+            "name": "Grimy harralander",
+            "quantity": 1,
+            "rarity": [
+              1,
+              167.2
+            ],
+            "id": 205
+          },
+          {
+            "name": "Grimy ranarr weed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              212.8
+            ],
+            "id": 207
+          },
+          {
+            "name": "Grimy irit leaf",
+            "quantity": 1,
+            "rarity": [
+              1,
+              292.6
+            ],
+            "id": 209
+          },
+          {
+            "name": "Grimy avantoe",
+            "quantity": 1,
+            "rarity": [
+              1,
+              390.1
+            ],
+            "id": 211
+          },
+          {
+            "name": "Grimy kwuarm",
+            "quantity": 1,
+            "rarity": [
+              1,
+              468.1
+            ],
+            "id": 213
+          },
+          {
+            "name": "Grimy cadantine",
+            "quantity": 1,
+            "rarity": [
+              1,
+              585.1
+            ],
+            "id": 215
+          },
+          {
+            "name": "Grimy lantadyme",
+            "quantity": 1,
+            "rarity": [
+              1,
+              780.2
+            ],
+            "id": 2485
+          },
+          {
+            "name": "Grimy dwarf weed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              780.2
+            ],
+            "id": 217
+          }
+        ]
+      },
+      {
+        "table_name": "Regular",
+        "items": [
+          {
+            "name": "Toadflax seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              129.2
+            ],
+            "id": 5296
+          },
+          {
+            "name": "Irit seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              188.5
+            ],
+            "id": 5297
+          },
+          {
+            "name": "Belladonna seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              195.1
+            ],
+            "id": 5281
+          },
+          {
+            "name": "Poison ivy seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              270.9
+            ],
+            "id": 5106
+          },
+          {
+            "name": "Avantoe seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              276.3
+            ],
+            "id": 5298
+          },
+          {
+            "name": "Cactus seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              290.7
+            ],
+            "id": 5280
+          },
+          {
+            "name": "Potato cactus seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              398.6
+            ],
+            "id": 22873
+          },
+          {
+            "name": "Kwuarm seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              404.4
+            ],
+            "id": 5299
+          },
+          {
+            "name": "Snapdragon seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              606.6
+            ],
+            "id": 5300
+          },
+          {
+            "name": "Cadantine seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              872
+            ],
+            "id": 5301
+          },
+          {
+            "name": "Lantadyme seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1213.2
+            ],
+            "id": 5302
+          },
+          {
+            "name": "Snape grass seed",
+            "quantity": 3,
+            "rarity": [
+              2,
+              1395.2
+            ],
+            "id": 22879
+          },
+          {
+            "name": "Dwarf weed seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1993.1
+            ],
+            "id": 5303
+          },
+          {
+            "name": "Torstol seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              3100.4
+            ],
+            "id": 5304
+          }
+        ]
+      },
+      {
+        "table_name": "Regular",
+        "items": [
+          {
+            "name": "Lobster",
+            "quantity": 1,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 379
+          },
+          {
+            "name": "Coins",
+            "quantity": 2500,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Gold bar",
+            "quantity": 5,
+            "rarity": [
+              7,
+              128
+            ],
+            "id": 2357
+          },
+          {
+            "name": "Tuna",
+            "quantity": 2,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 361
+          },
+          {
+            "name": "Wine of zamorak",
+            "quantity": 3,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 245
+          }
+        ]
+      },
+      {
+        "table_name": "Regular",
+        "items": [
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              1,
+              170.67
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              1,
+              341.33
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              1,
+              682.67
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1820.44
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2730.67
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              1,
+              5461.33
+            ],
+            "id": 830
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              5461.33
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              5461.33
+            ],
+            "id": 985
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              87381.33
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              1,
+              174762.67
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              233016.89
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Regular",
+        "items": [
+          {
+            "name": "Crystal shard",
+            "quantity": 5,
+            "rarity": [
+              1,
+              24
+            ],
+            "id": null
+          },
+          {
+            "name": "Brimstone key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              64
+            ],
+            "id": null
+          },
+          {
+            "name": "Clue scroll (hard)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Regular",
+        "items": [
+          {
+            "name": "Ancient shard",
+            "quantity": 1,
+            "rarity": [
+              1,
+              196
+            ],
+            "id": null
+          },
+          {
+            "name": "Dark totem base",
+            "quantity": 1,
+            "rarity": [
+              1,
+              295
+            ],
+            "id": null
+          },
+          {
+            "name": "Dark totem middle",
+            "quantity": 1,
+            "rarity": [
+              1,
+              295
+            ],
+            "id": null
+          },
+          {
+            "name": "Dark totem top",
+            "quantity": 1,
+            "rarity": [
+              1,
+              295
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Wilderness Slayer Cave",
+        "items": [
+          {
+            "name": "Malicious ashes",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 25772
+          }
+        ]
+      },
+      {
+        "table_name": "Wilderness Slayer Cave",
+        "items": [
+          {
+            "name": "Adamant kiteshield",
+            "quantity": 1,
+            "rarity": [
+              7,
+              112
+            ],
+            "id": 1199
+          },
+          {
+            "name": "Rune axe",
+            "quantity": 1,
+            "rarity": [
+              7,
+              112
+            ],
+            "id": 1359
+          },
+          {
+            "name": "Rune sq shield",
+            "quantity": 1,
+            "rarity": [
+              7,
+              112
+            ],
+            "id": 1185
+          },
+          {
+            "name": "Adamant battleaxe",
+            "quantity": 1,
+            "rarity": [
+              5,
+              112
+            ],
+            "id": 1371
+          },
+          {
+            "name": "Rune med helm",
+            "quantity": 1,
+            "rarity": [
+              4,
+              112
+            ],
+            "id": 1147
+          },
+          {
+            "name": "Rune full helm",
+            "quantity": 1,
+            "rarity": [
+              3,
+              112
+            ],
+            "id": 1163
+          },
+          {
+            "name": "Mystic air staff",
+            "quantity": 1,
+            "rarity": [
+              2,
+              112
+            ],
+            "id": 1405
+          },
+          {
+            "name": "Rune boots",
+            "quantity": 1,
+            "rarity": [
+              1,
+              112
+            ],
+            "id": 4131
+          },
+          {
+            "name": "Rune chainbody",
+            "quantity": 1,
+            "rarity": [
+              1,
+              112
+            ],
+            "id": 1113
+          }
+        ]
+      },
+      {
+        "table_name": "Wilderness Slayer Cave",
+        "items": [
+          {
+            "name": "Death rune",
+            "quantity": 23,
+            "rarity": [
+              12,
+              112
+            ],
+            "id": 560
+          },
+          {
+            "name": "Blood rune",
+            "quantity": 20,
+            "rarity": [
+              10,
+              112
+            ],
+            "id": 565
+          },
+          {
+            "name": "Chaos rune",
+            "quantity": 50,
+            "rarity": [
+              10,
+              112
+            ],
+            "id": 562
+          },
+          {
+            "name": "Air rune",
+            "quantity": 150,
+            "rarity": [
+              6,
+              112
+            ],
+            "id": 556
+          },
+          {
+            "name": "Soul rune",
+            "quantity": 25,
+            "rarity": [
+              5,
+              112
+            ],
+            "id": 566
+          }
+        ]
+      },
+      {
+        "table_name": "Wilderness Slayer Cave",
+        "items": [
+          {
+            "name": "Grimy guam leaf",
+            "quantity": 1,
+            "rarity": [
+              1,
+              64
+            ],
+            "id": 199
+          },
+          {
+            "name": "Grimy marrentill",
+            "quantity": 1,
+            "rarity": [
+              1,
+              85.3
+            ],
+            "id": 201
+          },
+          {
+            "name": "Grimy tarromin",
+            "quantity": 1,
+            "rarity": [
+              1,
+              113.8
+            ],
+            "id": 203
+          },
+          {
+            "name": "Grimy harralander",
+            "quantity": 1,
+            "rarity": [
+              1,
+              146.3
+            ],
+            "id": 205
+          },
+          {
+            "name": "Grimy ranarr weed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              186.2
+            ],
+            "id": 207
+          },
+          {
+            "name": "Grimy irit leaf",
+            "quantity": 1,
+            "rarity": [
+              1,
+              256
+            ],
+            "id": 209
+          },
+          {
+            "name": "Grimy avantoe",
+            "quantity": 1,
+            "rarity": [
+              1,
+              341.3
+            ],
+            "id": 211
+          },
+          {
+            "name": "Grimy kwuarm",
+            "quantity": 1,
+            "rarity": [
+              1,
+              409.6
+            ],
+            "id": 213
+          },
+          {
+            "name": "Grimy cadantine",
+            "quantity": 1,
+            "rarity": [
+              1,
+              512
+            ],
+            "id": 215
+          },
+          {
+            "name": "Grimy lantadyme",
+            "quantity": 1,
+            "rarity": [
+              1,
+              682.7
+            ],
+            "id": 2485
+          },
+          {
+            "name": "Grimy dwarf weed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              682.7
+            ],
+            "id": 217
+          }
+        ]
+      },
+      {
+        "table_name": "Wilderness Slayer Cave",
+        "items": [
+          {
+            "name": "Toadflax seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              113
+            ],
+            "id": 5296
+          },
+          {
+            "name": "Irit seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              165
+            ],
+            "id": 5297
+          },
+          {
+            "name": "Belladonna seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              170.7
+            ],
+            "id": 5281
+          },
+          {
+            "name": "Poison ivy seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              237
+            ],
+            "id": 5106
+          },
+          {
+            "name": "Avantoe seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              241.7
+            ],
+            "id": 5298
+          },
+          {
+            "name": "Cactus seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              254.3
+            ],
+            "id": 5280
+          },
+          {
+            "name": "Potato cactus seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              348.8
+            ],
+            "id": 22873
+          },
+          {
+            "name": "Kwuarm seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              353.9
+            ],
+            "id": 5299
+          },
+          {
+            "name": "Snapdragon seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              530.8
+            ],
+            "id": 5300
+          },
+          {
+            "name": "Cadantine seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              763
+            ],
+            "id": 5301
+          },
+          {
+            "name": "Lantadyme seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              1061.6
+            ],
+            "id": 5302
+          },
+          {
+            "name": "Snape grass seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1220.8
+            ],
+            "id": 22879
+          },
+          {
+            "name": "Dwarf weed seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              1744
+            ],
+            "id": 5303
+          },
+          {
+            "name": "Torstol seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              2712.9
+            ],
+            "id": 5304
+          }
+        ]
+      },
+      {
+        "table_name": "Wilderness Slayer Cave",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 2500,
+            "rarity": [
+              8,
+              112
+            ],
+            "id": null
+          },
+          {
+            "name": "Gold bar",
+            "quantity": 5,
+            "rarity": [
+              7,
+              112
+            ],
+            "id": 2357
+          },
+          {
+            "name": "Wine of zamorak",
+            "quantity": 3,
+            "rarity": [
+              2,
+              112
+            ],
+            "id": 245
+          }
+        ]
+      },
+      {
+        "table_name": "Wilderness Slayer Cave",
+        "items": [
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              1,
+              149.33
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              1,
+              298.67
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              1,
+              597.33
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1592.89
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2389.33
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              1,
+              4778.67
+            ],
+            "id": 830
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              4778.67
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              4778.67
+            ],
+            "id": 985
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              76458.67
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              1,
+              152917.33
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              203889.78
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Wilderness Slayer Cave",
+        "items": [
+          {
+            "name": "Looting bag",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3
+            ],
+            "id": null
+          },
+          {
+            "name": "Clue scroll (hard)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Wilderness Slayer Cave",
+        "items": [
+          {
+            "name": "Larran's key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              55
+            ],
+            "id": 23490
+          },
+          {
+            "name": "Slayer's enchantment",
+            "quantity": 1,
+            "rarity": [
+              1,
+              156
+            ],
+            "id": 21257
+          }
+        ]
+      }
+    ]
   }
 ]
