@@ -2939,5 +2939,543 @@
         ]
       }
     ]
+  },
+  {
+    "id": 14860,
+    "name": "Shellbane gryphon",
+    "level": 235,
+    "drops": [
+      {
+        "table_name": "Pre-roll",
+        "items": [
+          {
+            "name": "Belle's folly (tarnished)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              256
+            ],
+            "id": 31245
+          }
+        ]
+      },
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Big bones",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 532
+          },
+          {
+            "name": "Gryphon feather",
+            "quantity": 10,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 31235
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons",
+        "items": [
+          {
+            "name": "Rune claws",
+            "quantity": 1,
+            "rarity": [
+              20,
+              128
+            ],
+            "id": 3101
+          },
+          {
+            "name": "Rune scimitar",
+            "quantity": 1,
+            "rarity": [
+              16,
+              128
+            ],
+            "id": 1333
+          },
+          {
+            "name": "Adamant cannonball",
+            "quantity": 50,
+            "rarity": [
+              16,
+              128
+            ],
+            "id": 31912
+          },
+          {
+            "name": "Rune cannonball",
+            "quantity": 30,
+            "rarity": [
+              12,
+              128
+            ],
+            "id": 31914
+          }
+        ]
+      },
+      {
+        "table_name": "Foods",
+        "items": [
+          {
+            "name": "Raw swordfish",
+            "quantity": 1,
+            "rarity": [
+              28,
+              128
+            ],
+            "id": 371
+          },
+          {
+            "name": "Sweetcorn",
+            "quantity": 1,
+            "rarity": [
+              20,
+              128
+            ],
+            "id": 5986
+          },
+          {
+            "name": "Watermelon",
+            "quantity": 1,
+            "rarity": [
+              20,
+              128
+            ],
+            "id": 5982
+          },
+          {
+            "name": "Raw sea turtle",
+            "quantity": 1,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": 395
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds and frags",
+        "items": [
+          {
+            "name": "Potato seed",
+            "quantity": 4,
+            "rarity": [
+              2,
+              17.1
+            ],
+            "id": 5318
+          },
+          {
+            "name": "Onion seed",
+            "quantity": 3,
+            "rarity": [
+              2,
+              34.1
+            ],
+            "id": 5319
+          },
+          {
+            "name": "Cabbage seed",
+            "quantity": 3,
+            "rarity": [
+              2,
+              68.3
+            ],
+            "id": 5324
+          },
+          {
+            "name": "Tomato seed",
+            "quantity": 2,
+            "rarity": [
+              2,
+              37.2
+            ],
+            "id": 5322
+          },
+          {
+            "name": "Sweetcorn seed",
+            "quantity": 2,
+            "rarity": [
+              2,
+              74.5
+            ],
+            "id": 5320
+          },
+          {
+            "name": "Elkhorn frag",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 31511
+          },
+          {
+            "name": "Pillar frag",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 31513
+          },
+          {
+            "name": "Strawberry seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              148.9
+            ],
+            "id": 5323
+          },
+          {
+            "name": "Watermelon seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              297.9
+            ],
+            "id": 5321
+          },
+          {
+            "name": "Snape grass seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              297.9
+            ],
+            "id": 22879
+          }
+        ]
+      },
+      {
+        "table_name": "Herbs",
+        "items": [
+          {
+            "name": "Grimy guam leaf",
+            "quantity": 1,
+            "rarity": [
+              2,
+              85.3
+            ],
+            "id": 199
+          },
+          {
+            "name": "Grimy marrentill",
+            "quantity": 1,
+            "rarity": [
+              2,
+              113.8
+            ],
+            "id": 201
+          },
+          {
+            "name": "Grimy tarromin",
+            "quantity": 1,
+            "rarity": [
+              2,
+              151.7
+            ],
+            "id": 203
+          },
+          {
+            "name": "Grimy harralander",
+            "quantity": 1,
+            "rarity": [
+              2,
+              195
+            ],
+            "id": 205
+          },
+          {
+            "name": "Grimy ranarr weed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              248.2
+            ],
+            "id": 207
+          },
+          {
+            "name": "Grimy irit leaf",
+            "quantity": 1,
+            "rarity": [
+              2,
+              341.3
+            ],
+            "id": 209
+          },
+          {
+            "name": "Grimy avantoe",
+            "quantity": 1,
+            "rarity": [
+              2,
+              455.1
+            ],
+            "id": 211
+          },
+          {
+            "name": "Grimy kwuarm",
+            "quantity": 1,
+            "rarity": [
+              2,
+              71.2
+            ],
+            "id": 213
+          },
+          {
+            "name": "Grimy cadantine",
+            "quantity": 1,
+            "rarity": [
+              2,
+              89
+            ],
+            "id": 215
+          },
+          {
+            "name": "Grimy lantadyme",
+            "quantity": 1,
+            "rarity": [
+              2,
+              118.7
+            ],
+            "id": 2485
+          },
+          {
+            "name": "Grimy dwarf weed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              92
+            ],
+            "id": 217
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Gryphon feather",
+            "quantity": 50,
+            "rarity": [
+              22,
+              128
+            ],
+            "id": 31235
+          },
+          {
+            "name": "Shark lure",
+            "quantity": 5,
+            "rarity": [
+              20,
+              128
+            ],
+            "id": 30900
+          },
+          {
+            "name": "Basket",
+            "quantity": 1,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 5376
+          }
+        ]
+      },
+      {
+        "table_name": "Gem drop table",
+        "items": [
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              2,
+              512
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1024
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              2,
+              2048
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              2,
+              5461.33
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              2,
+              8192
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              2,
+              16384
+            ],
+            "id": 830
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              2,
+              16384
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              2,
+              16384
+            ],
+            "id": 985
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              2,
+              262144
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              2,
+              524288
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              2,
+              699050.67
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Clue scroll (elite)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": null
+          },
+          {
+            "name": "Reward casket (elite)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": null
+          },
+          {
+            "name": "Brimstone key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              58
+            ],
+            "id": null
+          },
+          {
+            "name": "Long bone",
+            "quantity": 1,
+            "rarity": [
+              1,
+              400
+            ],
+            "id": null
+          },
+          {
+            "name": "Jar of feathers",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2000
+            ],
+            "id": null
+          },
+          {
+            "name": "Gull (pet)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3000
+            ],
+            "id": null
+          },
+          {
+            "name": "Curved bone",
+            "quantity": 1,
+            "rarity": [
+              1,
+              5012.5
+            ],
+            "id": null
+          },
+          {
+            "name": "Clue scroll (elite)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              200
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]
