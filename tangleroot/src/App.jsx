@@ -742,6 +742,8 @@ function PieTooltip({ active, payload, groupTotal }) {
 
 // ─── Harvest summary tab ──────────────────────────────────────────────────────
 function HarvestSummaryTab({ days }) {
+  const [hideApprox, setHideApprox] = useState(true);
+
   const trackedDays = days.filter(d => !d.approximate && d.entries?.length);
 
   if (trackedDays.length === 0) {
@@ -754,7 +756,7 @@ function HarvestSummaryTab({ days }) {
     );
   }
 
-  // Aggregate total rolls per harvestId across all tracked days
+  // Aggregate total rolls per harvestId across all tracked days (totals always use tracked-only)
   const totals = new Map();
   for (const day of trackedDays) {
     for (const entry of day.entries) {
@@ -789,26 +791,59 @@ function HarvestSummaryTab({ days }) {
 
   const grandTotal = [...totals.values()].reduce((s, v) => s + v, 0);
 
+  // Days used for the timeline charts; when hideApprox is off, include approximate days as zero rows
+  const timelineDays = [...days]
+    .filter(d => hideApprox ? (!d.approximate && d.entries?.length) : true)
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  const axTick  = { fill: C.muted, fontSize: 9, fontFamily: "'IBM Plex Mono', monospace" };
+  const gridProp = { stroke: C.border, strokeDasharray: "3 3" };
+  const showDots = timelineDays.length <= 30;
+
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "0.75rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem", flexWrap: "wrap", gap: "0.5rem" }}>
         <p style={{ ...S.secLabel, margin: 0 }}>Items harvested — {trackedDays.length} tracked day{trackedDays.length !== 1 ? "s" : ""}</p>
+        <label style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.62rem", color: C.muted, cursor: "pointer", userSelect: "none" }}>
+          <input
+            type="checkbox"
+            checked={hideApprox}
+            onChange={e => setHideApprox(e.target.checked)}
+            style={{ accentColor: C.accent }}
+          />
+          Hide approx. days in charts
+        </label>
         <span style={{ fontSize: "0.62rem", color: C.muted }}>{grandTotal.toLocaleString()} total rolls</span>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "0.65rem" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "0.65rem" }}>
         {sortedPatchTypes.map(pt => {
           const items = byPatchType.get(pt);
           const groupTotal = items.reduce((s, e) => s + e.qty, 0);
           const pieData = items.map(({ produce, qty }) => ({ name: produce, value: qty }));
+          const harvestIds = items.map(i => i.harvestId);
+
+          // Timeline data: 0 when a produce wasn't logged that day
+          const timelineData = timelineDays.map((day, dayIdx) => {
+            const point = { idx: dayIdx + 1, date: day.date };
+            for (const hid of harvestIds) {
+              const entry = day.entries?.find(e => e.harvestId === hid);
+              point[hid] = entry?.qty ?? 0;
+            }
+            return point;
+          });
+          const hasTimeline = timelineDays.length >= 2 &&
+            timelineData.some(d => harvestIds.some(hid => d[hid] > 0));
 
           return (
             <div key={pt} style={S.card}>
+              {/* Header */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "0.55rem" }}>
                 <span style={{ fontSize: "0.6rem", letterSpacing: "0.1em", color: C.gold, textTransform: "uppercase" }}>{pt}</span>
                 <span style={{ fontSize: "0.58rem", color: C.muted }}>{groupTotal.toLocaleString()} rolls</span>
               </div>
 
+              {/* Donut pie chart */}
               <ResponsiveContainer width="100%" height={150}>
                 <PieChart>
                   <Pie
@@ -843,6 +878,54 @@ function HarvestSummaryTab({ days }) {
                   </div>
                 ))}
               </div>
+
+              {/* Timeline line chart */}
+              {hasTimeline && (
+                <>
+                  <div style={{ borderTop: `1px solid ${C.border}`, margin: "0.75rem -0.9rem 0.65rem" }} />
+                  <div style={{ ...S.chartTitle, marginBottom: "0.55rem" }}>Rolls per day</div>
+                  <ResponsiveContainer width="100%" height={160}>
+                    <LineChart data={timelineData} margin={{ top: 4, right: 8, bottom: 22, left: 0 }}>
+                      <CartesianGrid {...gridProp} />
+                      <XAxis dataKey="idx" tick={axTick} tickLine={false} axisLine={{ stroke: C.border }}>
+                        <Label value="Day #" position="insideBottom" offset={-14} style={{ ...axTick, fill: C.muted }} />
+                      </XAxis>
+                      <YAxis allowDecimals={false} tick={axTick} tickLine={false} axisLine={{ stroke: C.border }} width={24} />
+                      <Tooltip content={
+                        <ChartTip
+                          labelFmt={r => `Day ${r.idx} — ${r.date}`}
+                          valFmt={(v, name) => {
+                            const item = items.find(i => i.harvestId === name);
+                            return `${item?.produce ?? name}: ${v.toLocaleString()}`;
+                          }}
+                        />
+                      } />
+                      {items.map(({ harvestId }, colorIdx) => (
+                        <Line
+                          key={harvestId}
+                          type="monotone"
+                          dataKey={harvestId}
+                          name={harvestId}
+                          stroke={PIE_COLORS[colorIdx % PIE_COLORS.length]}
+                          strokeWidth={1.5}
+                          dot={showDots ? { r: 2, strokeWidth: 0 } : false}
+                          connectNulls={false}
+                        />
+                      ))}
+                    </LineChart>
+                  </ResponsiveContainer>
+                  {items.length > 1 && (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginTop: "0.4rem" }}>
+                      {items.map(({ harvestId, produce }, colorIdx) => (
+                        <span key={harvestId} style={{ display: "inline-flex", alignItems: "center", gap: "0.28rem", fontSize: "0.58rem", color: C.muted }}>
+                          <span style={{ display: "inline-block", width: "14px", height: "2px", background: PIE_COLORS[colorIdx % PIE_COLORS.length], borderRadius: "1px" }} />
+                          {produce}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           );
         })}
