@@ -6831,5 +6831,515 @@
         ]
       }
     ]
+  },
+  {
+    "id": 496,
+    "name": "Kraken",
+    "level": null,
+    "drops": [
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Mystic water staff",
+            "quantity": 1,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 1403
+          },
+          {
+            "name": "Rune warhammer",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 1347
+          },
+          {
+            "name": "Rune longsword",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 1303
+          },
+          {
+            "name": "Mystic robe top",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 4091
+          },
+          {
+            "name": "Mystic robe bottom",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 4093
+          },
+          {
+            "name": "Trident of the seas (full)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              512
+            ],
+            "id": 11905
+          }
+        ]
+      },
+      {
+        "table_name": "Runes",
+        "items": [
+          {
+            "name": "Water rune",
+            "quantity": 400,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 555
+          },
+          {
+            "name": "Mist rune",
+            "quantity": 100,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 4695
+          },
+          {
+            "name": "Chaos rune",
+            "quantity": 200,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 562
+          },
+          {
+            "name": "Death rune",
+            "quantity": 150,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 560
+          },
+          {
+            "name": "Blood rune",
+            "quantity": 60,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 565
+          },
+          {
+            "name": "Soul rune",
+            "quantity": 50,
+            "rarity": [
+              7,
+              128
+            ],
+            "id": 566
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds",
+        "items": [
+          {
+            "name": "Watermelon seed",
+            "quantity": 24,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 5321
+          },
+          {
+            "name": "Torstol seed",
+            "quantity": 2,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 5304
+          },
+          {
+            "name": "Magic seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 5316
+          }
+        ]
+      },
+      {
+        "table_name": "Materials",
+        "items": [
+          {
+            "name": "Seaweed",
+            "quantity": 125,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 401
+          },
+          {
+            "name": "Battlestaff",
+            "quantity": 10,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 1391
+          },
+          {
+            "name": "Unpowered orb",
+            "quantity": 50,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 567
+          },
+          {
+            "name": "Diamond",
+            "quantity": 8,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 1601
+          },
+          {
+            "name": "Oak plank",
+            "quantity": 60,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 8778
+          },
+          {
+            "name": "Runite bar",
+            "quantity": 2,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 2363
+          },
+          {
+            "name": "Raw shark",
+            "quantity": 50,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 383
+          },
+          {
+            "name": "Raw monkfish",
+            "quantity": 100,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 7944
+          },
+          {
+            "name": "Grimy snapdragon",
+            "quantity": 6,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 3051
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 19999,
+            "rarity": [
+              15,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Shark",
+            "quantity": 5,
+            "rarity": [
+              7,
+              128
+            ],
+            "id": 385
+          },
+          {
+            "name": "Pirate boots",
+            "quantity": 1,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 7114
+          },
+          {
+            "name": "Sanfew serum(4)",
+            "quantity": 2,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 10925
+          },
+          {
+            "name": "Edible seaweed",
+            "quantity": 5,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 403
+          },
+          {
+            "name": "Harpoon",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 311
+          },
+          {
+            "name": "Bucket",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 1925
+          },
+          {
+            "name": "Crystal key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 989
+          },
+          {
+            "name": "Rusty sword",
+            "quantity": 1,
+            "rarity": [
+              1.75,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Antidote++(4)",
+            "quantity": 2,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 5952
+          },
+          {
+            "name": "Dragonstone ring",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 1645
+          },
+          {
+            "name": "Kraken tentacle",
+            "quantity": 1,
+            "rarity": [
+              1,
+              400
+            ],
+            "id": 12004
+          }
+        ]
+      },
+      {
+        "table_name": "Gem drop table",
+        "items": [
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              1,
+              256
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              1,
+              512
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1024
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Chaos talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2730.67
+            ],
+            "id": 1452
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2730.67
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              1,
+              4096
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              1,
+              8192
+            ],
+            "id": 830
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              8192
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              8192
+            ],
+            "id": 985
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              131072
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              1,
+              262144
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              349525.33
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Brimstone key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              49
+            ],
+            "id": null
+          },
+          {
+            "name": "Clue scroll (elite)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              500
+            ],
+            "id": null
+          },
+          {
+            "name": "Jar of dirt",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1000
+            ],
+            "id": 12007
+          },
+          {
+            "name": "Pet kraken",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3000
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]
