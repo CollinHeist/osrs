@@ -17,6 +17,7 @@ import {
   normalizeDayForLoad,
   normalizeRunForLoad,
 } from "./wikiHarvests.js";
+import GpEfficiencyTab from "./GpEfficiencyTab.jsx";
 
 const HARVEST_GROUPS = harvestOptionsByPatchType();
 
@@ -1490,7 +1491,12 @@ export default function App() {
 
           {/* Tabs */}
           <div style={S.tabBar}>
-            {[{id:"log",label:"Log"},{id:"charts",label:"Charts"},{id:"summary",label:"Summary"}].map(t => (
+            {[
+              {id:"log",     label:"Log"},
+              {id:"charts",  label:"Charts"},
+              {id:"summary", label:"Summary"},
+              {id:"gp",      label:"GP Efficiency"},
+            ].map(t => (
               <button key={t.id} style={{ ...S.tab, ...(activeTab===t.id ? S.tabActive : {}) }} onClick={() => setActiveTab(t.id)}>
                 {t.label}
               </button>
@@ -1500,6 +1506,7 @@ export default function App() {
           {activeTab === "log"     && <LogTab days={days} removeDay={removeDay} clearAll={clearAll} avgChance={avgChance} />}
           {activeTab === "charts"  && <ChartsTab days={days} />}
           {activeTab === "summary" && <HarvestSummaryTab days={days} />}
+          {activeTab === "gp"      && <GpEfficiencyTab level={level} />}
         </div>
       </div>
 
