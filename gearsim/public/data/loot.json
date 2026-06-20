@@ -7341,5 +7341,217 @@
         ]
       }
     ]
+  },
+  {
+    "id": 787,
+    "name": "Suqah",
+    "level": 111,
+    "drops": [
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Big bones",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 532
+          },
+          {
+            "name": "Suqah hide",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Pre-roll",
+        "items": [
+          {
+            "name": "A special tiara",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Suqah tooth",
+            "quantity": 1,
+            "rarity": [
+              69,
+              129
+            ],
+            "id": null
+          },
+          {
+            "name": "Grimy guam leaf",
+            "quantity": 1,
+            "rarity": [
+              30,
+              129
+            ],
+            "id": 199
+          },
+          {
+            "name": "Grimy marrentill",
+            "quantity": 1,
+            "rarity": [
+              25,
+              129
+            ],
+            "id": 201
+          }
+        ]
+      },
+      {
+        "table_name": "Gem drop table",
+        "items": [
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              1,
+              103.2
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              1,
+              206.4
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              1,
+              412.8
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1100.8
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1651.2
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              1,
+              3302.4
+            ],
+            "id": 830
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3302.4
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3302.4
+            ],
+            "id": 985
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              52838.4
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              1,
+              105676.8
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              140902.4
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Clue scroll (hard)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              129
+            ],
+            "id": null
+          },
+          {
+            "name": "Long bone",
+            "quantity": 1,
+            "rarity": [
+              1,
+              400
+            ],
+            "id": null
+          },
+          {
+            "name": "Curved bone",
+            "quantity": 1,
+            "rarity": [
+              1,
+              5012.5
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]
