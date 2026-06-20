@@ -30,18 +30,21 @@ export function computeResults(filledSegments, xpMultiplier = 1) {
     const tree = TREE_BY_ID[seg.treeId];
     if (!tree) return null;
 
-    let segFailProb  = 1;
-    let totalActions = 0;
+    let segFailProb    = 1;
+    let totalActions   = 0;
+    let weightedPSum   = 0;
 
     for (let level = seg.fromLevel; level < seg.toLevel; level++) {
-      const xpForLevel     = xpAt(level + 1) - xpAt(level);
+      const xpForLevel      = xpAt(level + 1) - xpAt(level);
       const actionsForLevel = xpForLevel / (tree.xpPerLog * xpMultiplier);
       const p = chancePerLog(tree, level);
-      segFailProb  *= Math.pow(1 - p, actionsForLevel);
-      totalActions += actionsForLevel;
+      segFailProb   *= Math.pow(1 - p, actionsForLevel);
+      totalActions  += actionsForLevel;
+      weightedPSum  += p * actionsForLevel;
     }
 
-    const segChance = 1 - segFailProb;
+    const segChance  = 1 - segFailProb;
+    const avgPPerLog = totalActions > 0 ? weightedPSum / totalActions : 0;
     cumFailProb *= segFailProb;
 
     return {
@@ -54,6 +57,7 @@ export function computeResults(filledSegments, xpMultiplier = 1) {
       xp:         xpAt(seg.toLevel) - xpAt(seg.fromLevel),
       actions:    Math.round(totalActions),
       segChance,
+      avgPPerLog,
       cumChance:  1 - cumFailProb,
     };
   }).filter(Boolean);

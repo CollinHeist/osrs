@@ -102,7 +102,7 @@ export default function BreakdownTable({ results, xpMultiplier = 1 }) {
           <tbody>
             {results.map((r, idx) => {
               const prevCum = idx === 0 ? 0 : results[idx - 1].cumChance;
-              const avgOddsPerLog = r.actions > 0 ? r.segChance / r.actions : 0;
+              const avgOddsPerLog = r.avgPPerLog ?? 0;
 
               return (
                 <tr
