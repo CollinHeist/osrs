@@ -33,6 +33,7 @@ export default function App() {
   const [selectedId, setSelectedId] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
+  const [search, setSearch] = useState("");
 
   // Resolve task potions against the global library before computing metrics.
   // If a potion has a globalId, its cost/duration is always taken from the library.
@@ -149,7 +150,7 @@ export default function App() {
       )}
 
       <StatsBanner tasks={enrichedTasks} />
-      <XpGpScatterChart tasks={enrichedTasks} />
+      <XpGpScatterChart tasks={enrichedTasks} search={search} />
 
       <nav className="tab-bar">
         {TABS.map((t) => (
@@ -170,6 +171,13 @@ export default function App() {
               <button className="btn-primary" onClick={openAdd}>
                 + Log Task
               </button>
+              <input
+                type="search"
+                className="task-search"
+                placeholder="Search monsters…"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
               <ImportExport tasks={tasks} onImport={importTasks} />
             </div>
             <TaskList
@@ -178,6 +186,7 @@ export default function App() {
               onSelect={handleSelect}
               onEdit={handleEdit}
               onDelete={handleDelete}
+              search={search}
             />
           </div>
 

@@ -43,6 +43,7 @@ function PotionRow({ potion, tasks, onUpdate, onDelete }) {
         />
         <input
           type="number"
+          className="gpotion-num-input"
           min="0"
           placeholder="GP / dose"
           value={draft.costPerDose}
@@ -50,6 +51,7 @@ function PotionRow({ potion, tasks, onUpdate, onDelete }) {
         />
         <input
           type="number"
+          className="gpotion-num-input"
           min="0"
           step="0.5"
           placeholder="min / dose"

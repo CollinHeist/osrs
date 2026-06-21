@@ -34,36 +34,44 @@ export function AnalyticsDashboard({ tasks, gameData, settings = {} }) {
     return rankTasks(tasks, gameData.priceById, gameData.loot, settings);
   }, [tasks, gameData, settings]);
 
-  const xpChartData = useMemo(
-    () =>
-      [...tasks]
-        .filter((t) => (t.slayerXpPerHour || 0) > 0)
-        .sort((a, b) => (b.slayerXpPerHour || 0) - (a.slayerXpPerHour || 0))
-        .slice(0, 20)
-        .map((t) => ({
-          name: t.monsterName,
-          value: t.slayerXpPerHour || 0,
+  // Group by monster name, keeping the best rate per monster
+  const xpChartData = useMemo(() => {
+    const monsterMap = new Map();
+    for (const t of tasks) {
+      if (!t.slayerXpPerHour || t.slayerXpPerHour <= 0) continue;
+      const name = t.monsterName;
+      const existing = monsterMap.get(name);
+      if (!existing || t.slayerXpPerHour > existing.value) {
+        monsterMap.set(name, {
+          name,
+          value: t.slayerXpPerHour,
           rec: t.recommendation?.type ?? "keep",
-        })),
-    [tasks]
-  );
+        });
+      }
+    }
+    return [...monsterMap.values()]
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 20);
+  }, [tasks]);
 
-  const gpChartData = useMemo(
-    () =>
-      tasks
-        .filter((t) => t.metrics)
-        .sort(
-          (a, b) =>
-            (b.metrics.gpPerHour || 0) - (a.metrics.gpPerHour || 0)
-        )
-        .slice(0, 20)
-        .map((t) => ({
-          name: t.monsterName,
+  const gpChartData = useMemo(() => {
+    const monsterMap = new Map();
+    for (const t of tasks) {
+      if (!t.metrics) continue;
+      const name = t.monsterName;
+      const existing = monsterMap.get(name);
+      if (!existing || t.metrics.gpPerHour > existing.value) {
+        monsterMap.set(name, {
+          name,
           value: t.metrics.gpPerHour,
           rec: t.recommendation?.type ?? "keep",
-        })),
-    [tasks]
-  );
+        });
+      }
+    }
+    return [...monsterMap.values()]
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 20);
+  }, [tasks]);
 
   if (!tasks.length) {
     return (
@@ -101,7 +109,7 @@ export function AnalyticsDashboard({ tasks, gameData, settings = {} }) {
     <div className="analytics-layout">
       {xpChartData.length > 0 && (
         <div className="panel chart-card">
-          <h2>Slayer XP/hr by Monster</h2>
+          <h2>Best Slayer XP/hr by Monster</h2>
           <div className="chart-area">
             <ResponsiveContainer width="100%" height={280}>
               <BarChart
@@ -128,7 +136,7 @@ export function AnalyticsDashboard({ tasks, gameData, settings = {} }) {
                   contentStyle={chartTooltipStyle}
                   labelStyle={chartLabelStyle}
                   itemStyle={chartItemStyle}
-                  formatter={(v) => [fmtInt(v), "XP/hr"]}
+                  formatter={(v) => [fmtInt(v), "Best XP/hr"]}
                 />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                   {xpChartData.map((d, i) => (
@@ -146,7 +154,7 @@ export function AnalyticsDashboard({ tasks, gameData, settings = {} }) {
 
       {gpChartData.length > 0 && (
         <div className="panel chart-card">
-          <h2>GP/hr (net) by Monster</h2>
+          <h2>Best GP/hr (net) by Monster</h2>
           <div className="chart-area">
             <ResponsiveContainer width="100%" height={280}>
               <BarChart
@@ -174,7 +182,7 @@ export function AnalyticsDashboard({ tasks, gameData, settings = {} }) {
                   contentStyle={chartTooltipStyle}
                   labelStyle={chartLabelStyle}
                   itemStyle={chartItemStyle}
-                  formatter={(v) => [fmtGp(v), "GP/hr"]}
+                  formatter={(v) => [fmtGp(v), "Best GP/hr"]}
                 />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                   {gpChartData.map((d, i) => (

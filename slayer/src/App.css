@@ -1663,7 +1663,7 @@ tr.loot-table-group td {
 .gpotion-header,
 .gpotion-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  grid-template-columns: 2fr 1fr 1fr 1fr 88px;
   gap: 0.75rem;
   align-items: center;
   padding: 0.6rem 1rem;
@@ -1678,6 +1678,13 @@ tr.loot-table-group td {
   background: rgba(255, 255, 255, 0.025);
 }
 
+/* Right-align numeric header columns */
+.gpotion-header > span:nth-child(2),
+.gpotion-header > span:nth-child(3),
+.gpotion-header > span:nth-child(4) {
+  text-align: right;
+}
+
 .gpotion-row {
   border-bottom: 1px solid var(--border);
   transition: background 0.12s;
@@ -1689,6 +1696,13 @@ tr.loot-table-group td {
 
 .gpotion-row:hover {
   background: rgba(255, 255, 255, 0.03);
+}
+
+/* Right-align numeric data columns */
+.gpotion-row > span:nth-child(2),
+.gpotion-row > span:nth-child(3),
+.gpotion-row > span:nth-child(4) {
+  text-align: right;
 }
 
 .gpotion-row--editing {
@@ -1706,6 +1720,14 @@ tr.loot-table-group td {
   padding: 0.3rem 0.5rem;
   border-radius: 7px;
   width: 100%;
+}
+
+.gpotion-num-input {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 7px;
+  width: 100%;
+  text-align: right;
 }
 
 .gpotion-actions {
@@ -1791,4 +1813,83 @@ tr.loot-table-group td {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* ── Task search ── */
+.task-search {
+  flex: 1;
+  max-width: 220px;
+  min-width: 120px;
+  background: rgba(7, 10, 18, 0.55);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  padding: 0.45rem 0.65rem;
+  border-radius: 10px;
+  outline: none;
+  font-size: 0.82rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.task-search:focus {
+  border-color: rgba(240, 180, 41, 0.45);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.task-search::placeholder {
+  color: var(--text-muted);
+}
+
+/* ── Hoverable metric cell ── */
+.task-row-metric--hoverable {
+  cursor: default;
+  border-radius: 6px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+  transition: background 0.12s;
+}
+
+.task-row-metric--hoverable:hover {
+  background: rgba(240, 180, 41, 0.1);
+}
+
+/* ── Metric distribution popup ── */
+.metric-dist-popup {
+  position: fixed;
+  z-index: 9000;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 0.6rem 0.75rem 0.4rem;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.metric-dist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+
+.metric-dist-label {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.metric-dist-rank {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--accent);
+}
+
+.metric-dist-value {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.25rem;
 }

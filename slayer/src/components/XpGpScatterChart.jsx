@@ -41,9 +41,9 @@ function ScatterTooltip({ active, payload }) {
 }
 
 /**
- * @param {{ tasks: any[] }} props
+ * @param {{ tasks: any[], search?: string }} props
  */
-export function XpGpScatterChart({ tasks }) {
+export function XpGpScatterChart({ tasks, search = "" }) {
   const data = useMemo(
     () =>
       tasks
@@ -59,6 +59,9 @@ export function XpGpScatterChart({ tasks }) {
   );
 
   if (data.length < 2) return null;
+
+  const isFiltered = search.trim().length > 0;
+  const query = search.trim().toLowerCase();
 
   return (
     <div className="panel scatter-card">
@@ -106,11 +109,25 @@ export function XpGpScatterChart({ tasks }) {
               cursor={{ strokeDasharray: "3 3", stroke: "rgba(120,132,180,0.4)" }}
               content={<ScatterTooltip />}
             />
-            <Scatter data={data} r={6}>
-              {data.map((d, i) => (
-                <Cell key={i} fill={REC_COLORS[d.rec] ?? "#8f97b8"} />
-              ))}
-            </Scatter>
+            <Scatter
+              data={data}
+              shape={(props) => {
+                const { cx, cy, payload } = props;
+                const matches =
+                  !isFiltered || payload.name.toLowerCase().includes(query);
+                return (
+                  <circle
+                    cx={cx}
+                    cy={cy}
+                    r={isFiltered && matches ? 8 : 6}
+                    fill={REC_COLORS[payload.rec] ?? "#8f97b8"}
+                    fillOpacity={isFiltered && !matches ? 0.1 : 1}
+                    stroke={isFiltered && matches ? "rgba(255,255,255,0.5)" : "none"}
+                    strokeWidth={isFiltered && matches ? 1.5 : 0}
+                  />
+                );
+              }}
+            />
           </ScatterChart>
         </ResponsiveContainer>
       </div>
