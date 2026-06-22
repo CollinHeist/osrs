@@ -10167,5 +10167,678 @@
         ]
       }
     ]
+  },
+  {
+    "id": 7797,
+    "name": "Zygomite",
+    "level": 74,
+    "drops": [
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Ashes",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 592
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Steel axe",
+            "quantity": 1,
+            "rarity": [
+              3,
+              143
+            ],
+            "id": 1353
+          },
+          {
+            "name": "Steel 2h sword",
+            "quantity": 1,
+            "rarity": [
+              3,
+              143
+            ],
+            "id": 1311
+          },
+          {
+            "name": "Mithril full helm",
+            "quantity": 1,
+            "rarity": [
+              1,
+              143
+            ],
+            "id": 1159
+          }
+        ]
+      },
+      {
+        "table_name": "Runes",
+        "items": [
+          {
+            "name": "Nature rune",
+            "quantity": 2,
+            "rarity": [
+              30,
+              143
+            ],
+            "id": 561
+          },
+          {
+            "name": "Earth rune",
+            "quantity": 15,
+            "rarity": [
+              5,
+              143
+            ],
+            "id": 557
+          }
+        ]
+      },
+      {
+        "table_name": "Herbs",
+        "items": [
+          {
+            "name": "Grimy ranarr weed",
+            "quantity": 2,
+            "rarity": [
+              6,
+              143
+            ],
+            "id": 207
+          },
+          {
+            "name": "Grimy tarromin",
+            "quantity": 1,
+            "rarity": [
+              2,
+              143
+            ],
+            "id": 203
+          },
+          {
+            "name": "Grimy harralander",
+            "quantity": 1,
+            "rarity": [
+              1,
+              143
+            ],
+            "id": 205
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds",
+        "items": [
+          {
+            "name": "Strawberry seed",
+            "quantity": 4,
+            "rarity": [
+              11,
+              143
+            ],
+            "id": 5323
+          },
+          {
+            "name": "Potato seed",
+            "quantity": 4,
+            "rarity": [
+              1,
+              143
+            ],
+            "id": 5318
+          },
+          {
+            "name": "Mushroom spore",
+            "quantity": 1,
+            "rarity": [
+              8,
+              429
+            ],
+            "id": 5282
+          }
+        ]
+      },
+      {
+        "table_name": "Coins",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 24,
+            "rarity": [
+              3,
+              143
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 64,
+            "rarity": [
+              39,
+              143
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 120,
+            "rarity": [
+              10,
+              143
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 250,
+            "rarity": [
+              2,
+              143
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Supercompost",
+            "quantity": 1,
+            "rarity": [
+              6,
+              143
+            ],
+            "id": 6034
+          },
+          {
+            "name": "Mort myre fungus",
+            "quantity": 1,
+            "rarity": [
+              8,
+              429
+            ],
+            "id": 2970
+          },
+          {
+            "name": "Clay",
+            "quantity": 1,
+            "rarity": [
+              7,
+              143
+            ],
+            "id": 434
+          },
+          {
+            "name": "Fungicide",
+            "quantity": 1,
+            "rarity": [
+              8,
+              429
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Gem drop table",
+        "items": [
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              1,
+              114.4
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              1,
+              228.8
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              1,
+              457.6
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1220.27
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1830.4
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              1,
+              3660.8
+            ],
+            "id": 830
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3660.8
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3660.8
+            ],
+            "id": 985
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              58572.8
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              1,
+              117145.6
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              156194.13
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Brimstone key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              188
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Ashes",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 592
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Steel axe",
+            "quantity": 1,
+            "rarity": [
+              3,
+              146
+            ],
+            "id": 1353
+          },
+          {
+            "name": "Steel 2h sword",
+            "quantity": 1,
+            "rarity": [
+              6,
+              146
+            ],
+            "id": 1311
+          },
+          {
+            "name": "Rune full helm",
+            "quantity": 1,
+            "rarity": [
+              1,
+              146
+            ],
+            "id": 1163
+          }
+        ]
+      },
+      {
+        "table_name": "Runes",
+        "items": [
+          {
+            "name": "Nature rune",
+            "quantity": 2,
+            "rarity": [
+              3,
+              146
+            ],
+            "id": 561
+          },
+          {
+            "name": "Earth rune",
+            "quantity": 15,
+            "rarity": [
+              5,
+              146
+            ],
+            "id": 557
+          }
+        ]
+      },
+      {
+        "table_name": "Herbs",
+        "items": [
+          {
+            "name": "Grimy snapdragon",
+            "quantity": 1,
+            "rarity": [
+              6,
+              146
+            ],
+            "id": 3051
+          },
+          {
+            "name": "Grimy tarromin",
+            "quantity": 1,
+            "rarity": [
+              2,
+              146
+            ],
+            "id": 203
+          },
+          {
+            "name": "Grimy harralander",
+            "quantity": 1,
+            "rarity": [
+              1,
+              146
+            ],
+            "id": 205
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds",
+        "items": [
+          {
+            "name": "Strawberry seed",
+            "quantity": 4,
+            "rarity": [
+              11,
+              146
+            ],
+            "id": 5323
+          },
+          {
+            "name": "Potato seed",
+            "quantity": 4,
+            "rarity": [
+              1,
+              146
+            ],
+            "id": 5318
+          },
+          {
+            "name": "Mushroom spore",
+            "quantity": 1,
+            "rarity": [
+              4,
+              146
+            ],
+            "id": 5282
+          }
+        ]
+      },
+      {
+        "table_name": "Coins",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 44,
+            "rarity": [
+              30,
+              146
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 102,
+            "rarity": [
+              39,
+              146
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 220,
+            "rarity": [
+              7,
+              146
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 460,
+            "rarity": [
+              2,
+              146
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Supercompost",
+            "quantity": 3,
+            "rarity": [
+              6,
+              146
+            ],
+            "id": 6034
+          },
+          {
+            "name": "Mort myre fungus",
+            "quantity": 1,
+            "rarity": [
+              4,
+              146
+            ],
+            "id": 2970
+          },
+          {
+            "name": "Clay",
+            "quantity": 1,
+            "rarity": [
+              7,
+              146
+            ],
+            "id": 434
+          },
+          {
+            "name": "Fungicide",
+            "quantity": 1,
+            "rarity": [
+              4,
+              146
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Gem drop table",
+        "items": [
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              1,
+              146
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              1,
+              292
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              1,
+              584
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1557.33
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2336
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              1,
+              4672
+            ],
+            "id": 830
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              4672
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              4672
+            ],
+            "id": 985
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              74752
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              1,
+              149504
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              199338.67
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Brimstone key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              111
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]
