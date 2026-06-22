@@ -8610,5 +8610,584 @@
         ]
       }
     ]
+  },
+  {
+    "id": 970,
+    "name": "Dagannoth",
+    "level": null,
+    "drops": [
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Bones",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 526
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons",
+        "items": [
+          {
+            "name": "Iron spear",
+            "quantity": 1,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 1239
+          },
+          {
+            "name": "Bronze spear",
+            "quantity": 1,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 1237
+          },
+          {
+            "name": "Mithril spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 1243
+          }
+        ]
+      },
+      {
+        "table_name": "Runes and ammunition",
+        "items": [
+          {
+            "name": "Water rune",
+            "quantity": 15,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 555
+          },
+          {
+            "name": "Steel arrow",
+            "quantity": 15,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 886
+          },
+          {
+            "name": "Mithril javelin",
+            "quantity": 3,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 828
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds",
+        "items": [
+          {
+            "name": "Toadflax seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              35.9
+            ],
+            "id": 5296
+          },
+          {
+            "name": "Irit seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              52.4
+            ],
+            "id": 5297
+          },
+          {
+            "name": "Belladonna seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              54.2
+            ],
+            "id": 5281
+          },
+          {
+            "name": "Poison ivy seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              75.3
+            ],
+            "id": 5106
+          },
+          {
+            "name": "Avantoe seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              76.7
+            ],
+            "id": 5298
+          },
+          {
+            "name": "Cactus seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              80.7
+            ],
+            "id": 5280
+          },
+          {
+            "name": "Potato cactus seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              110.7
+            ],
+            "id": 22873
+          },
+          {
+            "name": "Kwuarm seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              112.3
+            ],
+            "id": 5299
+          },
+          {
+            "name": "Snapdragon seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              168.5
+            ],
+            "id": 5300
+          },
+          {
+            "name": "Cadantine seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              242.2
+            ],
+            "id": 5301
+          },
+          {
+            "name": "Lantadyme seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              337
+            ],
+            "id": 5302
+          },
+          {
+            "name": "Snape grass seed",
+            "quantity": 3,
+            "rarity": [
+              1,
+              387.6
+            ],
+            "id": 22879
+          },
+          {
+            "name": "Dwarf weed seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              553.7
+            ],
+            "id": 5303
+          },
+          {
+            "name": "Torstol seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              861.2
+            ],
+            "id": 5304
+          }
+        ]
+      },
+      {
+        "table_name": "Fishing",
+        "items": [
+          {
+            "name": "Lobster pot",
+            "quantity": 1,
+            "rarity": [
+              12,
+              128
+            ],
+            "id": 301
+          },
+          {
+            "name": "Raw herring",
+            "quantity": 3,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 345
+          },
+          {
+            "name": "Raw sardine",
+            "quantity": 5,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 327
+          },
+          {
+            "name": "Harpoon",
+            "quantity": 1,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 311
+          },
+          {
+            "name": "Feather",
+            "quantity": 15,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 314
+          },
+          {
+            "name": "Fishing bait",
+            "quantity": 50,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 313
+          },
+          {
+            "name": "Raw lobster",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 377
+          },
+          {
+            "name": "Raw tuna",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 359
+          },
+          {
+            "name": "Seaweed",
+            "quantity": 10,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 401
+          },
+          {
+            "name": "Oyster pearls",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 413
+          },
+          {
+            "name": "Oyster pearl",
+            "quantity": 2,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 411
+          }
+        ]
+      },
+      {
+        "table_name": "Coins",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 56,
+            "rarity": [
+              29,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 25,
+            "rarity": [
+              9,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 44,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 41,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Casket",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 405
+          },
+          {
+            "name": "Opal bolt tips",
+            "quantity": 12,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 45
+          }
+        ]
+      },
+      {
+        "table_name": "Gem drop table",
+        "items": [
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              1,
+              512
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1024
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2048
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Chaos talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              5461.33
+            ],
+            "id": 1452
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              5461.33
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              1,
+              8192
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              1,
+              16384
+            ],
+            "id": 830
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              16384
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              16384
+            ],
+            "id": 985
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              262144
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              1,
+              524288
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              699050.67
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Dagannoth ribs",
+            "quantity": 1,
+            "rarity": [
+              1,
+              4
+            ],
+            "id": null
+          },
+          {
+            "name": "Ensouled dagannoth head",
+            "quantity": 1,
+            "rarity": [
+              1,
+              40
+            ],
+            "id": 13493
+          },
+          {
+            "name": "Clue scroll (medium)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Brimstone key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              235
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Catacombs tertiary",
+        "items": [
+          {
+            "name": "Ancient shard",
+            "quantity": 1,
+            "rarity": [
+              1,
+              286
+            ],
+            "id": null
+          },
+          {
+            "name": "Dark totem base",
+            "quantity": 1,
+            "rarity": [
+              1,
+              430
+            ],
+            "id": null
+          },
+          {
+            "name": "Dark totem middle",
+            "quantity": 1,
+            "rarity": [
+              1,
+              430
+            ],
+            "id": null
+          },
+          {
+            "name": "Dark totem top",
+            "quantity": 1,
+            "rarity": [
+              1,
+              430
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]
