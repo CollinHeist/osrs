@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import {
   LineChart, Line, BarChart, Bar, ComposedChart,
   PieChart, Pie, Cell,
@@ -935,10 +935,78 @@ function HarvestSummaryTab({ days }) {
   );
 }
 
+// ─── Daily % distribution popup ───────────────────────────────────────────────
+const DAILY_POPUP_W = 260;
+const DAILY_POPUP_H = 120;
+
+function DailyDistributionPopup({ days, focusDayId, anchorRect }) {
+  const { sorted, focusIdx } = useMemo(() => {
+    const rows = [...days]
+      .filter((d) => d.chance > 0)
+      .map((d) => ({ id: d.id, date: d.date, value: d.chance * 100 }))
+      .sort((a, b) => b.value - a.value);
+    return { sorted: rows, focusIdx: rows.findIndex((r) => r.id === focusDayId) };
+  }, [days, focusDayId]);
+
+  if (!sorted.length || focusIdx === -1) return null;
+
+  const focusValue = sorted[focusIdx].value;
+  // "Top N%" = this day is in the top N% of all logged days
+  const topPct = Math.max(1, Math.ceil(((focusIdx + 1) / sorted.length) * 100));
+
+  const margin = 8;
+  let left = anchorRect.left + anchorRect.width / 2 - DAILY_POPUP_W / 2;
+  left = Math.max(margin, Math.min(left, window.innerWidth - DAILY_POPUP_W - margin));
+  let top = anchorRect.top - DAILY_POPUP_H - margin;
+  if (top < margin) top = anchorRect.bottom + margin;
+
+  return (
+    <div style={{
+      position: "fixed",
+      zIndex: 9000,
+      left,
+      top,
+      width: DAILY_POPUP_W,
+      background: C.surface,
+      border: `1px solid ${C.border}`,
+      borderRadius: "6px",
+      padding: "0.55rem 0.7rem 0.35rem",
+      boxShadow: "0 12px 40px rgba(0,0,0,0.6)",
+      pointerEvents: "none",
+      fontFamily: "'IBM Plex Mono', monospace",
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.1rem" }}>
+        <span style={{ fontSize: "0.55rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.muted }}>
+          Daily % Distribution
+        </span>
+        <span style={{ fontSize: "0.55rem", color: C.accent }}>
+          #{focusIdx + 1} / {sorted.length} · top {topPct}%
+        </span>
+      </div>
+      <div style={{ fontSize: "0.88rem", fontWeight: 600, color: C.accent, marginBottom: "0.2rem" }}>
+        {fmtPct(focusValue / 100, 3)}
+      </div>
+      <ResponsiveContainer width="100%" height={54}>
+        <BarChart data={sorted} margin={{ top: 0, right: 0, bottom: 0, left: 0 }} barCategoryGap="8%">
+          <Bar dataKey="value" radius={[2, 2, 0, 0]} isAnimationActive={false}>
+            {sorted.map((d) => (
+              <Cell
+                key={d.id}
+                fill={d.id === focusDayId ? C.accent : "rgba(122,125,110,0.28)"}
+              />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
 // ─── Log tab ──────────────────────────────────────────────────────────────────
 function LogTab({ days, removeDay, clearAll }) {
   const { cumById, milestoneById } = computeLogCumulativeMeta(days);
   const [expandedIds, setExpandedIds] = useState(new Set());
+  const [pctHover, setPctHover] = useState(null); // { dayId, rect }
 
   function toggleExpand(id) {
     setExpandedIds(prev => {
@@ -1002,7 +1070,13 @@ function LogTab({ days, removeDay, clearAll }) {
                     )}
                     {summarizeDay(d)}
                   </td>
-                  <td style={S.td}><span style={{ color:C.accent, fontWeight:600 }}>{fmtPct(d.chance,3)}</span></td>
+                  <td
+                    style={{ ...S.td, cursor: "default", transition: "background 0.12s" }}
+                    onMouseEnter={(e) => setPctHover({ dayId: d.id, rect: e.currentTarget.getBoundingClientRect() })}
+                    onMouseLeave={() => setPctHover(null)}
+                  >
+                    <span style={{ color: C.accent, fontWeight: 600 }}>{fmtPct(d.chance, 3)}</span>
+                  </td>
                   <td style={S.td}>
                     <div style={{ display:"flex", alignItems:"center", gap:"7px" }}>
                       <div style={S.miniBar}>
@@ -1052,6 +1126,14 @@ function LogTab({ days, removeDay, clearAll }) {
             })}
           </tbody>
         </table>
+      )}
+
+      {pctHover && (
+        <DailyDistributionPopup
+          days={days}
+          focusDayId={pctHover.dayId}
+          anchorRect={pctHover.rect}
+        />
       )}
     </div>
   );
