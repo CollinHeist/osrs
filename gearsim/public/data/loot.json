@@ -11558,5 +11558,502 @@
         ]
       }
     ]
+  },
+  {
+    "id": 15500,
+    "name": "Lava Strykewyrm",
+    "level": 116,
+    "drops": [
+      {
+        "table_name": "Pre-roll",
+        "items": [
+          {
+            "name": "Dragon metal sheet",
+            "quantity": 1,
+            "rarity": [
+              1,
+              115
+            ],
+            "id": 31996
+          }
+        ]
+      },
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Strykewyrm bones",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 31726
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Lava battlestaff",
+            "quantity": 1,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 3053
+          },
+          {
+            "name": "Adamant platebody",
+            "quantity": 1,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 1123
+          },
+          {
+            "name": "Rune longsword",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 1303
+          },
+          {
+            "name": "Rune mace",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 1432
+          },
+          {
+            "name": "Rune med helm",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 1147
+          },
+          {
+            "name": "Rune pickaxe",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 1275
+          }
+        ]
+      },
+      {
+        "table_name": "Runes and ammunition",
+        "items": [
+          {
+            "name": "Lava rune",
+            "quantity": 100,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 4699
+          },
+          {
+            "name": "Death rune",
+            "quantity": 10,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 560
+          },
+          {
+            "name": "Chaos rune",
+            "quantity": 20,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 562
+          },
+          {
+            "name": "Fire rune",
+            "quantity": 100,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 554
+          },
+          {
+            "name": "Lava rune",
+            "quantity": 200,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 4699
+          },
+          {
+            "name": "Rune dart",
+            "quantity": 30,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 811
+          },
+          {
+            "name": "Rune knife",
+            "quantity": 30,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 868
+          },
+          {
+            "name": "Rune arrow",
+            "quantity": 30,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 892
+          },
+          {
+            "name": "Adamant cannonball",
+            "quantity": 22,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 31912
+          },
+          {
+            "name": "Rune cannonball",
+            "quantity": 14,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 31914
+          }
+        ]
+      },
+      {
+        "table_name": "Bolt tips",
+        "items": [
+          {
+            "name": "Diamond bolt tips",
+            "quantity": 10,
+            "rarity": [
+              1,
+              94.2
+            ],
+            "id": 9192
+          },
+          {
+            "name": "Emerald bolt tips",
+            "quantity": 10,
+            "rarity": [
+              1,
+              117.8
+            ],
+            "id": 9190
+          },
+          {
+            "name": "Ruby bolt tips",
+            "quantity": 10,
+            "rarity": [
+              1,
+              117.8
+            ],
+            "id": 9191
+          },
+          {
+            "name": "Dragonstone bolt tips",
+            "quantity": 10,
+            "rarity": [
+              1,
+              157
+            ],
+            "id": 9193
+          },
+          {
+            "name": "Onyx bolt tips",
+            "quantity": 10,
+            "rarity": [
+              1,
+              336.5
+            ],
+            "id": 9194
+          },
+          {
+            "name": "Sapphire bolt tips",
+            "quantity": 10,
+            "rarity": [
+              1,
+              471
+            ],
+            "id": 9189
+          }
+        ]
+      },
+      {
+        "table_name": "Herbs",
+        "items": [
+          {
+            "name": "Grimy guam leaf",
+            "quantity": 1,
+            "rarity": [
+              1,
+              256
+            ],
+            "id": 199
+          },
+          {
+            "name": "Grimy marrentill",
+            "quantity": 1,
+            "rarity": [
+              1,
+              341.3
+            ],
+            "id": 201
+          },
+          {
+            "name": "Grimy tarromin",
+            "quantity": 1,
+            "rarity": [
+              1,
+              455.1
+            ],
+            "id": 203
+          },
+          {
+            "name": "Grimy harralander",
+            "quantity": 1,
+            "rarity": [
+              1,
+              585.1
+            ],
+            "id": 205
+          },
+          {
+            "name": "Grimy ranarr weed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              744.7
+            ],
+            "id": 207
+          },
+          {
+            "name": "Grimy irit leaf",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1024
+            ],
+            "id": 209
+          },
+          {
+            "name": "Grimy avantoe",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1365.3
+            ],
+            "id": 211
+          },
+          {
+            "name": "Grimy kwuarm",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1638.4
+            ],
+            "id": 213
+          },
+          {
+            "name": "Grimy cadantine",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2048
+            ],
+            "id": 215
+          },
+          {
+            "name": "Grimy lantadyme",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2730.7
+            ],
+            "id": 2485
+          },
+          {
+            "name": "Grimy dwarf weed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2730.7
+            ],
+            "id": 217
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 200,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Chilli potato",
+            "quantity": 1,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 7054
+          },
+          {
+            "name": "Fire orb",
+            "quantity": 1,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 569
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Ashes",
+            "quantity": 3,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 592
+          },
+          {
+            "name": "Super attack(3)",
+            "quantity": 1,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 145
+          },
+          {
+            "name": "Super defence(3)",
+            "quantity": 1,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 163
+          },
+          {
+            "name": "Dragon arrowtips",
+            "quantity": 6,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 11237
+          },
+          {
+            "name": "Coal",
+            "quantity": 6,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 453
+          },
+          {
+            "name": "Adamantite ore",
+            "quantity": 4,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 449
+          },
+          {
+            "name": "Chaos talisman",
+            "quantity": 1,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 1452
+          },
+          {
+            "name": "Fire talisman",
+            "quantity": 1,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 1442
+          },
+          {
+            "name": "Runite ore",
+            "quantity": 2,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 451
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Brimstone key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              77
+            ],
+            "id": null
+          },
+          {
+            "name": "Clue scroll (hard)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]
