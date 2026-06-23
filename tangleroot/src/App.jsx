@@ -31,6 +31,28 @@ function fmtPct(p, digits = 3) {
   return (p * 100).toFixed(digits) + "%";
 }
 
+// Approx dry rate from cumulative P: (1 − 1/r)^(r·d) = 1 − P_cum  (r cancels out as r → ∞).
+const DRY_RATE_R = 100;
+
+function approxDryRate(cumProb, r = DRY_RATE_R) {
+  if (cumProb <= 0) return 0;
+  if (cumProb >= 1) return Infinity;
+  return Math.log(1 - cumProb) / (r * Math.log(1 - 1 / r));
+}
+
+function fmtDryMultiplier(d) {
+  if (d <= 0) return "—";
+  if (!Number.isFinite(d)) return "∞x dry";
+  const nearest = Math.round(d);
+  if (Math.abs(d - nearest) < 0.005) return `${nearest}x dry`;
+  return `${(Math.round(d * 100) / 100).toFixed(2)}x dry`;
+}
+
+function fmtDryRate(cumProb) {
+  if (cumProb <= 0) return { val: "—", sub: "from cum. P" };
+  return { val: fmtDryMultiplier(approxDryRate(cumProb)), sub: "from cum. P" };
+}
+
 function todayStr() {
   return new Date().toISOString().slice(0, 10);
 }
@@ -182,7 +204,7 @@ const S = {
     color: C.text, fontFamily: "'IBM Plex Mono', monospace", fontSize: "0.62rem", padding: "4px 5px",
     boxSizing: "border-box",
   },
-  statsGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.65rem", marginBottom: "1.1rem" },
+  statsGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "0.65rem", marginBottom: "1.1rem" },
   statCard: { background: C.card, border: `1px solid ${C.border}`, borderRadius: "4px", padding: "0.75rem 0.9rem" },
   statLabel: { fontSize: "0.58rem", color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "0.2rem" },
   statVal:  { fontSize: "1.3rem", fontWeight: 600, color: C.text },
@@ -1386,6 +1408,7 @@ export default function App() {
   }
 
   const pDay = q => avgChance > 0 ? Math.ceil(Math.log(1-q) / Math.log(1-avgChance)) : null;
+  const dryRate = fmtDryRate(cumProb);
 
   return (
     <div style={S.app}>
@@ -1557,6 +1580,7 @@ export default function App() {
             {[
               { label:"Days logged",  val: days.length,                                          sub:"sessions" },
               { label:"Cumulative P", val: days.length ? fmtPct(cumProb,2) : "—",               sub:"chance so far", color: cumProb>0.5?C.gold:cumProb>0.25?C.accent:C.text },
+              { label:"Approx dry",   val: days.length ? dryRate.val : "—",                     sub: days.length ? dryRate.sub : "from cum. P", color: cumProb>0.75?C.gold:cumProb>0.5?C.accent:C.text },
               { label:"Avg daily %",  val: days.length ? fmtPct(avgChance,3) : "—",             sub:"per logged day" },
               { label:"p50 / p90",    val: days.length ? `${pDay(0.5) ?? "—"} / ${pDay(0.9) ?? "—"}` : "— / —", sub:"expected days" },
             ].map(({ label, val, sub, color }) => (
