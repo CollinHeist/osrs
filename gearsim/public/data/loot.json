@@ -2,28 +2,28 @@
   {
     "id": 8059,
     "name": "Vorkath",
-    "level": 732,
+    "level": null,
     "drops": [
       {
         "table_name": "100%",
         "items": [
           {
             "name": "Superior dragon bones",
-            "id": 22124,
             "quantity": 2,
             "rarity": [
               1,
               1
-            ]
+            ],
+            "id": 22124
           },
           {
             "name": "Blue dragonhide",
-            "id": 1751,
             "quantity": 2,
             "rarity": [
               1,
               1
-            ]
+            ],
+            "id": 1751
           }
         ]
       },
@@ -32,15 +32,835 @@
         "items": [
           {
             "name": "Rune longsword",
-            "id": 1303,
-            "quantity": [
-              2,
-              3
+            "quantity": 3,
+            "rarity": [
+              10,
+              150
             ],
+            "id": 1303
+          },
+          {
+            "name": "Rune kiteshield",
+            "quantity": 3,
+            "rarity": [
+              10,
+              150
+            ],
+            "id": 1201
+          },
+          {
+            "name": "Battlestaff",
+            "quantity": 15,
+            "rarity": [
+              8,
+              150
+            ],
+            "id": 1391
+          },
+          {
+            "name": "Dragon battleaxe",
+            "quantity": 1,
+            "rarity": [
+              4,
+              150
+            ],
+            "id": 1377
+          },
+          {
+            "name": "Dragon longsword",
+            "quantity": 1,
+            "rarity": [
+              4,
+              150
+            ],
+            "id": 1305
+          },
+          {
+            "name": "Dragon platelegs",
+            "quantity": 1,
+            "rarity": [
+              4,
+              150
+            ],
+            "id": 4087
+          },
+          {
+            "name": "Dragon plateskirt",
+            "quantity": 1,
+            "rarity": [
+              4,
+              150
+            ],
+            "id": 4585
+          }
+        ]
+      },
+      {
+        "table_name": "Runes",
+        "items": [
+          {
+            "name": "Chaos rune",
+            "quantity": 350,
+            "rarity": [
+              12,
+              150
+            ],
+            "id": 562
+          },
+          {
+            "name": "Death rune",
+            "quantity": 300,
+            "rarity": [
+              12,
+              150
+            ],
+            "id": 560
+          },
+          {
+            "name": "Wrath rune",
+            "quantity": 60,
+            "rarity": [
+              6,
+              150
+            ],
+            "id": 21880
+          }
+        ]
+      },
+      {
+        "table_name": "Dragonhide",
+        "items": [
+          {
+            "name": "Blue dragonhide",
+            "quantity": 30,
+            "rarity": [
+              16,
+              150
+            ],
+            "id": 1751
+          },
+          {
+            "name": "Green dragonhide",
+            "quantity": 30,
+            "rarity": [
+              14,
+              150
+            ],
+            "id": 1753
+          },
+          {
+            "name": "Red dragonhide",
+            "quantity": 25,
+            "rarity": [
+              14,
+              150
+            ],
+            "id": 1749
+          },
+          {
+            "name": "Black dragonhide",
+            "quantity": 25,
+            "rarity": [
+              14,
+              150
+            ],
+            "id": 1747
+          }
+        ]
+      },
+      {
+        "table_name": "Fletching materials",
+        "items": [
+          {
+            "name": "Dragon bolts (unf)",
+            "quantity": 100,
+            "rarity": [
+              16,
+              150
+            ],
+            "id": 21930
+          },
+          {
+            "name": "Dragonstone bolt tips",
+            "quantity": 25,
+            "rarity": [
+              10,
+              150
+            ],
+            "id": 9193
+          },
+          {
+            "name": "Onyx bolt tips",
+            "quantity": 10,
+            "rarity": [
+              8,
+              150
+            ],
+            "id": 9194
+          },
+          {
+            "name": "Rune dart tip",
+            "quantity": 100,
+            "rarity": [
+              6,
+              150
+            ],
+            "id": 824
+          },
+          {
+            "name": "Dragon dart tip",
+            "quantity": 50,
+            "rarity": [
+              12,
+              150
+            ],
+            "id": 11232
+          },
+          {
+            "name": "Dragon arrowtips",
+            "quantity": 50,
+            "rarity": [
+              6,
+              150
+            ],
+            "id": 11237
+          },
+          {
+            "name": "Diamond bolt tips",
+            "quantity": 30,
+            "rarity": [
+              50,
+              2730
+            ],
+            "id": 9192
+          },
+          {
+            "name": "Emerald bolt tips",
+            "quantity": 30,
+            "rarity": [
+              40,
+              2730
+            ],
+            "id": 9190
+          },
+          {
+            "name": "Ruby bolt tips",
+            "quantity": 30,
+            "rarity": [
+              40,
+              2730
+            ],
+            "id": 9191
+          },
+          {
+            "name": "Dragonstone bolt tips",
+            "quantity": 30,
+            "rarity": [
+              28,
+              2730
+            ],
+            "id": 9193
+          },
+          {
+            "name": "Onyx bolt tips",
+            "quantity": 30,
+            "rarity": [
+              14,
+              2730
+            ],
+            "id": 9194
+          },
+          {
+            "name": "Sapphire bolt tips",
+            "quantity": 30,
+            "rarity": [
+              10,
+              2730
+            ],
+            "id": 9189
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds",
+        "items": [
+          {
+            "name": "Ranarr seed",
+            "quantity": 1,
             "rarity": [
               2,
-              30
-            ]
+              416.7
+            ],
+            "id": 5295
+          },
+          {
+            "name": "Snapdragon seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              112.3
+            ],
+            "id": 5300
+          },
+          {
+            "name": "Torstol seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              118.7
+            ],
+            "id": 5304
+          },
+          {
+            "name": "Watermelon seed",
+            "quantity": 15,
+            "rarity": [
+              2,
+              595.2
+            ],
+            "id": 5321
+          },
+          {
+            "name": "Willow seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              625
+            ],
+            "id": 5313
+          },
+          {
+            "name": "Mahogany seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              694.4
+            ],
+            "id": 21488
+          },
+          {
+            "name": "Maple seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              694.4
+            ],
+            "id": 5314
+          },
+          {
+            "name": "Teak seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              694.4
+            ],
+            "id": 21486
+          },
+          {
+            "name": "Yew seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              694.4
+            ],
+            "id": 5315
+          },
+          {
+            "name": "Papaya tree seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              892.9
+            ],
+            "id": 5288
+          },
+          {
+            "name": "Magic seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1136.4
+            ],
+            "id": 5316
+          },
+          {
+            "name": "Palm tree seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1250
+            ],
+            "id": 5289
+          },
+          {
+            "name": "Spirit seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1562.5
+            ],
+            "id": null
+          },
+          {
+            "name": "Dragonfruit tree seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              2083.3
+            ],
+            "id": 22877
+          },
+          {
+            "name": "Celastrus seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              3125
+            ],
+            "id": 22869
+          },
+          {
+            "name": "Redwood tree seed",
+            "quantity": 1,
+            "rarity": [
+              2,
+              3125
+            ],
+            "id": 22871
+          }
+        ]
+      },
+      {
+        "table_name": "Shark drop table",
+        "items": [
+          {
+            "name": "Raw shark",
+            "quantity": 55,
+            "rarity": [
+              6,
+              300
+            ],
+            "id": 383
+          },
+          {
+            "name": "Shark lure",
+            "quantity": 110,
+            "rarity": [
+              6,
+              300
+            ],
+            "id": 30900
+          },
+          {
+            "name": "Manta ray",
+            "quantity": 55,
+            "rarity": [
+              4,
+              300
+            ],
+            "id": 391
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Adamantite ore",
+            "quantity": 30,
+            "rarity": [
+              14,
+              150
+            ],
+            "id": 449
+          },
+          {
+            "name": "Coins",
+            "quantity": 80000,
+            "rarity": [
+              10,
+              150
+            ],
+            "id": null
+          },
+          {
+            "name": "Grapes",
+            "quantity": 300,
+            "rarity": [
+              10,
+              150
+            ],
+            "id": 1987
+          },
+          {
+            "name": "Magic logs",
+            "quantity": 50,
+            "rarity": [
+              10,
+              150
+            ],
+            "id": 1513
+          },
+          {
+            "name": "Dragon bones",
+            "quantity": 20,
+            "rarity": [
+              8,
+              150
+            ],
+            "id": 536
+          },
+          {
+            "name": "Diamond",
+            "quantity": 20,
+            "rarity": [
+              8,
+              150
+            ],
+            "id": 1601
+          },
+          {
+            "name": "Dragonstone",
+            "quantity": 3,
+            "rarity": [
+              6,
+              150
+            ],
+            "id": 1615
+          },
+          {
+            "name": "Wrath talisman",
+            "quantity": 1,
+            "rarity": [
+              6,
+              150
+            ],
+            "id": 22118
+          }
+        ]
+      },
+      {
+        "table_name": "Rare drop table",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 3000,
+            "rarity": [
+              2,
+              182.86
+            ],
+            "id": null
+          },
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              2,
+              768
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              2,
+              190.51
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              2,
+              190.51
+            ],
+            "id": 985
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1536
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              2,
+              3072
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Runite bar",
+            "quantity": 1,
+            "rarity": [
+              2,
+              768
+            ],
+            "id": 2363
+          },
+          {
+            "name": "Nature rune",
+            "quantity": 67,
+            "rarity": [
+              2,
+              1280
+            ],
+            "id": 561
+          },
+          {
+            "name": "Rune 2h sword",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1280
+            ],
+            "id": 1319
+          },
+          {
+            "name": "Rune battleaxe",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1280
+            ],
+            "id": 1373
+          },
+          {
+            "name": "Law rune",
+            "quantity": 45,
+            "rarity": [
+              2,
+              1920
+            ],
+            "id": 563
+          },
+          {
+            "name": "Death rune",
+            "quantity": 45,
+            "rarity": [
+              2,
+              1920
+            ],
+            "id": 560
+          },
+          {
+            "name": "Steel arrow",
+            "quantity": 150,
+            "rarity": [
+              2,
+              1920
+            ],
+            "id": 886
+          },
+          {
+            "name": "Rune arrow",
+            "quantity": 42,
+            "rarity": [
+              2,
+              1920
+            ],
+            "id": 892
+          },
+          {
+            "name": "Adamant javelin",
+            "quantity": 20,
+            "rarity": [
+              2,
+              1920
+            ],
+            "id": 829
+          },
+          {
+            "name": "Rune sq shield",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1920
+            ],
+            "id": 1185
+          },
+          {
+            "name": "Dragonstone",
+            "quantity": 1,
+            "rarity": [
+              2,
+              1920
+            ],
+            "id": 1615
+          },
+          {
+            "name": "Silver ore",
+            "quantity": 100,
+            "rarity": [
+              2,
+              1920
+            ],
+            "id": 442
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              2,
+              8192
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              2,
+              12288
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune kiteshield",
+            "quantity": 1,
+            "rarity": [
+              2,
+              3840
+            ],
+            "id": 1201
+          },
+          {
+            "name": "Dragon med helm",
+            "quantity": 1,
+            "rarity": [
+              2,
+              3840
+            ],
+            "id": 1149
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              2,
+              4053.77
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              2,
+              24576
+            ],
+            "id": 830
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              2,
+              8107.55
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              2,
+              10810.06
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Scaly blue dragonhide",
+            "quantity": 1,
+            "rarity": [
+              1,
+              10
+            ],
+            "id": 27897
+          },
+          {
+            "name": "Vorkath's head",
+            "quantity": 1,
+            "rarity": [
+              1,
+              50
+            ],
+            "id": null
+          },
+          {
+            "name": "Brimstone key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              50
+            ],
+            "id": null
+          },
+          {
+            "name": "Clue scroll (elite)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              65
+            ],
+            "id": null
+          },
+          {
+            "name": "Dragonbone necklace",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1000
+            ],
+            "id": 22111
+          },
+          {
+            "name": "Jar of decay",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3000
+            ],
+            "id": 22106
+          },
+          {
+            "name": "Vorki",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3000
+            ],
+            "id": null
+          },
+          {
+            "name": "Draconic visage",
+            "quantity": 1,
+            "rarity": [
+              1,
+              5000
+            ],
+            "id": 11286
+          },
+          {
+            "name": "Skeletal visage",
+            "quantity": 1,
+            "rarity": [
+              1,
+              5000
+            ],
+            "id": 22006
           }
         ]
       }
