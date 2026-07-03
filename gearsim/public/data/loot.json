@@ -13354,5 +13354,1905 @@
         ]
       }
     ]
+  },
+  {
+    "id": 13599,
+    "name": "Tormented Demons",
+    "level": null,
+    "drops": [
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Infernal ashes",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 25778
+          }
+        ]
+      },
+      {
+        "table_name": "Unique",
+        "items": [
+          {
+            "name": "Burning claw",
+            "quantity": 1,
+            "rarity": [
+              499,
+              250000
+            ],
+            "id": 29574
+          },
+          {
+            "name": "Tormented synapse",
+            "quantity": 1,
+            "rarity": [
+              1,
+              500
+            ],
+            "id": 29580
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Dragon dagger",
+            "quantity": 1,
+            "rarity": [
+              3,
+              51
+            ],
+            "id": 1215
+          },
+          {
+            "name": "Rune kiteshield",
+            "quantity": 1,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 1201
+          },
+          {
+            "name": "Battlestaff",
+            "quantity": 1,
+            "rarity": [
+              3,
+              51
+            ],
+            "id": 1391
+          },
+          {
+            "name": "Rune platebody",
+            "quantity": 1,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 1127
+          }
+        ]
+      },
+      {
+        "table_name": "Runes and ammunition",
+        "items": [
+          {
+            "name": "Chaos rune",
+            "quantity": 100,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 562
+          },
+          {
+            "name": "Soul rune",
+            "quantity": 75,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 566
+          },
+          {
+            "name": "Rune arrow",
+            "quantity": 125,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 892
+          }
+        ]
+      },
+      {
+        "table_name": "Herbs",
+        "items": [
+          {
+            "name": "Grimy kwuarm",
+            "quantity": 1,
+            "rarity": [
+              10,
+              408
+            ],
+            "id": 213
+          },
+          {
+            "name": "Grimy dwarf weed",
+            "quantity": 1,
+            "rarity": [
+              8,
+              408
+            ],
+            "id": 217
+          },
+          {
+            "name": "Grimy cadantine",
+            "quantity": 1,
+            "rarity": [
+              8,
+              408
+            ],
+            "id": 215
+          },
+          {
+            "name": "Grimy lantadyme",
+            "quantity": 1,
+            "rarity": [
+              6,
+              408
+            ],
+            "id": 2485
+          },
+          {
+            "name": "Grimy avantoe",
+            "quantity": 1,
+            "rarity": [
+              5,
+              408
+            ],
+            "id": 211
+          },
+          {
+            "name": "Grimy ranarr weed",
+            "quantity": 1,
+            "rarity": [
+              4,
+              408
+            ],
+            "id": 207
+          },
+          {
+            "name": "Grimy snapdragon",
+            "quantity": 1,
+            "rarity": [
+              4,
+              408
+            ],
+            "id": 3051
+          },
+          {
+            "name": "Grimy torstol",
+            "quantity": 1,
+            "rarity": [
+              3,
+              408
+            ],
+            "id": 219
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds",
+        "items": [
+          {
+            "name": "Ranarr seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              425
+            ],
+            "id": 5295
+          },
+          {
+            "name": "Snapdragon seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              455.4
+            ],
+            "id": 5300
+          },
+          {
+            "name": "Torstol seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              579.5
+            ],
+            "id": 5304
+          },
+          {
+            "name": "Watermelon seed",
+            "quantity": 15,
+            "rarity": [
+              1,
+              607.1
+            ],
+            "id": 5321
+          },
+          {
+            "name": "Willow seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              637.5
+            ],
+            "id": 5313
+          },
+          {
+            "name": "Mahogany seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 21488
+          },
+          {
+            "name": "Maple seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 5314
+          },
+          {
+            "name": "Teak seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 21486
+          },
+          {
+            "name": "Yew seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 5315
+          },
+          {
+            "name": "Papaya tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              910.7
+            ],
+            "id": 5288
+          },
+          {
+            "name": "Magic seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1159.1
+            ],
+            "id": 5316
+          },
+          {
+            "name": "Palm tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1275
+            ],
+            "id": 5289
+          },
+          {
+            "name": "Spirit seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1593.7
+            ],
+            "id": null
+          },
+          {
+            "name": "Dragonfruit tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2125
+            ],
+            "id": 22877
+          },
+          {
+            "name": "Celastrus seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3187.5
+            ],
+            "id": 22869
+          },
+          {
+            "name": "Redwood tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3187.5
+            ],
+            "id": 22871
+          }
+        ]
+      },
+      {
+        "table_name": "Consumables",
+        "items": [
+          {
+            "name": "Smouldering gland",
+            "quantity": 1,
+            "rarity": [
+              1,
+              25
+            ],
+            "id": null
+          },
+          {
+            "name": "Smouldering pile of flesh",
+            "quantity": 1,
+            "rarity": [
+              1,
+              25
+            ],
+            "id": null
+          },
+          {
+            "name": "Smouldering heart",
+            "quantity": 1,
+            "rarity": [
+              1,
+              125
+            ],
+            "id": null
+          },
+          {
+            "name": "Manta ray",
+            "quantity": 2,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 391
+          },
+          {
+            "name": "Prayer potion(4)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 2434
+          },
+          {
+            "name": "Prayer potion(2)",
+            "quantity": 2,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 141
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Guthixian temple teleport",
+            "quantity": 2,
+            "rarity": [
+              1,
+              12
+            ],
+            "id": 29684
+          },
+          {
+            "name": "Magic shortbow (u)",
+            "quantity": 1,
+            "rarity": [
+              29,
+              255
+            ],
+            "id": 72
+          },
+          {
+            "name": "Magic longbow (u)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              255
+            ],
+            "id": 70
+          },
+          {
+            "name": "Malicious ashes",
+            "quantity": 3,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 25772
+          },
+          {
+            "name": "Fire orb",
+            "quantity": 7,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 569
+          },
+          {
+            "name": "Dragon arrowtips",
+            "quantity": 40,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 11237
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Clue scroll (elite)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 13600,
+    "name": "Tormented Demons",
+    "level": null,
+    "drops": [
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Infernal ashes",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 25778
+          }
+        ]
+      },
+      {
+        "table_name": "Unique",
+        "items": [
+          {
+            "name": "Burning claw",
+            "quantity": 1,
+            "rarity": [
+              499,
+              250000
+            ],
+            "id": 29574
+          },
+          {
+            "name": "Tormented synapse",
+            "quantity": 1,
+            "rarity": [
+              1,
+              500
+            ],
+            "id": 29580
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Dragon dagger",
+            "quantity": 1,
+            "rarity": [
+              3,
+              51
+            ],
+            "id": 1215
+          },
+          {
+            "name": "Rune kiteshield",
+            "quantity": 1,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 1201
+          },
+          {
+            "name": "Battlestaff",
+            "quantity": 1,
+            "rarity": [
+              3,
+              51
+            ],
+            "id": 1391
+          },
+          {
+            "name": "Rune platebody",
+            "quantity": 1,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 1127
+          }
+        ]
+      },
+      {
+        "table_name": "Runes and ammunition",
+        "items": [
+          {
+            "name": "Chaos rune",
+            "quantity": 100,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 562
+          },
+          {
+            "name": "Soul rune",
+            "quantity": 75,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 566
+          },
+          {
+            "name": "Rune arrow",
+            "quantity": 125,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 892
+          }
+        ]
+      },
+      {
+        "table_name": "Herbs",
+        "items": [
+          {
+            "name": "Grimy kwuarm",
+            "quantity": 1,
+            "rarity": [
+              10,
+              408
+            ],
+            "id": 213
+          },
+          {
+            "name": "Grimy dwarf weed",
+            "quantity": 1,
+            "rarity": [
+              8,
+              408
+            ],
+            "id": 217
+          },
+          {
+            "name": "Grimy cadantine",
+            "quantity": 1,
+            "rarity": [
+              8,
+              408
+            ],
+            "id": 215
+          },
+          {
+            "name": "Grimy lantadyme",
+            "quantity": 1,
+            "rarity": [
+              6,
+              408
+            ],
+            "id": 2485
+          },
+          {
+            "name": "Grimy avantoe",
+            "quantity": 1,
+            "rarity": [
+              5,
+              408
+            ],
+            "id": 211
+          },
+          {
+            "name": "Grimy ranarr weed",
+            "quantity": 1,
+            "rarity": [
+              4,
+              408
+            ],
+            "id": 207
+          },
+          {
+            "name": "Grimy snapdragon",
+            "quantity": 1,
+            "rarity": [
+              4,
+              408
+            ],
+            "id": 3051
+          },
+          {
+            "name": "Grimy torstol",
+            "quantity": 1,
+            "rarity": [
+              3,
+              408
+            ],
+            "id": 219
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds",
+        "items": [
+          {
+            "name": "Ranarr seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              425
+            ],
+            "id": 5295
+          },
+          {
+            "name": "Snapdragon seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              455.4
+            ],
+            "id": 5300
+          },
+          {
+            "name": "Torstol seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              579.5
+            ],
+            "id": 5304
+          },
+          {
+            "name": "Watermelon seed",
+            "quantity": 15,
+            "rarity": [
+              1,
+              607.1
+            ],
+            "id": 5321
+          },
+          {
+            "name": "Willow seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              637.5
+            ],
+            "id": 5313
+          },
+          {
+            "name": "Mahogany seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 21488
+          },
+          {
+            "name": "Maple seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 5314
+          },
+          {
+            "name": "Teak seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 21486
+          },
+          {
+            "name": "Yew seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 5315
+          },
+          {
+            "name": "Papaya tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              910.7
+            ],
+            "id": 5288
+          },
+          {
+            "name": "Magic seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1159.1
+            ],
+            "id": 5316
+          },
+          {
+            "name": "Palm tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1275
+            ],
+            "id": 5289
+          },
+          {
+            "name": "Spirit seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1593.7
+            ],
+            "id": null
+          },
+          {
+            "name": "Dragonfruit tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2125
+            ],
+            "id": 22877
+          },
+          {
+            "name": "Celastrus seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3187.5
+            ],
+            "id": 22869
+          },
+          {
+            "name": "Redwood tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3187.5
+            ],
+            "id": 22871
+          }
+        ]
+      },
+      {
+        "table_name": "Consumables",
+        "items": [
+          {
+            "name": "Smouldering gland",
+            "quantity": 1,
+            "rarity": [
+              1,
+              25
+            ],
+            "id": null
+          },
+          {
+            "name": "Smouldering pile of flesh",
+            "quantity": 1,
+            "rarity": [
+              1,
+              25
+            ],
+            "id": null
+          },
+          {
+            "name": "Smouldering heart",
+            "quantity": 1,
+            "rarity": [
+              1,
+              125
+            ],
+            "id": null
+          },
+          {
+            "name": "Manta ray",
+            "quantity": 2,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 391
+          },
+          {
+            "name": "Prayer potion(4)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 2434
+          },
+          {
+            "name": "Prayer potion(2)",
+            "quantity": 2,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 141
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Guthixian temple teleport",
+            "quantity": 2,
+            "rarity": [
+              1,
+              12
+            ],
+            "id": 29684
+          },
+          {
+            "name": "Magic shortbow (u)",
+            "quantity": 1,
+            "rarity": [
+              29,
+              255
+            ],
+            "id": 72
+          },
+          {
+            "name": "Magic longbow (u)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              255
+            ],
+            "id": 70
+          },
+          {
+            "name": "Malicious ashes",
+            "quantity": 3,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 25772
+          },
+          {
+            "name": "Fire orb",
+            "quantity": 7,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 569
+          },
+          {
+            "name": "Dragon arrowtips",
+            "quantity": 40,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 11237
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Clue scroll (elite)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 13601,
+    "name": "Tormented Demons",
+    "level": null,
+    "drops": [
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Infernal ashes",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 25778
+          }
+        ]
+      },
+      {
+        "table_name": "Unique",
+        "items": [
+          {
+            "name": "Burning claw",
+            "quantity": 1,
+            "rarity": [
+              499,
+              250000
+            ],
+            "id": 29574
+          },
+          {
+            "name": "Tormented synapse",
+            "quantity": 1,
+            "rarity": [
+              1,
+              500
+            ],
+            "id": 29580
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Dragon dagger",
+            "quantity": 1,
+            "rarity": [
+              3,
+              51
+            ],
+            "id": 1215
+          },
+          {
+            "name": "Rune kiteshield",
+            "quantity": 1,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 1201
+          },
+          {
+            "name": "Battlestaff",
+            "quantity": 1,
+            "rarity": [
+              3,
+              51
+            ],
+            "id": 1391
+          },
+          {
+            "name": "Rune platebody",
+            "quantity": 1,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 1127
+          }
+        ]
+      },
+      {
+        "table_name": "Runes and ammunition",
+        "items": [
+          {
+            "name": "Chaos rune",
+            "quantity": 100,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 562
+          },
+          {
+            "name": "Soul rune",
+            "quantity": 75,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 566
+          },
+          {
+            "name": "Rune arrow",
+            "quantity": 125,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 892
+          }
+        ]
+      },
+      {
+        "table_name": "Herbs",
+        "items": [
+          {
+            "name": "Grimy kwuarm",
+            "quantity": 1,
+            "rarity": [
+              10,
+              408
+            ],
+            "id": 213
+          },
+          {
+            "name": "Grimy dwarf weed",
+            "quantity": 1,
+            "rarity": [
+              8,
+              408
+            ],
+            "id": 217
+          },
+          {
+            "name": "Grimy cadantine",
+            "quantity": 1,
+            "rarity": [
+              8,
+              408
+            ],
+            "id": 215
+          },
+          {
+            "name": "Grimy lantadyme",
+            "quantity": 1,
+            "rarity": [
+              6,
+              408
+            ],
+            "id": 2485
+          },
+          {
+            "name": "Grimy avantoe",
+            "quantity": 1,
+            "rarity": [
+              5,
+              408
+            ],
+            "id": 211
+          },
+          {
+            "name": "Grimy ranarr weed",
+            "quantity": 1,
+            "rarity": [
+              4,
+              408
+            ],
+            "id": 207
+          },
+          {
+            "name": "Grimy snapdragon",
+            "quantity": 1,
+            "rarity": [
+              4,
+              408
+            ],
+            "id": 3051
+          },
+          {
+            "name": "Grimy torstol",
+            "quantity": 1,
+            "rarity": [
+              3,
+              408
+            ],
+            "id": 219
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds",
+        "items": [
+          {
+            "name": "Ranarr seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              425
+            ],
+            "id": 5295
+          },
+          {
+            "name": "Snapdragon seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              455.4
+            ],
+            "id": 5300
+          },
+          {
+            "name": "Torstol seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              579.5
+            ],
+            "id": 5304
+          },
+          {
+            "name": "Watermelon seed",
+            "quantity": 15,
+            "rarity": [
+              1,
+              607.1
+            ],
+            "id": 5321
+          },
+          {
+            "name": "Willow seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              637.5
+            ],
+            "id": 5313
+          },
+          {
+            "name": "Mahogany seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 21488
+          },
+          {
+            "name": "Maple seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 5314
+          },
+          {
+            "name": "Teak seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 21486
+          },
+          {
+            "name": "Yew seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 5315
+          },
+          {
+            "name": "Papaya tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              910.7
+            ],
+            "id": 5288
+          },
+          {
+            "name": "Magic seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1159.1
+            ],
+            "id": 5316
+          },
+          {
+            "name": "Palm tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1275
+            ],
+            "id": 5289
+          },
+          {
+            "name": "Spirit seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1593.7
+            ],
+            "id": null
+          },
+          {
+            "name": "Dragonfruit tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2125
+            ],
+            "id": 22877
+          },
+          {
+            "name": "Celastrus seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3187.5
+            ],
+            "id": 22869
+          },
+          {
+            "name": "Redwood tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3187.5
+            ],
+            "id": 22871
+          }
+        ]
+      },
+      {
+        "table_name": "Consumables",
+        "items": [
+          {
+            "name": "Smouldering gland",
+            "quantity": 1,
+            "rarity": [
+              1,
+              25
+            ],
+            "id": null
+          },
+          {
+            "name": "Smouldering pile of flesh",
+            "quantity": 1,
+            "rarity": [
+              1,
+              25
+            ],
+            "id": null
+          },
+          {
+            "name": "Smouldering heart",
+            "quantity": 1,
+            "rarity": [
+              1,
+              125
+            ],
+            "id": null
+          },
+          {
+            "name": "Manta ray",
+            "quantity": 2,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 391
+          },
+          {
+            "name": "Prayer potion(4)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 2434
+          },
+          {
+            "name": "Prayer potion(2)",
+            "quantity": 2,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 141
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Guthixian temple teleport",
+            "quantity": 2,
+            "rarity": [
+              1,
+              12
+            ],
+            "id": 29684
+          },
+          {
+            "name": "Magic shortbow (u)",
+            "quantity": 1,
+            "rarity": [
+              29,
+              255
+            ],
+            "id": 72
+          },
+          {
+            "name": "Magic longbow (u)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              255
+            ],
+            "id": 70
+          },
+          {
+            "name": "Malicious ashes",
+            "quantity": 3,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 25772
+          },
+          {
+            "name": "Fire orb",
+            "quantity": 7,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 569
+          },
+          {
+            "name": "Dragon arrowtips",
+            "quantity": 40,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 11237
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Clue scroll (elite)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 13602,
+    "name": "Tormented Demons",
+    "level": null,
+    "drops": [
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Infernal ashes",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 25778
+          }
+        ]
+      },
+      {
+        "table_name": "Unique",
+        "items": [
+          {
+            "name": "Burning claw",
+            "quantity": 1,
+            "rarity": [
+              499,
+              250000
+            ],
+            "id": 29574
+          },
+          {
+            "name": "Tormented synapse",
+            "quantity": 1,
+            "rarity": [
+              1,
+              500
+            ],
+            "id": 29580
+          }
+        ]
+      },
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Dragon dagger",
+            "quantity": 1,
+            "rarity": [
+              3,
+              51
+            ],
+            "id": 1215
+          },
+          {
+            "name": "Rune kiteshield",
+            "quantity": 1,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 1201
+          },
+          {
+            "name": "Battlestaff",
+            "quantity": 1,
+            "rarity": [
+              3,
+              51
+            ],
+            "id": 1391
+          },
+          {
+            "name": "Rune platebody",
+            "quantity": 1,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 1127
+          }
+        ]
+      },
+      {
+        "table_name": "Runes and ammunition",
+        "items": [
+          {
+            "name": "Chaos rune",
+            "quantity": 100,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 562
+          },
+          {
+            "name": "Soul rune",
+            "quantity": 75,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 566
+          },
+          {
+            "name": "Rune arrow",
+            "quantity": 125,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 892
+          }
+        ]
+      },
+      {
+        "table_name": "Herbs",
+        "items": [
+          {
+            "name": "Grimy kwuarm",
+            "quantity": 1,
+            "rarity": [
+              10,
+              408
+            ],
+            "id": 213
+          },
+          {
+            "name": "Grimy dwarf weed",
+            "quantity": 1,
+            "rarity": [
+              8,
+              408
+            ],
+            "id": 217
+          },
+          {
+            "name": "Grimy cadantine",
+            "quantity": 1,
+            "rarity": [
+              8,
+              408
+            ],
+            "id": 215
+          },
+          {
+            "name": "Grimy lantadyme",
+            "quantity": 1,
+            "rarity": [
+              6,
+              408
+            ],
+            "id": 2485
+          },
+          {
+            "name": "Grimy avantoe",
+            "quantity": 1,
+            "rarity": [
+              5,
+              408
+            ],
+            "id": 211
+          },
+          {
+            "name": "Grimy ranarr weed",
+            "quantity": 1,
+            "rarity": [
+              4,
+              408
+            ],
+            "id": 207
+          },
+          {
+            "name": "Grimy snapdragon",
+            "quantity": 1,
+            "rarity": [
+              4,
+              408
+            ],
+            "id": 3051
+          },
+          {
+            "name": "Grimy torstol",
+            "quantity": 1,
+            "rarity": [
+              3,
+              408
+            ],
+            "id": 219
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds",
+        "items": [
+          {
+            "name": "Ranarr seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              425
+            ],
+            "id": 5295
+          },
+          {
+            "name": "Snapdragon seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              455.4
+            ],
+            "id": 5300
+          },
+          {
+            "name": "Torstol seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              579.5
+            ],
+            "id": 5304
+          },
+          {
+            "name": "Watermelon seed",
+            "quantity": 15,
+            "rarity": [
+              1,
+              607.1
+            ],
+            "id": 5321
+          },
+          {
+            "name": "Willow seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              637.5
+            ],
+            "id": 5313
+          },
+          {
+            "name": "Mahogany seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 21488
+          },
+          {
+            "name": "Maple seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 5314
+          },
+          {
+            "name": "Teak seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 21486
+          },
+          {
+            "name": "Yew seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              708.3
+            ],
+            "id": 5315
+          },
+          {
+            "name": "Papaya tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              910.7
+            ],
+            "id": 5288
+          },
+          {
+            "name": "Magic seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1159.1
+            ],
+            "id": 5316
+          },
+          {
+            "name": "Palm tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1275
+            ],
+            "id": 5289
+          },
+          {
+            "name": "Spirit seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1593.7
+            ],
+            "id": null
+          },
+          {
+            "name": "Dragonfruit tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2125
+            ],
+            "id": 22877
+          },
+          {
+            "name": "Celastrus seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3187.5
+            ],
+            "id": 22869
+          },
+          {
+            "name": "Redwood tree seed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3187.5
+            ],
+            "id": 22871
+          }
+        ]
+      },
+      {
+        "table_name": "Consumables",
+        "items": [
+          {
+            "name": "Smouldering gland",
+            "quantity": 1,
+            "rarity": [
+              1,
+              25
+            ],
+            "id": null
+          },
+          {
+            "name": "Smouldering pile of flesh",
+            "quantity": 1,
+            "rarity": [
+              1,
+              25
+            ],
+            "id": null
+          },
+          {
+            "name": "Smouldering heart",
+            "quantity": 1,
+            "rarity": [
+              1,
+              125
+            ],
+            "id": null
+          },
+          {
+            "name": "Manta ray",
+            "quantity": 2,
+            "rarity": [
+              4,
+              51
+            ],
+            "id": 391
+          },
+          {
+            "name": "Prayer potion(4)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 2434
+          },
+          {
+            "name": "Prayer potion(2)",
+            "quantity": 2,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 141
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Guthixian temple teleport",
+            "quantity": 2,
+            "rarity": [
+              1,
+              12
+            ],
+            "id": 29684
+          },
+          {
+            "name": "Magic shortbow (u)",
+            "quantity": 1,
+            "rarity": [
+              29,
+              255
+            ],
+            "id": 72
+          },
+          {
+            "name": "Magic longbow (u)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              255
+            ],
+            "id": 70
+          },
+          {
+            "name": "Malicious ashes",
+            "quantity": 3,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 25772
+          },
+          {
+            "name": "Fire orb",
+            "quantity": 7,
+            "rarity": [
+              2,
+              51
+            ],
+            "id": 569
+          },
+          {
+            "name": "Dragon arrowtips",
+            "quantity": 40,
+            "rarity": [
+              1,
+              51
+            ],
+            "id": 11237
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Clue scroll (elite)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]

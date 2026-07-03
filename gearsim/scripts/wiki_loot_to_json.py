@@ -188,7 +188,9 @@ def parse_rarity(cell: Tag) -> tuple[float, float] | None:
     * ``2/3``    – non-unit numerator
     * ``Always`` – mapped to ``(1, 1)``
     * ``2 × 1/250`` – multi-roll: N rolls of P/D, stored as ``(N*P, D)``
+    * ``~1/12``  – approximate rarity, treated as exact
     """
+
     span = cell.find("span", attrs={"data-drop-fraction": True})
     if span and span.get("data-drop-fraction"):
         raw = strip_commas_num(span["data-drop-fraction"])
@@ -201,6 +203,8 @@ def parse_rarity(cell: Tag) -> tuple[float, float] | None:
 
     text = cell.get_text(" ", strip=True)
     text = re.split(r"\s*[;\[]", text, maxsplit=1)[0].strip()
+    # Strip leading "~" from approximate rarities (e.g. "~1/12" → "1/12")
+    text = text.lstrip("~").strip()
     if not text:
         return None
     low = text.lower()
