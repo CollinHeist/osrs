@@ -948,6 +948,12 @@ tr.loot-table-group td {
   padding-bottom: 0.45rem;
 }
 
+tr.loot-table-group td.loot-table-group-toggle {
+  text-align: center;
+  width: 44px;
+  cursor: pointer;
+}
+
 .loot-table th {
   position: sticky;
   top: 0;

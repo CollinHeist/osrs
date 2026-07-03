@@ -1,4 +1,4 @@
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { getFlattenedLootRows } from "../lib/loot.js";
 import { computeLootEvPerKill } from "../lib/analytics.js";
 import { fmtGp } from "../lib/format.js";
@@ -11,6 +11,32 @@ import { fmtGp } from "../lib/format.js";
 function rowIncluded(row, lootPick, lootMinGpPerItem) {
   if (lootPick && row.key in lootPick) return lootPick[row.key];
   return row.unitPrice >= (lootMinGpPerItem ?? 0);
+}
+
+/**
+ * Checkbox for toggling an entire loot table group, with indeterminate support.
+ * @param {{ rows: any[], lootPick: Record<string, boolean>, lootMinGpPerItem: number, onToggle: (include: boolean) => void }} props
+ */
+function GroupHeaderCheckbox({ rows, lootPick, lootMinGpPerItem, onToggle }) {
+  const checkedCount = rows.filter((r) =>
+    rowIncluded(r, lootPick, lootMinGpPerItem)
+  ).length;
+  const allIncluded = checkedCount === rows.length;
+  const someIncluded = checkedCount > 0 && checkedCount < rows.length;
+
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current) ref.current.indeterminate = someIncluded;
+  }, [someIncluded]);
+
+  return (
+    <input
+      ref={ref}
+      type="checkbox"
+      checked={allIncluded}
+      onChange={() => onToggle(!allIncluded)}
+    />
+  );
 }
 
 /**
@@ -76,6 +102,14 @@ export function LootTable({
     });
   }
 
+  function toggleGroup(rows, include) {
+    const newPick = { ...lootPick };
+    for (const row of rows) {
+      newPick[row.key] = include;
+    }
+    onChange({ lootMinGpPerItem, lootPick: newPick });
+  }
+
   function applyThreshold() {
     const val = Math.max(0, parseInt(thresholdInput) || 0);
     const newPick = {};
@@ -137,7 +171,15 @@ export function LootTable({
             {[...lootGroups.entries()].map(([tableName, rows]) => (
               <Fragment key={tableName}>
                 <tr className="loot-table-group">
-                  <td colSpan={6}>{tableName}</td>
+                  <td className="loot-table-group-toggle">
+                    <GroupHeaderCheckbox
+                      rows={rows}
+                      lootPick={lootPick}
+                      lootMinGpPerItem={lootMinGpPerItem}
+                      onToggle={(include) => toggleGroup(rows, include)}
+                    />
+                  </td>
+                  <td colSpan={5}>{tableName}</td>
                 </tr>
                 {rows.map((row) => {
                   const included = rowIncluded(row, lootPick, lootMinGpPerItem);
