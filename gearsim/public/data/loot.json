@@ -17120,5 +17120,267 @@
         ]
       }
     ]
+  },
+  {
+    "id": 15497,
+    "name": "Aquanite",
+    "level": 145,
+    "drops": [
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Big bones",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 532
+          }
+        ]
+      },
+      {
+        "table_name": "Pre-roll",
+        "items": [
+          {
+            "name": "Aquanite tendon",
+            "quantity": 1,
+            "rarity": [
+              1,
+              3500
+            ],
+            "id": 32876
+          }
+        ]
+      },
+      {
+        "table_name": "Runes and ammunition",
+        "items": [
+          {
+            "name": "Water rune",
+            "quantity": 350,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 555
+          },
+          {
+            "name": "Rune cannonball",
+            "quantity": 22,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 31914
+          },
+          {
+            "name": "Dragon cannonball",
+            "quantity": 15,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 31916
+          }
+        ]
+      },
+      {
+        "table_name": "Seeds and frags",
+        "items": [
+          {
+            "name": "Ranarr seed",
+            "quantity": 1,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": 5295
+          },
+          {
+            "name": "Irit seed",
+            "quantity": 1,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": 5297
+          },
+          {
+            "name": "Avantoe seed",
+            "quantity": 1,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": 5298
+          },
+          {
+            "name": "Kwuarm seed",
+            "quantity": 1,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": 5299
+          },
+          {
+            "name": "Cadantine seed",
+            "quantity": 1,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": 5301
+          },
+          {
+            "name": "Snape grass seed",
+            "quantity": 2,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 22879
+          },
+          {
+            "name": "Watermelon seed",
+            "quantity": 5,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 5321
+          },
+          {
+            "name": "Pineapple seed",
+            "quantity": 1,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 5287
+          },
+          {
+            "name": "Elkhorn frag",
+            "quantity": 4,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 31511
+          },
+          {
+            "name": "Pillar frag",
+            "quantity": 3,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 31513
+          },
+          {
+            "name": "Umbral frag",
+            "quantity": 1,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 31515
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Snape grass",
+            "quantity": 2,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 231
+          },
+          {
+            "name": "Seaweed",
+            "quantity": 1,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": 401
+          },
+          {
+            "name": "Shark lure",
+            "quantity": 5,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 30900
+          },
+          {
+            "name": "Water battlestaff",
+            "quantity": 1,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 1395
+          },
+          {
+            "name": "Coins",
+            "quantity": 200,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 1617
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Clue scroll (hard)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              125
+            ],
+            "id": null
+          },
+          {
+            "name": "Long bone",
+            "quantity": 1,
+            "rarity": [
+              1,
+              400
+            ],
+            "id": null
+          },
+          {
+            "name": "Curved bone",
+            "quantity": 1,
+            "rarity": [
+              1,
+              5012.5
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]
