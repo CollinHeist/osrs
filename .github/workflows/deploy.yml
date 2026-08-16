@@ -43,6 +43,7 @@ jobs:
             gearsim/package-lock.json
             slayer/package-lock.json
             efficiency/package-lock.json
+            luck/package-lock.json
 
       - name: Install dependencies (tangleroot)
         working-directory: tangleroot
@@ -87,9 +88,17 @@ jobs:
         working-directory: efficiency
         run: npm run build
 
+      - name: Install dependencies (luck)
+        working-directory: luck
+        run: npm ci
+
+      - name: Build (luck)
+        working-directory: luck
+        run: npm run build
+
       - name: Stage Pages artifact
         run: |
-          mkdir -p _site/herblore _site/prayer _site/gear _site/tangleroot _site/training _site/beaver _site/slayer _site/efficiency
+          mkdir -p _site/herblore _site/prayer _site/gear _site/tangleroot _site/training _site/beaver _site/slayer _site/efficiency _site/luck
           cp index.html _site/index.html
           cp herblore/index.html _site/herblore/index.html
           cp prayer/index.html _site/prayer/index.html
@@ -100,6 +109,7 @@ jobs:
           cp gear/legacy.html _site/gear/legacy.html
           cp -R slayer/dist/. _site/slayer/
           cp -R efficiency/dist/. _site/efficiency/
+          cp -R luck/dist/. _site/luck/
 
       - name: Setup Pages
         uses: actions/configure-pages@v6

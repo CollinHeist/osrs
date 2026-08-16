@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-15",
+  "source": "https://oldschool.runescape.wiki/",
+  "activities": [
+    {
+      "id": "tempoross",
+      "name": "Tempoross",
+      "category": "Skilling boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Tempoross",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tempoross.png",
+      "unit": { "singular": "reward permit", "plural": "reward permits" },
+      "rateNote": "Rates are per reward permit used at the reward pool. Duplicate-protected rewards are still evaluated at their original first-copy rate.",
+      "groups": [
+        {
+          "id": "reward-pool",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": ["fish-barrel", "tackle-box", "big-harpoonfish", "tome-of-water", "tiny-tempor", "dragon-harpoon"]
+        }
+      ],
+      "drops": [
+        {
+          "id": "fish-barrel",
+          "name": "Fish barrel",
+          "rate": [1, 400],
+          "duplicateProtected": true,
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Fish_barrel",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Fish_barrel.png"
+        },
+        {
+          "id": "tackle-box",
+          "name": "Tackle box",
+          "rate": [1, 400],
+          "duplicateProtected": true,
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Tackle_box",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tackle_box.png"
+        },
+        {
+          "id": "big-harpoonfish",
+          "name": "Big harpoonfish",
+          "rate": [1, 1600],
+          "duplicateProtected": true,
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Big_harpoonfish",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Big_harpoonfish.png"
+        },
+        {
+          "id": "tome-of-water",
+          "name": "Tome of water (empty)",
+          "rate": [1, 1600],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Tome_of_water",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tome_of_water_(empty).png"
+        },
+        {
+          "id": "tiny-tempor",
+          "name": "Tiny tempor",
+          "rate": [1, 8000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Tiny_tempor",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tiny_tempor.png"
+        },
+        {
+          "id": "dragon-harpoon",
+          "name": "Dragon harpoon",
+          "rate": [1, 8000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_harpoon",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_harpoon.png"
+        }
+      ]
+    },
+    {
+      "id": "Camdozaal",
+      "name": "Camdozaal",
+      "category": "Other",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Ruins_of_Camdozaal",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Barronite_deposit_detail.png",
+      "unit": { "singular": "barronite deposit", "plural": "barronite deposits" },
+      "groups": [
+        {
+          "id": "barronite-deposit",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": ["barronite-head", "imcando-hammer-broken", "ancient-astroscope", "ancient-carcanet", "ancient-globe", "ancient-ledger", "ancient-treatise"]
+        }
+      ],
+      "drops": [
+        {
+          "id": "barronite-head",
+          "name": "Barronite Head",
+          "rate": [1, 200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Barronite_head",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Barronite_head.png"
+        },
+        {
+          "id": "imcando-hammer-broken",
+          "name": "Imcando Hammer (Broken)",
+          "rate": [1, 300],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Imcando_hammer_(broken)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Imcando_hammer_detail.png"
+        },
+        {
+          "id": "ancient-astroscope",
+          "name": "Ancient astroscope",
+          "rate": [1, 350],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_astroscope",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ancient_astroscope.png"
+        },
+        {
+          "id": "ancient-carcanet",
+          "name": "Ancient carcanet",
+          "rate": [1, 350],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_carcanet",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ancient_carcanet.png"
+        },
+        {
+          "id": "ancient-globe",
+          "name": "Ancient globe",
+          "rate": [1, 350],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_globe",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ancient_globe.png"
+        },
+        {
+          "id": "ancient-ledger",
+          "name": "Ancient ledger",
+          "rate": [1, 350],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_ledger",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ancient_ledger.png"
+        },
+        {
+          "id": "ancient-treatise",
+          "name": "Ancient treatise",
+          "rate": [1, 350],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_treatise",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ancient_treatise.png"
+        }
+      ]
+    },
+    {
+      "id": "wintertodt",
+      "name": "Wintertodt",
+      "category": "Skilling boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Wintertodt",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Wintertodt.png",
+      "unit": { "singular": "reward roll", "plural": "reward rolls" },
+      "rateNote": "Wintertodt awards a variable number of reward rolls based on points. Enter reward rolls, not games. The cart checks uniques sequentially, so the catalog uses their effective mutually exclusive rates. Pyromancer pieces are omitted because their selection changes with ownership.",
+      "groups": [
+        {
+          "id": "reward-cart-sequence",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": ["phoenix", "wintertodt-dragon-axe", "tome-of-fire", "warm-gloves", "bruma-torch"]
+        }
+      ],
+      "drops": [
+        {
+          "id": "phoenix",
+          "name": "Phoenix",
+          "rate": [1, 5000],
+          "rateLabel": "1/5,000",
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Phoenix",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Phoenix.png"
+        },
+        {
+          "id": "wintertodt-dragon-axe",
+          "name": "Dragon axe",
+          "rate": [4999, 50000000],
+          "rateLabel": "effective 1/10,000.2",
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_axe",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_axe.png"
+        },
+        {
+          "id": "tome-of-fire",
+          "name": "Tome of fire (empty)",
+          "rate": [49985001, 50000000000],
+          "rateLabel": "effective 1/1,000.3",
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Tome_of_fire",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tome_of_fire_(empty).png"
+        },
+        {
+          "id": "warm-gloves",
+          "name": "Warm gloves",
+          "rate": [49935015999, 7500000000000],
+          "rateLabel": "effective 1/150.2",
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Warm_gloves",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Warm_gloves.png"
+        },
+        {
+          "id": "bruma-torch",
+          "name": "Bruma torch",
+          "rate": [7440317383851, 1125000000000000],
+          "rateLabel": "effective 1/151.2",
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bruma_torch",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bruma_torch.png"
+        }
+      ]
+    },
+    {
+      "id": "zulrah",
+      "name": "Zulrah",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Zulrah",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Zulrah.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "rateNote": "Each kill has two main loot rolls. The three fangs/visage and both mutagens are represented per roll; jar and pet are independent per kill. Uncut onyx is omitted because it is not exclusive to Zulrah.",
+      "groups": [
+        {
+          "id": "zulrah-loot-rolls",
+          "type": "exclusive",
+          "rollsPerUnit": 2,
+          "drops": ["tanzanite-fang", "magic-fang", "serpentine-visage", "tanzanite-mutagen", "magma-mutagen"]
+        },
+        {
+          "id": "zulrah-tertiary",
+          "type": "independent",
+          "rollsPerUnit": 1,
+          "drops": ["jar-of-swamp", "pet-snakeling"]
+        }
+      ],
+      "drops": [
+        {
+          "id": "tanzanite-fang",
+          "name": "Tanzanite fang",
+          "rate": [1, 1024],
+          "rateLabel": "2 × 1/1,024 per kill",
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Tanzanite_fang",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tanzanite_fang.png"
+        },
+        {
+          "id": "magic-fang",
+          "name": "Magic fang",
+          "rate": [1, 1024],
+          "rateLabel": "2 × 1/1,024 per kill",
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_fang",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Magic_fang.png"
+        },
+        {
+          "id": "serpentine-visage",
+          "name": "Serpentine visage",
+          "rate": [1, 1024],
+          "rateLabel": "2 × 1/1,024 per kill",
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Serpentine_visage",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Serpentine_visage.png"
+        },
+        {
+          "id": "tanzanite-mutagen",
+          "name": "Tanzanite mutagen",
+          "rate": [1, 13107],
+          "rateLabel": "about 2 × 1/13,107 per kill",
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Tanzanite_mutagen",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tanzanite_mutagen.png"
+        },
+        {
+          "id": "magma-mutagen",
+          "name": "Magma mutagen",
+          "rate": [1, 13107],
+          "rateLabel": "about 2 × 1/13,107 per kill",
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Magma_mutagen",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Magma_mutagen.png"
+        },
+        {
+          "id": "jar-of-swamp",
+          "name": "Jar of swamp",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_swamp",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_swamp.png"
+        },
+        {
+          "id": "pet-snakeling",
+          "name": "Pet snakeling",
+          "rate": [1, 4000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pet_snakeling",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pet_snakeling.png"
+        }
+      ]
+    },
+    {
+      "id": "vorkath",
+      "name": "Vorkath",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Vorkath",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Vorkath.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "rateNote": "The tracked rare drops roll independently. Vorkath's head is omitted because its guaranteed 50th-kill protection does not have a fixed independent rate.",
+      "groups": [
+        {
+          "id": "vorkath-tertiary",
+          "type": "independent",
+          "rollsPerUnit": 1,
+          "drops": ["dragonbone-necklace", "jar-of-decay", "vorki", "draconic-visage", "skeletal-visage"]
+        }
+      ],
+      "drops": [
+        {
+          "id": "dragonbone-necklace",
+          "name": "Dragonbone necklace",
+          "rate": [1, 1000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragonbone_necklace",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragonbone_necklace.png"
+        },
+        {
+          "id": "jar-of-decay",
+          "name": "Jar of decay",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_decay",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_decay.png"
+        },
+        {
+          "id": "vorki",
+          "name": "Vorki",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Vorki",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Vorki.png"
+        },
+        {
+          "id": "draconic-visage",
+          "name": "Draconic visage",
+          "rate": [1, 5000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Draconic_visage",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Draconic_visage.png"
+        },
+        {
+          "id": "skeletal-visage",
+          "name": "Skeletal visage",
+          "rate": [1, 5000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Skeletal_visage",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Skeletal_visage.png"
+        }
+      ]
+    },
+    {
+      "id": "barrows",
+      "name": "Barrows",
+      "category": "Minigame",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Barrows",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Chest_(Barrows,_open).png",
+      "unit": { "singular": "chest", "plural": "chests" },
+      "rateNote": "Assumes all six brothers are killed before every chest: seven reward rolls, each with a 1/102 equipment chance, then an equal choice among 24 pieces. Runs with fewer brothers are not represented.",
+      "groups": [
+        {
+          "id": "barrows-equipment",
+          "type": "exclusive",
+          "rollsPerUnit": 7,
+          "drops": ["ahrims-hood", "ahrims-robetop", "ahrims-robeskirt", "ahrims-staff", "dharoks-helm", "dharoks-platebody", "dharoks-platelegs", "dharoks-greataxe", "guthans-helm", "guthans-platebody", "guthans-chainskirt", "guthans-warspear", "karils-coif", "karils-leathertop", "karils-leatherskirt", "karils-crossbow", "torags-helm", "torags-platebody", "torags-platelegs", "torags-hammers", "veracs-helm", "veracs-brassard", "veracs-plateskirt", "veracs-flail"]
+        }
+      ],
+      "drops": [
+        { "id": "ahrims-hood", "name": "Ahrim's hood", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Ahrim%27s_hood", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ahrim%27s_hood.png" },
+        { "id": "ahrims-robetop", "name": "Ahrim's robetop", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Ahrim%27s_robetop", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ahrim%27s_robetop.png" },
+        { "id": "ahrims-robeskirt", "name": "Ahrim's robeskirt", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Ahrim%27s_robeskirt", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ahrim%27s_robeskirt.png" },
+        { "id": "ahrims-staff", "name": "Ahrim's staff", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Ahrim%27s_staff", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ahrim%27s_staff.png" },
+        { "id": "dharoks-helm", "name": "Dharok's helm", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Dharok%27s_helm", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dharok%27s_helm.png" },
+        { "id": "dharoks-platebody", "name": "Dharok's platebody", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Dharok%27s_platebody", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dharok%27s_platebody.png" },
+        { "id": "dharoks-platelegs", "name": "Dharok's platelegs", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Dharok%27s_platelegs", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dharok%27s_platelegs.png" },
+        { "id": "dharoks-greataxe", "name": "Dharok's greataxe", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Dharok%27s_greataxe", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dharok%27s_greataxe.png" },
+        { "id": "guthans-helm", "name": "Guthan's helm", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Guthan%27s_helm", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Guthan%27s_helm.png" },
+        { "id": "guthans-platebody", "name": "Guthan's platebody", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Guthan%27s_platebody", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Guthan%27s_platebody.png" },
+        { "id": "guthans-chainskirt", "name": "Guthan's chainskirt", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Guthan%27s_chainskirt", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Guthan%27s_chainskirt.png" },
+        { "id": "guthans-warspear", "name": "Guthan's warspear", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Guthan%27s_warspear", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Guthan%27s_warspear.png" },
+        { "id": "karils-coif", "name": "Karil's coif", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Karil%27s_coif", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Karil%27s_coif.png" },
+        { "id": "karils-leathertop", "name": "Karil's leathertop", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Karil%27s_leathertop", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Karil%27s_leathertop.png" },
+        { "id": "karils-leatherskirt", "name": "Karil's leatherskirt", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Karil%27s_leatherskirt", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Karil%27s_leatherskirt.png" },
+        { "id": "karils-crossbow", "name": "Karil's crossbow", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Karil%27s_crossbow", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Karil%27s_crossbow.png" },
+        { "id": "torags-helm", "name": "Torag's helm", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Torag%27s_helm", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Torag%27s_helm.png" },
+        { "id": "torags-platebody", "name": "Torag's platebody", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Torag%27s_platebody", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Torag%27s_platebody.png" },
+        { "id": "torags-platelegs", "name": "Torag's platelegs", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Torag%27s_platelegs", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Torag%27s_platelegs.png" },
+        { "id": "torags-hammers", "name": "Torag's hammers", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Torag%27s_hammers", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Torag%27s_hammers.png" },
+        { "id": "veracs-helm", "name": "Verac's helm", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Verac%27s_helm", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Verac%27s_helm.png" },
+        { "id": "veracs-brassard", "name": "Verac's brassard", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Verac%27s_brassard", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Verac%27s_brassard.png" },
+        { "id": "veracs-plateskirt", "name": "Verac's plateskirt", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Verac%27s_plateskirt", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Verac%27s_plateskirt.png" },
+        { "id": "veracs-flail", "name": "Verac's flail", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Verac%27s_flail", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Verac%27s_flail.png" }
+      ]
+    }
+  ]
+}
