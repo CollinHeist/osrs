@@ -50,7 +50,12 @@ export default function App() {
     const activities = catalog.activities.filter((activity) => (
       activity.name.toLocaleLowerCase().includes(query)
     ))
-    if (!groupByCategory) return [{ category: null, activities }]
+    if (!groupByCategory) {
+      return [{
+        category: null,
+        activities: activities.sort((left, right) => left.name.localeCompare(right.name)),
+      }]
+    }
 
     const grouped = activities.reduce((groups, activity) => {
       const category = activity.category || 'Other'

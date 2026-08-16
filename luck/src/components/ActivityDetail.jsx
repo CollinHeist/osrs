@@ -38,6 +38,9 @@ export default function ActivityDetail({
       p90Time: duration(remaining.p90),
     }
   }, [activity, obtainedIds, progress.count, progress.minutesPerUnit])
+  const formattedCompletionChance = summary.completionChance < 0.01
+    ? formatPercent(summary.completionChance, 4)
+    : formatPercent(summary.completionChance, 1)
 
   function reset() {
     if (window.confirm(`Clear all ${activity.name} progress? This cannot be undone.`)) {
@@ -89,7 +92,10 @@ export default function ActivityDetail({
         </button>
       </section>
 
-      <section className="metrics-grid" aria-label="Activity luck summary">
+      <section
+        className={`metrics-grid ${isGreenlogged ? 'greenlogged' : ''}`}
+        aria-label="Activity luck summary"
+      >
         <MetricCard
           label="Tracked uniques"
           value={`${obtainedIds.length}/${activity.drops.length}`}
@@ -98,37 +104,43 @@ export default function ActivityDetail({
         />
         <MetricCard
           label="Greenlog chance by now"
-          value={formatPercent(summary.completionChance, 4, true)}
+          value={formattedCompletionChance}
           detail="Fresh-player completion probability"
         />
-        <MetricCard
-          label="Expected remaining"
-          value={formatNumber(summary.remaining.expected)}
-          detail={activity.unit.plural}
-        />
-        <MetricCard
-          label="Expected play time"
-          value={summary.expectedTime}
-          detail={progress.minutesPerUnit ? 'Using your average pace' : 'Add an average time'}
-        />
+        {!isGreenlogged && (
+          <>
+            <MetricCard
+              label="Expected remaining"
+              value={formatNumber(summary.remaining.expected)}
+              detail={activity.unit.plural}
+            />
+            <MetricCard
+              label="Expected play time"
+              value={summary.expectedTime}
+              detail={progress.minutesPerUnit ? 'Using your average pace' : 'Add an average time'}
+            />
+          </>
+        )}
       </section>
 
-      <section className="estimate-panel">
-        <div>
-          <span>Median remaining</span>
-          <strong>{formatNumber(summary.remaining.median)} {activity.unit.plural}</strong>
-          <small>{summary.medianTime}</small>
-        </div>
-        <div>
-          <span>90% completion point</span>
-          <strong>{formatNumber(summary.remaining.p90)} {activity.unit.plural}</strong>
-          <small>{summary.p90Time}</small>
-        </div>
-        <p>
-          These are probability estimates, not guarantees. Expected time is an average;
-          the 90% point means one in ten comparable grinds would take longer.
-        </p>
-      </section>
+      {!isGreenlogged && (
+        <section className="estimate-panel">
+          <div>
+            <span>Median remaining</span>
+            <strong>{formatNumber(summary.remaining.median)} {activity.unit.plural}</strong>
+            <small>{summary.medianTime}</small>
+          </div>
+          <div>
+            <span>90% completion point</span>
+            <strong>{formatNumber(summary.remaining.p90)} {activity.unit.plural}</strong>
+            <small>{summary.p90Time}</small>
+          </div>
+          <p>
+            These are probability estimates, not guarantees. Expected time is an average;
+            the 90% point means one in ten comparable grinds would take longer.
+          </p>
+        </section>
+      )}
 
       <div className="section-heading">
         <div>
