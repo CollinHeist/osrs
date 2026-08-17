@@ -12,6 +12,32 @@ export function effectiveGpHr(gpHr, rewardProfit) {
 }
 
 /**
+ * Convert a signed GP/XP rate into GP/hr.
+ *
+ * @param {number} xpHr
+ * @param {number} gpXp
+ * @returns {number | null}
+ */
+export function gpHrFromGpXp(xpHr, gpXp) {
+  if (!(xpHr > 0) || !Number.isFinite(gpXp)) return null;
+  const gpHr = xpHr * gpXp;
+  return Number.isFinite(gpHr) ? gpHr : null;
+}
+
+/**
+ * Convert GP/hr into a signed GP/XP rate.
+ *
+ * @param {number} xpHr
+ * @param {number} gpHr
+ * @returns {number | null}
+ */
+export function gpXpFromGpHr(xpHr, gpHr) {
+  if (!(xpHr > 0) || !Number.isFinite(gpHr)) return null;
+  const gpXp = gpHr / xpHr;
+  return Number.isFinite(gpXp) ? gpXp : null;
+}
+
+/**
  * Effective XP/hr given a money-maker GP/hr baseline.
  * Returns null when the method is at least as profitable as the money-maker
  * (effective gpHr >= moneyMakerGpHr), since the rate diverges to infinity.

@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { formatRate, parseRate } from "../lib/efficiency.js";
+import {
+  formatRate,
+  gpHrFromGpXp,
+  gpXpFromGpHr,
+  parseRate,
+} from "../lib/efficiency.js";
 
 /**
  * Editable rate field that accepts compact suffixes (100k, 1.5m).
@@ -27,6 +32,51 @@ function RateInput({ value, signed = false, onCommit, "aria-label": ariaLabel })
     }
     onCommit(parsed);
     setText(formatRate(parsed, { signed }));
+  }
+
+  return (
+    <input
+      className="input-mono"
+      type="text"
+      inputMode="decimal"
+      aria-label={ariaLabel}
+      value={display}
+      onFocus={() => {
+        setFocused(true);
+        setText(String(value));
+      }}
+      onChange={(e) => setText(e.target.value)}
+      onBlur={commit}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") e.currentTarget.blur();
+      }}
+    />
+  );
+}
+
+/**
+ * Signed decimal field for GP/XP values.
+ *
+ * @param {{
+ *   value: number;
+ *   onCommit: (n: number) => void;
+ *   "aria-label"?: string;
+ * }} props
+ */
+function GpXpInput({ value, onCommit, "aria-label": ariaLabel }) {
+  const [text, setText] = useState(() => String(value));
+  const [focused, setFocused] = useState(false);
+  const display = focused ? text : String(Number(value.toFixed(4)));
+
+  function commit() {
+    setFocused(false);
+    const parsed = parseRate(text);
+    if (parsed == null) {
+      setText(String(value));
+      return;
+    }
+    onCommit(parsed);
+    setText(String(parsed));
   }
 
   return (
@@ -85,9 +135,10 @@ export function OptionEditor({ options, onChange, onAdd }) {
         </button>
       </div>
       <p className="help-blurb">
-        Enter XP/hr and GP/hr for each method. Positive GP/hr is profit; negative is a loss.
-        Effective XP/hr = XP/hr ÷ (1 − GP/hr ÷ money-maker GP/hr). Use “Reward profitable
-        methods” below to choose whether earned GP counts as time saved.
+        Enter XP/hr and either GP/hr or GP/XP for each method. Changing GP/XP calculates
+        GP/hr. Positive GP is profit; negative is a loss. Effective XP/hr = XP/hr ÷ (1 −
+        GP/hr ÷ money-maker GP/hr). Use “Reward profitable methods” below to choose whether
+        earned GP counts as time saved.
       </p>
       {options.length === 0 ? (
         <p className="muted empty-hint">Add an option to plot effective XP rates.</p>
@@ -99,6 +150,7 @@ export function OptionEditor({ options, onChange, onAdd }) {
                 <th className="col-order" aria-label="Order" />
                 <th>Name</th>
                 <th>XP/hr</th>
+                <th>GP/XP</th>
                 <th>GP/hr</th>
                 <th aria-label="Actions" />
               </tr>
@@ -145,6 +197,17 @@ export function OptionEditor({ options, onChange, onAdd }) {
                       value={o.xpHr}
                       aria-label="XP per hour"
                       onCommit={(xpHr) => update(o.id, { xpHr })}
+                    />
+                  </td>
+                  <td>
+                    <GpXpInput
+                      key={`${o.id}-gp-xp`}
+                      value={gpXpFromGpHr(o.xpHr, o.gpHr) ?? 0}
+                      aria-label="GP per XP"
+                      onCommit={(gpXp) => {
+                        const gpHr = gpHrFromGpXp(o.xpHr, gpXp);
+                        if (gpHr != null) update(o.id, { gpHr });
+                      }}
                     />
                   </td>
                   <td>
