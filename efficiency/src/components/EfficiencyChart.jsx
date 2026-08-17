@@ -20,7 +20,9 @@ import { formatRate, sampleSeries, SERIES_COLORS } from "../lib/efficiency.js";
  */
 function ChartTooltip({ active, payload, label, optionNames }) {
   if (!active || !payload?.length) return null;
-  const rows = payload.filter((p) => p.value != null && Number.isFinite(p.value));
+  const rows = payload
+    .filter((p) => p.value != null && Number.isFinite(p.value))
+    .sort((a, b) => b.value - a.value);
   if (!rows.length) return null;
 
   return (
