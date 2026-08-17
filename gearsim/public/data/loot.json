@@ -17721,5 +17721,249 @@
         ]
       }
     ]
+  },
+  {
+    "id": 443,
+    "name": "Infernal Mage",
+    "level": 66,
+    "drops": [
+      {
+        "table_name": "Pre-roll",
+        "items": [
+          {
+            "name": "Lava battlestaff",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1000
+            ],
+            "id": 3053
+          },
+          {
+            "name": "Mystic boots (dark)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              512
+            ],
+            "id": 4107
+          },
+          {
+            "name": "Mystic hat (dark)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              512
+            ],
+            "id": 4099
+          }
+        ]
+      },
+      {
+        "table_name": "100%",
+        "items": [
+          {
+            "name": "Bones",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1
+            ],
+            "id": 526
+          }
+        ]
+      },
+      {
+        "table_name": "Staves",
+        "items": [
+          {
+            "name": "Staff",
+            "quantity": 1,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": 1379
+          },
+          {
+            "name": "Staff of fire",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 1387
+          }
+        ]
+      },
+      {
+        "table_name": "Elemental runes",
+        "items": [
+          {
+            "name": "Earth rune",
+            "quantity": 10,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 557
+          },
+          {
+            "name": "Fire rune",
+            "quantity": 10,
+            "rarity": [
+              6,
+              128
+            ],
+            "id": 554
+          },
+          {
+            "name": "Earth rune",
+            "quantity": 36,
+            "rarity": [
+              4,
+              128
+            ],
+            "id": 557
+          },
+          {
+            "name": "Air rune",
+            "quantity": 10,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 556
+          },
+          {
+            "name": "Water rune",
+            "quantity": 10,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 555
+          },
+          {
+            "name": "Air rune",
+            "quantity": 18,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 556
+          },
+          {
+            "name": "Water rune",
+            "quantity": 18,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 555
+          },
+          {
+            "name": "Earth rune",
+            "quantity": 18,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 557
+          },
+          {
+            "name": "Fire rune",
+            "quantity": 18,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 554
+          }
+        ]
+      },
+      {
+        "table_name": "Catalytic runes",
+        "items": [
+          {
+            "name": "Mind rune",
+            "quantity": 18,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 558
+          },
+          {
+            "name": "Body rune",
+            "quantity": 18,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 559
+          },
+          {
+            "name": "Blood rune",
+            "quantity": 4,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 565
+          },
+          {
+            "name": "Death rune",
+            "quantity": 7,
+            "rarity": [
+              18,
+              128
+            ],
+            "id": 560
+          }
+        ]
+      },
+      {
+        "table_name": "Coins",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 1,
+            "rarity": [
+              21,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 2,
+            "rarity": [
+              16,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 4,
+            "rarity": [
+              9,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 29,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]
