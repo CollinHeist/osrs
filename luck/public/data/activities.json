@@ -89,7 +89,7 @@
         {
           "id": "tarnished-locket",
           "name": "Tarnished locket",
-          "rate": [1, 40],
+          "rate": [1, 1000],
           "duplicateProtected": true,
           "wikiUrl": "https://oldschool.runescape.wiki/w/Tarnished_locket",
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tarnished_locket.png"
@@ -97,7 +97,7 @@
         {
           "id": "lost-bag",
           "name": "Lost bag",
-          "rate": [1, 60],
+          "rate": [1, 1500],
           "duplicateProtected": true,
           "wikiUrl": "https://oldschool.runescape.wiki/w/Lost_bag",
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Lost_bag.png"
