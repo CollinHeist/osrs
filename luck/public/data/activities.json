@@ -4,6 +4,114 @@
   "source": "https://oldschool.runescape.wiki/",
   "activities": [
     {
+      "id": "abyssal-sire",
+      "name": "Abyssal Sire",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_Sire",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_Sire_(phase_1).png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [],
+      "drops": []
+    },
+    {
+      "id": "guardians-of-the-rift",
+      "name": "Guardians of the Rift",
+      "category": "Minigame",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Guardians_of_the_Rift",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Rewards_Guardian.png",
+      "unit": { "singular": "pull", "plural": "pulls" },
+      "groups": [
+        {
+          "id": "rare-rewards-table",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "abyssal-needle",
+            "abyssal-lantern",
+            "abyssal-red-dye",
+            "abyssal-green-dye",
+            "abyssal-blue-dye"
+          ]
+        },
+        {
+          "id": "intricate-pouch",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "tarnished-locket",
+            "lost-bag"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": ["abyssal-protector"]
+        }
+      ],
+      "drops": [
+        {
+          "id": "abyssal-needle",
+          "name": "Abyssal needle",
+          "rate": [1, 300],
+          "duplicateProtected": true,
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_needle",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_needle.png"
+        },
+        {
+          "id": "abyssal-lantern",
+          "name": "Abyssal lantern",
+          "rate": [1, 700],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_lantern",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_lantern.png"
+        },
+        {
+          "id": "abyssal-red-dye",
+          "name": "Abyssal red dye",
+          "rate": [1, 1200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_red_dye",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_red_dye.png"
+        },
+        {
+          "id": "abyssal-green-dye",
+          "name": "Abyssal green dye",
+          "rate": [1, 1200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_green_dye",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_green_dye.png"
+        },
+        {
+          "id": "abyssal-blue-dye",
+          "name": "Abyssal blue dye",
+          "rate": [1, 1200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_blue_dye",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_blue_dye.png"
+        },
+        {
+          "id": "tarnished-locket",
+          "name": "Tarnished locket",
+          "rate": [1, 40],
+          "duplicateProtected": true,
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Tarnished_locket",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tarnished_locket.png"
+        },
+        {
+          "id": "lost-bag",
+          "name": "Lost bag",
+          "rate": [1, 60],
+          "duplicateProtected": true,
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Lost_bag",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Lost_bag.png"
+        },
+        {
+          "id": "abyssal-protector",
+          "name": "Abyssal protector",
+          "rate": [1, 4000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_protector",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_protector_(follower).png"
+        }
+      ]
+    },
+    {
       "id": "tempoross",
       "name": "Tempoross",
       "category": "Skilling boss",
