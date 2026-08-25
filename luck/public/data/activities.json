@@ -484,6 +484,41 @@
         { "id": "veracs-plateskirt", "name": "Verac's plateskirt", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Verac%27s_plateskirt", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Verac%27s_plateskirt.png" },
         { "id": "veracs-flail", "name": "Verac's flail", "rate": [1, 2448], "rateLabel": "7 × 1/2,448 per chest", "wikiUrl": "https://oldschool.runescape.wiki/w/Verac%27s_flail", "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Verac%27s_flail.png" }
       ]
+    },
+    {
+      "id": "martial-salvage",
+      "name": "Martial Salvage",
+      "category": "Sailing",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Martial_Salvage",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Martial_salvage.png",
+      "unit": { "singular": "salvage", "plural": "salvages" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "broken-sextant",
+            "salvors-paint"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "broken-sextant",
+          "name": "Broken sextant",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Broken_sextant",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Broken_sextant_detail.png"
+        },
+        {
+          "id": "salvors-paint",
+          "name": "Salvor's paint",
+          "rate": [1, 24000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Salvor's_paint",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Salvor's_paint.png"
+        }
+      ]
     }
   ]
 }
