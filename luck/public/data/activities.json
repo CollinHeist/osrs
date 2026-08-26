@@ -519,6 +519,33 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Salvor's_paint.png"
         }
       ]
+    },
+    {
+      "id": "fremennik-salvage",
+      "name": "Fremennik Salvage",
+      "category": "Sailing",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Fremennik_salvage",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Fremennik_salvage.png",
+      "unit": { "singular": "salvage", "plural": "salvages" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "smashed-mirror"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "smashed-mirror",
+          "name": "Smashed mirror",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Smashed_mirror",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Smashed_mirror.png"
+        }
+      ]
     }
   ]
 }
