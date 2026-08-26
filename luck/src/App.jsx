@@ -9,12 +9,12 @@ function activityIdFromHash() {
 }
 
 export default function App() {
-  const [catalog, setCatalog] = useState(null)
-  const [loadError, setLoadError] = useState('')
-  const [selectedId, setSelectedId] = useState(activityIdFromHash)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [groupByCategory, setGroupByCategory] = useState(false)
-  const tracker = useLuckTracker()
+  const [catalog, setCatalog] = useState(null);
+  const [loadError, setLoadError] = useState('');
+  const [selectedId, setSelectedId] = useState(activityIdFromHash);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [groupByCategory, setGroupByCategory] = useState(true);
+  const tracker = useLuckTracker();
 
   useEffect(() => {
     let active = true
