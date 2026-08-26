@@ -486,6 +486,141 @@
       ]
     },
     {
+      "id": "small-salvage",
+      "name": "Small Salvage",
+      "category": "Sailing",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Small_salvage",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Small_shipwreck.png",
+      "unit": { "singular": "salvage", "plural": "salvages" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "rusty-locket"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "rusty-locket",
+          "name": "Rusty locket",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Rusty_locket",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Rusty_locket.png"
+        }
+      ]
+    },
+    {
+      "id": "fishy-salvage",
+      "name": "Fishy Salvage",
+      "category": "Sailing",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Fishy_salvage",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Fisherman's_shipwreck.png",
+      "unit": { "singular": "salvage", "plural": "salvages" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "mouldy-block"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "mouldy-block",
+          "name": "Mouldy block",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mouldy_block",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mouldy_block.png"
+        }
+      ]
+    },
+    {
+      "id": "barracuda-salvage",
+      "name": "Barracuda Salvage",
+      "category": "Sailing",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Barracuda_salvage",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Barracuda_shipwreck.png",
+      "unit": { "singular": "salvage", "plural": "salvages" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "dull-knife"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "dull-knife",
+          "name": "Dull knife",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dull_knife",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dull_knife.png"
+        }
+      ]
+    },
+    {
+      "id": "large-salvage",
+      "name": "Large Salvage",
+      "category": "Sailing",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Large_salvage",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Large_shipwreck.png",
+      "unit": { "singular": "salvage", "plural": "salvages" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "broken-compass"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "broken-compass",
+          "name": "Broken compass",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Broken_compass",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Broken_compass.png"
+        }
+      ]
+    },
+    {
+      "id": "plundered-salvage",
+      "name": "Plundered Salvage",
+      "category": "Sailing",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Plundered_salvage",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pirate_shipwreck.png",
+      "unit": { "singular": "salvage", "plural": "salvages" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "rusty-coin"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "rusty-coin",
+          "name": "Rusty coin",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Rusty_coin",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Rusty_coin.png"
+        }
+      ]
+    },
+    {
       "id": "martial-salvage",
       "name": "Martial Salvage",
       "category": "Sailing",
@@ -544,6 +679,41 @@
           "rate": [1, 3000],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Smashed_mirror",
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Smashed_mirror.png"
+        }
+      ]
+    },
+    {
+      "id": "opulent-salvage",
+      "name": "Opulent Salvage",
+      "category": "Sailing",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Opulent_salvage",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Merchant_shipwreck.png",
+      "unit": { "singular": "salvage", "plural": "salvages" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "mouldy-doll",
+            "dragon-cannon-barrel"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "mouldy-doll",
+          "name": "Mouldy doll",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mouldy_doll",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mouldy_doll.png"
+        },
+        {
+          "id": "dragon-cannon-barrel",
+          "name": "Dragon cannon barrel",
+          "rate": [1, 20000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_cannon_barrel",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_cannon_barrel.png"
         }
       ]
     }
