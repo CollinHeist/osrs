@@ -490,7 +490,7 @@
       "name": "Martial Salvage",
       "category": "Sailing",
       "wikiUrl": "https://oldschool.runescape.wiki/w/Martial_Salvage",
-      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Martial_salvage.png",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mercenary_shipwreck.png",
       "unit": { "singular": "salvage", "plural": "salvages" },
       "groups": [
         {
@@ -525,7 +525,7 @@
       "name": "Fremennik Salvage",
       "category": "Sailing",
       "wikiUrl": "https://oldschool.runescape.wiki/w/Fremennik_salvage",
-      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Fremennik_salvage.png",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Fremennik_shipwreck.png",
       "unit": { "singular": "salvage", "plural": "salvages" },
       "groups": [
         {
