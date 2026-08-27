@@ -14,6 +14,64 @@
       "drops": []
     },
     {
+      "id": "brutus",
+      "name": "Brutus",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Brutus",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Brutus.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "mooleta",
+            "bottomless-milk-bucket",
+            "cow-slippers"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "beef"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "mooleta",
+          "name": "Mooleta",
+          "rate": [1, 30],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mooleta",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mooleta.png"
+        },
+        {
+          "id": "bottomless-milk-bucket",
+          "name": "Bottomless milk bucket",
+          "rate": [1, 37.5],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bottomless_milk_bucket#Empty",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bottomless_milk_bucket_(empty).png"
+        },
+        {
+          "id": "cow-slippers",
+          "name": "Cow slippers",
+          "rate": [1, 150],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Cow_slippers",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Cow_slippers.png"
+        },
+        {
+          "id": "beef",
+          "name": "Beef",
+          "rate": [1, 1000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Beef",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Beef.png"
+        }
+      ]
+    },
+    {
       "id": "guardians-of-the-rift",
       "name": "Guardians of the Rift",
       "category": "Minigame",
