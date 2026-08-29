@@ -1,12 +1,16 @@
 import { useMemo } from 'react'
 import {
   collectionChance,
+  collectionMilestoneUnits,
   remainingCollectionStats,
   unitsToDuration,
 } from '../lib/probability'
 import { formatDuration, formatNumber, formatPercent } from '../lib/format'
+import CurrentCountField from './CurrentCountField'
 import DropRow from './DropRow'
 import MetricCard from './MetricCard'
+
+const COLLECTION_MILESTONES = [0.5, 0.75, 0.9, 0.95, 0.99, 0.999]
 
 export default function ActivityDetail({
   activity,
@@ -21,9 +25,18 @@ export default function ActivityDetail({
     .filter((drop) => (progress.drops[drop.id] ?? []).length > 0)
     .map((drop) => drop.id)
   const isGreenlogged = obtainedIds.length === activity.drops.length
+  const minimumCount = Object.values(progress.drops)
+    .flat()
+    .reduce((latest, entry) => Math.max(latest, entry.at ?? 0), 0)
 
   const summary = useMemo(() => {
     const completionChance = collectionChance(activity, progress.count)
+    const milestones = COLLECTION_MILESTONES
+      .filter((target) => target > completionChance)
+      .map((target) => ({
+        target,
+        units: collectionMilestoneUnits(activity, target),
+      }))
     const remaining = remainingCollectionStats(activity, obtainedIds)
     const duration = (units) => {
       const result = unitsToDuration(units, progress.minutesPerUnit)
@@ -32,6 +45,7 @@ export default function ActivityDetail({
 
     return {
       completionChance,
+      milestones,
       remaining,
       expectedTime: duration(remaining.expected),
       medianTime: duration(remaining.median),
@@ -64,17 +78,13 @@ export default function ActivityDetail({
       {activity.rateNote && <aside className="rate-note">{activity.rateNote}</aside>}
 
       <section className="control-panel">
-        <label>
-          Current {activity.unit.plural}
-          <input
-            type="number"
-            min="0"
-            value={progress.count}
-            onChange={(event) => onUpdate({
-              count: Math.max(0, Math.floor(Number(event.target.value) || 0)),
-            })}
-          />
-        </label>
+        <CurrentCountField
+          key={`${activity.id}-${progress.count}`}
+          activity={activity}
+          count={progress.count}
+          minimumCount={minimumCount}
+          onUpdate={onUpdate}
+        />
         <label>
           Average minutes per {activity.unit.singular}
           <input
@@ -106,6 +116,26 @@ export default function ActivityDetail({
           label="Greenlog chance by now"
           value={formattedCompletionChance}
           detail="Fresh-player completion probability"
+          popover={(
+            <div className="milestone-list">
+              <b>Upcoming chance milestones</b>
+              {summary.milestones.length > 0 ? summary.milestones.map(({ target, units }) => (
+                <span key={target}>
+                  <em>{formatPercent(target, target >= 0.999 ? 1 : 0)}</em>
+                  {units === null ? (
+                    <>Beyond 2,000,000 {activity.unit.plural}</>
+                  ) : (
+                    <>
+                      At {formatNumber(units)} {activity.unit.plural}
+                      <small>+{formatNumber(Math.max(0, units - progress.count))} from now</small>
+                    </>
+                  )}
+                </span>
+              )) : (
+                <span>All listed milestones reached.</span>
+              )}
+            </div>
+          )}
         />
         {!isGreenlogged && (
           <>

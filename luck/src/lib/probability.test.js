@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs'
 import {
   binomialProbability,
   collectionChance,
+  collectionMilestoneUnits,
   dropByProbability,
   getDropIntervals,
   itemLuckStats,
@@ -84,6 +85,19 @@ describe('collection calculations', () => {
   it('accounts for mutually exclusive outcomes', () => {
     expect(collectionChance(exclusiveActivity, 1)).toBe(0)
     expect(collectionChance(exclusiveActivity, 2)).toBeCloseTo(0.125)
+  })
+
+  it('finds the first action count that reaches a collection milestone', () => {
+    const units = collectionMilestoneUnits(independentActivity, 0.5)
+
+    expect(units).toBe(3)
+    expect(collectionChance(independentActivity, units)).toBeGreaterThanOrEqual(0.5)
+    expect(collectionChance(independentActivity, units - 1)).toBeLessThan(0.5)
+  })
+
+  it('returns null when a collection milestone exceeds the search range', () => {
+    expect(collectionMilestoneUnits(independentActivity, 0.99, { maxUnits: 2 })).toBeNull()
+    expect(() => collectionMilestoneUnits(independentActivity, 1)).toThrow()
   })
 
   it('conditions remaining estimates on obtained drops', () => {

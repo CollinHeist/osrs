@@ -144,19 +144,21 @@ export default function DropRow({
               </span>
             )
           })}
-          {unknownEntries.map((entry) => (
-            <span className="history-chip unknown" key={entry.id}>
-              Copy obtained · KC unknown
-              <small>Counted in overall drop luck</small>
+          {unknownEntries.length > 0 && (
+            <span className="history-chip unknown">
+              {unknownEntries.length === 1
+                ? '1 copy obtained · KC unknown'
+                : `${unknownEntries.length} copies obtained · KC unknown`}
+              <small>Counted in overall drop luck · remove one at a time</small>
               <button
                 type="button"
-                onClick={() => onRemove(entry.id)}
-                aria-label={`Remove ${drop.name} with unknown KC`}
+                onClick={() => onRemove(unknownEntries.at(-1).id)}
+                aria-label={`Remove one ${drop.name} with unknown KC`}
               >
                 ×
               </button>
             </span>
-          ))}
+          )}
         </div>
       )}
 

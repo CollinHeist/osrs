@@ -246,6 +246,24 @@ export function collectionChance(activity, units, obtainedDropIds = []) {
   return Math.min(1, Math.max(0, chance))
 }
 
+export function collectionMilestoneUnits(
+  activity,
+  target,
+  options = {},
+) {
+  const probability = Number(target)
+  if (!Number.isFinite(probability) || probability <= 0 || probability >= 1) {
+    throw new Error('Collection milestone must be between 0 and 1.')
+  }
+
+  const maxUnits = options.maxUnits ?? DEFAULT_MAX_UNITS
+  return findQuantile(
+    (units) => collectionChance(activity, units),
+    probability,
+    maxUnits,
+  )
+}
+
 export function remainingCollectionStats(
   activity,
   obtainedDropIds = [],
