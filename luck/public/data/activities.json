@@ -312,8 +312,8 @@
       "id": "giant-mole",
       "name": "Giant mole",
       "category": "Boss",
-      "wikiUrl": "https://oldschool.runescape.wiki/w/Giant_mole",
-      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Giant_mole.png",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Giant_Mole",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Giant_Mole.png",
       "unit": { "singular": "kill", "plural": "kills" },
       "groups": [
         {
