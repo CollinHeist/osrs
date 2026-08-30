@@ -344,6 +344,88 @@
       ]
     },
     {
+      "id": "grotesque-guardians",
+      "name": "Grotesque guardians",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Grotesque_guardians",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dawn.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "unique",
+          "type": "exclusive",
+          "rollsPerUnit": 2,
+          "drops": [
+            "granite-maul",
+            "granite-gloves",
+            "granite-ring",
+            "granite-hammer",
+            "black-tourmaline-core"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "independent",
+          "rollsPerUnit": 1,
+          "drops": [
+            "noon",
+            "jar-of-stone"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "granite-maul",
+          "name": "Granite maul",
+          "rate": [1, 250],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Granite_maul",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Granite_maul.png"
+        },
+        {
+          "id": "granite-gloves",
+          "name": "Granite gloves",
+          "rate": [1, 500],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Granite_gloves",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Granite_gloves.png"
+        },
+        {
+          "id": "granite-ring",
+          "name": "Granite ring",
+          "rate": [1, 500],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Granite_ring",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Granite_ring.png"
+        },
+        {
+          "id": "granite-hammer",
+          "name": "Granite hammer",
+          "rate": [1, 750],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Granite_hammer",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Granite_hammer.png"
+        },
+        {
+          "id": "black-tourmaline-core",
+          "name": "Black tourmaline core",
+          "rate": [1, 1000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Black_tourmaline_core",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Black_tourmaline_core.png"
+        },
+        {
+          "id": "noon",
+          "name": "Noon",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Noon",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Noon_(follower).png"
+        },
+        {
+          "id": "jar-of-stone",
+          "name": "Jar of stone",
+          "rate": [1, 5000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Stone",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Stone.png"
+        }
+      ]
+    },
+    {
       "id": "wintertodt",
       "name": "Wintertodt",
       "category": "Skilling boss",
