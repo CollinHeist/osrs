@@ -870,12 +870,20 @@
           "type": "exclusive",
           "rollsPerUnit": 1,
           "drops": [
+            "dragon-nails",
             "mouldy-doll",
             "dragon-cannon-barrel"
           ]
         }
       ],
       "drops": [
+        {
+          "id": "dragon-nails",
+          "name": "Dragon nails",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_nails",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_nails.png"
+        },
         {
           "id": "mouldy-doll",
           "name": "Mouldy doll",
