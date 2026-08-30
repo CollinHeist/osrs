@@ -309,6 +309,41 @@
       ]
     },
     {
+      "id": "giant-mole",
+      "name": "Giant mole",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Giant_mole",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Giant_mole.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "immaculate-mole-skin",
+            "baby-mole"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "immaculate-mole-skin",
+          "name": "Immaculate mole skin",
+          "rate": [1, 50],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Immaculate_mole_skin",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Immaculate_mole_skin.png"
+        },
+        {
+          "id": "baby-mole",
+          "name": "Baby mole",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Baby_mole",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Baby_Mole_(follower).png"
+        }
+      ]
+    },
+    {
       "id": "wintertodt",
       "name": "Wintertodt",
       "category": "Skilling boss",
