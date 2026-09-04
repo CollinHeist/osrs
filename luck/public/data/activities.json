@@ -661,6 +661,41 @@
       ]
     },
     {
+      "id": "scurrius",
+      "name": "Scurrius",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Scurrius",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Scurrius.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "tertiary",
+          "type": "independent",
+          "rollsPerUnit": 1,
+          "drops": [
+            "scurrius-spine",
+            "scurry"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "scurrius-spine",
+          "name": "Scurrius' spine",
+          "rate": [1, 33],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Scurrius%27s_spine",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Scurrius'_spine_detail.png"
+        },
+        {
+          "id": "scurry",
+          "name": "Scurry",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Scurry",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Scurry_(follower).png"
+        }
+      ]
+    },
+    {
       "id": "small-salvage",
       "name": "Small Salvage",
       "category": "Sailing",
