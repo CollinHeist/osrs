@@ -1003,7 +1003,62 @@
       ]
     },
     {
-      "id": "kalphite-queen-cage",
+      "id": "king-black-dragon",
+      "name": "King Black Dragon",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/King_Black_Dragon",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/King_Black_Dragon.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "independent",
+          "rollsPerUnit": 1,
+          "drops": [
+            "dragon-pickaxe"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "independent",
+          "rollsPerUnit": 1,
+          "drops": [
+            "kbd-heads",
+            "prince-black-dragon",
+            "draconic-visage"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "dragon-pickaxe",
+          "name": "Dragon pickaxe",
+          "rate": [1, 1000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_pickaxe",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_pickaxe.png"
+        },
+        {
+          "id": "kbd-heads",
+          "name": "KBD heads",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Kbd_heads",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Kbd_heads.png"
+        },
+        {
+          "id": "prince-black-dragon",
+          "name": "Prince Black Dragon",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Prince_Black_Dragon",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Prince_Black_Dragon_(follower).png"
+        },
+        {
+          "id": "draconic-visage",
+          "name": "Draconic visage",
+          "rate": [1, 5000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Draconic_visage",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Draconic_visage.png"
+        }
+      ]
     }
   ]
 }
