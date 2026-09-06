@@ -1059,6 +1059,72 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Draconic_visage.png"
         }
       ]
+    },
+    {
+      "id": "skotizo",
+      "name": "Skotizo",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Skotizo",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Skotizo.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "gemstones",
+          "type": "independent",
+          "rollsPerUnit": 1,
+          "drops": [
+            "uncut-onyx"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "independent",
+          "rollsPerUnit": 1,
+          "drops": [
+            "dark-claw",
+            "skotos",
+            "dark-totem",
+            "jar-of-darkness"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "uncut-onyx",
+          "name": "Uncut onyx",
+          "rate": [1, 1000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Uncut_onyx",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Uncut_onyx.png"
+        },
+        {
+          "id": "dark-claw",
+          "name": "Dark claw",
+          "rate": [1, 25],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dark_claw",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dark_claw.png"
+        },
+        {
+          "id": "skotos",
+          "name": "Skotos",
+          "rate": [1, 65],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Skotos",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Skotos_(follower).png"
+        },
+        {
+          "id": "dark-totem",
+          "name": "Dark totem",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dark_totem",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dark_totem.png"
+        },
+        {
+          "id": "jar-of-darkness",
+          "name": "Jar of Darkness",
+          "rate": [1, 200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Darkness",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Darkness.png"
+        }
+      ]
     }
   ]
 }
