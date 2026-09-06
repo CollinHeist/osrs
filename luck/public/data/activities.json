@@ -934,6 +934,76 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_cannon_barrel.png"
         }
       ]
+    },
+    {
+      "id": "kalphite-queen",
+      "name": "Kalphite Queen",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Kalphite_Queen",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Kalphite_Queen.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "tertiary",
+          "type": "independent",
+          "rollsPerUnit": 1,
+          "drops": [
+            "kq-head",
+            "dragon-chainbody",
+            "dragon-2h-sword",
+            "dragon-pickaxe",
+            "jar-of-sand",
+            "kalphite-princess"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "kq-head",
+          "name": "KQ head",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Kq_head",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Kq_head.png"
+        },
+        {
+          "id": "dragon-chainbody",
+          "name": "Dragon chainbody",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_chainbody",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_chainbody.png"
+        },
+        {
+          "id": "dragon-2h-sword",
+          "name": "Dragon 2h sword",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_2h_sword",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_2h_sword.png"
+        },
+        {
+          "id": "dragon-pickaxe",
+          "name": "Dragon pickaxe",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_pickaxe",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_pickaxe.png"
+        },
+        {
+          "id": "jar-of-sand",
+          "name": "Jar of Sand",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Sand",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Sand.png"
+        },
+        {
+          "id": "kalphite-princess",
+          "name": "Kalphite Princess",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Kalphite_Princess",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Kalphite_Princess_(follower,_walking).png"
+        }
+      ]
+    },
+    {
+      "id": "kalphite-queen-cage",
     }
   ]
 }
