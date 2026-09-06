@@ -430,7 +430,7 @@
       "name": "Wintertodt",
       "category": "Skilling boss",
       "wikiUrl": "https://oldschool.runescape.wiki/w/Wintertodt",
-      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Wintertodt.png",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Howling_Snow_Storm.gif",
       "unit": { "singular": "reward roll", "plural": "reward rolls" },
       "rateNote": "Wintertodt awards a variable number of reward rolls based on points. Enter reward rolls, not games. The cart checks uniques sequentially, so the catalog uses their effective mutually exclusive rates. Pyromancer pieces are omitted because their selection changes with ownership.",
       "groups": [
@@ -489,7 +489,7 @@
       "name": "Zulrah",
       "category": "Boss",
       "wikiUrl": "https://oldschool.runescape.wiki/w/Zulrah",
-      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Zulrah.png",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Zulrah_(serpentine).png",
       "unit": { "singular": "kill", "plural": "kills" },
       "rateNote": "Each kill has two main loot rolls. The three fangs/visage and both mutagens are represented per roll; jar and pet are independent per kill. Uncut onyx is omitted because it is not exclusive to Zulrah.",
       "groups": [
