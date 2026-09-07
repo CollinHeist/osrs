@@ -220,17 +220,17 @@
         },
         {
           "id": "tome-of-water",
-          "name": "Tome of water (empty)",
+          "name": "Tome of Water",
           "rate": [1, 1600],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Tome_of_water",
-          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tome_of_water_(empty).png"
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tome_of_Water.png"
         },
         {
           "id": "tiny-tempor",
           "name": "Tiny tempor",
           "rate": [1, 8000],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Tiny_tempor",
-          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tiny_tempor.png"
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tiny_Tempor.png"
         },
         {
           "id": "dragon-harpoon",
