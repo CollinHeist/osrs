@@ -1125,6 +1125,148 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Darkness.png"
         }
       ]
+    },
+    {
+      "id": "reward-casket-beginner",
+      "name": "Reward casket (beginner)",
+      "category": "Clues",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Reward_casket_(beginner)",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Clue_scroll_(beginner)_detail.png",
+      "unit": {
+        "singular": "casket",
+        "plural": "caskets"
+      },
+      "groups": [
+        {
+          "id": "beginner-clue-uniques",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "mole-slippers",
+            "frog-slippers",
+            "bear-feet",
+            "demon-feet",
+            "jester-cape",
+            "shoulder-parrot",
+            "monk-s-robe-top-t",
+            "monk-s-robe-t",
+            "amulet-of-defence-t",
+            "sandwich-lady-hat",
+            "sandwich-lady-top",
+            "sandwich-lady-bottom",
+            "rune-scimitar-ornament-kit-guthix",
+            "rune-scimitar-ornament-kit-saradomin",
+            "rune-scimitar-ornament-kit-zamorak"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "mole-slippers",
+          "name": "Mole slippers",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mole_slippers",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mole_slippers.png"
+        },
+        {
+          "id": "frog-slippers",
+          "name": "Frog slippers",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Frog_slippers",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Frog_slippers.png"
+        },
+        {
+          "id": "bear-feet",
+          "name": "Bear feet",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bear_feet",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bear_feet.png"
+        },
+        {
+          "id": "demon-feet",
+          "name": "Demon feet",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Demon_feet",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Demon_feet.png"
+        },
+        {
+          "id": "jester-cape",
+          "name": "Jester cape",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jester_cape",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jester_cape.png"
+        },
+        {
+          "id": "shoulder-parrot",
+          "name": "Shoulder parrot",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Shoulder_parrot",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Shoulder_parrot.png"
+        },
+        {
+          "id": "monk-s-robe-top-t",
+          "name": "Monk's robe top (t)",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Monk%27s_robe_top_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Monk's_robe_top_(t).png"
+        },
+        {
+          "id": "monk-s-robe-t",
+          "name": "Monk's robe (t)",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Monk%27s_robe_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Monk's_robe_(t).png"
+        },
+        {
+          "id": "amulet-of-defence-t",
+          "name": "Amulet of defence (t)",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Amulet_of_defence_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Amulet_of_defence_(t).png"
+        },
+        {
+          "id": "sandwich-lady-hat",
+          "name": "Sandwich lady hat",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Sandwich_lady_hat",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Sandwich_lady_hat.png"
+        },
+        {
+          "id": "sandwich-lady-top",
+          "name": "Sandwich lady top",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Sandwich_lady_top",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Sandwich_lady_top.png"
+        },
+        {
+          "id": "sandwich-lady-bottom",
+          "name": "Sandwich lady bottom",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Sandwich_lady_bottom",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Sandwich_lady_bottom.png"
+        },
+        {
+          "id": "rune-scimitar-ornament-kit-guthix",
+          "name": "Rune scimitar ornament kit (Guthix)",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Rune_scimitar_ornament_kit_(Guthix)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Rune_scimitar_ornament_kit_(Guthix).png"
+        },
+        {
+          "id": "rune-scimitar-ornament-kit-saradomin",
+          "name": "Rune scimitar ornament kit (Saradomin)",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Rune_scimitar_ornament_kit_(Saradomin)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Rune_scimitar_ornament_kit_(Saradomin).png"
+        },
+        {
+          "id": "rune-scimitar-ornament-kit-zamorak",
+          "name": "Rune scimitar ornament kit (Zamorak)",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Rune_scimitar_ornament_kit_(Zamorak)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Rune_scimitar_ornament_kit_(Zamorak).png"
+        }
+      ]
     }
   ]
 }
