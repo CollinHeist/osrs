@@ -1267,6 +1267,57 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Rune_scimitar_ornament_kit_(Zamorak).png"
         }
       ]
+    },
+    {
+      "id": "araxxor",
+      "name": "Araxxor",
+      "category": "Other",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Araxxor",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Araxxor.png",
+      "unit": {
+        "singular": "kill",
+        "plural": "kills"
+      },
+      "groups": [
+        {
+          "id": "unique",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "noxious-piece",
+            "araxyte-fang"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": ["nid"]
+        }
+      ],
+      "drops": [
+        {
+          "id": "noxious-piece",
+          "name": "Noxious halberd piece (pommel, point, blade)",
+          "rate": [1, 200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Noxious_halberd",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Noxious_halberd.png"
+        },
+        {
+          "id": "araxyte-fang",
+          "name": "Araxyte fang",
+          "rate": [1, 600],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Araxyte_fang",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Araxyte_fang.png"
+        },
+        {
+          "id": "nid",
+          "name": "Nid",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Nid",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Nid_(follower).png"
+        }
+      ]
     }
   ]
 }
