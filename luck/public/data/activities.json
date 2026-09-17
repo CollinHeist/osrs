@@ -591,15 +591,15 @@
           "id": "jar-of-decay",
           "name": "Jar of decay",
           "rate": [1, 3000],
-          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_decay",
-          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_decay.png"
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Decay",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Decay.png"
         },
         {
           "id": "vorki",
           "name": "Vorki",
           "rate": [1, 3000],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Vorki",
-          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Vorki.png"
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Vorki_(follower).png"
         },
         {
           "id": "draconic-visage",
