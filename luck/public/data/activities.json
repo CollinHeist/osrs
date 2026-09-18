@@ -1289,6 +1289,15 @@
           ]
         },
         {
+          "id": "other",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "araxyte-head",
+            "jar-of-venom"
+          ]
+        },
+        {
           "id": "tertiary",
           "type": "exclusive",
           "rollsPerUnit": 1,
@@ -1309,6 +1318,20 @@
           "rate": [1, 600],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Araxyte_fang",
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Araxyte_fang.png"
+        },
+        {
+          "id": "araxyte-head",
+          "name": "Araxyte head",
+          "rate": [1, 250],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Araxyte_head",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Araxyte_head.png"
+        },
+        {
+          "id": "jar-of-venom",
+          "name": "Jar of Venom",
+          "rate": [1, 1500],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Venom",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Venom.png"
         },
         {
           "id": "nid",
