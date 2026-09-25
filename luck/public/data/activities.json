@@ -10,8 +10,73 @@
       "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_Sire",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_Sire_(phase_1).png",
       "unit": { "singular": "kill", "plural": "kills" },
-      "groups": [],
-      "drops": []
+      "rateNote": "The drop rates assume the Abyssal Orphan pet has not been obtained, and are rolled per-kill, not per Unsired. All Bludgeon pieces are combined into a single drop. The Abyssal Whip is not listed.",
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "unsired"
+          ]
+        },
+        {
+          "id": "unsired",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "bludgeon-piece",
+            "abyssal-dagger",
+            "jar-of-miasma",
+            "abyssal-head",
+            "abyssal-orphan"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "unsired",
+          "name": "Unsired",
+          "rate": [1, 100],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Unsired",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Unsired.png"
+        },
+        {
+          "id": "bludgeon-piece",
+          "name": "Bludgeon piece (claw, spine, axon)",
+          "rate": [1, 206],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal bludgeon",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_bludgeon_detail.png"
+        },
+        {
+          "id": "abyssal-dagger",
+          "name": "Abyssal dagger",
+          "rate": [1, 492],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_dagger",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_dagger_detail.png"
+        },
+        {
+          "id": "jar-of-miasma",
+          "name": "Jar of Miasma",
+          "rate": [1, 984],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Miasma",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Miasma_detail.png"
+        },
+        {
+          "id": "abyssal-head",
+          "name": "Abyssal head",
+          "rate": [1, 1280],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_head",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_head_detail.png"
+        },
+        {
+          "id": "abyssal-orphan",
+          "name": "Abyssal orphan",
+          "rate": [1, 2560],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_orphan",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_orphan_(follower).png"
+        }
+      ]
     },
     {
       "id": "brutus",
