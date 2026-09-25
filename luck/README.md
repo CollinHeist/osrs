@@ -42,3 +42,19 @@ so changing catalog configuration never silently deletes user data.
 Rates must describe normal main-game conditions. Add the relevant OSRS Wiki page
 to every activity and drop, and update the catalog's `updatedAt` date whenever
 rates change.
+
+### Wiki loot parser
+
+Install `scripts/osrs-wiki-loot-parser.user.js` in Tampermonkey, then open an OSRS
+Wiki page containing loot tables. Use the **Export loot JSON** button to:
+
+1. select the tables and individual drops to track;
+2. set each group's type and rolls per tracked unit;
+3. generate, copy, or download an activity object for `activities.json`.
+
+The script reads the Wiki's exact fraction metadata instead of rounded displayed
+rates. It also shows the selected loot's effective GE value per tracked unit when
+Price columns are present, averaging the endpoints of displayed price ranges.
+Alternative level or condition subtables are grouped so only one is enabled at a
+time. Group mechanics cannot be inferred reliably from HTML, so review the
+generated group types and roll counts before adding the object to the catalog.

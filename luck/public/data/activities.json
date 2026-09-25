@@ -2468,6 +2468,72 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Nid_(follower).png"
         }
       ]
+    },
+    {
+      "id": "thermonuclear-smoke-devil",
+      "name": "Thermonuclear smoke devil",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Thermonuclear_smoke_devil",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Thermonuclear_smoke_devil.png",
+      "unit": {"singular": "kill", "plural": "kills"},
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "occult-necklace",
+            "smoke-battlestaff",
+            "dragon-chainbody"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "jar-of-smoke",
+            "pet-smoke-devil"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "occult-necklace",
+          "name": "Occult necklace",
+          "rate": [1, 350],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Occult_necklace",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Occult_necklace.png"
+        },
+        {
+          "id": "smoke-battlestaff",
+          "name": "Smoke battlestaff",
+          "rate": [1, 512],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Smoke_battlestaff",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Smoke_battlestaff.png"
+        },
+        {
+          "id": "dragon-chainbody",
+          "name": "Dragon chainbody",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_chainbody",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_chainbody.png"
+        },
+        {
+          "id": "jar-of-smoke",
+          "name": "Jar of Smoke",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Smoke",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Smoke.png"
+        },
+        {
+          "id": "pet-smoke-devil",
+          "name": "Pet Smoke Devil",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pet_Smoke_Devil",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Smoke_Devil_(follower).png"
+        }
+      ]
     }
   ]
 }
