@@ -2577,6 +2577,64 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Moxi_(follower).png"
         }
       ]
+    },
+    {
+      "id": "mad-angel",
+      "name": "Mad Angel",
+      "category": "Other",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Mad_Angel",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mad_Angel.webp",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "ardeaglais-teleport",
+            "hallowfell",
+            "jar-of-light"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "aggy"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "ardeaglais-teleport",
+          "name": "Ardeaglais teleport",
+          "rate": [1, 25],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ardeaglais_teleport",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ardeaglais_teleport.png"
+        },
+        {
+          "id": "hallowfell",
+          "name": "Hallowfell",
+          "rate": [1, 127],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Hallowfell",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Hallowfell.png"
+        },
+        {
+          "id": "jar-of-light",
+          "name": "Jar of Light",
+          "rate": [1, 1000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Light",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Light.png"
+        },
+        {
+          "id": "aggy",
+          "name": "Aggy",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Aggy",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Aggy_(follower).png"
+        }
+      ]
     }
   ]
 }
