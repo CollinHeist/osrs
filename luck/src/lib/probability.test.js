@@ -118,6 +118,37 @@ describe('collection calculations', () => {
     })
   })
 
+  it('approximates large exclusive collections close to the exact result', () => {
+    const size = 30
+    const rate = 1 / 300
+    const ids = Array.from({ length: size }, (_, index) => `drop-${index}`)
+    const activity = {
+      drops: ids.map((id) => ({ id, rate: [1, 300] })),
+      groups: [{ id: 'table', type: 'exclusive', drops: ids }],
+    }
+    const exactChance = (units) => {
+      let chance = 0
+      let combination = 1
+      for (let excluded = 0; excluded <= size; excluded += 1) {
+        chance += (excluded % 2 === 0 ? 1 : -1) * combination
+          * (1 - excluded * rate) ** units
+        combination = combination * (size - excluded) / (excluded + 1)
+      }
+      return chance
+    }
+
+    for (const units of [5_000, 10_000, 20_000]) {
+      expect(Math.abs(collectionChance(activity, units) - exactChance(units)))
+        .toBeLessThan(0.01)
+    }
+    expect(collectionChance(activity, 1_000_000, ids.slice(1))).toBeCloseTo(1)
+
+    const fresh = remainingCollectionStats(activity)
+    const partial = remainingCollectionStats(activity, ids.slice(0, 20))
+    expect(fresh.expected).toBeGreaterThan(partial.expected)
+    expect(remainingCollectionStats(activity, ids).expected).toBe(0)
+  })
+
   it('validates every starter activity and handles the full Barrows log', () => {
     const catalog = JSON.parse(readFileSync(
       new URL('../../public/data/activities.json', import.meta.url),

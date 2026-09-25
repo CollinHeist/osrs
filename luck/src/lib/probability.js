@@ -1,4 +1,5 @@
 const DEFAULT_MAX_UNITS = 2_000_000
+const EXACT_DROP_LIMIT = 24
 
 export function rateToProbability(rate) {
   if (!Array.isArray(rate) || rate.length !== 2) {
@@ -195,8 +196,10 @@ function normalizeGroups(activity) {
 
 export function createCollectionModel(activity) {
   const { dropIds, groups } = normalizeGroups(activity)
-  if (dropIds.length > 24) {
-    throw new Error('Collection calculations support at most 24 tracked drops.')
+  if (dropIds.length > EXACT_DROP_LIMIT) {
+    throw new Error(
+      `Exact collection calculations support at most ${EXACT_DROP_LIMIT} tracked drops.`,
+    )
   }
 
   return {
@@ -215,10 +218,18 @@ export function maskForObtained(model, obtainedDropIds) {
   }, 0)
 }
 
+function isLargeCollection(activity) {
+  return activity.drops.length > EXACT_DROP_LIMIT
+}
+
 export function collectionChance(activity, units, obtainedDropIds = []) {
+  const count = Math.max(0, Math.floor(Number(units) || 0))
+  if (isLargeCollection(activity)) {
+    return approximateCollectionChance(missRateClasses(activity, obtainedDropIds), count)
+  }
+
   const model = createCollectionModel(activity)
   const obtainedMask = maskForObtained(model, obtainedDropIds)
-  const count = Math.max(0, Math.floor(Number(units) || 0))
   const missingIndices = model.dropIds
     .map((_, index) => index)
     .filter((index) => !(obtainedMask & (1 << index)))
@@ -269,19 +280,34 @@ export function remainingCollectionStats(
   obtainedDropIds = [],
   options = {},
 ) {
-  const model = createCollectionModel(activity)
-  const startingMask = maskForObtained(model, obtainedDropIds)
-  if (startingMask === model.completeMask) {
+  const maxUnits = options.maxUnits ?? DEFAULT_MAX_UNITS
+  const complete = {
+    expected: 0,
+    median: 0,
+    p90: 0,
+    bounded: true,
+    evaluatedUnits: 0,
+  }
+
+  if (isLargeCollection(activity)) {
+    const classes = missRateClasses(activity, obtainedDropIds)
+    if (classes.length === 0) return complete
+    const chanceAt = (units) => approximateCollectionChance(classes, units)
+    const expected = approximateExpected(classes, maxUnits)
+    const p90 = findQuantile(chanceAt, 0.9, maxUnits)
     return {
-      expected: 0,
-      median: 0,
-      p90: 0,
-      bounded: true,
-      evaluatedUnits: 0,
+      expected,
+      median: findQuantile(chanceAt, 0.5, maxUnits),
+      p90,
+      bounded: expected !== null && p90 !== null,
+      evaluatedUnits: maxUnits,
     }
   }
 
-  const maxUnits = options.maxUnits ?? DEFAULT_MAX_UNITS
+  const model = createCollectionModel(activity)
+  const startingMask = maskForObtained(model, obtainedDropIds)
+  if (startingMask === model.completeMask) return complete
+
   const missingIndices = model.dropIds
     .map((_, index) => index)
     .filter((index) => !(startingMask & (1 << index)))
@@ -328,6 +354,43 @@ export function remainingCollectionStats(
     bounded: finite && p90 !== null,
     evaluatedUnits: maxUnits,
   }
+}
+
+// Large collections treat each missing drop as independent, which is exact for
+// independent groups and accurate to O(rate) for exclusive ones. Drops sharing a
+// per-unit miss chance collapse into one [logMiss, count] class.
+function missRateClasses(activity, obtainedDropIds) {
+  const { groups } = normalizeGroups(activity)
+  const dropsById = new Map(activity.drops.map((drop) => [drop.id, drop]))
+  const obtained = new Set(obtainedDropIds)
+  const classes = new Map()
+
+  for (const group of groups) {
+    const rolls = Math.max(1, Math.floor(group.rollsPerUnit ?? 1))
+    for (const dropId of group.drops) {
+      if (obtained.has(dropId)) continue
+      const logMiss = rolls * Math.log1p(-rateToProbability(dropsById.get(dropId).rate))
+      classes.set(logMiss, (classes.get(logMiss) ?? 0) + 1)
+    }
+  }
+  return [...classes]
+}
+
+function approximateCollectionChance(classes, units) {
+  return classes.reduce(
+    (chance, [logMiss, count]) => chance * Math.pow(-Math.expm1(units * logMiss), count),
+    1,
+  )
+}
+
+function approximateExpected(classes, maxUnits) {
+  let expected = 0
+  for (let units = 0; units <= maxUnits; units += 1) {
+    const remaining = 1 - approximateCollectionChance(classes, units)
+    if (remaining < 1e-12) return expected
+    expected += remaining
+  }
+  return null
 }
 
 function getSymmetricExclusiveModel(model, missingIndices) {
