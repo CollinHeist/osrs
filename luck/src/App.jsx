@@ -66,7 +66,7 @@ export default function App() {
       .sort(([left], [right]) => left.localeCompare(right))
       .map(([category, groupedActivities]) => ({
         category,
-        activities: groupedActivities,
+        activities: groupedActivities.sort((left, right) => left.name.localeCompare(right.name)),
       }))
   }, [catalog, groupByCategory, searchQuery])
 
