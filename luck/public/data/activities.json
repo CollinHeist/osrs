@@ -2538,7 +2538,7 @@
     {
       "id": "amoxliatl",
       "name": "Amoxliatl",
-      "category": "Other",
+      "category": "Boss",
       "wikiUrl": "https://oldschool.runescape.wiki/w/Amoxliatl",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Amoxliatl.png",
       "unit": { "singular": "kill", "plural": "kills" },
@@ -2581,7 +2581,7 @@
     {
       "id": "mad-angel",
       "name": "Mad Angel",
-      "category": "Other",
+      "category": "Boss",
       "wikiUrl": "https://oldschool.runescape.wiki/w/Mad_Angel",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mad_Angel.webp",
       "unit": { "singular": "kill", "plural": "kills" },
