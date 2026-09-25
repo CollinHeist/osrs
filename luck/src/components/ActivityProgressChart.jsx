@@ -1,16 +1,10 @@
-import { dropByProbability } from '../lib/probability'
+import { dropByProbability, rollsForDrop } from '../lib/probability'
 import { formatPercent } from '../lib/format'
 
 const SIZE = 64
 const STROKE = 9
 const RADIUS = (SIZE - STROKE) / 2
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
-
-function rollsForDrop(activity, dropId) {
-  return activity.groups
-    .filter((group) => group.drops.includes(dropId))
-    .reduce((sum, group) => sum + (group.rollsPerUnit ?? 1), 0) || 1
-}
 
 // Gaps shrink as segments get smaller and disappear entirely for very large collection logs.
 function segmentGap(count) {

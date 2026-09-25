@@ -3,15 +3,10 @@ import {
   dropByProbability,
   getDropIntervals,
   noDropProbability,
+  rollsForDrop,
 } from '../lib/probability'
 import { formatNumber, formatPercent, formatRate } from '../lib/format'
 import DropDistribution from './DropDistribution'
-
-function rollsForDrop(activity, dropId) {
-  return activity.groups
-    .filter((group) => group.drops.includes(dropId))
-    .reduce((sum, group) => sum + (group.rollsPerUnit ?? 1), 0) || 1
-}
 
 export default function DropRow({
   activity,

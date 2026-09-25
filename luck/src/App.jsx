@@ -1,17 +1,27 @@
 import { useEffect, useMemo, useState } from 'react'
-import ActivityCard from './components/ActivityCard'
+import ActivityBrowser from './components/ActivityBrowser'
 import ActivityDetail from './components/ActivityDetail'
+import DashboardTabs from './components/DashboardTabs'
 import ImportExport from './components/ImportExport'
+import StatsView from './components/StatsView'
 import { useLuckTracker } from './hooks/useLuckTracker'
 
+const STATS_HASH = '#stats'
+
 function activityIdFromHash() {
+  if (window.location.hash === STATS_HASH) return ''
   return decodeURIComponent(window.location.hash.replace(/^#activity=/, ''))
+}
+
+function viewFromHash() {
+  return window.location.hash === STATS_HASH ? 'stats' : 'activities'
 }
 
 export default function App() {
   const [catalog, setCatalog] = useState(null);
   const [loadError, setLoadError] = useState('');
   const [selectedId, setSelectedId] = useState(activityIdFromHash);
+  const [view, setView] = useState(viewFromHash);
   const [searchQuery, setSearchQuery] = useState('');
   const [groupByCategory, setGroupByCategory] = useState(true);
   const tracker = useLuckTracker();
@@ -35,40 +45,23 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    const onHashChange = () => setSelectedId(activityIdFromHash())
+    const onHashChange = () => {
+      const activityId = activityIdFromHash()
+      setSelectedId(activityId)
+      if (!activityId) setView(viewFromHash())
+    }
     window.addEventListener('hashchange', onHashChange)
-    return () => window.removeEventListener('hashchange', onHashChange)
+    window.addEventListener('popstate', onHashChange)
+    return () => {
+      window.removeEventListener('hashchange', onHashChange)
+      window.removeEventListener('popstate', onHashChange)
+    }
   }, [])
 
   const selectedActivity = useMemo(
     () => catalog?.activities.find((activity) => activity.id === selectedId),
     [catalog, selectedId],
   )
-  const activityGroups = useMemo(() => {
-    if (!catalog) return []
-    const query = searchQuery.trim().toLocaleLowerCase()
-    const activities = catalog.activities.filter((activity) => (
-      activity.name.toLocaleLowerCase().includes(query)
-    ))
-    if (!groupByCategory) {
-      return [{
-        category: null,
-        activities: activities.sort((left, right) => left.name.localeCompare(right.name)),
-      }]
-    }
-
-    const grouped = activities.reduce((groups, activity) => {
-      const category = activity.category || 'Other'
-      groups.set(category, [...(groups.get(category) ?? []), activity])
-      return groups
-    }, new Map())
-    return [...grouped.entries()]
-      .sort(([left], [right]) => left.localeCompare(right))
-      .map(([category, groupedActivities]) => ({
-        category,
-        activities: groupedActivities.sort((left, right) => left.name.localeCompare(right.name)),
-      }))
-  }, [catalog, groupByCategory, searchQuery])
 
   function selectActivity(activityId) {
     history.pushState(
@@ -80,9 +73,11 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  function showDashboard() {
-    history.pushState('', document.title, `${window.location.pathname}${window.location.search}`)
+  function showDashboard(nextView = view) {
+    const hash = nextView === 'stats' ? STATS_HASH : ''
+    history.pushState('', document.title, `${window.location.pathname}${window.location.search}${hash}`)
     setSelectedId('')
+    setView(nextView)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -110,7 +105,7 @@ export default function App() {
           <ActivityDetail
             activity={selectedActivity}
             progress={tracker.getProgress(selectedActivity.id)}
-            onBack={showDashboard}
+            onBack={() => showDashboard()}
             onUpdate={(patch) => tracker.updateProgress(selectedActivity.id, patch)}
             onAddDrop={(dropId, at) => tracker.addDrop(selectedActivity.id, dropId, at)}
             onRemoveDrop={(dropId, entryId) => (
@@ -124,7 +119,7 @@ export default function App() {
           <>
             <section className="dashboard-hero">
               <div className="eyebrow">Old School RuneScape</div>
-              <h1>How lucky are you?</h1>
+              <h1>How lucky are you, really?</h1>
               <p>
                 Log every unique, measure your dry streaks, and estimate the grind
                 left between you and the green log.
@@ -137,60 +132,25 @@ export default function App() {
               </aside>
             )}
 
-            <div className="section-heading">
-              <div>
-                <div className="eyebrow">Your grinds</div>
-                <h2>Choose an activity</h2>
-              </div>
-              <p>Progress stays in this browser. Export a backup whenever you like.</p>
-            </div>
+            <DashboardTabs view={view} onChange={showDashboard} />
 
-            <section className="dashboard-controls" aria-label="Activity list controls">
-              <label className="search-control">
-                <span>Search activities</span>
-                <input
-                  type="search"
-                  value={searchQuery}
-                  placeholder="Tempoross, Zulrah…"
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                />
-              </label>
-              <label className="group-control">
-                <span>Display</span>
-                <select
-                  value={groupByCategory ? 'category' : 'list'}
-                  onChange={(event) => setGroupByCategory(event.target.value === 'category')}
-                >
-                  <option value="list">Single list</option>
-                  <option value="category">Group by category</option>
-                </select>
-              </label>
-            </section>
-
-            {activityGroups.every((group) => group.activities.length === 0) ? (
-              <div className="empty-activities">
-                No activities match “{searchQuery.trim()}”.
-              </div>
-            ) : activityGroups.map((group) => (
-              <section className="activity-section" key={group.category || 'all'}>
-                {group.category && (
-                  <div className="category-heading">
-                    <h3>{group.category}</h3>
-                    <span>{group.activities.length}</span>
-                  </div>
-                )}
-                <div className="activity-grid">
-                  {group.activities.map((activity) => (
-                    <ActivityCard
-                      key={activity.id}
-                      activity={activity}
-                      progress={tracker.getProgress(activity.id)}
-                      onOpen={() => selectActivity(activity.id)}
-                    />
-                  ))}
-                </div>
-              </section>
-            ))}
+            {view === 'stats' ? (
+              <StatsView
+                activities={catalog.activities}
+                getProgress={tracker.getProgress}
+                onOpen={selectActivity}
+              />
+            ) : (
+              <ActivityBrowser
+                activities={catalog.activities}
+                getProgress={tracker.getProgress}
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                groupByCategory={groupByCategory}
+                onGroupByCategoryChange={setGroupByCategory}
+                onOpen={selectActivity}
+              />
+            )}
 
             <footer className="method-note">
               <strong>How the math works</strong>

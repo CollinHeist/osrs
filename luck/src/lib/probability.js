@@ -29,6 +29,12 @@ export function dropByProbability(rate, eligibleUnits) {
   return 1 - noDropProbability(rate, eligibleUnits)
 }
 
+export function rollsForDrop(activity, dropId) {
+  return (activity.groups ?? [])
+    .filter((group) => group.drops.includes(dropId))
+    .reduce((sum, group) => sum + (group.rollsPerUnit ?? 1), 0) || 1
+}
+
 export function binomialProbability(trials, probability, successes) {
   const n = Math.max(0, Math.floor(Number(trials) || 0))
   const k = Math.floor(Number(successes))
