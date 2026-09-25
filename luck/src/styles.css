@@ -127,7 +127,7 @@ h2 { font-size: clamp(1.25rem, 2.5vw, 1.7rem); }
   background: linear-gradient(110deg, rgba(21, 27, 35, .96), rgba(13, 17, 23, .96));
   padding: 20px;
   display: grid;
-  grid-template-columns: 78px minmax(220px, 1fr) minmax(190px, 250px) auto;
+  grid-template-columns: 78px minmax(220px, 1fr) auto auto;
   align-items: center;
   gap: 22px;
   cursor: pointer;
@@ -164,52 +164,42 @@ h2 { font-size: clamp(1.25rem, 2.5vw, 1.7rem); }
 .card-arrow { color: var(--gold); font-size: 1.3rem; padding: 12px; }
 
 .activity-progress {
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: stretch;
-  gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 210px;
   padding-left: 20px;
   border-left: 1px solid var(--border-soft);
 }
 .activity-progress-label {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 2px;
+  flex-direction: column;
+  gap: 3px;
   color: var(--muted);
   font-size: .66rem;
   white-space: nowrap;
 }
 .activity-progress-label small { color: #56616d; font-size: .58rem; }
-.activity-progress-bars {
-  height: 32px;
-  display: flex;
-  align-items: stretch;
-  gap: 3px;
+.activity-progress-ring {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  overflow: visible;
 }
-.activity-progress-bars > span {
-  flex: 1;
-  min-width: 3px;
-  max-width: 18px;
-  display: flex;
-  align-items: end;
-  overflow: hidden;
-  border: 1px solid #2b3540;
-  border-radius: 2px;
-  background: #090c10;
+.activity-progress-ring circle {
+  fill: none;
+  stroke-width: 9;
 }
-.activity-progress-bars i {
-  width: 100%;
-  min-height: 1px;
-  background: var(--gold);
-  opacity: .72;
-}
-.activity-progress-bars .obtained {
-  border-color: rgba(102, 190, 129, .5);
-}
-.activity-progress-bars .obtained i {
-  background: var(--green);
-  opacity: .9;
+.activity-progress-ring .track { stroke: #1d252f; }
+.activity-progress-ring .fill { stroke: var(--gold); opacity: .78; }
+.activity-progress-ring .obtained .track,
+.activity-progress-ring .obtained .fill { stroke: var(--green); opacity: .9; }
+.activity-progress-count {
+  fill: var(--text);
+  font: 500 9px 'JetBrains Mono', monospace;
+  text-anchor: middle;
+  dominant-baseline: central;
 }
 
 .dashboard-controls {
@@ -582,20 +572,13 @@ input:focus { border-color: #796231; box-shadow: 0 0 0 3px rgba(217, 173, 87, .0
   .section-heading { display: block; }
   .section-heading p { margin-top: 10px; }
   .dashboard-controls { grid-template-columns: 1fr; }
-  .activity-card { grid-template-columns: 56px 1fr; gap: 14px; padding: 14px; }
+  .activity-card { grid-template-columns: 56px 1fr auto; gap: 14px; padding: 14px; }
   .activity-art { width: 56px; height: 56px; }
   .activity-art img { max-width: 44px; max-height: 44px; }
   .card-arrow { display: none; }
   .activity-card-stats { gap: 9px 15px; }
-  .activity-progress {
-    grid-column: 1 / -1;
-    grid-template-columns: 1fr;
-    gap: 7px;
-    padding: 11px 0 0;
-    border-top: 1px solid var(--border-soft);
-    border-left: 0;
-  }
-  .activity-progress-label { flex-direction: row; justify-content: space-between; }
+  .activity-progress { width: auto; padding-left: 0; border-left: 0; }
+  .activity-progress-label { display: none; }
   .detail-hero { grid-template-columns: 70px 1fr; gap: 15px; }
   .detail-hero > img { width: 70px; height: 70px; padding: 8px; }
   .control-panel { flex-wrap: wrap; }
