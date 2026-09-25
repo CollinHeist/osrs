@@ -124,7 +124,7 @@ export default function App() {
           <>
             <section className="dashboard-hero">
               <div className="eyebrow">Old School RuneScape</div>
-              <h1>How lucky are you, really?</h1>
+              <h1>How lucky are you?</h1>
               <p>
                 Log every unique, measure your dry streaks, and estimate the grind
                 left between you and the green log.
