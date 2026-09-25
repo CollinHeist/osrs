@@ -1275,8 +1275,8 @@
       "wikiUrl": "https://oldschool.runescape.wiki/w/Reward_casket_(easy)",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Reward_casket_(easy).png",
       "unit": {
-        "singular": "kill",
-        "plural": "kills"
+        "singular": "casket",
+        "plural": "caskets"
       },
       "groups": [
         {
@@ -1995,20 +1995,14 @@
         {
           "id": "monk-s-robe-top-g",
           "name": "Monk's robe top (g)",
-          "rate": [
-            1,
-            14040
-          ],
+          "rate": [1, 14040],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Monk%27s_robe_top_(g)",
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Monk's_robe_top_(g).png"
         },
         {
           "id": "monk-s-robe-g",
           "name": "Monk's robe (g)",
-          "rate": [
-            1,
-            14040
-          ],
+          "rate": [1, 14040],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Monk%27s_robe_(g)",
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Monk's_robe_(g).png"
         },
