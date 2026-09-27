@@ -1205,7 +1205,7 @@
         {
           "id": "beginner-clue-uniques",
           "type": "exclusive",
-          "rollsPerUnit": 1,
+          "rollsPerUnit": 2,
           "drops": [
             "mole-slippers",
             "frog-slippers",
@@ -1339,15 +1339,12 @@
       "category": "Clues",
       "wikiUrl": "https://oldschool.runescape.wiki/w/Reward_casket_(easy)",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Clue_scroll_(easy)_detail.png",
-      "unit": {
-        "singular": "casket",
-        "plural": "caskets"
-      },
+      "unit": { "singular": "casket", "plural": "caskets" },
       "groups": [
         {
           "id": "easy-clue-uniques",
           "type": "exclusive",
-          "rollsPerUnit": 1,
+          "rollsPerUnit": 3,
           "drops": [
             "willow-comp-bow",
             "amulet-of-magic-t",
