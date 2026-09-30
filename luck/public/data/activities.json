@@ -2393,6 +2393,954 @@
       ]
     },
     {
+      "id": "reward-casket-medium",
+      "name": "Reward casket (medium)",
+      "category": "Clues",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Reward_casket_(medium)",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Clue_scroll_(medium)_detail.png",
+      "unit": {
+        "singular": "casket",
+        "plural": "caskets"
+      },
+      "groups": [
+        {
+          "id": "medium-clue-uniques",
+          "type": "exclusive",
+          "rollsPerUnit": 4,
+          "drops": [
+            "gnomish-firelighter",
+            "yew-comp-bow",
+            "strength-amulet-t",
+            "ranger-boots",
+            "wizard-boots",
+            "holy-sandals",
+            "spiked-manacles",
+            "climbing-boots-g",
+            "adamant-full-helm-t",
+            "adamant-platebody-t",
+            "adamant-platelegs-t",
+            "adamant-plateskirt-t",
+            "adamant-kiteshield-t",
+            "adamant-full-helm-g",
+            "adamant-platebody-g",
+            "adamant-platelegs-g",
+            "adamant-plateskirt-g",
+            "adamant-kiteshield-g",
+            "adamant-shield-h1",
+            "adamant-shield-h2",
+            "adamant-shield-h3",
+            "adamant-shield-h4",
+            "adamant-shield-h5",
+            "adamant-helm-h1",
+            "adamant-helm-h2",
+            "adamant-helm-h3",
+            "adamant-helm-h4",
+            "adamant-helm-h5",
+            "adamant-platebody-h1",
+            "adamant-platebody-h2",
+            "adamant-platebody-h3",
+            "adamant-platebody-h4",
+            "adamant-platebody-h5",
+            "mithril-full-helm-g",
+            "mithril-platebody-g",
+            "mithril-platelegs-g",
+            "mithril-plateskirt-g",
+            "mithril-kiteshield-g",
+            "mithril-full-helm-t",
+            "mithril-platebody-t",
+            "mithril-platelegs-t",
+            "mithril-plateskirt-t",
+            "mithril-kiteshield-t",
+            "green-d-hide-body-g",
+            "green-d-hide-body-t",
+            "green-d-hide-chaps-g",
+            "green-d-hide-chaps-t",
+            "saradomin-mitre",
+            "saradomin-cloak",
+            "guthix-mitre",
+            "guthix-cloak",
+            "zamorak-mitre",
+            "zamorak-cloak",
+            "ancient-mitre",
+            "ancient-cloak",
+            "ancient-stole",
+            "ancient-crozier",
+            "armadyl-mitre",
+            "armadyl-cloak",
+            "armadyl-stole",
+            "armadyl-crozier",
+            "bandos-mitre",
+            "bandos-cloak",
+            "bandos-stole",
+            "bandos-crozier",
+            "red-boater",
+            "green-boater",
+            "orange-boater",
+            "black-boater",
+            "blue-boater",
+            "pink-boater",
+            "purple-boater",
+            "white-boater",
+            "red-headband",
+            "black-headband",
+            "brown-headband",
+            "white-headband",
+            "blue-headband",
+            "gold-headband",
+            "pink-headband",
+            "green-headband",
+            "crier-hat",
+            "crier-coat",
+            "crier-bell",
+            "adamant-cane",
+            "arceuus-banner",
+            "piscarilius-banner",
+            "hosidius-banner",
+            "shayzien-banner",
+            "lovakengj-banner",
+            "cabbage-round-shield",
+            "black-unicorn-mask",
+            "white-unicorn-mask",
+            "cat-mask",
+            "penguin-mask",
+            "leprechaun-hat",
+            "black-leprechaun-hat",
+            "wolf-mask",
+            "wolf-cloak",
+            "purple-elegant-shirt",
+            "purple-elegant-blouse",
+            "purple-elegant-legs",
+            "purple-elegant-skirt",
+            "black-elegant-shirt",
+            "white-elegant-blouse",
+            "black-elegant-legs",
+            "white-elegant-skirt",
+            "pink-elegant-shirt",
+            "pink-elegant-blouse",
+            "pink-elegant-legs",
+            "pink-elegant-skirt",
+            "gold-elegant-shirt",
+            "gold-elegant-blouse",
+            "gold-elegant-legs",
+            "gold-elegant-skirt"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "gnomish-firelighter",
+          "name": "Gnomish firelighter",
+          "rate": [10, 3410],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Gnomish_firelighter",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Gnomish_firelighter.png"
+        },
+        {
+          "id": "yew-comp-bow",
+          "name": "Yew comp bow",
+          "rate": [10, 3410],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Yew_comp_bow",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Yew_comp_bow.png"
+        },
+        {
+          "id": "strength-amulet-t",
+          "name": "Strength amulet (t)",
+          "rate": [10, 3410],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Strength_amulet_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Strength_amulet_(t).png"
+        },
+        {
+          "id": "ranger-boots",
+          "name": "Ranger boots",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ranger_boots",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ranger_boots.png"
+        },
+        {
+          "id": "wizard-boots",
+          "name": "Wizard boots",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Wizard_boots",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Wizard_boots.png"
+        },
+        {
+          "id": "holy-sandals",
+          "name": "Holy sandals",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Holy_sandals",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Holy_sandals.png"
+        },
+        {
+          "id": "spiked-manacles",
+          "name": "Spiked manacles",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Spiked_manacles",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Spiked_manacles.png"
+        },
+        {
+          "id": "climbing-boots-g",
+          "name": "Climbing boots (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Climbing_boots_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Climbing_boots_(g).png"
+        },
+        {
+          "id": "adamant-full-helm-t",
+          "name": "Adamant full helm (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_full_helm_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_full_helm_(t).png"
+        },
+        {
+          "id": "adamant-platebody-t",
+          "name": "Adamant platebody (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_platebody_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_platebody_(t).png"
+        },
+        {
+          "id": "adamant-platelegs-t",
+          "name": "Adamant platelegs (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_platelegs_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_platelegs_(t).png"
+        },
+        {
+          "id": "adamant-plateskirt-t",
+          "name": "Adamant plateskirt (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_plateskirt_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_plateskirt_(t).png"
+        },
+        {
+          "id": "adamant-kiteshield-t",
+          "name": "Adamant kiteshield (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_kiteshield_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_kiteshield_(t).png"
+        },
+        {
+          "id": "adamant-full-helm-g",
+          "name": "Adamant full helm (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_full_helm_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_full_helm_(g).png"
+        },
+        {
+          "id": "adamant-platebody-g",
+          "name": "Adamant platebody (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_platebody_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_platebody_(g).png"
+        },
+        {
+          "id": "adamant-platelegs-g",
+          "name": "Adamant platelegs (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_platelegs_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_platelegs_(g).png"
+        },
+        {
+          "id": "adamant-plateskirt-g",
+          "name": "Adamant plateskirt (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_plateskirt_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_plateskirt_(g).png"
+        },
+        {
+          "id": "adamant-kiteshield-g",
+          "name": "Adamant kiteshield (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_kiteshield_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_kiteshield_(g).png"
+        },
+        {
+          "id": "adamant-shield-h1",
+          "name": "Adamant shield (h1)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_shield_(h1)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_shield_(h1).png"
+        },
+        {
+          "id": "adamant-shield-h2",
+          "name": "Adamant shield (h2)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_shield_(h2)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_shield_(h2).png"
+        },
+        {
+          "id": "adamant-shield-h3",
+          "name": "Adamant shield (h3)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_shield_(h3)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_shield_(h3).png"
+        },
+        {
+          "id": "adamant-shield-h4",
+          "name": "Adamant shield (h4)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_shield_(h4)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_shield_(h4).png"
+        },
+        {
+          "id": "adamant-shield-h5",
+          "name": "Adamant shield (h5)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_shield_(h5)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_shield_(h5).png"
+        },
+        {
+          "id": "adamant-helm-h1",
+          "name": "Adamant helm (h1)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_helm_(h1)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_helm_(h1).png"
+        },
+        {
+          "id": "adamant-helm-h2",
+          "name": "Adamant helm (h2)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_helm_(h2)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_helm_(h2).png"
+        },
+        {
+          "id": "adamant-helm-h3",
+          "name": "Adamant helm (h3)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_helm_(h3)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_helm_(h3).png"
+        },
+        {
+          "id": "adamant-helm-h4",
+          "name": "Adamant helm (h4)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_helm_(h4)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_helm_(h4).png"
+        },
+        {
+          "id": "adamant-helm-h5",
+          "name": "Adamant helm (h5)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_helm_(h5)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_helm_(h5).png"
+        },
+        {
+          "id": "adamant-platebody-h1",
+          "name": "Adamant platebody (h1)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_platebody_(h1)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_platebody_(h1).png"
+        },
+        {
+          "id": "adamant-platebody-h2",
+          "name": "Adamant platebody (h2)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_platebody_(h2)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_platebody_(h2).png"
+        },
+        {
+          "id": "adamant-platebody-h3",
+          "name": "Adamant platebody (h3)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_platebody_(h3)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_platebody_(h3).png"
+        },
+        {
+          "id": "adamant-platebody-h4",
+          "name": "Adamant platebody (h4)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_platebody_(h4)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_platebody_(h4).png"
+        },
+        {
+          "id": "adamant-platebody-h5",
+          "name": "Adamant platebody (h5)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_platebody_(h5)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_platebody_(h5).png"
+        },
+        {
+          "id": "mithril-full-helm-g",
+          "name": "Mithril full helm (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mithril_full_helm_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mithril_full_helm_(g).png"
+        },
+        {
+          "id": "mithril-platebody-g",
+          "name": "Mithril platebody (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mithril_platebody_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mithril_platebody_(g).png"
+        },
+        {
+          "id": "mithril-platelegs-g",
+          "name": "Mithril platelegs (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mithril_platelegs_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mithril_platelegs_(g).png"
+        },
+        {
+          "id": "mithril-plateskirt-g",
+          "name": "Mithril plateskirt (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mithril_plateskirt_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mithril_plateskirt_(g).png"
+        },
+        {
+          "id": "mithril-kiteshield-g",
+          "name": "Mithril kiteshield (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mithril_kiteshield_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mithril_kiteshield_(g).png"
+        },
+        {
+          "id": "mithril-full-helm-t",
+          "name": "Mithril full helm (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mithril_full_helm_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mithril_full_helm_(t).png"
+        },
+        {
+          "id": "mithril-platebody-t",
+          "name": "Mithril platebody (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mithril_platebody_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mithril_platebody_(t).png"
+        },
+        {
+          "id": "mithril-platelegs-t",
+          "name": "Mithril platelegs (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mithril_platelegs_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mithril_platelegs_(t).png"
+        },
+        {
+          "id": "mithril-plateskirt-t",
+          "name": "Mithril plateskirt (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mithril_plateskirt_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mithril_plateskirt_(t).png"
+        },
+        {
+          "id": "mithril-kiteshield-t",
+          "name": "Mithril kiteshield (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mithril_kiteshield_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mithril_kiteshield_(t).png"
+        },
+        {
+          "id": "green-d-hide-body-g",
+          "name": "Green d'hide body (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Green_d%27hide_body_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Green_d'hide_body_(g).png"
+        },
+        {
+          "id": "green-d-hide-body-t",
+          "name": "Green d'hide body (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Green_d%27hide_body_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Green_d'hide_body_(t).png"
+        },
+        {
+          "id": "green-d-hide-chaps-g",
+          "name": "Green d'hide chaps (g)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Green_d%27hide_chaps_(g)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Green_d'hide_chaps_(g).png"
+        },
+        {
+          "id": "green-d-hide-chaps-t",
+          "name": "Green d'hide chaps (t)",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Green_d%27hide_chaps_(t)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Green_d'hide_chaps_(t).png"
+        },
+        {
+          "id": "saradomin-mitre",
+          "name": "Saradomin mitre",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Saradomin_mitre",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Saradomin_mitre.png"
+        },
+        {
+          "id": "saradomin-cloak",
+          "name": "Saradomin cloak",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Saradomin_cloak",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Saradomin_cloak.png"
+        },
+        {
+          "id": "guthix-mitre",
+          "name": "Guthix mitre",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Guthix_mitre",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Guthix_mitre.png"
+        },
+        {
+          "id": "guthix-cloak",
+          "name": "Guthix cloak",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Guthix_cloak",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Guthix_cloak.png"
+        },
+        {
+          "id": "zamorak-mitre",
+          "name": "Zamorak mitre",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorak_mitre",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Zamorak_mitre.png"
+        },
+        {
+          "id": "zamorak-cloak",
+          "name": "Zamorak cloak",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorak_cloak",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Zamorak_cloak.png"
+        },
+        {
+          "id": "ancient-mitre",
+          "name": "Ancient mitre",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_mitre",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ancient_mitre.png"
+        },
+        {
+          "id": "ancient-cloak",
+          "name": "Ancient cloak",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_cloak",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ancient_cloak.png"
+        },
+        {
+          "id": "ancient-stole",
+          "name": "Ancient stole",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_stole",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ancient_stole.png"
+        },
+        {
+          "id": "ancient-crozier",
+          "name": "Ancient crozier",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_crozier",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ancient_crozier.png"
+        },
+        {
+          "id": "armadyl-mitre",
+          "name": "Armadyl mitre",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_mitre",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Armadyl_mitre.png"
+        },
+        {
+          "id": "armadyl-cloak",
+          "name": "Armadyl cloak",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_cloak",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Armadyl_cloak.png"
+        },
+        {
+          "id": "armadyl-stole",
+          "name": "Armadyl stole",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_stole",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Armadyl_stole.png"
+        },
+        {
+          "id": "armadyl-crozier",
+          "name": "Armadyl crozier",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_crozier",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Armadyl_crozier.png"
+        },
+        {
+          "id": "bandos-mitre",
+          "name": "Bandos mitre",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_mitre",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bandos_mitre.png"
+        },
+        {
+          "id": "bandos-cloak",
+          "name": "Bandos cloak",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_cloak",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bandos_cloak.png"
+        },
+        {
+          "id": "bandos-stole",
+          "name": "Bandos stole",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_stole",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bandos_stole.png"
+        },
+        {
+          "id": "bandos-crozier",
+          "name": "Bandos crozier",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_crozier",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bandos_crozier.png"
+        },
+        {
+          "id": "red-boater",
+          "name": "Red boater",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Red_boater",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Red_boater.png"
+        },
+        {
+          "id": "green-boater",
+          "name": "Green boater",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Green_boater",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Green_boater.png"
+        },
+        {
+          "id": "orange-boater",
+          "name": "Orange boater",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Orange_boater",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Orange_boater.png"
+        },
+        {
+          "id": "black-boater",
+          "name": "Black boater",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Black_boater",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Black_boater.png"
+        },
+        {
+          "id": "blue-boater",
+          "name": "Blue boater",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Blue_boater",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Blue_boater.png"
+        },
+        {
+          "id": "pink-boater",
+          "name": "Pink boater",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pink_boater",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pink_boater.png"
+        },
+        {
+          "id": "purple-boater",
+          "name": "Purple boater",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Purple_boater",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Purple_boater.png"
+        },
+        {
+          "id": "white-boater",
+          "name": "White boater",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/White_boater",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/White_boater.png"
+        },
+        {
+          "id": "red-headband",
+          "name": "Red headband",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Red_headband",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Red_headband.png"
+        },
+        {
+          "id": "black-headband",
+          "name": "Black headband",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Black_headband",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Black_headband.png"
+        },
+        {
+          "id": "brown-headband",
+          "name": "Brown headband",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Brown_headband",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Brown_headband.png"
+        },
+        {
+          "id": "white-headband",
+          "name": "White headband",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/White_headband",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/White_headband.png"
+        },
+        {
+          "id": "blue-headband",
+          "name": "Blue headband",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Blue_headband",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Blue_headband.png"
+        },
+        {
+          "id": "gold-headband",
+          "name": "Gold headband",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Gold_headband",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Gold_headband.png"
+        },
+        {
+          "id": "pink-headband",
+          "name": "Pink headband",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pink_headband",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pink_headband.png"
+        },
+        {
+          "id": "green-headband",
+          "name": "Green headband",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Green_headband",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Green_headband.png"
+        },
+        {
+          "id": "crier-hat",
+          "name": "Crier hat",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Crier_hat",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Crier_hat.png"
+        },
+        {
+          "id": "crier-coat",
+          "name": "Crier coat",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Crier_coat",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Crier_coat.png"
+        },
+        {
+          "id": "crier-bell",
+          "name": "Crier bell",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Crier_bell",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Crier_bell.png"
+        },
+        {
+          "id": "adamant-cane",
+          "name": "Adamant cane",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Adamant_cane",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Adamant_cane.png"
+        },
+        {
+          "id": "arceuus-banner",
+          "name": "Arceuus banner",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Arceuus_banner",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Arceuus_banner.png"
+        },
+        {
+          "id": "piscarilius-banner",
+          "name": "Piscarilius banner",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Piscarilius_banner",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Piscarilius_banner.png"
+        },
+        {
+          "id": "hosidius-banner",
+          "name": "Hosidius banner",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Hosidius_banner",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Hosidius_banner.png"
+        },
+        {
+          "id": "shayzien-banner",
+          "name": "Shayzien banner",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Shayzien_banner",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Shayzien_banner.png"
+        },
+        {
+          "id": "lovakengj-banner",
+          "name": "Lovakengj banner",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Lovakengj_banner",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Lovakengj_banner.png"
+        },
+        {
+          "id": "cabbage-round-shield",
+          "name": "Cabbage round shield",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Cabbage_round_shield",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Cabbage_round_shield.png"
+        },
+        {
+          "id": "black-unicorn-mask",
+          "name": "Black unicorn mask",
+          "rate": [
+            1,
+            2266
+          ],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Black_unicorn_mask",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Black_unicorn_mask.png"
+        },
+        {
+          "id": "white-unicorn-mask",
+          "name": "White unicorn mask",
+          "rate": [
+            1,
+            2266
+          ],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/White_unicorn_mask",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/White_unicorn_mask.png"
+        },
+        {
+          "id": "cat-mask",
+          "name": "Cat mask",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Cat_mask",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Cat_mask.png"
+        },
+        {
+          "id": "penguin-mask",
+          "name": "Penguin mask",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Penguin_mask",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Penguin_mask.png"
+        },
+        {
+          "id": "leprechaun-hat",
+          "name": "Leprechaun hat",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Leprechaun_hat",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Leprechaun_hat.png"
+        },
+        {
+          "id": "black-leprechaun-hat",
+          "name": "Black leprechaun hat",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Black_leprechaun_hat",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Black_leprechaun_hat.png"
+        },
+        {
+          "id": "wolf-mask",
+          "name": "Wolf mask",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Wolf_mask",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Wolf_mask.png"
+        },
+        {
+          "id": "wolf-cloak",
+          "name": "Wolf cloak",
+          "rate": [1, 1133],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Wolf_cloak",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Wolf_cloak.png"
+        },
+        {
+          "id": "purple-elegant-shirt",
+          "name": "Purple elegant shirt",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Purple_elegant_shirt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Purple_elegant_shirt.png"
+        },
+        {
+          "id": "purple-elegant-blouse",
+          "name": "Purple elegant blouse",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Purple_elegant_blouse",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Purple_elegant_blouse.png"
+        },
+        {
+          "id": "purple-elegant-legs",
+          "name": "Purple elegant legs",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Purple_elegant_legs",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Purple_elegant_legs.png"
+        },
+        {
+          "id": "purple-elegant-skirt",
+          "name": "Purple elegant skirt",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Purple_elegant_skirt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Purple_elegant_skirt.png"
+        },
+        {
+          "id": "black-elegant-shirt",
+          "name": "Black elegant shirt",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Black_elegant_shirt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Black_elegant_shirt.png"
+        },
+        {
+          "id": "white-elegant-blouse",
+          "name": "White elegant blouse",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/White_elegant_blouse",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/White_elegant_blouse.png"
+        },
+        {
+          "id": "black-elegant-legs",
+          "name": "Black elegant legs",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Black_elegant_legs",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Black_elegant_legs.png"
+        },
+        {
+          "id": "white-elegant-skirt",
+          "name": "White elegant skirt",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/White_elegant_skirt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/White_elegant_skirt.png"
+        },
+        {
+          "id": "pink-elegant-shirt",
+          "name": "Pink elegant shirt",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pink_elegant_shirt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pink_elegant_shirt.png"
+        },
+        {
+          "id": "pink-elegant-blouse",
+          "name": "Pink elegant blouse",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pink_elegant_blouse",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pink_elegant_blouse.png"
+        },
+        {
+          "id": "pink-elegant-legs",
+          "name": "Pink elegant legs",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pink_elegant_legs",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pink_elegant_legs.png"
+        },
+        {
+          "id": "pink-elegant-skirt",
+          "name": "Pink elegant skirt",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pink_elegant_skirt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pink_elegant_skirt.png"
+        },
+        {
+          "id": "gold-elegant-shirt",
+          "name": "Gold elegant shirt",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Gold_elegant_shirt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Gold_elegant_shirt.png"
+        },
+        {
+          "id": "gold-elegant-blouse",
+          "name": "Gold elegant blouse",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Gold_elegant_blouse",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Gold_elegant_blouse.png"
+        },
+        {
+          "id": "gold-elegant-legs",
+          "name": "Gold elegant legs",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Gold_elegant_legs",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Gold_elegant_legs.png"
+        },
+        {
+          "id": "gold-elegant-skirt",
+          "name": "Gold elegant skirt",
+          "rate": [8, 18128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Gold_elegant_skirt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Gold_elegant_skirt.png"
+        }
+      ]
+    },
+    {
       "id": "reward-casket-hard",
       "name": "Reward casket (hard)",
       "category": "Clues",
