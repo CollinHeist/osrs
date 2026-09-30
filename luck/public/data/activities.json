@@ -4467,6 +4467,16 @@
           "drops": ["nid"]
         }
       ],
+      "modes": [
+        { "id": "default", "name": "Looted" },
+        {
+          "id": "destroyed",
+          "name": "Destroyed",
+          "note": "Corpse destroyed: no loot rolls, doubled Nid chance.",
+          "groupRolls": { "unique": 0, "other": 0 },
+          "rates": { "nid": [1, 1500] }
+        }
+      ],
       "drops": [
         {
           "id": "noxious-piece",

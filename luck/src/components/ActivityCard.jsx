@@ -1,4 +1,4 @@
-import { collectionChance } from '../lib/probability'
+import { collectionChanceForCounts, progressCounts } from '../lib/probability'
 import { formatNumber, formatPercent } from '../lib/format'
 import ActivityProgressChart from './ActivityProgressChart'
 
@@ -7,7 +7,7 @@ export default function ActivityCard({ activity, progress, onOpen }) {
     (drop) => (progress.drops[drop.id] ?? []).length > 0,
   )
   const isGreenlogged = obtained.length === activity.drops.length
-  const greenlogChance = collectionChance(activity, progress.count)
+  const greenlogChance = collectionChanceForCounts(activity, progressCounts(progress))
 
   return (
     <button

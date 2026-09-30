@@ -35,6 +35,34 @@ An `exclusive` group allows at most one listed item on a roll. Set `rollsPerUnit
 when one tracked kill or chest contains multiple rolls, such as Zulrah's two loot
 rolls or a six-brother Barrows chest's seven reward rolls.
 
+### Kill types (modes)
+
+Activities with alternate ways to complete a unit can define a `modes` array. The
+player enters a separate count for each mode. The first mode must use the id
+`default`, which is also where counts saved before modes existed are placed.
+Activities without `modes` behave as a single `default` mode.
+
+```json
+"modes": [
+  { "id": "default", "name": "Looted" },
+  {
+    "id": "destroyed",
+    "name": "Destroyed",
+    "note": "Corpse destroyed: no loot rolls, doubled Nid chance.",
+    "groupRolls": { "unique": 0, "other": 0 },
+    "rates": { "nid": [1, 1500] }
+  }
+]
+```
+
+- `groupRolls` overrides a group's `rollsPerUnit` in that mode. Use `0` for groups
+  that never roll, including drops that only exist in some modes.
+- `rates` overrides individual drop rates in that mode.
+
+Drop history keeps a single total count. Dry streaks assume the player's overall
+mix of modes applied evenly across the grind, and future estimates use the
+player's selected planned mode.
+
 When `duplicateProtected` is enabled, the tracker accepts only the first copy and
 stops calculating a post-drop dry streak. Existing imported history is preserved
 so changing catalog configuration never silently deletes user data.

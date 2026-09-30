@@ -62,6 +62,24 @@ describe('buildInsights', () => {
     expect(insights.unluckiestActivities.map((entry) => entry.activity.id)).toEqual(['dry'])
   })
 
+  it('uses per-mode counts and the planned mode', () => {
+    const moded = {
+      ...activity('moded', [[1, 10]]),
+      modes: [
+        { id: 'default', name: 'Normal' },
+        { id: 'boosted', name: 'Boosted', rates: { 'moded-0': [1, 5] } },
+      ],
+    }
+    const modedProgress = {
+      ...progress(100, {}, 1),
+      counts: { default: 50, boosted: 50 },
+      plannedMode: 'boosted',
+    }
+    const result = buildInsights([moded], () => modedProgress)
+    expect(result.driestItems[0].dryChance).toBeCloseTo(0.9 ** 50 * 0.8 ** 50)
+    expect(result.fastestGreenlogs[0].expectedUnits).toBeCloseTo(5)
+  })
+
   it('orders greenlog estimates by expected play time', () => {
     const ids = insights.fastestGreenlogs.map((entry) => entry.activity.id)
     expect(ids).toEqual(['dry', 'lucky'])

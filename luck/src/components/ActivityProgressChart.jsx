@@ -1,4 +1,4 @@
-import { dropByProbability, rollsForDrop } from '../lib/probability'
+import { dropExposure, exposureDropBy, progressCounts } from '../lib/probability'
 import { formatPercent } from '../lib/format'
 
 const SIZE = 64
@@ -32,13 +32,13 @@ export default function ActivityProgressChart({ activity, progress }) {
   const total = activity.drops.length
   const gap = segmentGap(total)
   const segment = total ? 360 / total : 360
+  const counts = progressCounts(progress)
   const items = activity.drops.map((drop) => {
     const obtained = (progress.drops[drop.id] ?? []).length > 0
-    const eligibleRolls = progress.count * rollsForDrop(activity, drop.id)
     return {
       drop,
       obtained,
-      fill: obtained ? 1 : dropByProbability(drop.rate, eligibleRolls),
+      fill: obtained ? 1 : exposureDropBy(dropExposure(activity, counts, drop.id)),
     }
   })
   const obtainedCount = items.filter((item) => item.obtained).length

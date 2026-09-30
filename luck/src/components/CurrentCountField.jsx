@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 export default function CurrentCountField({
-  activity,
+  label,
   count,
   minimumCount,
-  onUpdate,
+  onCommit,
 }) {
   const [draft, setDraft] = useState(String(count))
 
@@ -17,12 +17,12 @@ export default function CurrentCountField({
 
     const nextCount = Math.max(0, minimumCount, parsed)
     setDraft(String(nextCount))
-    onUpdate({ count: nextCount })
+    onCommit(nextCount)
   }
 
   return (
     <label>
-      Current {activity.unit.plural}
+      {label}
       <input
         type="number"
         min="0"

@@ -1,9 +1,12 @@
 import {
-  dropByProbability,
+  dropExposure,
+  exposureDropBy,
+  exposureForUnits,
+  exposureNoDrop,
   getDropIntervals,
-  noDropProbability,
+  progressCounts,
   remainingCollectionStats,
-  rollsForDrop,
+  resolveMode,
 } from './probability'
 
 const EMPTY_PROGRESS = { count: 0, minutesPerUnit: 0, drops: {} }
@@ -34,15 +37,22 @@ function isStarted(progress) {
 function describeDrop(activity, drop, progress) {
   const entries = progress.drops[drop.id] ?? []
   const known = entries.filter((entry) => entry.at !== null).map((entry) => entry.at)
-  const rolls = rollsForDrop(activity, drop.id)
+  const counts = progressCounts(progress)
+  const firstAt = known.length ? Math.min(...known) : null
+  const intervals = getDropIntervals(known, progress.count)
   return {
     activity,
     drop,
     obtained: entries.length > 0,
-    firstAt: known.length ? Math.min(...known) : null,
-    rolls,
-    seenChance: dropByProbability(drop.rate, progress.count * rolls),
-    intervals: getDropIntervals(known, progress.count),
+    firstAt,
+    seenChance: exposureDropBy(dropExposure(activity, counts, drop.id)),
+    intervals,
+    dryChance: exposureNoDrop(
+      exposureForUnits(activity, counts, drop.id, intervals.currentStreak),
+    ),
+    firstChance: firstAt === null
+      ? null
+      : exposureDropBy(exposureForUnits(activity, counts, drop.id, firstAt)),
   }
 }
 
@@ -63,7 +73,7 @@ function greenlogEstimate(activity, progress, drops) {
   const obtainedIds = drops.filter((item) => item.obtained).map((item) => item.drop.id)
   let remaining
   try {
-    remaining = remainingCollectionStats(activity, obtainedIds)
+    remaining = remainingCollectionStats(resolveMode(activity, progress.plannedMode), obtainedIds)
   } catch {
     return null
   }
@@ -103,21 +113,14 @@ export function buildInsights(activities, getProgress, limit = 5) {
   // Items still missing, ranked by how unusual the current dry streak is.
   const driestItems = allDrops
     .filter((item) => !item.obtained && item.intervals.currentStreak > 0)
-    .map((item) => ({
-      ...item,
-      streak: item.intervals.currentStreak,
-      dryChance: noDropProbability(item.drop.rate, item.intervals.currentStreak * item.rolls),
-    }))
+    .map((item) => ({ ...item, streak: item.intervals.currentStreak }))
     .sort((left, right) => left.dryChance - right.dryChance)
     .slice(0, limit)
 
   // Items whose first recorded copy came unusually early.
   const luckiestDrops = allDrops
     .filter((item) => item.firstAt !== null)
-    .map((item) => ({
-      ...item,
-      chance: dropByProbability(item.drop.rate, item.firstAt * item.rolls),
-    }))
+    .map((item) => ({ ...item, chance: item.firstChance }))
     .sort((left, right) => left.chance - right.chance)
     .slice(0, limit)
 

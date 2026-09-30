@@ -1,14 +1,19 @@
 import { useMemo } from 'react'
 import {
-  collectionChance,
-  collectionMilestoneUnits,
+  collectionChanceForCounts,
+  collectionMilestoneUnitsForCounts,
+  getModes,
+  hasMultipleModes,
+  progressCounts,
   remainingCollectionStats,
+  resolveMode,
   unitsToDuration,
 } from '../lib/probability'
 import { formatDuration, formatNumber, formatPercent } from '../lib/format'
-import CurrentCountField from './CurrentCountField'
 import DropRow from './DropRow'
+import KillTypeCounts from './KillTypeCounts'
 import MetricCard from './MetricCard'
+import PlannedModeSelect from './PlannedModeSelect'
 
 const COLLECTION_MILESTONES = [0.5, 0.75, 0.9, 0.95, 0.99, 0.999]
 
@@ -29,16 +34,31 @@ export default function ActivityDetail({
     .flat()
     .reduce((latest, entry) => Math.max(latest, entry.at ?? 0), 0)
 
+  const counts = progressCounts(progress)
+  const multiMode = hasMultipleModes(activity)
+  const plannedActivity = resolveMode(activity, progress.plannedMode)
+  const plannedLabel = `${plannedActivity.mode.name} ${activity.unit.plural}`.toLowerCase()
+
   const summary = useMemo(() => {
-    const completionChance = collectionChance(activity, progress.count)
+    const completionChance = collectionChanceForCounts(activity, counts)
     const milestones = COLLECTION_MILESTONES
       .filter((target) => target > completionChance)
-      .map((target) => ({
-        target,
-        units: collectionMilestoneUnits(activity, target),
-      }))
-    const remaining = remainingCollectionStats(activity, obtainedIds)
+      .map((target) => {
+        const additional = collectionMilestoneUnitsForCounts(
+          activity,
+          counts,
+          plannedActivity.mode.id,
+          target,
+        )
+        return {
+          target,
+          additional,
+          units: additional === null ? null : progress.count + additional,
+        }
+      })
+    const remaining = remainingCollectionStats(plannedActivity, obtainedIds)
     const duration = (units) => {
+      if (units === null) return '—'
       const result = unitsToDuration(units, progress.minutesPerUnit)
       return result ? formatDuration(result.hours) : '—'
     }
@@ -51,7 +71,7 @@ export default function ActivityDetail({
       medianTime: duration(remaining.median),
       p90Time: duration(remaining.p90),
     }
-  }, [activity, obtainedIds, progress.count, progress.minutesPerUnit])
+  }, [activity, counts, obtainedIds, plannedActivity, progress.count, progress.minutesPerUnit])
   const formattedCompletionChance = summary.completionChance < 0.01
     ? formatPercent(summary.completionChance, 4)
     : formatPercent(summary.completionChance, 1)
@@ -76,13 +96,24 @@ export default function ActivityDetail({
       </section>
 
       {activity.rateNote && <aside className="rate-note">{activity.rateNote}</aside>}
+      {multiMode && getModes(activity).some((mode) => mode.note) && (
+        <aside className="rate-note">
+          {getModes(activity).filter((mode) => mode.note).map((mode) => (
+            <span className="mode-note" key={mode.id}><b>{mode.name}:</b> {mode.note}</span>
+          ))}
+        </aside>
+      )}
 
       <section className="control-panel">
-        <CurrentCountField
-          key={`${activity.id}-${progress.count}`}
+        <KillTypeCounts
           activity={activity}
-          count={progress.count}
+          counts={counts}
           minimumCount={minimumCount}
+          onUpdate={onUpdate}
+        />
+        <PlannedModeSelect
+          activity={activity}
+          plannedMode={progress.plannedMode}
           onUpdate={onUpdate}
         />
         <label>
@@ -119,15 +150,17 @@ export default function ActivityDetail({
           popover={(
             <div className="milestone-list">
               <b>Upcoming chance milestones</b>
-              {summary.milestones.length > 0 ? summary.milestones.map(({ target, units }) => (
+              {summary.milestones.length > 0 ? summary.milestones.map(({ target, units, additional }) => (
                 <span key={target}>
                   <em>{formatPercent(target, target >= 0.999 ? 1 : 0)}</em>
                   {units === null ? (
-                    <>Beyond 2,000,000 {activity.unit.plural}</>
+                    <>Beyond 2,000,000 more {multiMode ? plannedLabel : activity.unit.plural}</>
                   ) : (
                     <>
                       At {formatNumber(units)} {activity.unit.plural}
-                      <small>+{formatNumber(Math.max(0, units - progress.count))} from now</small>
+                      <small>
+                        +{formatNumber(additional)} {multiMode ? plannedLabel : ''} from now
+                      </small>
                     </>
                   )}
                 </span>
@@ -168,6 +201,7 @@ export default function ActivityDetail({
           <p>
             These are probability estimates, not guarantees. Expected time is an average;
             the 90% point means one in ten comparable grinds would take longer.
+            {multiMode && ` Remaining estimates assume ${plannedLabel}.`}
           </p>
         </section>
       )}
@@ -190,6 +224,7 @@ export default function ActivityDetail({
             activity={activity}
             drop={drop}
             entries={progress.drops[drop.id] ?? []}
+            counts={counts}
             currentCount={progress.count}
             onAdd={(at) => onAddDrop(drop.id, at)}
             onRemove={(entryId) => onRemoveDrop(drop.id, entryId)}

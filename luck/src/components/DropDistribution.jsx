@@ -1,12 +1,10 @@
-import { binomialProbability, itemLuckStats } from '../lib/probability'
+import { exposureLuckStats } from '../lib/probability'
 import { formatNumber, formatPercent } from '../lib/format'
 
 function distributionPoints(distribution) {
-  const { trials, probability, observed } = distribution
-  const mean = trials * probability
-  const deviation = Math.sqrt(mean * (1 - probability))
+  const { mean, deviation, maxCount, observed, probabilityOf } = distribution
   const minimum = Math.max(0, Math.floor(Math.min(mean - 3.5 * deviation, observed)))
-  const maximum = Math.min(trials, Math.ceil(Math.max(mean + 3.5 * deviation, observed)))
+  const maximum = Math.min(maxCount, Math.ceil(Math.max(mean + 3.5 * deviation, observed)))
   const span = maximum - minimum
   const values = span <= 30
     ? Array.from({ length: span + 1 }, (_, index) => minimum + index)
@@ -19,21 +17,16 @@ function distributionPoints(distribution) {
     .sort((a, b) => a - b)
     .map((count) => ({
       count,
-      probability: binomialProbability(trials, probability, count),
+      probability: probabilityOf(count),
     }))
 }
 
 export default function DropDistribution({
   drop,
-  eligibleRolls,
+  exposure,
   observedCount,
 }) {
-  const stats = itemLuckStats(
-    drop.rate,
-    eligibleRolls,
-    observedCount,
-    drop.duplicateProtected,
-  )
+  const stats = exposureLuckStats(exposure, observedCount, drop.duplicateProtected)
   const points = distributionPoints(stats.distribution)
   const peak = Math.max(...points.map((point) => point.probability), Number.EPSILON)
   const deltaPrefix = stats.delta > 0 ? '+' : ''

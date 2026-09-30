@@ -3,13 +3,21 @@ import { readFileSync } from 'node:fs'
 import {
   binomialProbability,
   collectionChance,
+  collectionChanceForCounts,
   collectionMilestoneUnits,
+  collectionMilestoneUnitsForCounts,
   dropByProbability,
+  dropExposure,
+  exposureDropBy,
+  exposureForUnits,
+  exposureLuckStats,
+  exposureNoDrop,
   getDropIntervals,
   itemLuckStats,
   noDropProbability,
   rateToProbability,
   remainingCollectionStats,
+  resolveMode,
   unitsToDuration,
 } from './probability'
 
@@ -163,6 +171,97 @@ describe('collection calculations', () => {
       expect(stats.median).toBeGreaterThan(0)
       expect(stats.p90).toBeGreaterThan(stats.median)
     }
+  })
+})
+
+const araxxorLike = {
+  drops: [
+    { id: 'piece', rate: [1, 200] },
+    { id: 'fang', rate: [1, 600] },
+    { id: 'nid', rate: [1, 3000] },
+  ],
+  groups: [
+    { id: 'unique', type: 'exclusive', rollsPerUnit: 1, drops: ['piece', 'fang'] },
+    { id: 'tertiary', type: 'exclusive', rollsPerUnit: 1, drops: ['nid'] },
+  ],
+  modes: [
+    { id: 'default', name: 'Looted' },
+    { id: 'destroyed', name: 'Destroyed', groupRolls: { unique: 0 }, rates: { nid: [1, 1500] } },
+  ],
+}
+
+describe('kill type modes', () => {
+  it('matches single-count functions when only the default mode exists', () => {
+    const counts = { default: 40 }
+    expect(collectionChanceForCounts(independentActivity, { default: 2 }))
+      .toBeCloseTo(collectionChance(independentActivity, 2))
+    expect(exposureDropBy(dropExposure(independentActivity, counts, 'b')))
+      .toBeCloseTo(dropByProbability([1, 4], 40))
+
+    const single = exposureLuckStats(dropExposure(independentActivity, { default: 500 }, 'a'), 260)
+    const legacy = itemLuckStats([1, 2], 500, 260)
+    expect(single.expected).toBeCloseTo(legacy.expected)
+    expect(single.percentile).toBeCloseTo(legacy.percentile)
+    expect(single.standardDeviations).toBeCloseTo(legacy.standardDeviations)
+  })
+
+  it('applies mode overrides without mutating the source activity', () => {
+    const destroyed = resolveMode(araxxorLike, 'destroyed')
+    expect(destroyed.drops.find((drop) => drop.id === 'nid').rate).toEqual([1, 1500])
+    expect(destroyed.groups.find((group) => group.id === 'unique').rollsPerUnit).toBe(0)
+    expect(araxxorLike.drops.find((drop) => drop.id === 'nid').rate).toEqual([1, 3000])
+    expect(araxxorLike.groups[0].rollsPerUnit).toBe(1)
+    expect(resolveMode(araxxorLike, 'missing').mode.id).toBe('default')
+  })
+
+  it('gives destroyed kills no unique rolls and a doubled Nid rate', () => {
+    const counts = { default: 0, destroyed: 900 }
+    expect(dropExposure(araxxorLike, counts, 'piece')).toEqual([])
+    expect(exposureDropBy(dropExposure(araxxorLike, counts, 'nid')))
+      .toBeCloseTo(1 - (1 - 1 / 1500) ** 900)
+    expect(collectionChanceForCounts(araxxorLike, counts)).toBe(0)
+  })
+
+  it('combines mixed mode counts in collection chance', () => {
+    const counts = { default: 300, destroyed: 200 }
+    const uniques = (1 - (199 / 200) ** 300) + (1 - (599 / 600) ** 300)
+      - (1 - (1 - 1 / 200 - 1 / 600) ** 300)
+    const nid = 1 - (1 - 1 / 3000) ** 300 * (1 - 1 / 1500) ** 200
+    expect(collectionChanceForCounts(araxxorLike, counts)).toBeCloseTo(uniques * nid, 10)
+    expect(collectionChanceForCounts(araxxorLike, counts, ['piece', 'fang'])).toBeCloseTo(nid, 10)
+  })
+
+  it('computes the multi-segment drop distribution', () => {
+    const segments = [
+      { probability: 0.5, rolls: 2 },
+      { probability: 0.25, rolls: 1 },
+    ]
+    const stats = exposureLuckStats(segments, 1)
+    expect(stats.expected).toBeCloseTo(1.25)
+    expect(stats.distribution.probabilityOf(0)).toBeCloseTo(0.25 * 0.75)
+    expect(stats.percentile).toBeCloseTo(0.25 * 0.75 + 0.5 * 0.75 + 0.25 * 0.25)
+  })
+
+  it('scales dry streak exposure by the overall mode mix', () => {
+    const counts = { default: 300, destroyed: 100 }
+    const streak = exposureForUnits(araxxorLike, counts, 'nid', 40)
+    expect(exposureNoDrop(streak)).toBeCloseTo((1 - 1 / 3000) ** 30 * (1 - 1 / 1500) ** 10)
+  })
+
+  it('finds additional planned-mode units for a collection milestone', () => {
+    const counts = { default: 0, destroyed: 500 }
+    const additional = collectionMilestoneUnitsForCounts(araxxorLike, counts, 'default', 0.5)
+    const at = (units) => collectionChanceForCounts(araxxorLike, { ...counts, default: units })
+    expect(at(additional)).toBeGreaterThanOrEqual(0.5)
+    expect(at(additional - 1)).toBeLessThan(0.5)
+    expect(collectionMilestoneUnitsForCounts(araxxorLike, counts, 'destroyed', 0.5, { maxUnits: 10_000 }))
+      .toBeNull()
+  })
+
+  it('reports unbounded remaining work for a mode that cannot complete the log', () => {
+    const stats = remainingCollectionStats(resolveMode(araxxorLike, 'destroyed'))
+    expect(stats.expected).toBeNull()
+    expect(stats.bounded).toBe(false)
   })
 })
 

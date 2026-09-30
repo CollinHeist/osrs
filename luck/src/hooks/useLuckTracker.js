@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 
 const STORAGE_KEY = 'osrs.luckTracker.v1'
-const STORAGE_VERSION = 1
+const STORAGE_VERSION = 2
+const DEFAULT_MODE_ID = 'default'
 
 function emptyState() {
   return { version: STORAGE_VERSION, activities: {} }
@@ -22,8 +23,24 @@ function normalizeEntry(entry) {
   }
 }
 
-function normalizeProgress(progress) {
-  const requestedCount = Math.max(0, Math.floor(Number(progress?.count) || 0))
+function toCount(value) {
+  return Math.max(0, Math.floor(Number(value) || 0))
+}
+
+function normalizeCounts(progress) {
+  // Version 1 progress stored a single count, which belongs to the default mode.
+  if (!progress?.counts || typeof progress.counts !== 'object') {
+    return { [DEFAULT_MODE_ID]: toCount(progress?.count) }
+  }
+  const counts = {}
+  for (const [modeId, value] of Object.entries(progress.counts)) {
+    counts[modeId] = toCount(value)
+  }
+  return counts
+}
+
+export function normalizeProgress(progress) {
+  const counts = normalizeCounts(progress)
   const minutes = Number(progress?.minutesPerUnit)
   const drops = {}
 
@@ -35,14 +52,23 @@ function normalizeProgress(progress) {
     .flat()
     .reduce((latest, entry) => Math.max(latest, entry.at ?? 0), 0)
 
+  // Recorded drops can never be later than the total count, so any shortfall
+  // is attributed to the default mode.
+  const entered = Object.values(counts).reduce((sum, value) => sum + value, 0)
+  if (latestDrop > entered) {
+    counts[DEFAULT_MODE_ID] = (counts[DEFAULT_MODE_ID] ?? 0) + latestDrop - entered
+  }
+
   return {
-    count: Math.max(requestedCount, latestDrop),
+    counts,
+    count: Math.max(entered, latestDrop),
+    plannedMode: typeof progress?.plannedMode === 'string' ? progress.plannedMode : DEFAULT_MODE_ID,
     minutesPerUnit: Number.isFinite(minutes) && minutes >= 0 ? minutes : 0,
     drops,
   }
 }
 
-function normalizeState(value) {
+export function normalizeState(value) {
   if (!value || typeof value !== 'object') return emptyState()
   const activities = {}
   for (const [activityId, progress] of Object.entries(value.activities ?? {})) {
@@ -59,7 +85,7 @@ function loadState() {
   }
 }
 
-function mergeStates(current, incoming) {
+export function mergeStates(current, incoming) {
   const merged = normalizeState(current)
 
   for (const [activityId, incomingProgress] of Object.entries(incoming.activities)) {
@@ -77,11 +103,17 @@ function mergeStates(current, incoming) {
       drops[dropId] = [...entriesById.values()]
     }
 
-    merged.activities[activityId] = {
-      count: Math.max(existing.count, incomingProgress.count),
+    const counts = { ...existing.counts }
+    for (const [modeId, value] of Object.entries(incomingProgress.counts)) {
+      counts[modeId] = Math.max(counts[modeId] ?? 0, value)
+    }
+
+    merged.activities[activityId] = normalizeProgress({
+      counts,
+      plannedMode: incomingProgress.plannedMode,
       minutesPerUnit: incomingProgress.minutesPerUnit || existing.minutesPerUnit,
       drops,
-    }
+    })
   }
 
   return merged

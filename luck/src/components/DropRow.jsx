@@ -1,24 +1,51 @@
 import { useMemo, useState } from 'react'
 import {
-  dropByProbability,
+  dropExposure,
+  exposureDropBy,
+  exposureForUnits,
+  exposureNoDrop,
   getDropIntervals,
-  noDropProbability,
+  getModes,
+  resolveMode,
   rollsForDrop,
 } from '../lib/probability'
 import { formatNumber, formatPercent, formatRate } from '../lib/format'
 import DropDistribution from './DropDistribution'
 
+function rateLabel(activity, drop) {
+  const modes = getModes(activity)
+  const variants = modes.map((mode) => {
+    const resolved = resolveMode(activity, mode.id)
+    const rate = resolved.drops.find((candidate) => candidate.id === drop.id).rate
+    return { mode, rate, rolls: rollsForDrop(resolved, drop.id) }
+  })
+  const [first] = variants
+  const uniform = variants.every((variant) => (
+    variant.rolls === first.rolls
+    && variant.rate[0] === first.rate[0]
+    && variant.rate[1] === first.rate[1]
+  ))
+  if (uniform) return `${drop.rateLabel || formatRate(drop.rate)} per roll`
+
+  return variants
+    .map(({ mode, rate, rolls }) => (
+      rolls === 0 ? `none ${mode.name.toLowerCase()}` : `${formatRate(rate)} ${mode.name.toLowerCase()}`
+    ))
+    .join(' · ')
+}
+
 export default function DropRow({
   activity,
   drop,
   entries,
+  counts,
   currentCount,
   onAdd,
   onRemove,
 }) {
   const [at, setAt] = useState(currentCount || '')
   const [error, setError] = useState('')
-  const rollsPerUnit = rollsForDrop(activity, drop.id)
+  const exposureFor = (units) => exposureForUnits(activity, counts, drop.id, units)
   const knownEntries = useMemo(
     () => entries
       .filter((entry) => entry.at !== null)
@@ -37,14 +64,11 @@ export default function DropRow({
   const hasUnknownDrop = unknownEntries.length > 0
   const duplicateProtected = drop.duplicateProtected === true
   const dryUnits = hasUnknownDrop ? null : hasDrop ? intervals.currentStreak : currentCount
-  const dryTail = dryUnits === null
-    ? null
-    : noDropProbability(drop.rate, dryUnits * rollsPerUnit)
-  const seenChance = dropByProbability(drop.rate, currentCount * rollsPerUnit)
+  const exposure = dropExposure(activity, counts, drop.id)
+  const dryTail = dryUnits === null ? null : exposureNoDrop(exposureFor(dryUnits))
+  const seenChance = exposureDropBy(exposure)
   const firstDropAt = knownEntries[0]?.at ?? null
-  const firstDropChance = firstDropAt
-    ? dropByProbability(drop.rate, firstDropAt * rollsPerUnit)
-    : null
+  const firstDropChance = firstDropAt ? exposureDropBy(exposureFor(firstDropAt)) : null
 
   function submit(event) {
     event.preventDefault()
@@ -69,7 +93,7 @@ export default function DropRow({
           <img src={drop.imageUrl} alt="" />
           <span>
             <strong>{drop.name}</strong>
-            <small>{drop.rateLabel || formatRate(drop.rate)} per roll</small>
+            <small>{rateLabel(activity, drop)}</small>
           </span>
         </a>
         <span className={`status-pill ${hasDrop ? 'complete' : ''}`}>
@@ -115,7 +139,7 @@ export default function DropRow({
 
       <DropDistribution
         drop={drop}
-        eligibleRolls={currentCount * rollsPerUnit}
+        exposure={exposure}
         observedCount={entries.length}
       />
 
@@ -124,7 +148,7 @@ export default function DropRow({
           {knownEntries.map((entry, index) => {
             const previousAt = index === 0 ? 0 : knownEntries[index - 1].at
             const interval = entry.at - previousAt
-            const luck = dropByProbability(drop.rate, interval * rollsPerUnit)
+            const luck = exposureDropBy(exposureFor(interval))
             return (
               <span className="history-chip" key={entry.id}>
                 #{index + 1} at {formatNumber(entry.at)}
