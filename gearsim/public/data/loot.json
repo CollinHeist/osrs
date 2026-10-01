@@ -18389,5 +18389,407 @@
         ]
       }
     ]
+  },
+  {
+    "id": 414,
+    "name": "Banshee",
+    "level": 23,
+    "drops": [
+      {
+        "table_name": "Weapons and armour",
+        "items": [
+          {
+            "name": "Iron mace",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 1420
+          },
+          {
+            "name": "Iron dagger",
+            "quantity": 1,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 1203
+          },
+          {
+            "name": "Iron kiteshield",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 1191
+          },
+          {
+            "name": "Mystic gloves (dark)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              512
+            ],
+            "id": 4105
+          }
+        ]
+      },
+      {
+        "table_name": "Runes",
+        "items": [
+          {
+            "name": "Air rune",
+            "quantity": 3,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 556
+          },
+          {
+            "name": "Cosmic rune",
+            "quantity": 2,
+            "rarity": [
+              3,
+              128
+            ],
+            "id": 564
+          },
+          {
+            "name": "Chaos rune",
+            "quantity": 3,
+            "rarity": [
+              2,
+              128
+            ],
+            "id": 562
+          },
+          {
+            "name": "Fire rune",
+            "quantity": 7,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 554
+          },
+          {
+            "name": "Chaos rune",
+            "quantity": 7,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 562
+          }
+        ]
+      },
+      {
+        "table_name": "Herbs",
+        "items": [
+          {
+            "name": "Grimy guam leaf",
+            "quantity": 1,
+            "rarity": [
+              1,
+              15.1
+            ],
+            "id": 199
+          },
+          {
+            "name": "Grimy marrentill",
+            "quantity": 1,
+            "rarity": [
+              1,
+              20.1
+            ],
+            "id": 201
+          },
+          {
+            "name": "Grimy tarromin",
+            "quantity": 1,
+            "rarity": [
+              1,
+              26.8
+            ],
+            "id": 203
+          },
+          {
+            "name": "Grimy harralander",
+            "quantity": 1,
+            "rarity": [
+              1,
+              34.4
+            ],
+            "id": 205
+          },
+          {
+            "name": "Grimy ranarr weed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              43.8
+            ],
+            "id": 207
+          },
+          {
+            "name": "Grimy irit leaf",
+            "quantity": 1,
+            "rarity": [
+              1,
+              60.2
+            ],
+            "id": 209
+          },
+          {
+            "name": "Grimy avantoe",
+            "quantity": 1,
+            "rarity": [
+              1,
+              80.3
+            ],
+            "id": 211
+          },
+          {
+            "name": "Grimy kwuarm",
+            "quantity": 1,
+            "rarity": [
+              1,
+              96.4
+            ],
+            "id": 213
+          },
+          {
+            "name": "Grimy cadantine",
+            "quantity": 1,
+            "rarity": [
+              1,
+              120.5
+            ],
+            "id": 215
+          },
+          {
+            "name": "Grimy lantadyme",
+            "quantity": 1,
+            "rarity": [
+              1,
+              160.6
+            ],
+            "id": 2485
+          },
+          {
+            "name": "Grimy dwarf weed",
+            "quantity": 1,
+            "rarity": [
+              1,
+              160.6
+            ],
+            "id": 217
+          }
+        ]
+      },
+      {
+        "table_name": "Coins",
+        "items": [
+          {
+            "name": "Coins",
+            "quantity": 13,
+            "rarity": [
+              10,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 26,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": null
+          },
+          {
+            "name": "Coins",
+            "quantity": 35,
+            "rarity": [
+              8,
+              128
+            ],
+            "id": null
+          }
+        ]
+      },
+      {
+        "table_name": "Other",
+        "items": [
+          {
+            "name": "Pure essence",
+            "quantity": 13,
+            "rarity": [
+              22,
+              128
+            ],
+            "id": 7936
+          },
+          {
+            "name": "Fishing bait",
+            "quantity": 15,
+            "rarity": [
+              22,
+              128
+            ],
+            "id": 313
+          },
+          {
+            "name": "Fishing bait",
+            "quantity": 7,
+            "rarity": [
+              5,
+              128
+            ],
+            "id": 313
+          },
+          {
+            "name": "Iron ore",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 440
+          },
+          {
+            "name": "Eye of newt",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": 221
+          }
+        ]
+      },
+      {
+        "table_name": "Gem drop table",
+        "items": [
+          {
+            "name": "Uncut sapphire",
+            "quantity": 1,
+            "rarity": [
+              1,
+              256
+            ],
+            "id": 1623
+          },
+          {
+            "name": "Uncut emerald",
+            "quantity": 1,
+            "rarity": [
+              1,
+              512
+            ],
+            "id": 1621
+          },
+          {
+            "name": "Uncut ruby",
+            "quantity": 1,
+            "rarity": [
+              1,
+              1024
+            ],
+            "id": 1619
+          },
+          {
+            "name": "Nature talisman",
+            "quantity": 1,
+            "rarity": [
+              1,
+              2730.67
+            ],
+            "id": 1462
+          },
+          {
+            "name": "Uncut diamond",
+            "quantity": 1,
+            "rarity": [
+              1,
+              4096
+            ],
+            "id": 1617
+          },
+          {
+            "name": "Rune javelin",
+            "quantity": 5,
+            "rarity": [
+              1,
+              8192
+            ],
+            "id": 830
+          },
+          {
+            "name": "Loop half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              8192
+            ],
+            "id": 987
+          },
+          {
+            "name": "Tooth half of key",
+            "quantity": 1,
+            "rarity": [
+              1,
+              8192
+            ],
+            "id": 985
+          },
+          {
+            "name": "Rune spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              131072
+            ],
+            "id": 1247
+          },
+          {
+            "name": "Shield left half",
+            "quantity": 1,
+            "rarity": [
+              1,
+              262144
+            ],
+            "id": 2366
+          },
+          {
+            "name": "Dragon spear",
+            "quantity": 1,
+            "rarity": [
+              1,
+              349525.33
+            ],
+            "id": 1249
+          }
+        ]
+      },
+      {
+        "table_name": "Tertiary",
+        "items": [
+          {
+            "name": "Clue scroll (easy)",
+            "quantity": 1,
+            "rarity": [
+              1,
+              128
+            ],
+            "id": null
+          }
+        ]
+      }
+    ]
   }
 ]
