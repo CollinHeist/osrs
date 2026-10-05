@@ -104,33 +104,35 @@ export default function ActivityDetail({
         </aside>
       )}
 
-      <section className="control-panel">
+      <section className={`control-panel ${multiMode ? 'has-modes' : ''}`}>
         <KillTypeCounts
           activity={activity}
           counts={counts}
           minimumCount={minimumCount}
           onUpdate={onUpdate}
         />
-        <PlannedModeSelect
-          activity={activity}
-          plannedMode={progress.plannedMode}
-          onUpdate={onUpdate}
-        />
-        <label>
-          Average minutes per {activity.unit.singular}
-          <input
-            type="number"
-            min="0"
-            step="0.1"
-            value={progress.minutesPerUnit}
-            onChange={(event) => onUpdate({
-              minutesPerUnit: Math.max(0, Number(event.target.value) || 0),
-            })}
+        <div className="control-panel-aside">
+          <PlannedModeSelect
+            activity={activity}
+            plannedMode={progress.plannedMode}
+            onUpdate={onUpdate}
           />
-        </label>
-        <button className="text-button danger" type="button" onClick={reset}>
-          Reset activity
-        </button>
+          <label>
+            Average minutes per {activity.unit.singular}
+            <input
+              type="number"
+              min="0"
+              step="0.1"
+              value={progress.minutesPerUnit}
+              onChange={(event) => onUpdate({
+                minutesPerUnit: Math.max(0, Number(event.target.value) || 0),
+              })}
+            />
+          </label>
+          <button className="text-button danger" type="button" onClick={reset}>
+            Reset activity
+          </button>
+        </div>
       </section>
 
       <section

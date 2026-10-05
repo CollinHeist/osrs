@@ -25,7 +25,7 @@ export default function KillTypeCounts({
   }
 
   return (
-    <>
+    <div className="mode-counts">
       {modes.map((mode) => {
         const value = counts[mode.id] ?? 0
         const others = total - value
@@ -43,6 +43,6 @@ export default function KillTypeCounts({
         <span>Total {activity.unit.plural}</span>
         <strong>{formatNumber(total)}</strong>
       </div>
-    </>
+    </div>
   )
 }
