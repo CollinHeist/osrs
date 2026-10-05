@@ -4836,6 +4836,126 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Maggot_marquess_(follower).png"
         }
       ]
+    },
+    {
+      "id": "sarachnis",
+      "name": "Sarachnis",
+      "category": "Boss",
+      "temple": { "category": "sarachnis", "kc": "Sarachnis" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Sarachnis",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Sarachnis.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "sarachnis-cudgel"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "giant-egg-sac-full",
+            "pristine-spider-silk",
+            "jar-of-eyes",
+            "sraracha"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "sarachnis-cudgel",
+          "name": "Sarachnis cudgel",
+          "rate": [1, 384],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Sarachnis_cudgel",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Sarachnis_cudgel.png"
+        },
+        {
+          "id": "giant-egg-sac-full",
+          "name": "Giant egg sac(full)",
+          "rate": [1, 20],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Giant_egg_sac(full)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Giant_egg_sac(full).png"
+        },
+        {
+          "id": "pristine-spider-silk",
+          "name": "Pristine spider silk",
+          "rate": [1, 50],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pristine_spider_silk",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pristine_spider_silk.png"
+        },
+        {
+          "id": "jar-of-eyes",
+          "name": "Jar of Eyes",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Eyes",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Eyes.png"
+        },
+        {
+          "id": "sraracha",
+          "name": "Sraracha",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Sraracha",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Sraracha_(follower,_blue).png"
+        }
+      ]
+    },
+    {
+      "id": "shellbane-gryphon",
+      "name": "Shellbane gryphon",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Shellbane_gryphon",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Shellbane_gryphon.png",
+      "unit": {
+        "singular": "kill",
+        "plural": "kills"
+      },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "belles-folly-tarnished"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "jar-of-feathers",
+            "gull"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "belles-folly-tarnished",
+          "name": "Belle's folly (tarnished)",
+          "rate": [1, 75],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Belle%27s_folly_(tarnished)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Belle's_folly_(tarnished).png"
+        },
+        {
+          "id": "jar-of-feathers",
+          "name": "Jar of Feathers",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Feathers",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Feathers.png"
+        },
+        {
+          "id": "gull",
+          "name": "Gull",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Gull_(pet)",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Gull_(follower).png"
+        }
+      ]
     }
   ]
 }
