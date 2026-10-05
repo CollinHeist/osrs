@@ -71,6 +71,45 @@ Rates must describe normal main-game conditions. Add the relevant OSRS Wiki page
 to every activity and drop, and update the catalog's `updatedAt` date whenever
 rates change.
 
+### TempleOSRS mapping
+
+Activities can define a `temple` block so their progress can be imported from
+TempleOSRS:
+
+```json
+"temple": { "category": "abyssal_sire", "kc": "Abyssal Sire" }
+```
+
+- `category` is the TempleOSRS collection log category key.
+- `kc` is the optional key in the TempleOSRS player stats response that holds the
+  activity's kill count. Omit it when TempleOSRS has no count for the activity or
+  counts a different unit, such as Tempoross games instead of reward permits.
+
+Drops are matched to collection log items in that category by case-insensitive
+name. Add `templeItemIds` when the names differ or when one drop combines several
+items (the counts are summed). Use `"templeItemIds": []` for drops the
+collection log does not track.
+
+## Import from TempleOSRS
+
+TempleOSRS does not send CORS headers, so the site cannot request it directly.
+**Import from TempleOSRS** in the header builds the two API links for a username:
+
+- the collection log (`player_collection_log.php?...&categories=all&includenames=1`);
+- player stats (`player_stats.php?...&bosses=1`), which is optional and supplies
+  kill counts.
+
+Open each link, paste the JSON response into the dialog, and review the changes
+for each activity before applying. Imports only add data:
+
+- A kill count update sets the activity's total. Counts in non-default modes are
+  kept, and the default mode absorbs the difference.
+- Drop updates add the missing entries with `at: null`. Existing entries are never
+  removed, so when the tracker has more than TempleOSRS the row is shown but
+  cannot be applied.
+- Items that appear in several collection log categories, such as the Dragon
+  pickaxe, are unselected by default because their count includes every source.
+
 ### Wiki loot parser
 
 Install `scripts/osrs-wiki-loot-parser.user.js` in Tampermonkey, then open an OSRS

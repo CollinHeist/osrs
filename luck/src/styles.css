@@ -64,7 +64,7 @@ img { display: block; }
 .home-link:hover, .text-button:hover, .back-button:hover { color: var(--gold-light); }
 .brand { font-family: 'Cinzel', serif; color: var(--gold-light); letter-spacing: .08em; }
 
-.import-export {
+.header-actions, .import-export {
   justify-self: end;
   display: flex;
   gap: 14px;
@@ -72,8 +72,77 @@ img { display: block; }
   font-size: .78rem;
 }
 
-.import-export [role='status'] { color: var(--muted); }
+.header-actions [role='status'] { color: var(--muted); }
 .visually-hidden { position: fixed; left: -10000px; }
+
+.temple-dialog {
+  width: min(680px, calc(100% - 24px));
+  max-height: calc(100vh - 48px);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: .86rem;
+}
+.temple-dialog::backdrop { background: rgba(4, 5, 8, .72); backdrop-filter: blur(3px); }
+.temple-dialog-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--panel);
+}
+.temple-dialog-header h2 { margin: 0; font: 600 1.05rem 'Cinzel', serif; color: var(--gold-light); }
+.temple-step { display: flex; flex-direction: column; gap: 16px; padding: 18px 20px 20px; }
+.temple-step .rate-note { margin: 0; }
+.temple-intro { margin: 0; color: var(--muted); line-height: 1.55; }
+.temple-intro strong { color: var(--text); }
+.temple-response-label { display: flex; justify-content: space-between; gap: 12px; font-size: .76rem; }
+.temple-response-label span { color: #56616d; }
+.temple-dialog textarea {
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  resize: vertical;
+  background: #090c10;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 10px;
+  font: .72rem/1.5 'JetBrains Mono', monospace;
+}
+.temple-dialog textarea:focus { outline: none; border-color: #796231; }
+.temple-dialog input[type='checkbox'] { display: inline-block; width: auto; margin: 0; accent-color: var(--gold); }
+.temple-actions { display: flex; justify-content: flex-end; gap: 9px; }
+.temple-select-all { display: flex; gap: 14px; font-size: .78rem; }
+.temple-empty { margin: 0; color: var(--green); }
+.temple-activity-list { display: flex; flex-direction: column; gap: 10px; }
+.temple-activity { border: 1px solid var(--border-soft); border-radius: 8px; background: var(--panel-raised); }
+.temple-activity-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 13px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text);
+  font-size: .86rem;
+  cursor: pointer;
+}
+.temple-activity ul { list-style: none; margin: 0; padding: 6px 13px 8px; }
+.temple-row { padding: 5px 0; }
+.temple-row label { display: flex; align-items: center; gap: 10px; color: var(--text); font-size: .8rem; cursor: pointer; }
+.temple-row-name { flex: 1; }
+.temple-row-values { font: 500 .76rem 'JetBrains Mono', monospace; color: var(--green); white-space: nowrap; }
+.temple-row.conflict .temple-row-values { color: var(--red); }
+.temple-row.missing .temple-row-values { color: var(--muted); }
+.temple-row.conflict label, .temple-row.missing label { color: var(--muted); cursor: default; }
+.temple-row small { display: block; margin: 2px 0 0 23px; color: #606b76; font-size: .7rem; }
+.temple-footnote { margin: 0; color: #606b76; font-size: .72rem; line-height: 1.5; }
 
 main {
   width: min(1180px, calc(100% - 36px));
@@ -656,8 +725,8 @@ input:focus { border-color: #796231; box-shadow: 0 0 0 3px rgba(217, 173, 87, .0
 @media (max-width: 620px) {
   .site-header { padding: 0 16px; grid-template-columns: 1fr auto; }
   .brand { display: none; }
-  .import-export { gap: 8px; }
-  .import-export [role='status'] { display: none; }
+  .header-actions, .import-export { gap: 8px; }
+  .header-actions [role='status'] { display: none; }
   main { width: min(100% - 24px, 1180px); padding-top: 32px; }
   .dashboard-hero { margin: 25px auto 52px; }
   .section-heading { display: block; }

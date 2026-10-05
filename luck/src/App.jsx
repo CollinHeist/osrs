@@ -4,6 +4,7 @@ import ActivityDetail from './components/ActivityDetail'
 import DashboardTabs from './components/DashboardTabs'
 import ImportExport from './components/ImportExport'
 import StatsView from './components/StatsView'
+import TempleImport from './components/TempleImport'
 import { useLuckTracker } from './hooks/useLuckTracker'
 
 const STATS_HASH = '#stats'
@@ -86,7 +87,16 @@ export default function App() {
       <header className="site-header">
         <a href="../" className="home-link">← OSRS Tools</a>
         <span className="brand">Luck Tracker</span>
-        <ImportExport state={tracker.state} onImport={tracker.importState} />
+        <div className="header-actions">
+          {catalog && (
+            <TempleImport
+              activities={catalog.activities}
+              state={tracker.state}
+              onApply={tracker.applyTempleImport}
+            />
+          )}
+          <ImportExport state={tracker.state} onImport={tracker.importState} />
+        </div>
       </header>
 
       <main>

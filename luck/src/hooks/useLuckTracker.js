@@ -119,6 +119,34 @@ export function mergeStates(current, incoming) {
   return merged
 }
 
+export function applyTempleChanges(current, changes) {
+  const activities = { ...current.activities }
+
+  for (const { activityId, kc, drops = [] } of changes) {
+    const existing = activities[activityId] ?? normalizeProgress()
+    const counts = { ...existing.counts }
+
+    // Temple reports a single total, so other modes keep their counts and the
+    // default mode absorbs the difference.
+    if (kc !== undefined) {
+      const otherModes = Object.entries(counts)
+        .filter(([modeId]) => modeId !== DEFAULT_MODE_ID)
+        .reduce((sum, [, value]) => sum + value, 0)
+      counts[DEFAULT_MODE_ID] = Math.max(0, toCount(kc) - otherModes)
+    }
+
+    const nextDrops = { ...existing.drops }
+    for (const { dropId, add } of drops) {
+      const added = Array.from({ length: toCount(add) }, () => ({ id: crypto.randomUUID(), at: null }))
+      nextDrops[dropId] = [...(nextDrops[dropId] ?? []), ...added]
+    }
+
+    activities[activityId] = normalizeProgress({ ...existing, counts, drops: nextDrops })
+  }
+
+  return { ...current, activities }
+}
+
 export function useLuckTracker() {
   const [state, setState] = useState(loadState)
 
@@ -190,6 +218,10 @@ export function useLuckTracker() {
     ))
   }, [])
 
+  const applyTempleImport = useCallback((changes) => {
+    setState((current) => applyTempleChanges(current, changes))
+  }, [])
+
   const resetActivity = useCallback((activityId) => {
     setState((current) => {
       const activities = { ...current.activities }
@@ -205,6 +237,7 @@ export function useLuckTracker() {
     addDrop,
     removeDrop,
     importState,
+    applyTempleImport,
     resetActivity,
   }
 }
