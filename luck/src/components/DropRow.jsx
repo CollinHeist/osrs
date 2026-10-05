@@ -29,7 +29,7 @@ function rateLabel(activity, drop) {
 
   return variants
     .map(({ mode, rate, rolls }) => (
-      rolls === 0 ? `none ${mode.name.toLowerCase()}` : `${formatRate(rate)} ${mode.name.toLowerCase()}`
+      rolls === 0 ? `N/A (${mode.name.toLowerCase()})` : `${formatRate(rate)} (${mode.name.toLowerCase()})`
     ))
     .join(' · ')
 }
