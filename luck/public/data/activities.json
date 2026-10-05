@@ -4777,6 +4777,65 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pet_Kraken_(follower).png"
         }
       ]
+    },
+    {
+      "id": "maggot-king",
+      "name": "Maggot King",
+      "category": "Boss",
+      "temple": { "category": "maggot_king", "kc": "Maggot King" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Maggot_King",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Maggot_King.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "elder-venator-fang",
+            "crimson-kisten"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": ["maggot-marquess"]
+        }
+      ],
+      "modes": [
+        { "id": "default", "name": "Open-stomach" },
+        {
+          "id": "take-eggs",
+          "name": "Take-eggs",
+          "note": "No loot rolls for ~2.33x higher pet chance",
+          "groupRolls": { "pre-roll": 0 },
+          "rates": { "maggot-marquess": [1, 1502.4] }
+        }
+      ],
+      "drops": [
+        {
+          "id": "crimson-kisten",
+          "name": "Crimson kisten",
+          "rate": [1, 520],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Crimson_kisten",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Crimson_kisten.png"
+        },
+        {
+          "id": "elder-venator-fang",
+          "name": "Elder venator fang",
+          "rate": [1, 340],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Elder_venator_fang",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Elder_venator_fang.png"
+        },
+        {
+          "id": "maggot-marquess",
+          "name": "Maggot marquess",
+          "rate": [1, 3500],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Maggot_marquess",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Maggot_marquess_(follower).png"
+        }
+      ]
     }
   ]
 }
