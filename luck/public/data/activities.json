@@ -4956,6 +4956,75 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Gull_(follower).png"
         }
       ]
+    },
+    {
+      "id": "alchemical-hydra",
+      "name": "Alchemical Hydra",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Alchemical_Hydra",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Alchemical_Hydra_(serpentine).png",
+      "unit": {
+        "singular": "kill",
+        "plural": "kills"
+      },
+      "groups": [
+        {
+          "id": "pre-roll",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "hydra-leather",
+            "hydras-claw"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "alchemical-hydra-heads",
+            "jar-of-chemicals",
+            "ikkle-hydra"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "hydra-leather",
+          "name": "Hydra leather",
+          "rate": [1, 514],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Hydra_leather",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Hydra_leather.png"
+        },
+        {
+          "id": "hydras-claw",
+          "name": "Hydra's claw",
+          "rate": [1, 1001],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Hydra%27s_claw",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Hydra's_claw.png"
+        },
+        {
+          "id": "alchemical-hydra-heads",
+          "name": "Alchemical hydra heads",
+          "rate": [1, 256],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Alchemical_hydra_heads",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Alchemical_hydra_heads.png"
+        },
+        {
+          "id": "jar-of-chemicals",
+          "name": "Jar of Chemicals",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Chemicals",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Chemicals.png"
+        },
+        {
+          "id": "ikkle-hydra",
+          "name": "Ikkle Hydra",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Ikkle_Hydra",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ikkle_Hydra_(follower,_fire).png"
+        }
+      ]
     }
   ]
 }
