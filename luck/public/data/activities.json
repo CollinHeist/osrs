@@ -4711,6 +4711,72 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Aggy_(follower).png"
         }
       ]
+    },
+    {
+      "id": "kraken",
+      "name": "Kraken",
+      "category": "Boss",
+      "temple": { "category": "kraken", "kc": "Kraken" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Kraken",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Kraken.webp",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "weapons-and-armour",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "trident-of-the-seas"
+          ]
+        },
+        {
+          "id": "other",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "kraken-tentacle"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "jar-of-dirt",
+            "pet-kraken"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "trident-of-the-seas",
+          "name": "Trident of the Seas",
+          "rate": [1, 512],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Trident_of_the_Seas",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Trident_of_the_Seas.png"
+        },
+        {
+          "id": "kraken-tentacle",
+          "name": "Kraken tentacle",
+          "rate": [1, 400],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Kraken_tentacle",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Kraken_tentacle.png"
+        },
+        {
+          "id": "jar-of-dirt",
+          "name": "Jar of Dirt",
+          "rate": [1, 1000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Dirt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Dirt.png"
+        },
+        {
+          "id": "pet-kraken",
+          "name": "Pet Kraken",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pet_Kraken",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pet_Kraken_(follower).png"
+        }
+      ]
     }
   ]
 }
