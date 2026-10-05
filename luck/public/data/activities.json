@@ -4908,6 +4908,7 @@
       "id": "shellbane-gryphon",
       "name": "Shellbane gryphon",
       "category": "Boss",
+      "temple": { "category": "shellbane_gryphon", "kc": "Shellbane Gryphon" },
       "wikiUrl": "https://oldschool.runescape.wiki/w/Shellbane_gryphon",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Shellbane_gryphon.png",
       "unit": {
