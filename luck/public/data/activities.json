@@ -5026,6 +5026,72 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Ikkle_Hydra_(follower,_fire).png"
         }
       ]
+    },
+    {
+      "id": "hunters-rumours",
+      "name": "Hunters' Rumours",
+      "category": "Other",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Hunters'_Rumours",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Quetzin_detail.png",
+      "unit": { "singular": "loot sack", "plural": "loot sacks" },
+      "groups": [
+        {
+          "id": "default",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "huntsmans-kit",
+            "guild-hunter-outfit"
+          ]
+        },
+        {
+          "id": "pet",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "quetzin"
+          ]
+        }
+      ],
+      "modes": [
+        { "id": "default", "name": "Expert/Master" },
+        {
+          "id": "adept-loot-sacks",
+          "name": "Adept",
+          "note": "The Quetzin cannot be obtained from Adept loot sacks.",
+          "groupRolls": { "pet": 0 }
+        },
+        {
+          "id": "post-200m",
+          "name": "Post-200m Hunter XP Expert/Master",
+          "note": "The Quetzin is 15x more common.",
+          "rates": { "quetzin": [1, 67] }
+        }
+      ],
+      "drops": [
+        {
+          "id": "huntsmans-kit",
+          "name": "Huntsman's kit",
+          "rate": [1, 50],
+          "duplicateProtected": true,
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Huntsman's_kit",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Huntsman's_kit.png"
+        },
+        {
+          "id": "guild-hunter-outfit",
+          "name": "Guild hunter outfit (any piece)",
+          "rate": [1, 50],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Guild_hunter_outfit",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Guild_hunter_outfit_equipped_male.png"
+        },
+        {
+          "id": "quetzin",
+          "name": "Quetzin",
+          "rate": [1, 1000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Quetzin",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Quetzin_(follower).png"
+        }
+      ]
     }
   ]
 }
