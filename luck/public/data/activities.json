@@ -5092,6 +5092,216 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Quetzin_(follower).png"
         }
       ]
+    },
+    {
+      "id": "bryophyta",
+      "name": "Bryophyta",
+      "category": "Boss",
+      "temple": { "category": "bryophyta", "kc": "Bryophyta" },
+      "rateNote": "Only count instances of opening Bryophyta's chest - killing the boss does not have a chance for this drop.",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Chest_(Bryophyta%27s_lair)",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bryophyta.png",
+      "unit": {"singular": "kill", "plural": "kills"},
+      "groups": [
+        {
+          "id": "other",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "bryophytas-essence"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "bryophytas-essence",
+          "name": "Bryophyta's essence",
+          "rate": [1, 118],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bryophyta%27s_essence",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bryophyta's_essence.png"
+        }
+      ]
+    },
+    {
+      "id": "callisto-and-artio",
+      "name": "Callisto and Artio",
+      "category": "Boss",
+      "temple": { "category": "callisto_and_artio", "kc": "Callisto" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Callisto",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Callisto.png",
+      "unit": {"singular": "kill", "plural": "kills"},
+      "groups": [
+        {
+          "id": "unique",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "claws-of-callisto",
+            "dragon-2h-sword",
+            "dragon-pickaxe",
+            "voidwaker-hilt",
+            "tyrannical-ring"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "callisto-cub"
+          ]
+        }
+      ],
+      "modes": [
+        { "id": "default", "name": "Callisto" },
+        {
+          "id": "artio",
+          "name": "Artio",
+          "note": "Uniques are less common from Artio",
+          "rates": {
+            "claws-of-callisto": [1, 618],
+            "dragon-2h-sword": [1, 358],
+            "dragon-pickaxe": [1, 358],
+            "voidwaker-hilt": [1, 912],
+            "tyrannical-ring": [1, 716],
+            "callisto-cub": [1, 2800]
+          }
+        }
+      ],
+      "drops": [
+        {
+          "id": "claws-of-callisto",
+          "name": "Claws of Callisto",
+          "rate": [1, 196],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Claws_of_Callisto",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Claws_of_Callisto.png"
+        },
+        {
+          "id": "dragon-2h-sword",
+          "name": "Dragon 2h sword",
+          "rate": [1, 256],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_2h_sword",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_2h_sword.png"
+        },
+        {
+          "id": "dragon-pickaxe",
+          "name": "Dragon pickaxe",
+          "rate": [1, 256],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_pickaxe",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_pickaxe.png"
+        },
+        {
+          "id": "voidwaker-hilt",
+          "name": "Voidwaker hilt",
+          "rate": [1, 360],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Voidwaker_hilt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Voidwaker_hilt.png"
+        },
+        {
+          "id": "tyrannical-ring",
+          "name": "Tyrannical ring",
+          "rate": [1, 512],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Tyrannical_ring",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Tyrannical_ring.png"
+        },
+        {
+          "id": "callisto-cub",
+          "name": "Callisto cub",
+          "rate": [1, 1500],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Callisto_cub",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Callisto_cub.png"
+        }
+      ]
+    },
+    {
+      "id": "cerberus",
+      "name": "Cerberus",
+      "category": "Boss",
+      "temple": { "category": "cerberus", "kc": "Cerberus" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Cerberus",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Cerberus.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "uniques",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "primordial-crystal",
+            "pegasian-crystal",
+            "eternal-crystal",
+            "smouldering-stone"
+          ]
+        },
+        {
+          "id": "other",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "key-master-teleport"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "jar-of-souls",
+            "hellpuppy"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "primordial-crystal",
+          "name": "Primordial crystal",
+          "rate": [1, 520],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Primordial_crystal",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Primordial_crystal.png"
+        },
+        {
+          "id": "pegasian-crystal",
+          "name": "Pegasian crystal",
+          "rate": [1, 520],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pegasian_crystal",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Pegasian_crystal.png"
+        },
+        {
+          "id": "eternal-crystal",
+          "name": "Eternal crystal",
+          "rate": [1, 520],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Eternal_crystal",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Eternal_crystal.png"
+        },
+        {
+          "id": "smouldering-stone",
+          "name": "Smouldering stone",
+          "rate": [1, 520],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Smouldering_stone",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Smouldering_stone.png"
+        },
+        {
+          "id": "key-master-teleport",
+          "name": "Key master teleport",
+          "rate": [2, 130],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Key_master_teleport",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Key_master_teleport.png"
+        },
+        {
+          "id": "jar-of-souls",
+          "name": "Jar of Souls",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Souls",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Souls.png"
+        },
+        {
+          "id": "hellpuppy",
+          "name": "Hellpuppy",
+          "rate": [1, 3000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Hellpuppy",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Hellpuppy_(follower).png"
+        }
+      ]
     }
   ]
 }
