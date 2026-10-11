@@ -11,7 +11,7 @@
       "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_Sire",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Abyssal_Sire_(phase_1).png",
       "unit": { "singular": "kill", "plural": "kills" },
-      "rateNote": "The drop rates assume the Abyssal Orphan pet has not been obtained, and are rolled per-kill, not per Unsired. All Bludgeon pieces are combined into a single drop. The Abyssal Whip is not listed.",
+      "rateNote": "The default kills assume the Abyssal Orphan pet has not been obtained, and are rolled per-kill (not per Unsired). All Bludgeon pieces are combined into a single drop. The Abyssal Whip is not listed.",
       "groups": [
         {
           "id": "pre-roll",
@@ -29,9 +29,31 @@
             "bludgeon-piece",
             "abyssal-dagger",
             "jar-of-miasma",
-            "abyssal-head",
+            "abyssal-head"
+          ]
+        },
+        {
+          "id": "abyssal-orphan",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
             "abyssal-orphan"
           ]
+        }
+      ],
+      "modes": [
+        { "id": "default", "name": "Default" },
+        {
+          "id": "has-abyssal-orphan",
+          "name": "Has Abyssal Orphan",
+          "note": "The Abyssal Orphan is removed as a potential drop if it is already owned (unless at Probita).",
+          "groupRolls": { "abyssal-orphan": 0 },
+          "rates": {
+            "bludgeon-piece": [1, 198],
+            "abyssal-dagger": [1, 473],
+            "jar-of-miasma": [1, 946],
+            "abyssal-head": [1, 1230]
+          }
         }
       ],
       "drops": [
