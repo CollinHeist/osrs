@@ -1,9 +1,17 @@
-export default function InsightList({ title, description, rows, emptyText, tone = '' }) {
+export default function InsightList({
+  title,
+  description,
+  rows,
+  emptyText,
+  tone = '',
+  controls = null,
+}) {
   return (
     <section className={`insight-panel ${tone}`}>
       <header>
         <h3>{title}</h3>
         <p>{description}</p>
+        {controls}
       </header>
       {rows.length === 0 ? (
         <div className="insight-empty">{emptyText}</div>

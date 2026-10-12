@@ -80,6 +80,42 @@ describe('buildInsights', () => {
     expect(result.fastestGreenlogs[0].expectedUnits).toBeCloseTo(5)
   })
 
+  it('keeps obtained items out of the driest list unless they are under rate', () => {
+    const grind = activity('grind', [[1, 10]])
+    const underRate = progress(100, { 'grind-0': [20] })
+    const excluded = buildInsights([grind], () => underRate)
+    expect(excluded.driestItems).toHaveLength(0)
+
+    const included = buildInsights([grind], () => underRate, 5, { includeObtainedUnderRate: true })
+    expect(included.driestItems).toHaveLength(1)
+    expect(included.driestItems[0].obtained).toBe(true)
+    expect(included.driestItems[0].luck.position).toBe('Below rate')
+    expect(included.driestItems[0].luck.observed).toBe(1)
+  })
+
+  it('ranks a rarer dry streak ahead of a milder under-rate drop', () => {
+    const missing = activity('missing', [[1, 5]])
+    const obtained = activity('obtained', [[1, 100]])
+    const result = buildInsights(
+      [missing, obtained],
+      (id) => (id === 'missing' ? progress(20) : progress(200, { 'obtained-0': [40] })),
+      5,
+      { includeObtainedUnderRate: true },
+    )
+    expect(result.driestItems.map((item) => item.drop.id)).toEqual(['missing-0', 'obtained-0'])
+  })
+
+  it('still excludes obtained items that are above rate', () => {
+    const spoon = activity('spoon', [[1, 100]])
+    const result = buildInsights(
+      [spoon],
+      () => progress(50, { 'spoon-0': [1, 2, 3] }),
+      5,
+      { includeObtainedUnderRate: true },
+    )
+    expect(result.driestItems).toHaveLength(0)
+  })
+
   it('orders greenlog estimates by expected play time', () => {
     const ids = insights.fastestGreenlogs.map((entry) => entry.activity.id)
     expect(ids).toEqual(['dry', 'lucky'])

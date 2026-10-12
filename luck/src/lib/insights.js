@@ -2,6 +2,7 @@ import {
   dropExposure,
   exposureDropBy,
   exposureForUnits,
+  exposureLuckStats,
   exposureNoDrop,
   getDropIntervals,
   progressCounts,
@@ -40,13 +41,15 @@ function describeDrop(activity, drop, progress) {
   const counts = progressCounts(progress)
   const firstAt = known.length ? Math.min(...known) : null
   const intervals = getDropIntervals(known, progress.count)
+  const exposure = dropExposure(activity, counts, drop.id)
   return {
     activity,
     drop,
     obtained: entries.length > 0,
     firstAt,
-    seenChance: exposureDropBy(dropExposure(activity, counts, drop.id)),
+    seenChance: exposureDropBy(exposure),
     intervals,
+    luck: exposureLuckStats(exposure, entries.length, drop.duplicateProtected === true),
     dryChance: exposureNoDrop(
       exposureForUnits(activity, counts, drop.id, intervals.currentStreak),
     ),
@@ -98,7 +101,23 @@ function compareGreenlogs(left, right) {
   return (left.expectedUnits ?? Infinity) - (right.expectedUnits ?? Infinity)
 }
 
-export function buildInsights(activities, getProgress, limit = 5) {
+function isDriestCandidate(item, includeObtainedUnderRate) {
+  if (!item.obtained) return item.intervals.currentStreak > 0
+  return includeObtainedUnderRate && item.luck.position === 'Below rate'
+}
+
+// Missing items are ranked by the chance of a streak this long. Obtained items
+// that are still below rate use the chance of this few drops or fewer.
+function dryness(item) {
+  return item.obtained ? item.luck.percentile : item.dryChance
+}
+
+export function buildInsights(
+  activities,
+  getProgress,
+  limit = 5,
+  { includeObtainedUnderRate = false } = {},
+) {
   const started = activities
     .map((activity) => ({ activity, progress: getProgress(activity.id) ?? EMPTY_PROGRESS }))
     .filter(({ activity, progress }) => activity.drops.length > 0 && isStarted(progress))
@@ -110,11 +129,11 @@ export function buildInsights(activities, getProgress, limit = 5) {
   const allDrops = started.flatMap(({ drops }) => drops)
   const counted = started.filter(({ progress }) => progress.count > 0)
 
-  // Items still missing, ranked by how unusual the current dry streak is.
+  // Missing items, plus obtained items still below rate when that list is requested.
   const driestItems = allDrops
-    .filter((item) => !item.obtained && item.intervals.currentStreak > 0)
+    .filter((item) => isDriestCandidate(item, includeObtainedUnderRate))
     .map((item) => ({ ...item, streak: item.intervals.currentStreak }))
-    .sort((left, right) => left.dryChance - right.dryChance)
+    .sort((left, right) => dryness(left) - dryness(right))
     .slice(0, limit)
 
   // Items whose first recorded copy came unusually early.

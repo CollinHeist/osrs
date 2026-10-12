@@ -695,6 +695,25 @@ input:focus { border-color: #796231; box-shadow: 0 0 0 3px rgba(217, 173, 87, .0
 .insight-panel header { margin-bottom: 12px; }
 .insight-panel h3 { margin: 0; color: #eee9da; font: 600 1rem 'Cinzel', serif; }
 .insight-panel header p { margin: 5px 0 0; color: var(--muted); font-size: .74rem; line-height: 1.5; }
+.insight-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  color: var(--text);
+  font-size: .74rem;
+  cursor: pointer;
+}
+.insight-toggle input {
+  display: inline-block;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  accent-color: var(--gold);
+}
 .insight-empty {
   padding: 22px 12px;
   border: 1px dashed var(--border);

@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { buildInsights } from '../lib/insights'
 import { formatDuration, formatNumber, formatPercent, formatRate } from '../lib/format'
 import InsightList from './InsightList'
@@ -9,16 +9,36 @@ function signed(value) {
   return value >= 0 ? `+${formatted}` : `−${formatted}`
 }
 
-function dropRow(item, onOpen, value, detail) {
+function dropRow(item, onOpen, value, detail, subtitle) {
+  const rate = item.drop.rateLabel || formatRate(item.drop.rate)
   return {
     key: `${item.activity.id}-${item.drop.id}`,
     imageUrl: item.drop.imageUrl,
     title: item.drop.name,
-    subtitle: `${item.activity.name} · ${item.drop.rateLabel || formatRate(item.drop.rate)}`,
+    subtitle: subtitle ?? `${item.activity.name} · ${rate}`,
     value,
     detail,
     onClick: () => onOpen(item.activity.id),
   }
+}
+
+function driestRow(item, onOpen) {
+  if (!item.obtained) {
+    return dropRow(
+      item,
+      onOpen,
+      formatPercent(item.dryChance, 2),
+      `${formatNumber(item.streak)} ${item.activity.unit.plural} dry`,
+    )
+  }
+
+  return dropRow(
+    item,
+    onOpen,
+    formatPercent(item.luck.percentile, 2),
+    `${formatNumber(item.luck.observed)} of ${formatNumber(item.luck.expected, 1)} expected`,
+    `Obtained · ${item.activity.name} · ${item.drop.rateLabel || formatRate(item.drop.rate)}`,
+  )
 }
 
 function activityRow(entry, onOpen, value, detail) {
@@ -50,9 +70,10 @@ function greenlogRow(entry, onOpen) {
 }
 
 export default function StatsView({ activities, getProgress, onOpen }) {
+  const [includeObtainedUnderRate, setIncludeObtainedUnderRate] = useState(false)
   const insights = useMemo(
-    () => buildInsights(activities, getProgress),
-    [activities, getProgress],
+    () => buildInsights(activities, getProgress, 5, { includeObtainedUnderRate }),
+    [activities, getProgress, includeObtainedUnderRate],
   )
   const { overview } = insights
   const uniqueDelta = overview.uniquesObtained - overview.uniquesExpected
@@ -104,15 +125,24 @@ export default function StatsView({ activities, getProgress, onOpen }) {
       <div className="insight-grid">
         <InsightList
           title="Driest items"
-          description="Still missing, ranked by how rare it is to go this long without one."
+          description={includeObtainedUnderRate
+            ? 'Missing items and obtained items still below rate, ranked by how unusual that is.'
+            : 'Still missing, ranked by how rare it is to go this long without one.'}
           tone="unlucky"
-          emptyText="Nothing is dry yet."
-          rows={insights.driestItems.map((item) => dropRow(
-            item,
-            onOpen,
-            formatPercent(item.dryChance, 2),
-            `${formatNumber(item.streak)} ${item.activity.unit.plural} dry`,
-          ))}
+          emptyText={includeObtainedUnderRate
+            ? 'Nothing is missing or under rate yet.'
+            : 'Nothing is dry yet.'}
+          controls={(
+            <label className="insight-toggle">
+              <input
+                type="checkbox"
+                checked={includeObtainedUnderRate}
+                onChange={(event) => setIncludeObtainedUnderRate(event.target.checked)}
+              />
+              Include obtained under rate
+            </label>
+          )}
+          rows={insights.driestItems.map((item) => driestRow(item, onOpen))}
         />
         <InsightList
           title="Least dry items"
