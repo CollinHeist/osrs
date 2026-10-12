@@ -672,7 +672,6 @@
       "wikiUrl": "https://oldschool.runescape.wiki/w/Vorkath",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Vorkath.png",
       "unit": { "singular": "kill", "plural": "kills" },
-      "rateNote": "The tracked rare drops roll independently. Vorkath's head is omitted because its guaranteed 50th-kill protection does not have a fixed independent rate.",
       "groups": [
         {
           "id": "vorkath-tertiary",
