@@ -5571,6 +5571,165 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/TzRek-Jad_(follower).png"
         }
       ]
+    },
+    {
+      "id": "the-gauntlet",
+      "name": "The Gauntlet",
+      "category": "Boss",
+      "temple": { "category": "the_gauntlet", "kc": "The Gauntlet" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/The_Gauntlet",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Crystalline_Hunllef.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "unique",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "crystal-weapon-seed",
+            "crystal-armour-seed",
+            "enhanced-crystal-weapon-seed",
+            "youngllef"
+          ]
+        }
+      ],
+      "modes": [
+        { "id": "default", "name": "Gauntlet" },
+        {
+          "id": "corrupted-gauntlet",
+          "name": "Corrupted Gauntlet",
+          "note": "Uniques are significantly more common from the Corrupted Gauntlet.",
+          "rates": {
+            "crystal-weapon-seed": [1, 50],
+            "crystal-armour-seed": [1, 50],
+            "enhanced-crystal-weapon-seed": [1, 400],
+            "youngllef": [1, 800]
+          }
+        }
+      ],
+      "drops": [
+        {
+          "id": "crystal-weapon-seed",
+          "name": "Crystal weapon seed",
+          "rate": [1, 120],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Crystal_weapon_seed",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Crystal_weapon_seed_detail.png"
+        },
+        {
+          "id": "crystal-armour-seed",
+          "name": "Crystal armour seed",
+          "rate": [1, 120],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Crystal_armour_seed",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Crystal_armour_seed_detail.png"
+        },
+        {
+          "id": "enhanced-crystal-weapon-seed",
+          "name": "Enhanced crystal weapon seed",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Enhanced_crystal_weapon_seed",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Enhanced_crystal_weapon_seed_detail.png"
+        },
+        {
+          "id": "youngllef",
+          "name": "Youngllef",
+          "rate": [1, 2000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Youngllef",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Youngllef_(follower).png"
+        }
+      ]
+    },
+    {
+      "id": "general-graardor",
+      "name": "General Graardor",
+      "category": "Boss",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/General_Graardor",
+      "imageUrl": "https://i.redd.it/ggnwx4vtcrf91.gif",
+      "unit": {
+        "singular": "kill",
+        "plural": "kills"
+      },
+      "groups": [
+        {
+          "id": "uniques",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "bandos-chestplate",
+            "bandos-tassets",
+            "bandos-boots",
+            "bandos-hilt",
+            "godsword-shard-1",
+            "godsword-shard-2",
+            "godsword-shard-3"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "pet-general-graardor"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "bandos-chestplate",
+          "name": "Bandos chestplate",
+          "rate": [1, 381],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_chestplate",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bandos_chestplate_detail.png"
+        },
+        {
+          "id": "bandos-tassets",
+          "name": "Bandos tassets",
+          "rate": [1, 381],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_tassets",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bandos_tassets_detail.png"
+        },
+        {
+          "id": "bandos-boots",
+          "name": "Bandos boots",
+          "rate": [1, 381],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_boots",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bandos_boots_detail.png"
+        },
+        {
+          "id": "bandos-hilt",
+          "name": "Bandos hilt",
+          "rate": [1, 508],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_hilt",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Bandos_hilt_detail.png"
+        },
+        {
+          "id": "godsword-shard-1",
+          "name": "Godsword shard 1",
+          "rate": [1, 762],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Godsword_shard_1",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Godsword_shard_1_detail.png"
+        },
+        {
+          "id": "godsword-shard-2",
+          "name": "Godsword shard 2",
+          "rate": [1, 762],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Godsword_shard_2",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Godsword_shard_2_detail.png"
+        },
+        {
+          "id": "godsword-shard-3",
+          "name": "Godsword shard 3",
+          "rate": [1, 762],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Godsword_shard_3",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Godsword_shard_3_detail.png"
+        },
+        {
+          "id": "pet-general-graardor",
+          "name": "Pet General Graardor",
+          "rate": [1, 5000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pet_General_Graardor",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/General_Graardor_Jr..png"
+        }
+      ]
     }
   ]
 }
