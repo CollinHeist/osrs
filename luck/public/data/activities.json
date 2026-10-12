@@ -5324,6 +5324,253 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Hellpuppy_(follower).png"
         }
       ]
+    },
+    {
+      "id": "dagannoth-rex",
+      "name": "Dagannoth Rex",
+      "category": "Boss",
+      "temple": { "category": "dagannoth_rex", "kc": "Dagannoth Rex" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Dagannoth_Rex",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dagannoth_Rex.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "weapons-and-armour",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "dragon-axe",
+            "berserker-ring",
+            "warrior-ring"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "pet-dagannoth-rex"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "dragon-axe",
+          "name": "Dragon axe",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_axe",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_axe.png"
+        },
+        {
+          "id": "berserker-ring",
+          "name": "Berserker ring",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Berserker_ring",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Berserker_ring.png"
+        },
+        {
+          "id": "warrior-ring",
+          "name": "Warrior ring",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Warrior_ring",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Warrior_ring.png"
+        },
+        {
+          "id": "pet-dagannoth-rex",
+          "name": "Pet Dagannoth Rex",
+          "rate": [1, 5000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pet_Dagannoth_Rex",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dagannoth_Rex_Jr..png"
+        }
+      ]
+    },
+    {
+      "id": "dagannoth-prime",
+      "name": "Dagannoth Prime",
+      "category": "Boss",
+      "temple": { "category": "dagannoth_prime", "kc": "Dagannoth Prime" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Dagannoth_Prime",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dagannoth_Prime.png",
+      "unit": { "singular": "kill", "plural": "kills"},
+      "groups": [
+        {
+          "id": "weapons-and-armour",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "mud-battlestaff",
+            "dragon-axe",
+            "seers-ring"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "pet-dagannoth-prime"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "mud-battlestaff",
+          "name": "Mud battlestaff",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Mud_battlestaff",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Mud_battlestaff.png"
+        },
+        {
+          "id": "dragon-axe",
+          "name": "Dragon axe",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_axe",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_axe.png"
+        },
+        {
+          "id": "seers-ring",
+          "name": "Seers ring",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Seers_ring",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Seers_ring.png"
+        },
+        {
+          "id": "pet-dagannoth-prime",
+          "name": "Pet Dagannoth Prime",
+          "rate": [1, 5000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pet_Dagannoth_Prime",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dagannoth_Prime_Jr..png"
+        }
+      ]
+    },
+    {
+      "id": "dagannoth-supreme",
+      "name": "Dagannoth Supreme",
+      "category": "Boss",
+      "temple": { "category": "dagannoth_supreme", "kc": "Dagannoth Supreme" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Dagannoth_Supreme",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dagannoth_Supreme.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "weapons-and-armour",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "seercull",
+            "dragon-axe",
+            "archers-ring"
+          ]
+        },
+        {
+          "id": "tertiary",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "pet-dagannoth-supreme"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "seercull",
+          "name": "Seercull",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Seercull",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Seercull.png"
+        },
+        {
+          "id": "dragon-axe",
+          "name": "Dragon axe",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_axe",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_axe.png"
+        },
+        {
+          "id": "archers-ring",
+          "name": "Archers ring",
+          "rate": [1, 128],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Archers_ring",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Archers_ring.png"
+        },
+        {
+          "id": "pet-dagannoth-supreme",
+          "name": "Pet Dagannoth Supreme",
+          "rate": [1, 5000],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Pet_Dagannoth_Supreme",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dagannoth_Supreme_Jr..png"
+        }
+      ]
+    },
+    {
+      "id": "deranged-archaeologist",
+      "name": "Deranged archaeologist",
+      "category": "Boss",
+      "temple": { "category": "deranged_archaeologist", "kc": "Deranged archaeologist" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Deranged_archaeologist",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Deranged_archaeologist.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "unique",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "steel-ring"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "steel-ring",
+          "name": "Steel ring",
+          "rate": [3, 131],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Steel_ring",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Steel_ring.png"
+        }
+      ]
+    },
+    {
+      "id": "tzhaar-fight-caves",
+      "name": "TzHaar Fight Caves",
+      "category": "Boss",
+      "temple": { "category": "the_fight_caves", "kc": "TzTok-Jad" },
+      "wikiUrl": "https://oldschool.runescape.wiki/w/TzHaar_Fight_Cave",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/TzTok-Jad.png",
+      "unit": { "singular": "kill", "plural": "kills" },
+      "groups": [
+        {
+          "id": "unique",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "tzrek-jad"
+          ]
+        }
+      ],
+      "modes": [
+        { "id": "default", "name": "Off-Task" },
+        {
+          "id": "slayer-task",
+          "name": "Slayer Task",
+          "note": "The pet is 2x as common on a slayer task.",
+          "rates": { "tzrek-jad": [1, 100] }
+        },
+        {
+          "id": "turn-in-cape",
+          "name": "Turn-In Cape",
+          "note": "Turning in a fire cape gives a 1/200 role for the pet."
+        }
+      ],
+      "drops": [
+        {
+          "id": "tzrek-jad",
+          "name": "TzRek-Jad",
+          "rate": [1, 200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/TzRek-Jad",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/TzRek-Jad_(follower).png"
+        }
+      ]
     }
   ]
 }
