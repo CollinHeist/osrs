@@ -4599,28 +4599,28 @@
           "name": "Occult necklace",
           "rate": [1, 350],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Occult_necklace",
-          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Occult_necklace.png"
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Occult_necklace_detail.png"
         },
         {
           "id": "smoke-battlestaff",
           "name": "Smoke battlestaff",
           "rate": [1, 512],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Smoke_battlestaff",
-          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Smoke_battlestaff.png"
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Smoke_battlestaff_detail.png"
         },
         {
           "id": "dragon-chainbody",
           "name": "Dragon chainbody",
           "rate": [1, 2000],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_chainbody",
-          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_chainbody.png"
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Dragon_chainbody_detail.png"
         },
         {
           "id": "jar-of-smoke",
           "name": "Jar of Smoke",
           "rate": [1, 2000],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Jar_of_Smoke",
-          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Smoke.png"
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jar_of_Smoke_detail.png"
         },
         {
           "id": "pet-smoke-devil",
