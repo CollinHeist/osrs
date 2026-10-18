@@ -726,13 +726,38 @@
       "wikiUrl": "https://oldschool.runescape.wiki/w/Barrows",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Chest_(Barrows,_open).png",
       "unit": { "singular": "chest", "plural": "chests" },
-      "rateNote": "Assumes all six brothers are killed before every chest: seven reward rolls, each with a 1/102 equipment chance, then an equal choice among 24 pieces. Runs with fewer brothers are not represented.",
+      "rateNote": "Assumes all six brothers are killed before every chest. Runs with fewer brothers are not represented.",
       "groups": [
         {
           "id": "barrows-equipment",
           "type": "exclusive",
           "rollsPerUnit": 7,
-          "drops": ["ahrims-hood", "ahrims-robetop", "ahrims-robeskirt", "ahrims-staff", "dharoks-helm", "dharoks-platebody", "dharoks-platelegs", "dharoks-greataxe", "guthans-helm", "guthans-platebody", "guthans-chainskirt", "guthans-warspear", "karils-coif", "karils-leathertop", "karils-leatherskirt", "karils-crossbow", "torags-helm", "torags-platebody", "torags-platelegs", "torags-hammers", "veracs-helm", "veracs-brassard", "veracs-plateskirt", "veracs-flail"]
+          "drops": [
+            "ahrims-hood",
+            "ahrims-robetop",
+            "ahrims-robeskirt",
+            "ahrims-staff",
+            "dharoks-helm",
+            "dharoks-platebody",
+            "dharoks-platelegs",
+            "dharoks-greataxe",
+            "guthans-helm",
+            "guthans-platebody",
+            "guthans-chainskirt",
+            "guthans-warspear",
+            "karils-coif",
+            "karils-leathertop",
+            "karils-leatherskirt",
+            "karils-crossbow",
+            "torags-helm",
+            "torags-platebody",
+            "torags-platelegs",
+            "torags-hammers",
+            "veracs-helm",
+            "veracs-brassard",
+            "veracs-plateskirt",
+            "veracs-flail"
+          ]
         }
       ],
       "drops": [
