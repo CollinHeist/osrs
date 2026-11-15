@@ -5668,10 +5668,7 @@
       "category": "Boss",
       "wikiUrl": "https://oldschool.runescape.wiki/w/General_Graardor",
       "imageUrl": "https://i.redd.it/ggnwx4vtcrf91.gif",
-      "unit": {
-        "singular": "kill",
-        "plural": "kills"
-      },
+      "unit": { "singular": "kill", "plural": "kills" },
       "groups": [
         {
           "id": "uniques",
@@ -5761,6 +5758,7 @@
       "category": "Other",
       "wikiUrl": "https://oldschool.runescape.wiki/w/Golem_crafting",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Golem_(sunstone).png",
+      "unit": { "singular": "golem", "plural": "golems" },
       "groups": [
         {
           "id": "uniques",
@@ -5787,6 +5785,7 @@
       "category": "Other",
       "wikiUrl": "https://oldschool.runescape.wiki/w/Evil_Chicken_Outfit",
       "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Evil_chicken_outfit_equipped.png",
+      "unit": { "singular": "egg", "plural": "eggs" },
       "groups": [
         {
           "id": "uniques",
