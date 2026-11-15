@@ -5121,7 +5121,7 @@
           "rate": [1, 50],
           "duplicateProtected": true,
           "wikiUrl": "https://oldschool.runescape.wiki/w/Huntsman's_kit",
-          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Huntsman's_kit.png"
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Huntsman's_kit_detail.png"
         },
         {
           "id": "guild-hunter-outfit",
@@ -5752,6 +5752,32 @@
           "rate": [1, 5000],
           "wikiUrl": "https://oldschool.runescape.wiki/w/Pet_General_Graardor",
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/General_Graardor_Jr..png"
+        }
+      ]
+    },
+    {
+      "id": "golem-crafting",
+      "name": "Golem Crafting",
+      "category": "Other",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Golem_crafting",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Golem_(sunstone).png",
+      "groups": [
+        {
+          "id": "uniques",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "jewellers-chisel"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "jewellers-chisel",
+          "name": "Jeweller's chisel",
+          "rate": [1, 300],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Jeweller's_chisel",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jeweller's_chisel_detail.png"
         }
       ]
     }
