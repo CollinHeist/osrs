@@ -5793,7 +5793,7 @@
           "rollsPerUnit": 1,
           "drops": [
             "evil-chicken-head",
-            "evil-chicken-body",
+            "evil-chicken-wings",
             "evil-chicken-legs",
             "evil-chicken-feet"
           ]
@@ -5808,11 +5808,11 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Evil_chicken_head_detail.png"
         },
         {
-          "id": "evil-chicken-body",
-          "name": "Evil chicken body",
+          "id": "evil-chicken-wings",
+          "name": "Evil chicken wings",
           "rate": [1, 1200],
-          "wikiUrl": "https://oldschool.runescape.wiki/w/Evil_chicken_body",
-          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Evil_chicken_body_detail.png"
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Evil_chicken_wings",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Evil_chicken_wings_detail.png"
         },
         {
           "id": "evil-chicken-legs",
