@@ -5780,6 +5780,56 @@
           "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Jeweller's_chisel_detail.png"
         }
       ]
+    },
+    {
+      "id": "evil-chicken-outfit",
+      "name": "Evil Chicken Outfit",
+      "category": "Other",
+      "wikiUrl": "https://oldschool.runescape.wiki/w/Evil_Chicken_Outfit",
+      "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Evil_chicken_outfit_equipped.png",
+      "groups": [
+        {
+          "id": "uniques",
+          "type": "exclusive",
+          "rollsPerUnit": 1,
+          "drops": [
+            "evil-chicken-head",
+            "evil-chicken-body",
+            "evil-chicken-legs",
+            "evil-chicken-feet"
+          ]
+        }
+      ],
+      "drops": [
+        {
+          "id": "evil-chicken-head",
+          "name": "Evil chicken head",
+          "rate": [1, 1200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Evil_chicken_head",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Evil_chicken_head_detail.png"
+        },
+        {
+          "id": "evil-chicken-body",
+          "name": "Evil chicken body",
+          "rate": [1, 1200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Evil_chicken_body",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Evil_chicken_body_detail.png"
+        },
+        {
+          "id": "evil-chicken-legs",
+          "name": "Evil chicken legs",
+          "rate": [1, 1200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Evil_chicken_legs",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Evil_chicken_legs_detail.png"
+        },
+        {
+          "id": "evil-chicken-feet",
+          "name": "Evil chicken feet",
+          "rate": [1, 1200],
+          "wikiUrl": "https://oldschool.runescape.wiki/w/Evil_chicken_feet",
+          "imageUrl": "https://oldschool.runescape.wiki/w/Special:Redirect/file/Evil_chicken_feet_detail.png"
+        }
+      ]
     }
   ]
 }
